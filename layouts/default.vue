@@ -3,88 +3,123 @@
     <v-navigation-drawer
       v-model='drawer'
       :mini-variant='miniVariant'
-      :clipped='clipped'
+      clipped
+      right
       fixed
       app
     >
       <v-list>
-        <v-list-item
-          v-for='(item, i) in items'
-          :key='i'
-          :to='item.to'
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text='item.title' />
-          </v-list-item-content>
-        </v-list-item>
+        <div v-for='(item, i) in items'
+             :key='i'>
+          <div v-if="item.type === 'divider'" class='px-8 py-4 tlf-menu-divider'>
+            <span>{{ item.title }}</span>
+          </div>
+
+          <v-list-item
+            v-else-if="item.type==='item'"
+            class='tlf-list-item'
+            :to='item.to'
+            router
+            exact
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title v-text='item.title' />
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-group v-else-if="item.type==='group'" append-icon=''>
+            <template #activator>
+              <v-list-item class='tlf-list-item'>
+                <v-list-item-action>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title v-text='item.title' />
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+            <v-list-item
+              v-for='(child,childIndex) in item.children'
+              :key='childIndex'
+              class='tlf-list-item-child'
+              :to='child.to'
+              router
+              exact
+            >
+              <v-list-item-action>
+                <v-icon>{{ child.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title v-text='child.title' />
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+        </div>
       </v-list>
     </v-navigation-drawer>
+
     <v-app-bar
-      :clipped-left='clipped'
+      class='tlf-app-bar'
       fixed
+      clipped-right
       app
+      elevation='0'
+      height='80'
     >
       <v-app-bar-nav-icon @click.stop='drawer = !drawer' />
-      <v-btn
-        icon
-        @click.stop='miniVariant = !miniVariant'
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop='clipped = !clipped'
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop='fixed = !fixed'
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text='title' />
+
+      <v-img class='mr-8 ml-6' src='~/static/images/logo.png' max-width='36' max-height='28' />
+
+      <v-toolbar-title class='font-weight-bold ml-16' v-text='title' />
+
+      <v-avatar class='mr-5 ml-4'>
+        <v-icon size='36'>fas fa-user-circle</v-icon>
+      </v-avatar>
+
+      <span class='font-weight-bold'>
+        الیاس ملک پور
+      </span>
+
+      <span class='mr-8'>
+        09027777254
+      </span>
+
       <v-spacer />
-      <v-btn
-        icon
-        @click.stop='rightDrawer = !rightDrawer'
-      >
-        <v-icon>mdi-menu</v-icon>
+
+      <v-btn text>
+        <span>جدول پاداش</span>
+        <v-icon class='mr-4'>fas fa-money-bill-wave</v-icon>
+      </v-btn>
+
+      <v-btn class='mr-16' text>
+        <span>تیکت</span>
+        <v-icon class='mr-4'>fas fa-pen-square</v-icon>
+      </v-btn>
+
+      <v-btn class='mr-16' text>
+        <span class='ml-4'>پیام‌ها</span>
+        <v-badge content='1' color='red lighten-2' left>
+          <v-icon>far fa-envelope</v-icon>
+        </v-badge>
+      </v-btn>
+
+      <v-btn class='mr-16' text>
+        <span class='ml-4'>پشتیبانی</span>
+        <v-badge content='2' color='red lighten-2' left>
+          <v-icon>fas fa-user-edit</v-icon>
+        </v-badge>
       </v-btn>
     </v-app-bar>
-    <v-main>
+
+    <v-main class='tlf-main'>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
-      v-model='rightDrawer'
-      :right='right'
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native='right = !right'>
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
-      :absolute='!fixed'
-      app
-    >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
@@ -94,26 +129,81 @@ import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
+      drawer: true,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
+          type: 'divider',
+          title: 'مدیریت محصولات'
+        },
+        {
+          type: 'item',
+          icon: 'fa-user-circle',
+          title: 'محصولات',
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          type: 'divider',
+          title: 'مدیریت کاربران'
+        },
+        {
+          type: 'group',
+          icon: 'fa-user-circle',
+          title: 'مدیران',
+          children: [
+            {
+              icon: 'fa-user-circle',
+              title: 'مدیران',
+              to: '/'
+            },
+            {
+              icon: 'fa-user-circle',
+              title: 'مدیران 2',
+              to: '/'
+            }
+          ]
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'پنل تلفیق هنر'
     }
   }
 })
 </script>
+
+<style lang='scss' scoped>
+.tlf-app-bar {
+  background: linear-gradient(90.91deg, #F0FBFF -2.31%, #FFF7F0 110.95%);
+  color: $dark-grey;
+}
+
+.tlf-app-bar .v-btn {
+  color: $dark-grey;
+}
+
+.tlf-main {
+  background: linear-gradient(117.81deg, #FFB97A -18.78%, #00B2FF 126.29%);
+}
+
+.tlf-menu-divider {
+  font-size: 16px;
+  font-weight: 300;
+  color: $lighter-grey;
+}
+
+.tlf-list-item{
+  font-weight: bold;
+  color: $dark-grey;
+}
+
+.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){
+  font-weight: bold;
+  color: $dark-grey;
+}
+
+.tlf-list-item-child{
+  font-weight: 400;
+  color: $dark-grey;
+}
+</style>

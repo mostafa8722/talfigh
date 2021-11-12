@@ -5,7 +5,7 @@ import fa from 'vuetify/src/locale/fa'
 const config: NuxtConfig = {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - nuxt-boilerplate',
+    titleTemplate: '%s - پنل مدیریت تلفیق هنر',
     title: 'nuxt-boilerplate',
     htmlAttrs: {
       lang: 'en'
@@ -22,7 +22,9 @@ const config: NuxtConfig = {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    '~/assets/scss/styles.scss'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -40,7 +42,8 @@ const config: NuxtConfig = {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/style-resources'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -63,16 +66,16 @@ const config: NuxtConfig = {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    rtl: false,
+    rtl: true,
     lang: {
       locales: { fa },
       current: 'fa'
     },
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/scss/_variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
-        dark: {
+        light: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
@@ -82,7 +85,17 @@ const config: NuxtConfig = {
           success: colors.green.accent3
         }
       }
+    },
+    defaultAssets:{
+      icons:'fa'
     }
+  },
+
+  styleResources: {
+    scss: [
+      '~/assets/scss/_variables.scss',
+      '~/assets/scss/_colors.scss'
+    ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
