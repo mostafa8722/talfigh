@@ -30,16 +30,14 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-group v-else-if="item.type==='group'" append-icon=''>
+          <v-list-group v-else-if="item.type === 'group'" append-icon=''>
             <template #activator>
-              <v-list-item class='tlf-list-item'>
                 <v-list-item-action>
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
                   <v-list-item-title v-text='item.title' />
                 </v-list-item-content>
-              </v-list-item>
             </template>
 
             <v-list-item
@@ -50,7 +48,7 @@
               router
               exact
             >
-              <v-list-item-action>
+              <v-list-item-action class='mr-4'>
                 <v-icon>{{ child.icon }}</v-icon>
               </v-list-item-action>
               <v-list-item-content>
@@ -146,6 +144,12 @@ export default Vue.extend({
           title: 'مدیریت کاربران'
         },
         {
+          type: 'item',
+          icon: 'fa-user-circle',
+          title: 'نقش‌ها',
+          to: '/roles'
+        },
+        {
           type: 'group',
           icon: 'fa-user-circle',
           title: 'مدیران',
@@ -193,11 +197,6 @@ export default Vue.extend({
 }
 
 .tlf-list-item{
-  font-weight: bold;
-  color: $dark-grey;
-}
-
-.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){
   font-weight: bold;
   color: $dark-grey;
 }
