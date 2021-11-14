@@ -5,10 +5,22 @@ body {
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6, input, textarea, .v-application {
+h1, h2, h3, h4, h5, h6, input, textarea,span, .v-application {
+  font-family: IranYekanFN, serif !important;
+}
+
+.v-application {
+  [class*='text-'] {
+    color: $dark-grey;
+    font-family: IranYekanFN, serif !important;
+  }
   font-family: IranYekanFN, serif !important;
 }
 
 .v-btn{
   letter-spacing: 0 !important;
+}
+
+.v-text-field--outlined fieldset{
+  color:#E2E2E2;
 }
