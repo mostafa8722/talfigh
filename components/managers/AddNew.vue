@@ -11,13 +11,18 @@
 
         </v-text-field>
    </v-input>
-   <v-sheet width='100%' height='400px' color='#FBFBFB'>
-
- <v-btn-toggle>
-   <v-btn active-class='activ' depressed>مدیر بازرگانی</v-btn>
-   <v-btn active-class='activ' depressed>مدیر بازرگانی</v-btn>
-   <v-btn active-class='activ' depressed>مدیر بازرگانی</v-btn>
- </v-btn-toggle>
+   <v-sheet rounded='xl' width='100%' height='400px' color='#FBFBFB'>
+ <v-container class='pa-0'>
+     <div class='border-bt'  @click='myToggleFunction'>
+      مدیر بازرگانی
+     </div>
+   <div class='border-bt'  @click='myToggleFunction'>
+     مدیر بازرگانی
+   </div>
+   <div class='border-bt'  @click='myToggleFunction'>
+     مدیر بازرگانی
+   </div>
+ </v-container>
    </v-sheet>
  </v-card>
 
@@ -27,19 +32,35 @@
 import Vue from 'vue'
 export default Vue.extend(
   {
-    name: 'AddNew'
+    name: 'AddNew',
+    data(){
+      return{
+        isActive:false
+      }
+    },
+    methods: {
+      myToggleFunction(event:any){
+        const button = event.target;
+        button.classList.toggle('activ');
+      }
+    }
   }
 )
 </script>
 
 <style lang='scss' scoped>
-.v-btn-toggle {
-  flex-direction: column;
-  border:#848484 thin solid;
-  width: 100%;
+.border-bt {
+ border-bottom: #F2F2F2 1px solid;
+  border-radius: 16px ;
+  padding: 15px;
+  width: 100% !important;
 }
 .activ{
-  background-color: #2D9DCD !important;
+  background-color: #2D9DCD!important;
   color: white !important;
 }
+button{
+  width: 100%;
+}
+
 </style>

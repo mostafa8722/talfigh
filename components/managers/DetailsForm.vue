@@ -1,6 +1,6 @@
 <template>
 
-    <v-card rounded='xl' class='py-4 px-5'>
+    <v-card rounded='xl' class='pa-10 '>
       <v-row>
         <v-col cols='12' sm='5'>
             <div class='d-flex mb-9 mt-4'>
@@ -21,7 +21,7 @@
       <v-text-field  label='توضیحات' outlined class='d-flex' height='300px'></v-text-field>
 
         </v-col>
-        <v-col cols='12' sm='7' cl>
+        <v-col cols='12' sm='7'  class='pl-14'>
           <v-row>
             <v-col cols='12' sm='6' class='margi'>
                   نام
@@ -41,21 +41,22 @@
 
             </v-col>
             <v-col cols='12'>
-              <v-text-field append-icon='fa-search'  label='جستجوی نقش' outlined></v-text-field>
+              <v-text-field color='red' append-icon='fa-search'  label='جستجوی نقش' outlined></v-text-field>
             </v-col>
 
-            <v-btn class='mr-auto' color='#00B728' rounded depressed outlined>ذخیره اطلاعات</v-btn>
           </v-row>
 
         </v-col>
+
+        <v-btn class='mr-auto sav' color='#00B728'  rounded depressed outlined>ذخیره اطلاعات</v-btn>
       </v-row>
+
      </v-card>
 
 </template>
 
 <script lang='ts'>
 import Vue from 'vue'
-
 export default Vue.extend(
   {
     name: 'DetailsForm'
@@ -64,10 +65,25 @@ export default Vue.extend(
 </script>
 
 <style lang='scss' scoped>
+.theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
+  background: #ffffff;
+  border: 1px solid red !important;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+
+  &:before {
+    display: none;
+  }
+}
+
 .activ{
 color: white !important;
 }
 .margi{
-  margin-top: 15%;
+  margin-top: 64px
+}
+.sav{
+  width: 171px;
+ border: #00B728 2px solid;
 }
 </style>
