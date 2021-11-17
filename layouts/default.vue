@@ -150,6 +150,12 @@ export default Vue.extend({
           to: '/roles'
         },
         {
+          type: 'item',
+          icon: 'fa-user-circle',
+          title: 'مدیران',
+          to: '/managers'
+        },
+        {
           type: 'group',
           icon: 'fa-user-circle',
           title: 'مدیران',
