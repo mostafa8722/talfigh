@@ -23,7 +23,9 @@ export default {
 .container__table{
   @media screen and (max-width: 600px){
     width: 1200px;
+
   }
+  height: 80%;
 }
 
 </style>
