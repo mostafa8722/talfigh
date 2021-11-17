@@ -114,9 +114,9 @@
     </v-app-bar>
 
     <v-main class='tlf-main'>
-      <v-container fluid>
+
         <Nuxt />
-      </v-container>
+
     </v-main>
   </v-app>
 </template>
