@@ -171,6 +171,18 @@ export default Vue.extend({
               to: '/'
             }
           ]
+        },
+        {
+          type: 'group',
+          icon: 'fa-cog',
+          title: 'تنظیمات سایت',
+          children: [
+            {
+              icon: 'fa-check-square',
+              title: 'تنظیمات فوتر - پاورقی',
+              to: '/settings/footer'
+            },
+          ]
         }
       ],
       miniVariant: false,
