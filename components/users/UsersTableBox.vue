@@ -1,9 +1,10 @@
 <template>
-  <div>
-    <v-col class='white ma-0'>
+  <div style='padding-bottom: 250px' class='white ma-0'>
+    <div class='d-flex flex-column'>
       <UsersHeaderTable />
-<!--      <UsersBodyTable />-->
-    </v-col>
+      <v-divider class='mt-7'></v-divider>
+      <UsersBodyTable />
+    </div>
   </div>
 </template>
 
