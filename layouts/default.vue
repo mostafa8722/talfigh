@@ -165,7 +165,17 @@ export default Vue.extend({
               to: '/'
             }
           ]
-        }
+        },
+        {
+          type: 'divider',
+          title: 'تنظیمات سیستمی'
+        },
+        {
+          type: 'item',
+          icon: 'fa-cog',
+          title: 'تنظیمات سایت',
+          to: '/settings/site'
+        },
       ],
       miniVariant: false,
       right: true,
