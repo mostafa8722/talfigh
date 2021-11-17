@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div style='overflow-x: auto'>
     <v-container>
-      <v-row style='column-gap: 1rem' class='mt-5 mr-5' align='center'>
+      <v-row style='column-gap: 1rem; row-gap: 1rem' class='mt-5 mr-5' align='center'>
         <span class='title'>لیست کاربران</span>
         <v-btn width='230' height='35' class='mr-5' rounded color='primary'>
           <span class='text-btn'>خروجی فایل اکسل</span>
         </v-btn>
       </v-row>
       <v-col class='mt-5'>
-        <div style='border-radius: 20px' class='white elevation-3'>
+        <div style='border-radius: 20px' class='white elevation-3 container__head'>
           <v-row style='column-gap: 1rem' class='mt-5 mr-5 py-5' align='center'>
             <v-col cols='3' align-self='start'>
               <div>
@@ -64,6 +64,13 @@ export default Vue.extend({
   font-weight: 400 !important;
   color: #000;
   font-family: IranYekanFN, serif !important;
+}
+
+
+.container__head{
+  @media screen and (max-width: 600px){
+    width: 1200px;
+  }
 }
 
 </style>

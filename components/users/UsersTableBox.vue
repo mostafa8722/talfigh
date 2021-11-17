@@ -1,5 +1,5 @@
 <template>
-  <div style='padding-bottom: 250px' class='white ma-0'>
+  <div style='padding-bottom: 250px' class='white ma-0 container__table'>
     <div class='d-flex flex-column'>
       <UsersHeaderTable />
       <v-divider class='mt-7'></v-divider>
@@ -17,6 +17,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
+
+.container__table{
+@media screen and (max-width: 600px){
+  width: 1200px;
+}
+}
 
 </style>
