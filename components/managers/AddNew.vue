@@ -2,8 +2,8 @@
 
  <v-card rounded='xl' class='py-4 px-5' >
    <v-btn rounded color='primary' depressed block>
+     <v-icon small left>fa-plus</v-icon>
      اضافه کردن مدیر
-     <v-icon small>fa-plus</v-icon>
    </v-btn>
    <v-input class='mt-5'>
         <v-text-field filled rounded append-icon='fa-search' label='
@@ -41,7 +41,7 @@ export default Vue.extend(
     methods: {
       myToggleFunction(event:any){
         const button = event.target;
-        button.classList.toggle('activ');
+        button.classList.toggle('activate');
       }
     }
   }
@@ -55,7 +55,7 @@ export default Vue.extend(
   padding: 15px;
   width: 100% !important;
 }
-.activ{
+.activate{
   background-color: #2D9DCD!important;
   color: white !important;
 }

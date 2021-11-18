@@ -72,6 +72,7 @@ const config: NuxtConfig = {
       current: 'fa'
     },
     customVariables: ['~/assets/scss/_variables.scss'],
+    treeShake: true,
     theme: {
       dark: false,
       themes: {
