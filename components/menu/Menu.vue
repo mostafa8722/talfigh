@@ -42,7 +42,7 @@
             </div>
             <div class='card-body d-none'>
               <nuxt-link v-for='(child,childIndex) in item.children' :key='childIndex' style='text-decoration: none' :to='child.to' exact >
-              <div style='column-gap: 1rem' class='card-item d-flex flex-row my-5 pr-7'>
+              <div style='column-gap: 1rem' class='card-item d-flex flex-row my-5 pr-5'>
                 <v-icon>{{ child.icon }}</v-icon>
                 <span class='card-item-title'>{{ child.title }}</span>
               </div>
@@ -162,6 +162,18 @@ export default Vue.extend({
               to: '/'
             }
           ]
+        },
+        {
+          type: 'group',
+          icon: 'fa-cog',
+          title: 'تنظیمات سایت',
+          children: [
+            {
+              icon: 'fa-check-square',
+              title: 'تنظیمات فوتر - پاورقی',
+              to: '/settings/footer'
+            },
+          ]
         }
       ],
       miniVariant: false,
@@ -237,7 +249,7 @@ export default Vue.extend({
 .card-body {
   .card-item {
     .card-item-title {
-      font-size: 1rem !important;
+      font-size: 0.9rem !important;
       font-weight: 400 !important;
       font-family: IranYekanFN, serif !important;
       color: #848484;
