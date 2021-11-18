@@ -42,7 +42,7 @@
             </div>
             <div class='card-body d-none'>
               <nuxt-link v-for='(child,childIndex) in item.children' :key='childIndex' style='text-decoration: none' :to='child.to' exact >
-              <div style='column-gap: 1rem' class='card-item d-flex flex-row align-center my-5 pr-5'>
+              <div style='column-gap: 1rem' class='card-item d-flex flex-row align-center mt-5 pr-5'>
                 <v-icon>{{ child.icon }}</v-icon>
                 <span class='card-item-title'>{{ child.title }}</span>
               </div>
