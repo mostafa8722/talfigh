@@ -8,56 +8,49 @@
       fixed
       app
     >
-      <v-list>
+      <div class='d-flex flex-column align-start justify-start'>
         <div v-for='(item, i) in items'
+             class='d-flex flex-column align-start justify-start px-8 py-4 '
              :key='i'>
-          <div v-if="item.type === 'divider'" class='px-8 py-4 tlf-menu-divider'>
+          <div v-if="item.type === 'divider'" class='tlf-menu-divider'>
             <span>{{ item.title }}</span>
           </div>
 
-          <v-list-item
-            v-else-if="item.type==='item'"
-            class='tlf-list-item'
-            :to='item.to'
-            router
-            exact
-          >
-            <v-list-item-action>
+          <nuxt-link style='text-decoration: none' v-else-if="item.type==='item'" :to='item.to' exact >
+          <div
+            style='column-gap: 1.5rem;cursor: pointer'
+            class='d-flex main-item align-center tlf-list-item' >
+
               <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title v-text='item.title' />
-            </v-list-item-content>
-          </v-list-item>
+              <span>{{ item.title }}</span>
 
-          <v-list-group v-else-if="item.type === 'group'" append-icon=''>
-            <template #activator>
-              <v-list-item-action>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title v-text='item.title' />
-              </v-list-item-content>
-            </template>
+          </div>
+          </nuxt-link>
 
-            <v-list-item
-              v-for='(child,childIndex) in item.children'
-              :key='childIndex'
-              class='tlf-list-item-child'
-              :to='child.to'
-              router
-              exact
-            >
-              <v-list-item-action class='mr-4'>
+
+
+          <div
+            v-else-if="item.type==='group'"
+            style='height: max-content; width: 100%'
+            class='card d-flex flex-column tlf-list-item'
+            @click='toggleMenuItem'
+          >
+            <div style='width: 100%; height: auto; column-gap: 0.7rem' class='card-header d-flex flex-row'>
+              <v-icon >{{ item.icon }}</v-icon>
+              <v-icon class='card-arrow' style='font-size: 0.7rem'>fa-chevron-left</v-icon>
+              <span class='card-title pa-0 ma-0'>{{ item.title }}</span>
+            </div>
+            <div class='card-body d-none'>
+              <nuxt-link v-for='(child,childIndex) in item.children' :key='childIndex' style='text-decoration: none' :to='child.to' exact >
+              <div style='column-gap: 1rem' class='card-item d-flex flex-row my-5 pr-7'>
                 <v-icon>{{ child.icon }}</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title v-text='child.title' />
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-group>
+                <span class='card-item-title'>{{ child.title }}</span>
+              </div>
+              </nuxt-link>
+            </div>
+          </div>
         </div>
-      </v-list>
+      </div>
     </v-navigation-drawer>
     <v-app-bar
       class='tlf-app-bar'
@@ -143,19 +136,19 @@ export default Vue.extend({
         },
         {
           type: 'item',
-          icon: 'fa-user-circle',
+          icon: 'fa-user-edit',
           title: 'نقش‌ها',
           to: '/roles'
         },
         {
           type: 'item',
-          icon: 'fa-user-edit',
+          icon: 'fa-users',
           title: 'کاربران',
           to: '/users'
         },
         {
           type: 'group',
-          icon: 'fa-user-circle',
+          icon: 'fa-user-graduate',
           title: 'مدیران',
           children: [
             {
@@ -176,11 +169,34 @@ export default Vue.extend({
       rightDrawer: false,
       title: 'پنل تلفیق هنر'
     }
+  },
+  methods: {
+    toggleMenuItem(event: any): any {
+      event.currentTarget.querySelector('.card-body').classList.toggle('card-opened')
+      event.currentTarget
+        .querySelector('.card-header')
+        .classList
+        .toggle('active')
+      if (event.currentTarget.querySelector('.card-body').classList.contains('card-opened')) {
+        event.currentTarget
+          .querySelector('.card-header')
+          .querySelector('.card-arrow')
+          .style
+          .transform = 'rotate(-90deg)'
+      } else {
+        event.currentTarget
+          .querySelector('.card-header')
+          .querySelector('.card-arrow')
+          .style
+          .transform = 'rotate(0deg)'
+      }
+    },
   }
 })
 </script>
 
 <style scoped lang='scss'>
+
 .tlf-menu-divider {
   font-size: 16px;
   font-weight: 300;
@@ -190,11 +206,22 @@ export default Vue.extend({
 .tlf-list-item{
   font-weight: bold;
   color: $dark-grey;
+  .fa, .fas {
+    color: #D8D8D8;
+  }
 }
 
 .tlf-list-item-child{
   font-weight: 400;
   color: $dark-grey;
+}
+
+.card {
+  cursor: pointer;
+  //row-gap: 2rem;
+}
+.card-body.card-opened {
+  display: unset !important;
 }
 
 .tlf-app-bar {
@@ -205,4 +232,49 @@ export default Vue.extend({
 .tlf-app-bar .v-btn {
   color: $dark-grey;
 }
+
+
+.card-body {
+  .card-item {
+    .card-item-title {
+      font-size: 1rem !important;
+      font-weight: 400 !important;
+      font-family: IranYekanFN, serif !important;
+      color: #848484;
+      cursor: pointer;
+    }
+  }
+}
+
+.card-header {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &.active {
+    color: #F2994A;
+    .fa, .fas{
+      color: #F2994A;
+    }
+  }
+  &:hover {
+    .fa, .fas{
+      color: #F2994A;
+    }
+    color: #F2994A
+  }
+}
+
+.main-item{
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &.active {
+    color: #F2994A
+  }
+  &:hover {
+    .fa, .fas{
+      color: #F2994A;
+    }
+    color: #F2994A
+  }
+}
+
 </style>
