@@ -26,7 +26,7 @@
         </div>
       </v-col>
     </v-container>
-    <UsersTableBox class='mt-10' />
+    <UsersTableBox class='mt-10 mb-10' />
   </div>
 </template>
 
