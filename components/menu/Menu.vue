@@ -178,6 +178,11 @@ export default Vue.extend({
               title: 'تنظیمات صفحه اصلی',
               to: '/settings/home-settings'
             },
+            {
+              icon: 'fa-check-square',
+              title: 'تنظیمات سیستمی',
+              to: '/settings/system-settings'
+            },
           ]
         }
       ],
