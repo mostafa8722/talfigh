@@ -8,7 +8,7 @@
       </p>
 
       <div  class='d-flex flex-column'  >
-        <v-img id='contract-image' width='90%' class='ml-auto'  contain src='~/static/images/contract1.jpg'></v-img>
+        <v-img id='contract-image' width='90%' class='mx-auto'  contain src='~/static/images/contract1.jpg'></v-img>
       </div>
 
     </v-card>
