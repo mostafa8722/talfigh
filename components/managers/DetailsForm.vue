@@ -37,8 +37,7 @@
               <span>موبایل</span>
               <v-text-field class='rounded-lg mt-2' placeholder='موبایل' outlined></v-text-field>
               <span>تکرار رمز</span>
-              <v-text-field class='rounded-lg mt-2' placeholder='
-              تکرار رمز' outlined></v-text-field>
+              <v-text-field class='rounded-lg mt-2' placeholder='تکرار رمز' outlined></v-text-field>
 
             </v-col>
             <v-col cols='12'>
