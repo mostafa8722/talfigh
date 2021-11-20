@@ -4,51 +4,51 @@
       <v-row>
         <v-col cols='12' sm='5'>
             <div class='d-flex mb-9 mt-4'>
-              <div class='pt-2 mx-4'>عنوان مدیر</div>
-              <v-btn depressed rounded  color='#009D4C' class='activ mx-4'  >
+              <div class=' ' id='title'>عنوان مدیر</div>
+              <v-btn depressed rounded  color='#009D4C' class='activate mt-2 mx-4'  >
                 <v-icon left small >fa-check</v-icon>
                  فعال سازی
               </v-btn>
-              <v-btn depressed rounded color='#FF5C5C' class='activ '>
+              <v-btn depressed rounded color='#FF5C5C' class='activate mt-2'>
                 <v-icon left small >fa-trash</v-icon>
                 بلاک مدیر
               </v-btn>
             </div>
 
-            <v-text-field class='d-inline-flex' label='مدیر داخلی' outlined></v-text-field>
+            <v-text-field style="width:50%"  class='d-flex rounded-lg '  placeholder='مدیر داخلی' outlined></v-text-field>
 
-          <div>توضیحات نقش</div>
-      <v-text-field  label='توضیحات' outlined class='d-flex' height='300px'></v-text-field>
+          <span>توضیحات نقش</span>
+      <v-textarea placeholder='توضیحات' outlined class='d-flex rounded-lg mt-2' rows="10" ></v-textarea>
 
         </v-col>
         <v-col cols='12' sm='7'  class='pl-14'>
           <v-row>
             <v-col cols='12' sm='6' class='margi'>
-                  نام
-              <v-text-field outlined label='نام'></v-text-field>
-              ایمیل
-              <v-text-field label='ایمیل' outlined></v-text-field>
-              رمز عبور
-              <v-text-field label='رمز عبور' outlined></v-text-field>
+                 <span>نام</span>
+              <v-text-field class='rounded-lg mt-2' outlined placeholder='نام'></v-text-field>
+            <span>ایمیل</span>
+              <v-text-field class='rounded-lg mt-2' placeholder='ایمیل' outlined></v-text-field>
+            <span> رمز عبور</span>
+              <v-text-field class='rounded-lg mt-2' placeholder='رمز عبور' outlined></v-text-field>
             </v-col>
             <v-col cols='12' sm='6' class='margi'>
-              نام خانوادگی
-              <v-text-field label=' نام خانوادگی' outlined></v-text-field>
-              موبایل
-              <v-text-field label='موبایل' outlined></v-text-field>
-              تکرار رمز
-              <v-text-field label='تکرار رمز' outlined></v-text-field>
+            <span>  نام خانوادگی</span>
+              <v-text-field class='rounded-lg mt-2' placeholder=' نام خانوادگی' outlined></v-text-field>
+              <span>موبایل</span>
+              <v-text-field class='rounded-lg mt-2' placeholder='موبایل' outlined></v-text-field>
+              <span>تکرار رمز</span>
+              <v-text-field class='rounded-lg mt-2' placeholder='تکرار رمز' outlined></v-text-field>
 
             </v-col>
             <v-col cols='12'>
-              <v-text-field color='red' append-icon='fa-search'  label='جستجوی نقش' outlined></v-text-field>
+              <v-text-field filled   class='rounded-lg mt-2'  append-icon='fa-search'  placeholder='جستجوی نقش' outlined></v-text-field>
             </v-col>
 
           </v-row>
 
         </v-col>
 
-        <v-btn class='mr-auto sav' color='#00B728'  rounded depressed outlined>ذخیره اطلاعات</v-btn>
+        <v-btn class='mr-auto sav mt-2' color='#00B728'  rounded depressed outlined>ذخیره اطلاعات</v-btn>
       </v-row>
 
      </v-card>
@@ -65,19 +65,14 @@ export default Vue.extend(
 </script>
 
 <style lang='scss' scoped>
-.theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
-  background: #ffffff;
-  border: 1px solid red !important;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
 
-  &:before {
-    display: none;
-  }
-}
-
-.activ{
+.activate{
 color: white !important;
+  width: 112px!important;
+  height: 26px !important;
+  background: #009D4C;
+  border-radius: 12px !important;
+  font-size: 12px !important;
 }
 .margi{
   margin-top: 64px
@@ -85,5 +80,25 @@ color: white !important;
 .sav{
   width: 171px;
  border: #00B728 2px solid;
+}
+span{
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #747474;
+
+}
+#title{
+  font-weight: 500;
+  font-size: 26px;
+
+  /* identical to box height */
+  text-align: center;
+  color: #747474;
+
 }
 </style>
