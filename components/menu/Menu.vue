@@ -173,6 +173,11 @@ export default Vue.extend({
               title: 'تنظیمات فوتر - پاورقی',
               to: '/settings/footer'
             },
+            {
+              icon: 'fa-check-square',
+              title: 'تنظیمات صفحه اصلی',
+              to: '/settings/home-settings'
+            },
           ]
         }
       ],
