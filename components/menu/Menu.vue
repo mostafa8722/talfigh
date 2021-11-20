@@ -16,17 +16,17 @@
             <span>{{ item.title }}</span>
           </div>
 
-          <nuxt-link style='text-decoration: none' v-else-if="item.type==='item'" :to='item.to' exact >
-          <div
-            style='column-gap: 1.5rem;cursor: pointer'
-            class='d-flex main-item align-center tlf-list-item' >
+          <nuxt-link active-class='main-item-active' style='text-decoration: none' v-else-if="item.type==='item'"
+                     :to='item.to' exact>
+            <div
+              style='column-gap: 1.5rem;cursor: pointer'
+              class='d-flex main-item align-center tlf-list-item'>
 
               <v-icon>{{ item.icon }}</v-icon>
               <span>{{ item.title }}</span>
 
-          </div>
+            </div>
           </nuxt-link>
-
 
 
           <div
@@ -36,16 +36,17 @@
             @click='toggleMenuItem'
           >
             <div style='width: 100%; height: auto; column-gap: 0.7rem' class='card-header d-flex flex-row'>
-              <v-icon >{{ item.icon }}</v-icon>
+              <v-icon>{{ item.icon }}</v-icon>
               <v-icon class='card-arrow' style='font-size: 0.7rem'>fa-chevron-left</v-icon>
               <span class='card-title pa-0 ma-0'>{{ item.title }}</span>
             </div>
             <div class='card-body d-none'>
-              <nuxt-link v-for='(child,childIndex) in item.children' :key='childIndex' style='text-decoration: none' :to='child.to' exact >
-              <div style='column-gap: 1rem' class='card-item d-flex flex-row align-center mt-5 pr-5'>
-                <v-icon>{{ child.icon }}</v-icon>
-                <span class='card-item-title'>{{ child.title }}</span>
-              </div>
+              <nuxt-link v-for='(child,childIndex) in item.children' :key='childIndex' style='text-decoration: none'
+                         :to='child.to' exact>
+                <div style='column-gap: 1rem' class='card-item d-flex flex-row align-center mt-5 pr-5'>
+                  <v-icon>{{ child.icon }}</v-icon>
+                  <span class='card-item-title'>{{ child.title }}</span>
+                </div>
               </nuxt-link>
             </div>
           </div>
@@ -61,50 +62,49 @@
       height='80'
     >
 
-          <img src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />
-          <v-img class='mr-8 ml-6' src='~/static/images/logo.png' max-width='36' max-height='28' />
-          <v-toolbar-title style='font-size: 1rem; font-weight: 700; color: #848484' class='ml-16' v-text='title' />
-          <v-avatar class='mr-5 ml-2'>
-            <v-icon size='36'>fas fa-user-circle</v-icon>
-          </v-avatar>
-          <span class='font-weight-bold'>
+      <img src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />
+      <v-img class='mr-8 ml-6' src='~/static/images/logo.png' max-width='36' max-height='28' />
+      <v-toolbar-title style='font-size: 1rem; font-weight: 700; color: #848484' class='ml-16' v-text='title' />
+      <v-avatar class='mr-5 ml-2'>
+        <v-icon size='36'>fas fa-user-circle</v-icon>
+      </v-avatar>
+      <span class='font-weight-bold'>
         الیاس ملک پور
       </span>
-          <span class='mr-8' style='color: #848484; font-size: 1rem; font-weight: 500' >
+      <span class='mr-8' style='color: #848484; font-size: 1rem; font-weight: 500'>
         09027777254
       </span>
 
-      <span class='mr-16' style='color: #848484; font-size: 1rem; font-weight: 500' >
-        کدملی : 0017693527
-      </span>
+<!--      <span class='mr-16' style='color: #848484; font-size: 1rem; font-weight: 500'>-->
+<!--        کدملی : 0017693527-->
+<!--      </span>-->
 
       <v-spacer></v-spacer>
 
 
-          <v-btn text class='mr-8'>
-            <span style='color: #C1C1C1'>جدول پاداش</span>
-            <v-icon color='#C1C1C1' class='mr-4'>fas fa-money-bill-wave</v-icon>
-          </v-btn>
+      <v-btn text class='mr-8'>
+        <span style='color: #C1C1C1'>جدول پاداش</span>
+        <v-icon color='#C1C1C1' class='mr-4'>fas fa-money-bill-wave</v-icon>
+      </v-btn>
 
-          <v-btn class='mr-10' text>
-            <span style='color: #C1C1C1'>تیکت</span>
-            <v-icon color='#C1C1C1' class='mr-4'>fas fa-pen-square</v-icon>
-          </v-btn>
+      <v-btn class='mr-10' text>
+        <span style='color: #C1C1C1'>تیکت</span>
+        <v-icon color='#C1C1C1' class='mr-4'>fas fa-pen-square</v-icon>
+      </v-btn>
 
-          <v-btn class='mr-10' text>
-            <span class='ml-4'>پیام‌ها</span>
-            <v-badge content='1' color='#C9344F' left>
-              <v-icon >far fa-envelope</v-icon>
-            </v-badge>
-          </v-btn>
+      <v-btn class='mr-10' text>
+        <span class='ml-4'>پیام‌ها</span>
+        <v-badge content='1' color='#C9344F' left>
+          <v-icon>far fa-envelope</v-icon>
+        </v-badge>
+      </v-btn>
 
-          <v-btn class='mr-10' text>
-            <span style='color: #C1C1C1' class='ml-4'>پشتیبانی</span>
-            <v-badge content='2' color='#C9344F' left>
-              <v-icon color='#C1C1C1'>fas fa-user-edit</v-icon>
-            </v-badge>
-          </v-btn>
-
+      <v-btn class='mr-10' text>
+        <span style='color: #C1C1C1' class='ml-4'>پشتیبانی</span>
+        <v-badge content='2' color='#C9344F' left>
+          <v-icon color='#C1C1C1'>fas fa-user-edit</v-icon>
+        </v-badge>
+      </v-btn>
 
 
     </v-app-bar>
@@ -212,7 +212,7 @@ export default Vue.extend({
           .style
           .transform = 'rotate(0deg)'
       }
-    },
+    }
   }
 })
 </script>
@@ -225,15 +225,16 @@ export default Vue.extend({
   color: $lighter-grey;
 }
 
-.tlf-list-item{
+.tlf-list-item {
   font-weight: bold;
   color: $dark-grey;
+
   .fa, .fas {
     color: #D8D8D8;
   }
 }
 
-.tlf-list-item-child{
+.tlf-list-item-child {
   font-weight: 400;
   color: $dark-grey;
 }
@@ -242,6 +243,7 @@ export default Vue.extend({
   cursor: pointer;
   //row-gap: 2rem;
 }
+
 .card-body.card-opened {
   display: unset !important;
 }
@@ -271,30 +273,46 @@ export default Vue.extend({
 .card-header {
   cursor: pointer;
   transition: all 0.2s ease;
+
   &.active {
     color: #F2994A;
-    .fa, .fas{
+
+    .fa, .fas {
       color: #F2994A;
     }
   }
+
   &:hover {
-    .fa, .fas{
+    .fa, .fas {
       color: #F2994A;
     }
+
     color: #F2994A
   }
 }
 
-.main-item{
+.main-item-active {
+  .main-item{
+    color: #F2994A;
+    .fa, .fas {
+      color: #F2994A;
+    }
+  }
+}
+
+.main-item {
   cursor: pointer;
   transition: all 0.2s ease;
+
   &.active {
     color: #F2994A
   }
+
   &:hover {
-    .fa, .fas{
+    .fa, .fas {
       color: #F2994A;
     }
+
     color: #F2994A
   }
 }
