@@ -6,6 +6,7 @@
         alt="Vuetify.js"
         class="mb-5"
       >
+      <modal-overlay></modal-overlay>
       <blockquote class="blockquote">
         &#8220;First, solve the problem. Then, write the code.&#8221;
         <footer>
@@ -17,3 +18,9 @@
     </v-col>
   </v-row>
 </template>
+<script>
+import ModalOverlay from '@/components/ModalOverlay'
+export default {
+  components: { ModalOverlay }
+}
+</script>
