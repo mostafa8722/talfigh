@@ -11,8 +11,8 @@
           <span style="color: #747474">لینک خارجی</span>
           <v-text-field background-color="white" rounded></v-text-field>
         </v-col>
-        <v-col cols="12" lg="4" md="4">
-          <v-btn class="px-10 mt-8 rounded-xl" color="primary">
+        <v-col class="d-flex justify-center" cols="12" lg="4" md="4">
+          <v-btn class="px-10 mt-9 rounded-xl" color="primary">
             <v-icon size="10">fas fa-plus</v-icon>&nbsp; اضافه کردن منو به لیست
           </v-btn>
         </v-col>
@@ -38,15 +38,15 @@
                     <v-row>
                       <v-col class="mt-4" cols="12">
                         <span style="color: #747474">عنوان</span>
-                        <v-text-field rounded dense></v-text-field>
+                        <v-text-field background-color="white" rounded></v-text-field>
                       </v-col>
-                      <v-col cols="12" lg="10" md="10">
+                      <v-col class="mb-4" cols="12" lg="7" md="7">
                         <span style="color: #747474">لینک خارجی</span>
-                        <v-text-field rounded dense></v-text-field>
+                        <v-text-field background-color="white" rounded></v-text-field>
                       </v-col>
                     </v-row>
-                    <div class="d-flex justify-end">
-                      <v-btn color="primary" class="px-8 rounded-0">
+                    <div class="expansion-panel-btn">
+                      <v-btn color="primary" class="px-10 rounded-0">
                         ذخیره
                       </v-btn>
                     </div>
@@ -80,6 +80,11 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: 800px) {
+  .v-expansion-panels {
+  width: 100% !important;
+}
+}
 .draggable-item {
   border-radius: 5px;
   margin-bottom: 2px;
@@ -102,5 +107,10 @@ export default Vue.extend({
 .v-expansion-panel-content {
   background-color: #f5f5f5;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.expansion-panel-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 </style>
