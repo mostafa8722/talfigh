@@ -22,18 +22,18 @@
           <v-icon @click='drawer = false' color='white' class='ml-5'>fas fa-times</v-icon>
         </div>
 
-        <div style='width: 100%' v-for='(item, i) in items'
+        <div style='width: 100%; transition: all 0.2s ease' v-for='(item, i) in items'
              class='d-flex flex-column align-start justify-start px-6 py-4 '
              :key='i'>
-          <div v-if="item.type === 'divider'" class='tlf-menu-divider'>
+          <div style='transition: all 0.2s ease' v-if="item.type === 'divider'" class='tlf-menu-divider'>
             <span>{{ item.title }}</span>
           </div>
 
           <nuxt-link active-class='main-item-active'
-                     style='text-decoration: none; width: 100%' v-else-if="item.type==='item'"
+                     style='text-decoration: none; width: 100%; transition: all 0.2s ease' v-else-if="item.type==='item'"
                      :to='item.to' exact>
             <div
-              style='column-gap: 1.3rem;cursor: pointer; width: 100%;'
+              style='column-gap: 1.3rem;cursor: pointer; width: 100%; transition: all 0.2s ease'
               class='d-flex main-item align-center tlf-list-item'>
 
               <v-icon size='20'>{{ item.icon }}</v-icon>
@@ -57,7 +57,7 @@
 
           <div
             v-else-if="item.type==='group'"
-            style='height: max-content; width: 100%'
+            style='height: max-content; width: 100%; transition: all 0.2s ease'
             class='card d-flex flex-column tlf-list-item'
             @click='toggleMenuItem'
           >
@@ -82,7 +82,7 @@
 
     <div
       class='white
-      mt-5 mr-5 pa-3 d-flex justify-space-between
+      mt-5 mr-7 pa-3 d-flex justify-space-between
       align-center tlf-app-bar rounded elevation-2'>
       <v-icon @click='drawer = true'>fas fa-bars</v-icon>
       <div class='d-flex align-center' style='column-gap: 1rem'>
@@ -263,33 +263,31 @@ export default Vue.extend({
   methods: {
     toggleMenuItem(event: any): any {
 
-      // console.log(event.target.parentElement.parentElement.querySelector('.card-body'))
-     event.currentTarget.querySelector('.card-body').classList.toggle('card-opened')
-
       event.currentTarget
         .querySelector('.card-header')
         .classList
         .toggle('active')
-      if (event.currentTarget.querySelector('.card-body').classList.contains('card-opened')) {
+
+      if (event.currentTarget.querySelector('.card-body').classList.contains('d-none')) {
+        event.currentTarget.querySelector('.card-body').classList.remove('d-none')
+        setTimeout((e)=>{
+          e.querySelector('.card-body').style.transform = 'translateY(0)'
+        },1,event.currentTarget)
         event.currentTarget
           .querySelector('.card-header')
           .querySelector('.card-arrow')
           .style
           .transform = 'rotate(-90deg)'
-        event.currentTarget
-          .querySelector('.card-body')
-          .style
-          .transform = 'translateY(0)'
       } else {
+        event.currentTarget.querySelector('.card-body').style.transform = 'translateY(-35px)'
+        setTimeout((e)=>{
+          e.querySelector('.card-body').classList.add('d-none')
+        },100,event.currentTarget)
         event.currentTarget
           .querySelector('.card-header')
           .querySelector('.card-arrow')
           .style
           .transform = 'rotate(0deg)'
-        event.currentTarget
-          .querySelector('.card-body')
-          .style
-          .transform = 'translateY(-35px)'
       }
     }
   }
@@ -299,7 +297,7 @@ export default Vue.extend({
 <style scoped lang='scss'>
 
 .tlf-app-bar {
-  width: 325px;
+  width: 350px;
 }
 
 .tlf-menu-divider {
@@ -328,10 +326,6 @@ export default Vue.extend({
   //row-gap: 2rem;
 }
 
-.card-body.card-opened {
-  display: unset !important;
-}
-
 .tlf-app-bar {
   background: white;
   color: $dark-grey;
@@ -340,7 +334,6 @@ export default Vue.extend({
 .tlf-app-bar .v-btn {
   color: $dark-grey;
 }
-
 
 .card-body {
   transition: all 0.2s ease;

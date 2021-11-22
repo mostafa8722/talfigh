@@ -12,15 +12,15 @@
       style='bottom: 0; height: unset'
     >
       <div class='d-flex flex-column align-start justify-start'>
-        <div style='width: 100%' v-for='(item, i) in items'
+        <div style='width: 100%; transition: all 0.2s ease' v-for='(item, i) in items'
              class='d-flex flex-column align-start justify-start px-6 py-4 '
              :key='i'>
-          <div v-if="item.type === 'divider'" class='tlf-menu-divider'>
+          <div style='transition: all 0.2s ease' v-if="item.type === 'divider'" class='tlf-menu-divider'>
             <span>{{ item.title }}</span>
           </div>
 
           <nuxt-link active-class='main-item-active'
-                     style='text-decoration: none; width: 100%' v-else-if="item.type==='item'"
+                     style='text-decoration: none; width: 100%; transition: all 0.2s ease' v-else-if="item.type==='item'"
                      :to='item.to' exact>
             <div
               style='column-gap: 1.3rem;cursor: pointer; width: 100%;'
@@ -47,7 +47,7 @@
 
           <div
             v-else-if="item.type==='group'"
-            style='height: max-content; width: 100%'
+            style='height: max-content; width: 100%; transition: all 0.2s ease'
             class='card d-flex flex-column tlf-list-item'
             @click='toggleMenuItem'
           >
@@ -236,18 +236,27 @@ export default Vue.extend({
   },
   methods: {
     toggleMenuItem(event: any): any {
-      event.currentTarget.querySelector('.card-body').classList.toggle('card-opened')
+
       event.currentTarget
         .querySelector('.card-header')
         .classList
         .toggle('active')
-      if (event.currentTarget.querySelector('.card-body').classList.contains('card-opened')) {
+
+      if (event.currentTarget.querySelector('.card-body').classList.contains('d-none')) {
+        event.currentTarget.querySelector('.card-body').classList.remove('d-none')
+        setTimeout((e)=>{
+          e.querySelector('.card-body').style.transform = 'translateY(0)'
+        },1,event.currentTarget)
         event.currentTarget
           .querySelector('.card-header')
           .querySelector('.card-arrow')
           .style
           .transform = 'rotate(-90deg)'
       } else {
+        event.currentTarget.querySelector('.card-body').style.transform = 'translateY(-35px)'
+        setTimeout((e)=>{
+          e.querySelector('.card-body').classList.add('d-none')
+        },100,event.currentTarget)
         event.currentTarget
           .querySelector('.card-header')
           .querySelector('.card-arrow')
@@ -260,33 +269,6 @@ export default Vue.extend({
 </script>
 
 <style scoped lang='scss'>
-
-//.tlf-drawer{
-//  overflow: hidden !important;
-//}
-//
-//.tlf-drawer::-webkit-scrollbar {
-//  width: 0;
-//  appearance: none;
-//}
-//
-///* Track */
-//.tlf-drawer::-webkit-scrollbar-track {
-//  appearance: none;
-//}
-//
-///* Handle */
-//.tlf-drawer::-webkit-scrollbar-thumb {
-//  background: white;
-//  appearance: none;
-//}
-//
-//
-///* Handle on hover */
-//.tlf-drawer::-webkit-scrollbar-thumb:hover {
-//  background: white;
-//  appearance: none;
-//}
 
 .tlf-menu-divider {
   font-size: 16px;
@@ -329,6 +311,9 @@ export default Vue.extend({
 
 
 .card-body {
+  transition: all 0.2s ease;
+  transform: translateY(-35px);
+
   .card-item {
     .card-item-title {
       font-size: 0.9rem !important;

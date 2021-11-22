@@ -2,7 +2,7 @@
   <div style='overflow-x: auto'>
     <TLFContainer>
       <v-row style='column-gap: 1rem; row-gap: 1rem' class='' align='center'>
-        <span class='title'>لیست کاربران</span>
+        <span class='title mr-3 mr-sm-0'>لیست کاربران</span>
         <v-btn width='230' height='35' class='mr-5 d-none d-sm-inline-block' rounded color='primary'>
           <span class='text-btn'>خروجی فایل اکسل</span>
         </v-btn>
@@ -26,7 +26,10 @@
         </div>
       </v-col>
     </TLFContainer>
-    <UsersTableBox class='mt-10 mb-10' />
+    <UsersTableBox class='mt-10 mb-10 d-none d-sm-block' />
+    <v-btn width='230' height='35' class='mr-5 mt-5 mb-5 d-sm-none d-inline-block' rounded color='primary'>
+      <span class='text-btn'>خروجی فایل اکسل</span>
+    </v-btn>
   </div>
 </template>
 
