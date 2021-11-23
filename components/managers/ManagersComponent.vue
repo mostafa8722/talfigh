@@ -14,7 +14,7 @@
   </v-col>
   <v-col cols='12' >
     <div id='list-title' class='my-8 mx-10'>
-      اضافه کردن مدیران
+      لیست مدیران
     </div>
   </v-col>
   <v-col cols='12' class='mx-0'>
