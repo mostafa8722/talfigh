@@ -163,6 +163,12 @@ export default Vue.extend({
             }
           ]
         },
+         {
+          type: 'item',
+          icon: 'fa-th',
+          title: 'منو ناوبری',
+          to: '/main-menu'
+        },
         {
           type: 'group',
           icon: 'fa-cog',
