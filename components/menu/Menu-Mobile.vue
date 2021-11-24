@@ -94,62 +94,6 @@
         <v-icon>fas fa-user-circle</v-icon>
       </div>
     </div>
-
-    <!--    <v-app-bar-->
-    <!--      class='tlf-app-bar'-->
-    <!--      fixed-->
-    <!--      clipped-right-->
-    <!--      app-->
-    <!--      elevation='1'-->
-    <!--      height='80'-->
-    <!--    >-->
-
-    <!--      <img style='cursor:pointer;' class='mr-3' src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />-->
-    <!--&lt;!&ndash;      <v-img class='mr-8 ml-6' src='~/static/images/logo.png' max-width='36' max-height='28' />&ndash;&gt;-->
-    <!--&lt;!&ndash;      <v-toolbar-title style='font-size: 1rem; font-weight: 700; color: #848484' class='ml-16' v-text='title' />&ndash;&gt;-->
-    <!--&lt;!&ndash;      <v-avatar class='mr-5 ml-2'>&ndash;&gt;-->
-    <!--&lt;!&ndash;        <v-icon color='#757575' size='36'>fas fa-user-circle</v-icon>&ndash;&gt;-->
-    <!--&lt;!&ndash;      </v-avatar>&ndash;&gt;-->
-    <!--&lt;!&ndash;      <span style='color: #848484' class='font-weight-bold'>&ndash;&gt;-->
-    <!--&lt;!&ndash;        الیاس ملک پور&ndash;&gt;-->
-    <!--&lt;!&ndash;      </span>&ndash;&gt;-->
-    <!--&lt;!&ndash;      <span class='mr-8' style='color: #848484; font-size: 1rem; font-weight: 500'>&ndash;&gt;-->
-    <!--&lt;!&ndash;        09027777254&ndash;&gt;-->
-    <!--&lt;!&ndash;      </span>&ndash;&gt;-->
-
-    <!--&lt;!&ndash;      &lt;!&ndash;      <span class='mr-16' style='color: #848484; font-size: 1rem; font-weight: 500'>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;        کدملی : 0017693527&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;      </span>&ndash;&gt;&ndash;&gt;-->
-
-    <!--&lt;!&ndash;      <v-spacer></v-spacer>&ndash;&gt;-->
-
-
-    <!--&lt;!&ndash;      &lt;!&ndash;      <v-btn text class='mr-8'>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;        <span style='color: #C1C1C1'>جدول پاداش</span>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;        <v-icon color='#C1C1C1' class='mr-4'>fas fa-money-bill-wave</v-icon>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;      </v-btn>&ndash;&gt;&ndash;&gt;-->
-
-    <!--&lt;!&ndash;      &lt;!&ndash;      <v-btn class='mr-10' text>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;        <span style='color: #C1C1C1'>تیکت</span>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;        <v-icon color='#C1C1C1' class='mr-4'>fas fa-pen-square</v-icon>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;      </v-btn>&ndash;&gt;&ndash;&gt;-->
-
-    <!--&lt;!&ndash;      <v-btn class='mr-10' text>&ndash;&gt;-->
-    <!--&lt;!&ndash;        <span class='ml-4'>پیام‌ها</span>&ndash;&gt;-->
-    <!--&lt;!&ndash;        <v-badge content='1' color='#C9344F' left>&ndash;&gt;-->
-    <!--&lt;!&ndash;          <v-icon>far fa-envelope</v-icon>&ndash;&gt;-->
-    <!--&lt;!&ndash;        </v-badge>&ndash;&gt;-->
-    <!--&lt;!&ndash;      </v-btn>&ndash;&gt;-->
-
-    <!--&lt;!&ndash;      &lt;!&ndash;      <v-btn class='mr-10' text>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;        <span style='color: #C1C1C1' class='ml-4'>پشتیبانی</span>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;        <v-badge content='2' color='#C9344F' left>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;          <v-icon color='#C1C1C1'>fas fa-user-edit</v-icon>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;        </v-badge>&ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;      &lt;!&ndash;      </v-btn>&ndash;&gt;&ndash;&gt;-->
-
-
-    <!--    </v-app-bar>-->
   </div>
 </template>
 

@@ -9,7 +9,7 @@
       absolute
       width='300px'
       class='tlf-drawer'
-      style='bottom: 0; height: unset'
+      style='bottom: 0; height: unset;'
     >
       <div class='d-flex flex-column align-start justify-start'>
         <div style='width: 100%; transition: all 0.2s ease' v-for='(item, i) in items'
@@ -78,8 +78,8 @@
       height='80'
     >
 
-      <img style='cursor:pointer;' class='mr-3' src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />
-      <v-img class='mr-8 ml-6' src='~/static/images/logo.png' max-width='36' max-height='28' />
+        <img class='mr-3' style='cursor:pointer;' src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />
+      <v-img class='mr-13 ml-6' src='~/static/images/logo.png' max-width='36' max-height='28' />
       <v-toolbar-title style='font-size: 1rem; font-weight: 700; color: #848484' class='ml-16' v-text='title' />
       <v-avatar class='mr-5 ml-2'>
         <v-icon color='#757575' size='36'>fas fa-user-circle</v-icon>
@@ -269,6 +269,10 @@ export default Vue.extend({
 </script>
 
 <style scoped lang='scss'>
+.tlf-drawer{
+  background: url("static/images/logo_sidebar.svg") -35px 200px,
+  linear-gradient(270deg, #FFFFFF 97.75%, #F2994A 98.14%),;
+}
 
 .tlf-menu-divider {
   font-size: 16px;
@@ -301,7 +305,8 @@ export default Vue.extend({
 }
 
 .tlf-app-bar {
-  background: linear-gradient(90.91deg, #F0FBFF -2.31%, #FFF7F0 110.95%);
+  background: linear-gradient(105deg, #FFFFFF 94.29%, #F2994A 94.33%);
+  box-shadow: 0px -63px 60px 37px rgba(0, 0, 0, 0.25);
   color: $dark-grey;
 }
 
