@@ -6,12 +6,22 @@
       clipped
       right
       app
-      absolute
+      fixed
       width='300px'
       class='tlf-drawer'
-      style='bottom: 0; height: unset;'
+      style='bottom: 0; height: unset'
     >
       <div class='d-flex flex-column align-start justify-start'>
+
+        <div style='background-color: #F2994A; width: 100%; height: 100px'
+             class='d-flex align-center justify-space-between'>
+          <div class='d-flex align-center'>
+            <img style='' src='@/static/images/logo_sefid_2.svg' alt=''>
+            <span class='mr-5' style='font-weight: bold; color: white'>پنل تلفیق هنر</span>
+          </div>
+          <v-icon @click='drawer = false' color='white' class='ml-5'>fas fa-times</v-icon>
+        </div>
+
         <div style='width: 100%; transition: all 0.2s ease' v-for='(item, i) in items'
              class='d-flex flex-column align-start justify-start px-6 py-4 '
              :key='i'>
@@ -23,23 +33,23 @@
                      style='text-decoration: none; width: 100%; transition: all 0.2s ease' v-else-if="item.type==='item'"
                      :to='item.to' exact>
             <div
-              style='column-gap: 1.3rem;cursor: pointer; width: 100%;'
+              style='column-gap: 1.3rem;cursor: pointer; width: 100%; transition: all 0.2s ease'
               class='d-flex main-item align-center tlf-list-item'>
 
               <v-icon size='20'>{{ item.icon }}</v-icon>
               <span>{{ item.title }}</span>
-              <span
-                style='background-color: #2D9DCD;
-                color: white;
-                font-size: 10px;
-                border-radius: 15px;
-                width: 60px;
-                height: 25px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                justify-self: flex-end;'
-                v-if='item.caption'>5 مورد</span>
+              <!--              <span-->
+              <!--                style='background-color: #2D9DCD;-->
+              <!--                    color: white;-->
+              <!--                    font-size: 10px;-->
+              <!--                    border-radius: 15px;-->
+              <!--                    width: 60px;-->
+              <!--                    height: 25px;-->
+              <!--                    display: flex;-->
+              <!--                    justify-content: center;-->
+              <!--                    align-items: center;-->
+              <!--                    justify-self: flex-end;'-->
+              <!--                v-if='item.caption'>5 مورد</span>-->
 
             </div>
           </nuxt-link>
@@ -69,61 +79,21 @@
         </div>
       </div>
     </v-navigation-drawer>
-    <v-app-bar
-      class='tlf-app-bar'
-      fixed
-      clipped-right
-      app
-      elevation='0'
-      height='80'
-    >
 
-        <img class='mr-3' style='cursor:pointer;' src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />
-      <v-img class='mr-13 ml-6' src='~/static/images/logo.png' max-width='36' max-height='28' />
-      <v-toolbar-title style='font-size: 1rem; font-weight: 700; color: #848484' class='ml-16' v-text='title' />
-      <v-avatar class='mr-5 ml-2'>
-        <v-icon color='#757575' size='36'>fas fa-user-circle</v-icon>
-      </v-avatar>
-      <span style='color: #848484' class='font-weight-bold'>
-        الیاس ملک پور
-      </span>
-      <span class='mr-8' style='color: #848484; font-size: 1rem; font-weight: 500'>
-        09027777254
-      </span>
-
-      <!--      <span class='mr-16' style='color: #848484; font-size: 1rem; font-weight: 500'>-->
-      <!--        کدملی : 0017693527-->
-      <!--      </span>-->
-
-      <v-spacer></v-spacer>
-
-
-      <!--      <v-btn text class='mr-8'>-->
-      <!--        <span style='color: #C1C1C1'>جدول پاداش</span>-->
-      <!--        <v-icon color='#C1C1C1' class='mr-4'>fas fa-money-bill-wave</v-icon>-->
-      <!--      </v-btn>-->
-
-      <!--      <v-btn class='mr-10' text>-->
-      <!--        <span style='color: #C1C1C1'>تیکت</span>-->
-      <!--        <v-icon color='#C1C1C1' class='mr-4'>fas fa-pen-square</v-icon>-->
-      <!--      </v-btn>-->
-
-      <v-btn class='mr-10' text>
-        <span class='ml-4'>پیام‌ها</span>
-        <v-badge content='1' color='#C9344F' left>
-          <v-icon>far fa-envelope</v-icon>
-        </v-badge>
-      </v-btn>
-
-      <!--      <v-btn class='mr-10' text>-->
-      <!--        <span style='color: #C1C1C1' class='ml-4'>پشتیبانی</span>-->
-      <!--        <v-badge content='2' color='#C9344F' left>-->
-      <!--          <v-icon color='#C1C1C1'>fas fa-user-edit</v-icon>-->
-      <!--        </v-badge>-->
-      <!--      </v-btn>-->
-
-
-    </v-app-bar>
+    <div
+      class='white
+      mt-5 mr-7 pa-3 d-flex justify-space-between
+      align-center tlf-app-bar rounded elevation-2'>
+      <v-icon @click='drawer = true'>fas fa-bars</v-icon>
+      <div class='d-flex align-center' style='column-gap: 1rem'>
+        <div>
+          <v-badge content='1' color='#C9344F' left offset-y='1rem' offset-x='0.5rem'>
+            <v-icon>far fa-bell</v-icon>
+          </v-badge>
+        </div>
+        <v-icon>fas fa-user-circle</v-icon>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -131,7 +101,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'Menu',
+  name: 'Menu-Mobile',
   data() {
     return {
       drawer: true,
@@ -269,9 +239,9 @@ export default Vue.extend({
 </script>
 
 <style scoped lang='scss'>
-.tlf-drawer{
-  background: url("static/images/logo_sidebar.svg") -35px 200px,
-  linear-gradient(270deg, #FFFFFF 97.75%, #F2994A 98.14%),;
+
+.tlf-app-bar {
+  width: 350px;
 }
 
 .tlf-menu-divider {
@@ -300,20 +270,14 @@ export default Vue.extend({
   //row-gap: 2rem;
 }
 
-.card-body.card-opened {
-  display: unset !important;
-}
-
 .tlf-app-bar {
-  background: linear-gradient(105deg, #FFFFFF 94.29%, #F2994A 94.33%);
-  box-shadow: 0px -63px 60px 37px rgba(0, 0, 0, 0.25);
+  background: white;
   color: $dark-grey;
 }
 
 .tlf-app-bar .v-btn {
   color: $dark-grey;
 }
-
 
 .card-body {
   transition: all 0.2s ease;
@@ -379,3 +343,4 @@ export default Vue.extend({
 }
 
 </style>
+

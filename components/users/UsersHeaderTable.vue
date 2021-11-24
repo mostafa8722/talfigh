@@ -14,8 +14,8 @@
       </div>
       <div class='d-flex align-center' style='column-gap: 1.5rem'>
         <div class='d-flex align-center' style='column-gap: 1rem'>
-          <img src='@/static/icons/arrow.svg' alt=''>
-          <img style='transform: rotate(180deg)' src='@/static/icons/arrow.svg' alt=''>
+          <img class='paginator-controller' src='@/static/icons/arrow.svg' style='cursor:pointer;' alt=''>
+          <img class='paginator-controller' style='transform: rotate(180deg); cursor:pointer;' src='@/static/icons/arrow.svg' alt=''>
         </div>
         <div class='d-flex align-center' style='column-gap: 0.5rem'>
           <span class='text__range'>1-50</span>
@@ -57,6 +57,14 @@ export default Vue.extend({
   font-weight: 500 !important;
   font-size: 1rem !important;
   font-style: normal;
+}
+
+.paginator-controller {
+  @include transition();
+  opacity: 0.3;
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 </style>

@@ -45,7 +45,7 @@
                font-weight: 300;' class='mr-1'>بلاک مدیر</span>
         </v-btn>
         <div style='background-color: #F2994A; border-radius: 50%'
-             class='py-2 px-2 d-flex justify-center align-center' >
+             class='py-2 edit-btn px-2 d-flex justify-center align-center' >
           <img src='@/static/icons/edit.svg' alt=''>
         </div>
       </div>
@@ -117,5 +117,12 @@ export default Vue.extend({
 <style scoped lang='scss'>
 span{
   font-family: IranYekanFN, serif !important;
+}
+.edit-btn {
+  @include transition();
+  cursor: pointer;
+  &:hover {
+    background-color: #c26f23 !important
+  }
 }
 </style>
