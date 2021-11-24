@@ -100,7 +100,7 @@
           <v-divider />
         </template>
         <template #[`item.actions`]>
-          <div class="d-flex flex-row">
+          <div class="d-flex flex-row py-6">
             <v-btn fab x-small color="error" elevation="0"
               ><v-icon>fas fa-trash-alt</v-icon></v-btn
             >
