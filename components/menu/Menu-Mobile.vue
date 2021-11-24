@@ -38,18 +38,6 @@
 
               <v-icon size='20'>{{ item.icon }}</v-icon>
               <span>{{ item.title }}</span>
-              <!--              <span-->
-              <!--                style='background-color: #2D9DCD;-->
-              <!--                    color: white;-->
-              <!--                    font-size: 10px;-->
-              <!--                    border-radius: 15px;-->
-              <!--                    width: 60px;-->
-              <!--                    height: 25px;-->
-              <!--                    display: flex;-->
-              <!--                    justify-content: center;-->
-              <!--                    align-items: center;-->
-              <!--                    justify-self: flex-end;'-->
-              <!--                v-if='item.caption'>5 مورد</span>-->
 
             </div>
           </nuxt-link>
@@ -57,7 +45,7 @@
 
           <div
             v-else-if="item.type==='group'"
-            style='height: max-content; width: 100%; transition: all 0.2s ease'
+            style='width: 100%; transition: all 0.2s ease'
             class='card d-flex flex-column tlf-list-item'
             @click='toggleMenuItem'
           >
@@ -105,103 +93,16 @@ export default Vue.extend({
   data() {
     return {
       drawer: true,
-      items: [
-        {
-          type: 'divider',
-          title: 'مدیریت کاربران'
-        },
-        {
-          type: 'item',
-          icon: 'fa-user-edit',
-          title: 'نقش‌ها',
-          to: '/roles'
-        },
-        {
-          type: 'item',
-          icon: 'fa-users',
-          title: 'کاربران',
-          to: '/users'
-        },
-        {
-          type: 'group',
-          icon: 'fa-user-graduate',
-          title: 'مدیران',
-          children: [
-            {
-              icon: 'fa-user-circle',
-              title: 'مدیران',
-              to: '/'
-            },
-            {
-              icon: 'fa-user-circle',
-              title: 'مدیران 2',
-              to: '/'
-            }
-          ]
-        },
-        {
-          type: 'divider',
-          title: 'مدیریت صفحه ها'
-        },
-        {
-          type: 'item',
-          icon: 'fa-pen',
-          title: 'صفحه سازی',
-          to: '/custom'
-        },
-        {
-          type: 'item',
-          icon: 'fa-th',
-          title: 'منو ناوبری',
-          to: '/custom'
-        },
-        {
-          type: 'item',
-          icon: 'fa-edit',
-          title: 'تنظیمات سایت',
-          to: '/settings/home-settings',
-          caption: '5 مورد'
-        },
-        {
-          type: 'item',
-          icon: 'fa-edit',
-          title: 'تنظیمات سیستمی',
-          to: '/settings/home-settings'
-        },
-        {
-          type: 'item',
-          icon: 'fa-edit',
-          title: 'تنظیمات صفحه اصلی',
-          to: '/settings/system-settings'
-        }
-        // {
-        //   type: 'group',
-        //   icon: 'fa-cog',
-        //   caption: '5 مورد',
-        //   title: 'تنظیمات سایت',
-        //   children: [
-        //     {
-        //       icon: 'fa-check-square',
-        //       title: 'تنظیمات فوتر - پاورقی',
-        //       to: '/settings/footer'
-        //     },
-        //     {
-        //       icon: 'fa-check-square',
-        //       title: 'تنظیمات صفحه اصلی',
-        //       to: '/settings/home-settings'
-        //     },
-        //     {
-        //       icon: 'fa-check-square',
-        //       title: 'تنظیمات سیستمی',
-        //       to: '/settings/system-settings'
-        //     },
-        //   ]
-        // }
-      ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'پنل تلفیق هنر'
+    }
+  },
+  props: {
+    items: {
+      type: Array,
+      required: true
     }
   },
   methods: {
@@ -212,10 +113,13 @@ export default Vue.extend({
         .classList
         .toggle('active')
 
+      const headerHeight = event.currentTarget.querySelector('.card-header').clientHeight
+
       if (event.currentTarget.querySelector('.card-body').classList.contains('d-none')) {
         event.currentTarget.querySelector('.card-body').classList.remove('d-none')
         setTimeout((e)=>{
           e.querySelector('.card-body').style.transform = 'translateY(0)'
+          e.style.height = e.querySelector('.card-body').clientHeight + headerHeight + 'px'
         },1,event.currentTarget)
         event.currentTarget
           .querySelector('.card-header')
@@ -224,6 +128,7 @@ export default Vue.extend({
           .transform = 'rotate(-90deg)'
       } else {
         event.currentTarget.querySelector('.card-body').style.transform = 'translateY(-35px)'
+        event.currentTarget.style.height = headerHeight + 'px'
         setTimeout((e)=>{
           e.querySelector('.card-body').classList.add('d-none')
         },100,event.currentTarget)
