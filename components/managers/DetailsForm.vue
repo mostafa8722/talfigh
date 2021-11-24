@@ -5,11 +5,11 @@
         <v-col cols='12' sm='5'>
             <div class='d-flex mb-9 mt-4'>
               <div class=' ' id='title'>عنوان مدیر</div>
-              <v-btn depressed rounded  color='#009D4C' class='activate mt-2 mx-4'  >
+              <v-btn depressed rounded  color='#009D4C' class='activate mt-2 mx-4 chp'  >
                 <v-icon left small >fa-check</v-icon>
                  فعال سازی
               </v-btn>
-              <v-btn depressed rounded color='#FF5C5C' class='activate mt-2'>
+              <v-btn depressed rounded color='#FF5C5C' class='activate mt-2 chp'>
                 <v-icon left small >fa-trash</v-icon>
                 بلاک مدیر
               </v-btn>
@@ -41,7 +41,7 @@
 
             </v-col>
             <v-col cols='12'>
-              <v-text-field filled   class='rounded-lg mt-2'  append-icon='fa-search'  placeholder='جستجوی نقش' outlined></v-text-field>
+              <v-text-field  outlined   rounded  class='  mt-2'  append-icon='fa-search'  placeholder='جستجوی نقش' ></v-text-field>
             </v-col>
 
           </v-row>
@@ -65,7 +65,10 @@ export default Vue.extend(
 </script>
 
 <style lang='scss' scoped>
-
+.chp{
+  min-width: 112px !important;
+  min-height: 26px !important;
+}
 .activate{
 color: white !important;
   width: 112px!important;

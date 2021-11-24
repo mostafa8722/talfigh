@@ -169,6 +169,12 @@ export default Vue.extend({
             }
           ]
         },
+         {
+          type: 'item',
+          icon: 'fa-th',
+          title: 'منو ناوبری',
+          to: '/main-menu'
+        },
         {
           type: 'divider',
           title: 'مدیریت صفحه ها'

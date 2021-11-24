@@ -380,7 +380,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'Index',
+  name: 'HomeSettings',
   data() {
     return {
       images: {
