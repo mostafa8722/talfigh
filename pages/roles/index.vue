@@ -1,21 +1,25 @@
 <template>
-  <div class='pa-10'>
+  <div class="pa-md-10 pa-6">
+    <div class="white--text mb-8 mt-4 d-md-none" style="font-size: 1.6rem">
+      انتخاب نقش برای ویرایش
+    </div>
     <v-row>
-      <v-col cols='3'>
-        <v-card rounded='lg' class='pa-4'>
-          <v-btn block depressed rounded='lg' color='primary'>
-            <v-icon size='16'>fas fa-plus</v-icon>
+      <v-col cols="12" lg="3" md="3">
+        <v-card class="pa-4 rounded-xl">
+          <v-btn block depressed rounded color="primary">
+            <v-icon size="16">fas fa-plus</v-icon>
             <span>اضافه کردن نقش</span>
           </v-btn>
 
           <v-text-field
-            class='mt-4'
-            append-icon='fas fa-search'
+            class="mt-4"
+            append-icon="fas fa-search"
             filled
             rounded
             dense
             placeholder="جستجو نقش‌ها"
-            hide-details/>
+            hide-details
+          />
 
           <v-virtual-scroll
             class="mt-4 tlf-v-scroll"
@@ -23,8 +27,11 @@
             :item-height="60"
             height="490"
           >
-            <template #default="{item}">
-              <div class="px-4 py-4 tlf-role-item" :class="{selected:item.id==3}">
+            <template #default="{ item }">
+              <div
+                class="px-4 py-4 tlf-role-item"
+                :class="{ selected: item.id == 3 }"
+              >
                 <span>{{ item.title }}</span>
               </div>
             </template>
@@ -32,10 +39,10 @@
         </v-card>
       </v-col>
 
-      <v-col cols='9' class='pr-2'>
-        <v-card rounded='lg' class='pa-4'>
+      <v-col cols="12" lg="9" md="9" class="pr-2">
+        <v-card class="py-4 px-8 rounded-xl">
           <v-row>
-            <v-col cols="4">
+            <v-col cols="12" lg="4" md="4">
               <h2 class="tlf-role-form-card-title">عنوان نقش</h2>
 
               <div class="mt-6 d-flex align-center">
@@ -43,12 +50,10 @@
                   placeholder="مدیر عامل"
                   class="rounded-lg"
                   hide-details
-                  outlined/>
+                  outlined
+                />
 
-                <v-btn
-                  class="mr-4"
-                  color="red lighten-1"
-                  text>
+                <v-btn class="mr-4" color="red lighten-1" text>
                   <v-icon>fas fa-trash-alt</v-icon>
                   <span class="mr-2">حذف</span>
                 </v-btn>
@@ -61,86 +66,109 @@
               <v-textarea
                 class="mt-6 rounded-lg"
                 placeholder="توضیحات..."
-                outlined/>
+                height="260"
+                outlined
+              />
             </v-col>
 
-            <v-col cols="4">
-              <v-card rounded='xl'
-                      class='pa-4 d-flex flex-column align-center justify-center'
-                      elevation="0"
-                      color="#E4E4E4">
-
+            <v-col cols="12" lg="4" md="4">
+              <v-card
+                rounded="xl"
+                class="pa-4 d-flex flex-column align-center justify-center"
+                elevation="0"
+                color="#E4E4E4"
+                min-height="480"
+              >
                 <h3 class="black--text">گروه دسترسی</h3>
 
                 <v-text-field
-                  class='mt-4'
-                  append-icon='fas fa-search'
+                  class="mt-4"
+                  append-icon="fas fa-search"
                   filled
                   rounded
                   dense
                   placeholder="جستجو گروه دسترسی"
                   background-color="white"
-                  hide-details/>
+                  hide-details
+                />
 
                 <v-virtual-scroll
                   class="mt-4 tlf-v-scroll"
-                  :items="roles"
+                  :items="permissionGroup"
                   :item-height="60"
                   width="100%"
                   max-height="300"
                 >
-                  <template #default="{item}">
-                    <div class="px-4 py-4 tlf-role-item" :class="{selected:item.id==2}">
+                  <template #default="{ item }">
+                    <div
+                      class="px-4 py-4 tlf-role-item"
+                      :class="{ selected: item.id == 2 }"
+                    >
                       <span>{{ item.title }}</span>
                     </div>
                   </template>
                 </v-virtual-scroll>
 
-                <v-btn class="mt-3 white--text"
-                       color="#7A7A7A"
-                       elevation="0"
-                       rounded>
+                <v-btn
+                  class="mt-3 white--text"
+                  color="#7A7A7A"
+                  elevation="0"
+                  rounded
+                >
                   اضافه کردن
                 </v-btn>
               </v-card>
             </v-col>
 
-            <v-col cols="4">
-              <v-card rounded='xl'
-                      class='pa-4 d-flex flex-column align-center justify-center'
-                      elevation="0"
-                      color="#E4E4E4">
-
+            <v-col cols="12" lg="4" md="4">
+              <v-card
+                rounded="xl"
+                class="pa-4 d-flex flex-column align-center justify-center"
+                elevation="0"
+                color="#E4E4E4"
+                min-height="480"
+              >
                 <h3 class="black--text">دسترسی</h3>
 
                 <v-text-field
-                  class='mt-4'
-                  append-icon='fas fa-search'
+                  class="mt-4"
+                  append-icon="fas fa-search"
                   filled
                   rounded
                   dense
                   placeholder="جستجو دسترسی"
                   background-color="white"
-                  hide-details/>
+                  hide-details
+                />
 
                 <v-virtual-scroll
                   class="mt-4 tlf-v-scroll"
-                  :items="roles"
-                  :item-height="60"
+                  :items="permissions"
+                  :item-height="70"
                   width="100%"
                   max-height="300"
                 >
-                  <template #default="{item}">
-                    <div class="px-4 py-4 tlf-role-item" :class="{selected:item.id==5}">
-                      <span>{{ item.title }}</span>
+                  <template #default="{ item }">
+                    <div class="px-4 py-4">
+                      <v-checkbox :label="item.title">
+                        <!-- <template #prepend>
+                          <div class="ml-8">
+                            <div class="mt-1" style="width: 100px">
+                              {{ item.title }}
+                            </div>
+                          </div>
+                        </template> -->
+                      </v-checkbox>
                     </div>
                   </template>
                 </v-virtual-scroll>
 
-                <v-btn class="mt-3 white--text"
-                       color="#7A7A7A"
-                       elevation="0"
-                       rounded>
+                <v-btn
+                  class="mt-3 white--text"
+                  color="#7A7A7A"
+                  elevation="0"
+                  rounded
+                >
                   اضافه کردن
                 </v-btn>
               </v-card>
@@ -148,31 +176,59 @@
           </v-row>
 
           <v-chip-group class="mt-4">
-            <v-chip color="#F2994A" text-color="white" close close-icon="fas fa-question-circle">
+            <v-chip
+              color="warning"
+              text-color="white"
+              close
+              close-icon="fas fa-question-circle"
+            >
               مدیر فروش
             </v-chip>
-            <v-chip color="#F2994A" text-color="white" close close-icon="fas fa-question-circle">
+            <v-chip
+              color="warning"
+              text-color="white"
+              close
+              close-icon="fas fa-question-circle"
+            >
               مدیر فروش
             </v-chip>
-            <v-chip color="#F2994A" text-color="white" close close-icon="fas fa-question-circle">
+            <v-chip
+              color="warning"
+              text-color="white"
+              close
+              close-icon="fas fa-question-circle"
+            >
               مدیر فروش
             </v-chip>
-            <v-chip color="#F2994A" text-color="white" close close-icon="fas fa-question-circle">
+            <v-chip
+              color="warning"
+              text-color="white"
+              close
+              close-icon="fas fa-question-circle"
+            >
               مدیر فروش
             </v-chip>
-            <v-chip color="#F2994A" text-color="white" close close-icon="fas fa-question-circle">
+            <v-chip
+              color="warning"
+              text-color="white"
+              close
+              close-icon="fas fa-question-circle"
+            >
               مدیر فروش
             </v-chip>
-            <v-chip color="#F2994A" text-color="white" close close-icon="fas fa-question-circle">
+            <v-chip
+              color="warning"
+              text-color="white"
+              close
+              close-icon="fas fa-question-circle"
+            >
               مدیر فروش
             </v-chip>
           </v-chip-group>
 
           <div class="mt-4 d-flex">
-            <v-spacer/>
-            <v-btn color="#00B728" rounded outlined>
-              ثبت و ویرایش نقش
-            </v-btn>
+            <v-spacer />
+            <v-btn color="#00B728" rounded outlined> ثبت و ویرایش نقش </v-btn>
           </div>
         </v-card>
       </v-col>
@@ -180,7 +236,7 @@
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import Vue from 'vue'
 
 export default Vue.extend({
@@ -190,39 +246,67 @@ export default Vue.extend({
       roles: [
         {
           id: 1,
-          title: 'نقش شماره 1'
+          title: 'نقش شماره 1',
         },
         {
           id: 2,
-          title: 'نقش شماره 2'
+          title: 'نقش شماره 2',
         },
         {
           id: 3,
-          title: 'نقش شماره 3'
+          title: 'نقش شماره 3',
         },
         {
           id: 4,
-          title: 'نقش شماره 4'
+          title: 'نقش شماره 4',
         },
         {
           id: 5,
-          title: 'نقش شماره 5'
+          title: 'نقش شماره 5',
         },
         {
           id: 6,
-          title: 'نقش شماره 6'
+          title: 'نقش شماره 6',
         },
         {
           id: 7,
-          title: 'نقش شماره 7'
+          title: 'نقش شماره 7',
         },
         {
           id: 8,
-          title: 'نقش شماره 8'
-        }
-      ]
+          title: 'نقش شماره 8',
+        },
+      ],
+      permissionGroup: [
+        {
+          id: 1,
+          title: 'مدیریت محصولات',
+        },
+        {
+          id: 2,
+          title: 'مدیر بازرسی',
+        },
+        {
+          id: 3,
+          title: 'پشتیبان',
+        },
+      ],
+      permissions: [
+        {
+          id: 1,
+          title: 'ثبت',
+        },
+        {
+          id: 2,
+          title: 'ویرایش',
+        },
+        {
+          id: 3,
+          title: 'حذف',
+        },
+      ],
     }
-  }
+  },
 })
 </script>
 
