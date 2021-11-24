@@ -31,7 +31,8 @@ const config: NuxtConfig = {
     '~/plugins/axios.ts',
     '~/plugins/repositories.ts',
     '~/plugins/errors.ts',
-    '~/plugins/vue-smooth-dnd.js'
+    '~/plugins/vue-smooth-dnd.js',
+    {src: '~plugins/vuelayers.js', ssr: false},
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
