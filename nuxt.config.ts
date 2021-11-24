@@ -82,8 +82,8 @@ const config: NuxtConfig = {
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
+          warning: '#F2994A',
+          error: '#FF5C5C',
           success: colors.green.accent3
         }
       }
