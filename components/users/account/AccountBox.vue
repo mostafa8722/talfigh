@@ -1,8 +1,5 @@
 <template>
-  <div class='mr-sm-16
-  mr-5
-  ml-5
-  ml-sm-16
+  <div class='
   d-flex
   flex-column
   white
@@ -14,7 +11,7 @@
   pl-sm-10'
        style='border-radius: 25px;'>
     <div class='d-flex align-start' style='column-gap: 0.5rem'>
-       <div class='d-flex flex-wrap'
+       <div class='d-flex flex-wrap form-inputs'
             style='column-gap: 1.9rem; row-gap: 1rem; width: 45%'>
          <div class='d-flex flex-column align-start justify-start' style='row-gap: 0.5rem'>
            <label for='name__input'>نام</label>
@@ -50,7 +47,7 @@
            <input style='width: 435px;' type='text' placeholder='شماره حساب' id='account__input'>
          </div>
        </div>
-       <AccountCard class='d-none d-sm-flex' />
+       <AccountCard class='d-none d-lg-flex' />
     </div>
     <v-btn
       style='border-width: 2px'
@@ -109,6 +106,20 @@ label{
   }
   #sheba__input{
     width: 263px !important;
+  }
+}
+@media screen and (max-width: 1400px){
+  #name__input, #family__input, #account__input{
+    width: 100% !important;
+  }
+  #sheba__input{
+    width: 100% !important;
+  }
+
+  .form-inputs{
+    div {
+      width: 100%;
+    }
   }
 }
 

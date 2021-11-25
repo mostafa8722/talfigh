@@ -186,6 +186,7 @@ export default Vue.extend({
     if (window.innerWidth < 960){
       this.$emit('heightMenu', menu.clientHeight)
     }
+
     window.addEventListener('resize', () => {
       if (window.innerWidth < 960){
         this.$emit('heightMenu', menu.clientHeight)

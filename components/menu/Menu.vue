@@ -11,7 +11,7 @@
       class='tlf-drawer'
       style='bottom: 0; height: unset;'
     >
-      <div class='d-flex flex-column align-start justify-start'>
+      <div class='d-flex container-drawer flex-column align-start justify-start'>
         <div style='width: 100%; transition: all 0.2s ease' v-for='(item, i) in items'
              class='d-flex flex-column align-start justify-start px-6 py-4 '
              :key='i'>

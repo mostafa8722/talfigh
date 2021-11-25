@@ -25,7 +25,7 @@ export default Vue.extend({
         {
           type: 'item',
           icon: 'fa-user-edit',
-          title: 'نقش‌ها',
+          title: 'نقش‌ ها',
           to: '/roles'
         },
         {
@@ -107,7 +107,14 @@ export default Vue.extend({
 
     window.addEventListener('resize', () => {
       this.isMobile = window.innerWidth < 960
+      if (!this.isMobile){
+        this.marginTopMenuMobile = 0
+      }
     })
+
+    if (!this.isMobile){
+      this.marginTopMenuMobile = 0
+    }
     this.isMobile = window.innerWidth < 960
   }
 })
