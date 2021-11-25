@@ -3,10 +3,10 @@
     <v-navigation-drawer
       v-model='drawer'
       :mini-variant='miniVariant'
+      fixed
       clipped
       right
       app
-      fixed
       width='300px'
       class='tlf-drawer'
       style='bottom: 0; height: unset;'
@@ -78,7 +78,7 @@
       height='80'
     >
 
-        <img class='mr-lg-3' style='cursor:pointer;' src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />
+        <img class='mr-lg-3 mr-md-2 mr-sm-1' style='cursor:pointer;' src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />
       <v-img class='mr-13 ml-6' src='~/static/images/logo.svg' max-width='38' />
       <v-toolbar-title style='font-size: 1rem; font-weight: 700; color: #848484' class='ml-10' v-text='title' />
       <v-avatar class='mr-5 ml-2'>
@@ -134,7 +134,7 @@ export default Vue.extend({
   name: 'Menu',
   data() {
     return {
-      drawer: true,
+      drawer: false,
       miniVariant: false,
       right: true,
       rightDrawer: false,
@@ -169,7 +169,7 @@ export default Vue.extend({
           .style
           .transform = 'rotate(-90deg)'
       } else {
-        event.currentTarget.querySelector('.card-body').style.transform = 'translateY(-35px)'
+        event.currentTarget.querySelector('.card-body').style.transform = 'translateY(-30px)'
         event.currentTarget.style.height = headerHeight + 'px'
         setTimeout((e)=>{
           e.querySelector('.card-body').classList.add('d-none')
@@ -227,6 +227,15 @@ export default Vue.extend({
   background: linear-gradient(105deg, #FFFFFF 94.29%, #F2994A 94.33%);
   box-shadow: 0px -63px 60px 37px rgba(0, 0, 0, 0.25);
   color: $dark-grey;
+@media screen and (max-width: 1200px){
+  background: linear-gradient(105deg, #FFFFFF 93.29%, #F2994A 93.33%);
+}
+  @media screen and (max-width: 960px){
+    background: linear-gradient(105deg, #FFFFFF 92.29%, #F2994A 92.33%);
+  }
+  @media screen and (max-width: 600px){
+    background: linear-gradient(105deg, #FFFFFF 90.29%, #F2994A 90.33%);
+  }
 }
 
 .tlf-app-bar .v-btn {
@@ -236,7 +245,7 @@ export default Vue.extend({
 
 .card-body {
   transition: all 0.2s ease;
-  transform: translateY(-35px);
+  transform: translateY(-30px);
 
   .card-item {
     .card-item-title {

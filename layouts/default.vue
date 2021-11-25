@@ -1,10 +1,10 @@
 <template>
   <v-app class='container__app tlf-main' dark>
-      <Menu :items='items' v-if='!isMobile' />
-      <MenuMobile :items='items' v-if='isMobile' />
-      <v-main>
-        <Nuxt />
-      </v-main>
+    <Menu :items='items' v-if='!isMobile' />
+    <MenuMobile @heightMenu='setMarginMain' :items='items' v-if='isMobile' />
+    <v-main :style='{marginTop: marginTopMenuMobile + "px"}'>
+      <Nuxt />
+    </v-main>
   </v-app>
 </template>
 
@@ -14,9 +14,9 @@ import Menu from '~/components/menu/Menu.vue'
 import MenuMobile from '~/components/menu/Menu-Mobile.vue'
 
 export default Vue.extend({
-  components: { MenuMobile, Menu, },
-  data(){
-    return{
+  components: { MenuMobile, Menu },
+  data() {
+    return {
       items: [
         {
           type: 'divider',
@@ -93,24 +93,36 @@ export default Vue.extend({
           to: '/settings/system-settings'
         }
       ],
-      isMobile: false
+      isMobile: false,
+      marginTopMenuMobile: 0,
+    }
+  },
+  methods: {
+    setMarginMain(number: any){
+      this.marginTopMenuMobile = number
     }
   },
   mounted() {
-    this.isMobile = window.innerWidth < 600
-  }
+    let $ = this
 
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth < 960
+    })
+    this.isMobile = window.innerWidth < 960
+  }
 })
 </script>
 
 <style lang='scss' scoped>
 @import '~vuetify/src/styles/styles.sass';
+
 .tlf-main {
-  background: linear-gradient(117.81deg, #FFB97A -18.78%, #00B2FF 126.29%);
+  background: url("static/images/background.jpg") 50% 0;
 }
-@media #{map-get($display-breakpoints, 'sm-and-down')}{
-  .tlf-main {
-    background: linear-gradient(30.5deg, #FFB97A -50.22%, #00B2FF 109.72%);
-  }
-}
+
+//@media #{map-get($display-breakpoints, 'sm-and-down')}{
+//  .tlf-main {
+//    background: url("static/images/background.jpg") 50% 0;
+//  }
+//}
 </style>
