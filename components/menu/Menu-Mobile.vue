@@ -183,9 +183,13 @@ export default Vue.extend({
   mounted() {
     const menu: any = document.querySelector('.menu')
 
-    this.$emit('heightMenu', menu.clientHeight)
-    window.addEventListener('resize', () => {
+    if (window.innerWidth < 960){
       this.$emit('heightMenu', menu.clientHeight)
+    }
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 960){
+        this.$emit('heightMenu', menu.clientHeight)
+      }
     })
   }
 })
