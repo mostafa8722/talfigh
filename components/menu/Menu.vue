@@ -7,7 +7,7 @@
       clipped
       right
       app
-      width='300px'
+      width='300'
       class='tlf-drawer'
       style='bottom: 0; height: unset;'
     >
@@ -193,14 +193,12 @@ export default Vue.extend({
 }
 
 .tlf-menu-divider {
-  font-size: 16px;
   font-weight: 300;
   color: $lighter-grey;
 }
 
 .tlf-list-item {
   font-weight: 500;
-  font-size: 16px;
   color: $dark-grey;
 
   .fa, .fas {
