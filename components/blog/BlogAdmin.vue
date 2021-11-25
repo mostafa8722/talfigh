@@ -5,11 +5,8 @@
      <div id='title'>بلاگ</div>
      <v-btn color='primary' rounded class='mr-10'>ذخیره مقاله</v-btn>
    </div>
-   <div id='form-title' class='mt-14'>
-      <div>عنوان بلاگ</div>
-     <v-card height='55px' rounded='lg' class='d-inline-flex pa-0'>
-       <v-text-field outlined filled   placeholder='عنوان بلاگ'  ></v-text-field>
-     </v-card>
+   <div  class='mt-14 '>
+    <blog-form></blog-form>
    </div>
  </v-container>
 
@@ -17,8 +14,10 @@
 
 <script lang='ts'>
 import Vue from 'vue'
+import BlogForm from '~/components/blog/BlogForm.vue'
 export default Vue.extend({
-  components: {  },
+  components: { BlogForm  },
+  name:'BlogAdmin',
   data(){
     return{}
   }
@@ -26,7 +25,7 @@ export default Vue.extend({
 </script>
 <style lang='scss' scoped>
 #wrapper{
-  margin-right: 78px;
+  margin-right: 66px;
 }
 #head{
   margin-top: 50px;
@@ -46,17 +45,5 @@ export default Vue.extend({
     border-radius: 76px;
   }
 }
-#form-title{
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 20px;
-  /* identical to box height */
-  color: #FFFFFF;
-  .v-text-field{
-    width: 542px;
 
-    border-radius: 10px;
-  }
-}
 </style>
