@@ -1,5 +1,5 @@
 <template>
-  <div style='overflow-x: auto'>
+  <div>
     <TLFContainer>
       <v-row style='column-gap: 1rem; row-gap: 1rem' class='' align='center'>
         <span class='title mr-3 mr-sm-0'>لیست کاربران</span>
@@ -73,7 +73,7 @@ export default Vue.extend({
 
 .container__head{
   @media screen and (max-width: 600px){
-    width: 1200px;
+    //width: 1200px;
   }
 }
 

@@ -22,6 +22,13 @@
           <v-icon @click='drawer = false' color='white' class='ml-5'>fas fa-times</v-icon>
         </div>
 
+        <div
+          style='column-gap: 1.3rem;cursor: pointer; width: 100%; transition: all 0.2s ease'
+          class='d-flex align-center px-6 pt-4'>
+          <v-icon size='30'>fas fa-user-circle</v-icon>
+          <span class='font-weight-bold'>الیاس ملکپور</span>
+        </div>
+
         <div style='width: 100%; transition: all 0.2s ease' v-for='(item, i) in items'
              class='d-flex flex-column align-start justify-start px-6 py-4 '
              :key='i'>
@@ -30,7 +37,8 @@
           </div>
 
           <nuxt-link active-class='main-item-active'
-                     style='text-decoration: none; width: 100%; transition: all 0.2s ease' v-else-if="item.type==='item'"
+                     style='text-decoration: none; width: 100%; transition: all 0.2s ease'
+                     v-else-if="item.type==='item'"
                      :to='item.to' exact>
             <div
               style='column-gap: 1.3rem;cursor: pointer; width: 100%; transition: all 0.2s ease'
@@ -38,18 +46,6 @@
 
               <v-icon size='20'>{{ item.icon }}</v-icon>
               <span>{{ item.title }}</span>
-              <!--              <span-->
-              <!--                style='background-color: #2D9DCD;-->
-              <!--                    color: white;-->
-              <!--                    font-size: 10px;-->
-              <!--                    border-radius: 15px;-->
-              <!--                    width: 60px;-->
-              <!--                    height: 25px;-->
-              <!--                    display: flex;-->
-              <!--                    justify-content: center;-->
-              <!--                    align-items: center;-->
-              <!--                    justify-self: flex-end;'-->
-              <!--                v-if='item.caption'>5 مورد</span>-->
 
             </div>
           </nuxt-link>
@@ -57,7 +53,7 @@
 
           <div
             v-else-if="item.type==='group'"
-            style='height: max-content; width: 100%; transition: all 0.2s ease'
+            style='width: 100%; transition: all 0.2s ease'
             class='card d-flex flex-column tlf-list-item'
             @click='toggleMenuItem'
           >
@@ -80,18 +76,50 @@
       </div>
     </v-navigation-drawer>
 
-    <div
-      class='white
-      mt-5 mr-7 pa-3 d-flex justify-space-between
-      align-center tlf-app-bar rounded elevation-2'>
-      <v-icon @click='drawer = true'>fas fa-bars</v-icon>
-      <div class='d-flex align-center' style='column-gap: 1rem'>
-        <div>
-          <v-badge content='1' color='#C9344F' left offset-y='1rem' offset-x='0.5rem'>
-            <v-icon>far fa-bell</v-icon>
-          </v-badge>
+    <div class='d-flex menu flex-column'
+         style='
+         row-gap: 0.5rem; position: fixed;
+         width: 95%;
+         left: 50%;
+         transform: translateX(-50%);
+         z-index: 5;
+'>
+      <div
+        class='white
+      mt-5 pa-5 d-flex justify-space-between
+      align-center tlf-app-bar rounded elevation-3'>
+        <v-icon color='#A7A7A7' size='30' @click='drawer = true'>fas fa-bars</v-icon>
+        <div class='d-flex align-center' style='column-gap: 1rem'>
+          <div>
+            <v-badge content='1' color='#C9344F' left offset-y='1rem' offset-x='0.5rem'>
+              <v-icon color='#A4A4A4' size='30'>far fa-bell</v-icon>
+            </v-badge>
+          </div>
+          <v-icon color='#A4A4A4' size='30'>fas fa-user-circle</v-icon>
         </div>
-        <v-icon>fas fa-user-circle</v-icon>
+      </div>
+      <div
+        class='d-flex align-self-end white align-center justify-center px-3 py-5'
+        style='column-gap: 0.1rem; border-radius: 0 50px 50px 50px; width: max-content;'>
+
+        <v-btn text>
+          <v-icon color='#C1C1C1' size='30'>fas fa-money-bill-wave</v-icon>
+        </v-btn>
+
+        <v-btn text>
+          <v-icon color='#C1C1C1' size='30'>fas fa-pen-square</v-icon>
+        </v-btn>
+
+        <v-btn text>
+          <v-icon color='#C1C1C1' size='30'>fas fa-user-edit</v-icon>
+        </v-btn>
+
+        <v-btn text>
+          <v-badge offset-y='1rem' offset-x='0.5rem' content='1' color='#C9344F' left>
+            <v-icon color='#353535' size='30'>far fa-envelope</v-icon>
+          </v-badge>
+        </v-btn>
+
       </div>
     </div>
   </div>
@@ -104,104 +132,17 @@ export default Vue.extend({
   name: 'Menu-Mobile',
   data() {
     return {
-      drawer: true,
-      items: [
-        {
-          type: 'divider',
-          title: 'مدیریت کاربران'
-        },
-        {
-          type: 'item',
-          icon: 'fa-user-edit',
-          title: 'نقش‌ها',
-          to: '/roles'
-        },
-        {
-          type: 'item',
-          icon: 'fa-users',
-          title: 'کاربران',
-          to: '/users'
-        },
-        {
-          type: 'group',
-          icon: 'fa-user-graduate',
-          title: 'مدیران',
-          children: [
-            {
-              icon: 'fa-user-circle',
-              title: 'مدیران',
-              to: '/'
-            },
-            {
-              icon: 'fa-user-circle',
-              title: 'مدیران 2',
-              to: '/'
-            }
-          ]
-        },
-        {
-          type: 'divider',
-          title: 'مدیریت صفحه ها'
-        },
-        {
-          type: 'item',
-          icon: 'fa-pen',
-          title: 'صفحه سازی',
-          to: '/custom'
-        },
-        {
-          type: 'item',
-          icon: 'fa-th',
-          title: 'منو ناوبری',
-          to: '/custom'
-        },
-        {
-          type: 'item',
-          icon: 'fa-edit',
-          title: 'تنظیمات سایت',
-          to: '/settings/home-settings',
-          caption: '5 مورد'
-        },
-        {
-          type: 'item',
-          icon: 'fa-edit',
-          title: 'تنظیمات سیستمی',
-          to: '/settings/home-settings'
-        },
-        {
-          type: 'item',
-          icon: 'fa-edit',
-          title: 'تنظیمات صفحه اصلی',
-          to: '/settings/system-settings'
-        }
-        // {
-        //   type: 'group',
-        //   icon: 'fa-cog',
-        //   caption: '5 مورد',
-        //   title: 'تنظیمات سایت',
-        //   children: [
-        //     {
-        //       icon: 'fa-check-square',
-        //       title: 'تنظیمات فوتر - پاورقی',
-        //       to: '/settings/footer'
-        //     },
-        //     {
-        //       icon: 'fa-check-square',
-        //       title: 'تنظیمات صفحه اصلی',
-        //       to: '/settings/home-settings'
-        //     },
-        //     {
-        //       icon: 'fa-check-square',
-        //       title: 'تنظیمات سیستمی',
-        //       to: '/settings/system-settings'
-        //     },
-        //   ]
-        // }
-      ],
+      drawer: false,
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'پنل تلفیق هنر'
+    }
+  },
+  props: {
+    items: {
+      type: Array,
+      required: true
     }
   },
   methods: {
@@ -212,21 +153,25 @@ export default Vue.extend({
         .classList
         .toggle('active')
 
+      const headerHeight = event.currentTarget.querySelector('.card-header').clientHeight
+
       if (event.currentTarget.querySelector('.card-body').classList.contains('d-none')) {
         event.currentTarget.querySelector('.card-body').classList.remove('d-none')
-        setTimeout((e)=>{
+        setTimeout((e) => {
           e.querySelector('.card-body').style.transform = 'translateY(0)'
-        },1,event.currentTarget)
+          e.style.height = e.querySelector('.card-body').clientHeight + headerHeight + 'px'
+        }, 1, event.currentTarget)
         event.currentTarget
           .querySelector('.card-header')
           .querySelector('.card-arrow')
           .style
           .transform = 'rotate(-90deg)'
       } else {
-        event.currentTarget.querySelector('.card-body').style.transform = 'translateY(-35px)'
-        setTimeout((e)=>{
+        event.currentTarget.querySelector('.card-body').style.transform = 'translateY(-30px)'
+        event.currentTarget.style.height = headerHeight + 'px'
+        setTimeout((e) => {
           e.querySelector('.card-body').classList.add('d-none')
-        },100,event.currentTarget)
+        }, 100, event.currentTarget)
         event.currentTarget
           .querySelector('.card-header')
           .querySelector('.card-arrow')
@@ -234,6 +179,19 @@ export default Vue.extend({
           .transform = 'rotate(0deg)'
       }
     }
+  },
+  mounted() {
+    const menu: any = document.querySelector('.menu')
+
+    if (window.innerWidth < 960){
+      this.$emit('heightMenu', menu.clientHeight)
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 960){
+        this.$emit('heightMenu', menu.clientHeight)
+      }
+    })
   }
 })
 </script>
@@ -241,7 +199,7 @@ export default Vue.extend({
 <style scoped lang='scss'>
 
 .tlf-app-bar {
-  width: 350px;
+
 }
 
 .tlf-menu-divider {
@@ -281,7 +239,7 @@ export default Vue.extend({
 
 .card-body {
   transition: all 0.2s ease;
-  transform: translateY(-35px);
+  transform: translateY(-30px);
 
   .card-item {
     .card-item-title {

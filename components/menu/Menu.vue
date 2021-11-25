@@ -3,15 +3,15 @@
     <v-navigation-drawer
       v-model='drawer'
       :mini-variant='miniVariant'
+      fixed
       clipped
       right
       app
-      absolute
-      width='300px'
+      width='300'
       class='tlf-drawer'
       style='bottom: 0; height: unset;'
     >
-      <div class='d-flex flex-column align-start justify-start'>
+      <div class='d-flex container-drawer flex-column align-start justify-start'>
         <div style='width: 100%; transition: all 0.2s ease' v-for='(item, i) in items'
              class='d-flex flex-column align-start justify-start px-6 py-4 '
              :key='i'>
@@ -26,7 +26,7 @@
               style='column-gap: 1.3rem;cursor: pointer; width: 100%;'
               class='d-flex main-item align-center tlf-list-item'>
 
-              <v-icon size='20'>{{ item.icon }}</v-icon>
+              <v-icon size='18'>{{ item.icon }}</v-icon>
               <span>{{ item.title }}</span>
               <span
                 style='background-color: #2D9DCD;
@@ -47,7 +47,7 @@
 
           <div
             v-else-if="item.type==='group'"
-            style='height: max-content; width: 100%; transition: all 0.2s ease'
+            style='width: 100%; transition: all 0.2s ease'
             class='card d-flex flex-column tlf-list-item'
             @click='toggleMenuItem'
           >
@@ -78,9 +78,9 @@
       height='80'
     >
 
-        <img class='mr-3' style='cursor:pointer;' src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />
-      <v-img class='mr-13 ml-6' src='~/static/images/logo.png' max-width='36' max-height='28' />
-      <v-toolbar-title style='font-size: 1rem; font-weight: 700; color: #848484' class='ml-16' v-text='title' />
+        <img class='mr-lg-3 mr-md-2 mr-sm-1' style='cursor:pointer;' src='@/static/icons/menu.svg' @click.stop='drawer = !drawer' alt='' />
+      <v-img class='mr-13 ml-6' src='~/static/images/logo.svg' max-width='38' />
+      <v-toolbar-title style='font-size: 1rem; font-weight: 700; color: #848484' class='ml-10' v-text='title' />
       <v-avatar class='mr-5 ml-2'>
         <v-icon color='#757575' size='36'>fas fa-user-circle</v-icon>
       </v-avatar>
@@ -134,110 +134,17 @@ export default Vue.extend({
   name: 'Menu',
   data() {
     return {
-      drawer: true,
-      items: [
-        {
-          type: 'divider',
-          title: 'مدیریت کاربران'
-        },
-        {
-          type: 'item',
-          icon: 'fa-user-edit',
-          title: 'نقش‌ها',
-          to: '/roles'
-        },
-        {
-          type: 'item',
-          icon: 'fa-users',
-          title: 'کاربران',
-          to: '/users'
-        },
-        {
-          type: 'group',
-          icon: 'fa-user-graduate',
-          title: 'مدیران',
-          children: [
-            {
-              icon: 'fa-user-circle',
-              title: 'مدیران',
-              to: '/'
-            },
-            {
-              icon: 'fa-user-circle',
-              title: 'مدیران 2',
-              to: '/'
-            }
-          ]
-        },
-         {
-          type: 'item',
-          icon: 'fa-th',
-          title: 'منو ناوبری',
-          to: '/main-menu'
-        },
-        {
-          type: 'divider',
-          title: 'مدیریت صفحه ها'
-        },
-        {
-          type: 'item',
-          icon: 'fa-pen',
-          title: 'صفحه سازی',
-          to: '/custom'
-        },
-        {
-          type: 'item',
-          icon: 'fa-th',
-          title: 'منو ناوبری',
-          to: '/custom'
-        },
-        {
-          type: 'item',
-          icon: 'fa-edit',
-          title: 'تنظیمات سایت',
-          to: '/settings/home-settings',
-          caption: '5 مورد'
-        },
-        {
-          type: 'item',
-          icon: 'fa-edit',
-          title: 'تنظیمات سیستمی',
-          to: '/settings/home-settings'
-        },
-        {
-          type: 'item',
-          icon: 'fa-edit',
-          title: 'تنظیمات صفحه اصلی',
-          to: '/settings/system-settings'
-        }
-        // {
-        //   type: 'group',
-        //   icon: 'fa-cog',
-        //   caption: '5 مورد',
-        //   title: 'تنظیمات سایت',
-        //   children: [
-        //     {
-        //       icon: 'fa-check-square',
-        //       title: 'تنظیمات فوتر - پاورقی',
-        //       to: '/settings/footer'
-        //     },
-        //     {
-        //       icon: 'fa-check-square',
-        //       title: 'تنظیمات صفحه اصلی',
-        //       to: '/settings/home-settings'
-        //     },
-        //     {
-        //       icon: 'fa-check-square',
-        //       title: 'تنظیمات سیستمی',
-        //       to: '/settings/system-settings'
-        //     },
-        //   ]
-        // }
-      ],
+      drawer: false,
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'پنل تلفیق هنر'
+    }
+  },
+  props: {
+    items: {
+      type: Array,
+      required: true
     }
   },
   methods: {
@@ -248,10 +155,13 @@ export default Vue.extend({
         .classList
         .toggle('active')
 
+      const headerHeight = event.currentTarget.querySelector('.card-header').clientHeight
+
       if (event.currentTarget.querySelector('.card-body').classList.contains('d-none')) {
         event.currentTarget.querySelector('.card-body').classList.remove('d-none')
         setTimeout((e)=>{
           e.querySelector('.card-body').style.transform = 'translateY(0)'
+          e.style.height = e.querySelector('.card-body').clientHeight + headerHeight + 'px'
         },1,event.currentTarget)
         event.currentTarget
           .querySelector('.card-header')
@@ -259,7 +169,8 @@ export default Vue.extend({
           .style
           .transform = 'rotate(-90deg)'
       } else {
-        event.currentTarget.querySelector('.card-body').style.transform = 'translateY(-35px)'
+        event.currentTarget.querySelector('.card-body').style.transform = 'translateY(-30px)'
+        event.currentTarget.style.height = headerHeight + 'px'
         setTimeout((e)=>{
           e.querySelector('.card-body').classList.add('d-none')
         },100,event.currentTarget)
@@ -275,20 +186,19 @@ export default Vue.extend({
 </script>
 
 <style scoped lang='scss'>
+
 .tlf-drawer{
   background: url("static/images/logo_sidebar.svg") -35px 200px,
   linear-gradient(270deg, #FFFFFF 97.75%, #F2994A 98.14%),;
 }
 
 .tlf-menu-divider {
-  font-size: 16px;
   font-weight: 300;
   color: $lighter-grey;
 }
 
 .tlf-list-item {
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: 500;
   color: $dark-grey;
 
   .fa, .fas {
@@ -303,6 +213,7 @@ export default Vue.extend({
 
 .card {
   cursor: pointer;
+  @include transition();
   //row-gap: 2rem;
 }
 
@@ -314,6 +225,15 @@ export default Vue.extend({
   background: linear-gradient(105deg, #FFFFFF 94.29%, #F2994A 94.33%);
   box-shadow: 0px -63px 60px 37px rgba(0, 0, 0, 0.25);
   color: $dark-grey;
+@media screen and (max-width: 1200px){
+  background: linear-gradient(105deg, #FFFFFF 93.29%, #F2994A 93.33%);
+}
+  @media screen and (max-width: 960px){
+    background: linear-gradient(105deg, #FFFFFF 92.29%, #F2994A 92.33%);
+  }
+  @media screen and (max-width: 600px){
+    background: linear-gradient(105deg, #FFFFFF 90.29%, #F2994A 90.33%);
+  }
 }
 
 .tlf-app-bar .v-btn {
@@ -323,7 +243,7 @@ export default Vue.extend({
 
 .card-body {
   transition: all 0.2s ease;
-  transform: translateY(-35px);
+  transform: translateY(-30px);
 
   .card-item {
     .card-item-title {

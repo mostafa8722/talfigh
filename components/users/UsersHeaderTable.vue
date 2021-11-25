@@ -1,7 +1,10 @@
 <template>
   <div class='pt-7 px-4'>
-    <div class='d-flex justify-space-between align-center'>
-      <div class='d-flex align-center' style='column-gap: 1rem'>
+    <div
+      style='row-gap: 1rem'
+      class='d-flex flex-wrap justify-space-between align-center'>
+      <div class='d-flex flex-wrap align-center'
+           style='column-gap: 1rem; row-gap: 1rem'>
         <input placeholder='جستجوی نام...' type='text' class='input__search py-2 pr-5'/>
         <input placeholder='جستجوی نام خانوادگی...' type='text' class='input__search py-2 pr-5'/>
         <input placeholder='جستجوی با شماره کد ملی...' type='text' class='input__search py-2 pr-5'/>
@@ -12,7 +15,8 @@
           class='px-10'
           rounded>جستجو</v-btn>
       </div>
-      <div class='d-flex align-center' style='column-gap: 1.5rem'>
+      <div class='d-flex align-center'
+           style='column-gap: 1.5rem;'>
         <div class='d-flex align-center' style='column-gap: 1rem'>
           <img class='paginator-controller' src='@/static/icons/arrow.svg' style='cursor:pointer;' alt=''>
           <img class='paginator-controller' style='transform: rotate(180deg); cursor:pointer;' src='@/static/icons/arrow.svg' alt=''>

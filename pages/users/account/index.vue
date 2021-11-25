@@ -1,15 +1,15 @@
 <template>
   <div>
-    <v-container>
-      <v-row style='column-gap: 1rem;' class='mt-5 mr-5 mb-5' align='center'>
+    <TLFContainer>
+      <v-row style='column-gap: 1rem;' class='mb-5' align='center'>
         <span class='title'>تکمیل اطلاعات حساب</span>
         <v-btn width='150' height='35' class='d-none d-sm-inline-block mr-5' rounded color='primary'>
           <span class='text-btn'>ذخیره اطلاعات</span>
         </v-btn>
       </v-row>
-    </v-container>
-    <AccountBox />
-    <AccountCard class='d-sm-none' />
+      <AccountBox />
+    </TLFContainer>
+    <AccountCard class='d-lg-none mx-auto' />
     <div
       style='border-radius: 25px'
       class='d-flex d-sm-none white justify-center align-center mx-5 mb-5 pa-10'>
@@ -29,10 +29,11 @@
 import Vue from 'vue'
 import AccountBox from '~/components/users/account/AccountBox'
 import AccountCard from '~/components/users/account/AccountCard'
+import TLFContainer from '../../../components/utilities/TLF-Container'
 
 export default Vue.extend({
   name: 'index',
-  components: { AccountBox, AccountCard }
+  components: { TLFContainer, AccountBox, AccountCard }
 })
 </script>
 
