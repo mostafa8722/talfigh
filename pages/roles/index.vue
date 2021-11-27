@@ -1,238 +1,51 @@
 <template>
-  <div class="pa-md-10 pa-6">
-    <div class="white--text mb-8 mt-4 d-md-none" style="font-size: 1.6rem">
-      انتخاب نقش برای ویرایش
-    </div>
-    <v-row>
-      <v-col cols="12" lg="3" md="3">
-        <v-card class="pa-4 rounded-xl">
-          <v-btn block depressed rounded color="primary">
-            <v-icon size="16">fas fa-plus</v-icon>
-            <span>اضافه کردن نقش</span>
-          </v-btn>
+  <div>
+    <div class="white--text pa-md-8 pa-6" style="font-size: 1.6rem">نقش‌ها</div>
 
-          <v-text-field
-            class="mt-4"
-            append-icon="fas fa-search"
-            filled
-            rounded
-            dense
-            placeholder="جستجو نقش‌ها"
-            hide-details
-          />
-
-          <v-virtual-scroll
-            class="mt-4 tlf-v-scroll"
-            :items="roles"
-            :item-height="60"
-            height="490"
-          >
-            <template #default="{ item }">
-              <div
-                class="px-4 py-4 tlf-role-item"
-                :class="{ selected: item.id == 3 }"
-              >
-                <span>{{ item.title }}</span>
-              </div>
-            </template>
-          </v-virtual-scroll>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" lg="9" md="9" class="pr-2">
-        <v-card class="py-4 px-8 rounded-xl">
-          <v-row>
-            <v-col cols="12" lg="4" md="4">
-              <h2 class="tlf-role-form-card-title">عنوان نقش</h2>
-
-              <div class="mt-6 d-flex align-center">
-                <v-text-field
-                  placeholder="مدیر عامل"
-                  class="rounded-lg"
-                  hide-details
-                  outlined
-                />
-
-                <v-btn class="mr-4" color="red lighten-1" text>
-                  <v-icon>fas fa-trash-alt</v-icon>
-                  <span class="mr-2">حذف</span>
-                </v-btn>
-              </div>
-
-              <div class="mt-3 text-body-1">
-                <span>توضیحات نقش</span>
-              </div>
-
-              <v-textarea
-                class="mt-6 rounded-lg"
-                placeholder="توضیحات..."
-                height="260"
-                outlined
-              />
-            </v-col>
-
-            <v-col cols="12" lg="4" md="4">
-              <v-card
-                rounded="xl"
-                class="pa-4 d-flex flex-column align-center justify-center"
-                elevation="0"
-                color="#E4E4E4"
-                min-height="480"
-              >
-                <h3 class="black--text">گروه دسترسی</h3>
-
-                <v-text-field
-                  class="mt-4"
-                  append-icon="fas fa-search"
-                  filled
-                  rounded
-                  dense
-                  placeholder="جستجو گروه دسترسی"
-                  background-color="white"
-                  hide-details
-                />
-
-                <v-virtual-scroll
-                  class="mt-4 tlf-v-scroll"
-                  :items="permissionGroup"
-                  :item-height="60"
-                  width="100%"
-                  max-height="300"
-                >
-                  <template #default="{ item }">
-                    <div
-                      class="px-4 py-4 tlf-role-item"
-                      :class="{ selected: item.id == 2 }"
-                    >
-                      <span>{{ item.title }}</span>
-                    </div>
-                  </template>
-                </v-virtual-scroll>
-
-                <v-btn
-                  class="mt-3 white--text"
-                  color="#7A7A7A"
-                  elevation="0"
-                  rounded
-                >
-                  اضافه کردن
-                </v-btn>
-              </v-card>
-            </v-col>
-
-            <v-col cols="12" lg="4" md="4">
-              <v-card
-                rounded="xl"
-                class="pa-4 d-flex flex-column align-center justify-center"
-                elevation="0"
-                color="#E4E4E4"
-                min-height="480"
-              >
-                <h3 class="black--text">دسترسی</h3>
-
-                <v-text-field
-                  class="mt-4"
-                  append-icon="fas fa-search"
-                  filled
-                  rounded
-                  dense
-                  placeholder="جستجو دسترسی"
-                  background-color="white"
-                  hide-details
-                />
-
-                <v-virtual-scroll
-                  class="mt-4 tlf-v-scroll"
-                  :items="permissions"
-                  :item-height="70"
-                  width="100%"
-                  max-height="300"
-                >
-                  <template #default="{ item }">
-                    <div class="px-4 py-4">
-                      <v-checkbox :label="item.title">
-                        <!-- <template #prepend>
-                          <div class="ml-8">
-                            <div class="mt-1" style="width: 100px">
-                              {{ item.title }}
-                            </div>
-                          </div>
-                        </template> -->
-                      </v-checkbox>
-                    </div>
-                  </template>
-                </v-virtual-scroll>
-
-                <v-btn
-                  class="mt-3 white--text"
-                  color="#7A7A7A"
-                  elevation="0"
-                  rounded
-                >
-                  اضافه کردن
-                </v-btn>
-              </v-card>
-            </v-col>
+    <div class="mb-8">
+      <v-data-table hide-default-footer :items="items" :headers="headers">
+        <template #top="{ pagination, options, updateOptions }">
+          <v-row class="pa-md-0 pa-4">
+            <v-col class="pt-1" cols="12" lg="3" md="3"
+              ><v-text-field
+                height="40"
+                background-color="#FBFBFB"
+                placeholder="جستجو عنوان مقاله..."
+                rounded
+              ></v-text-field
+            ></v-col>
+            <v-col class="pt-1" cols="12" lg="3" md="3"
+              ><v-text-field
+                height="40"
+                background-color="#FBFBFB"
+                placeholder="جستجو دسته..."
+                rounded
+              ></v-text-field
+            ></v-col>
+            <v-col cols="12" lg="1" md="1"
+              ><v-btn class="white--text px-8 mt-2" rounded color="#7A7A7A"
+                >جستجو</v-btn
+              ></v-col
+            >
+            <v-col cols="12" lg="5" md="5"
+              ><v-data-footer
+                :pagination="pagination"
+                :options="options"
+                items-per-page-text="$vuetify.dataTable.itemsPerPageText"
+                @update:options="updateOptions"
+            /></v-col>
           </v-row>
-
-          <v-chip-group class="mt-4">
-            <v-chip
-              color="warning"
-              text-color="white"
-              close
-              close-icon="fas fa-question-circle"
-            >
-              مدیر فروش
-            </v-chip>
-            <v-chip
-              color="warning"
-              text-color="white"
-              close
-              close-icon="fas fa-question-circle"
-            >
-              مدیر فروش
-            </v-chip>
-            <v-chip
-              color="warning"
-              text-color="white"
-              close
-              close-icon="fas fa-question-circle"
-            >
-              مدیر فروش
-            </v-chip>
-            <v-chip
-              color="warning"
-              text-color="white"
-              close
-              close-icon="fas fa-question-circle"
-            >
-              مدیر فروش
-            </v-chip>
-            <v-chip
-              color="warning"
-              text-color="white"
-              close
-              close-icon="fas fa-question-circle"
-            >
-              مدیر فروش
-            </v-chip>
-            <v-chip
-              color="warning"
-              text-color="white"
-              close
-              close-icon="fas fa-question-circle"
-            >
-              مدیر فروش
-            </v-chip>
-          </v-chip-group>
-
-          <div class="mt-4 d-flex">
-            <v-spacer />
-            <v-btn color="#00B728" rounded outlined> ثبت و ویرایش نقش </v-btn>
+          <v-divider />
+        </template>
+        <template #[`item.actions`]>
+          <div class="d-flex flex-row py-6">
+            <v-btn fab x-small color="warning" class="mr-4" elevation="0">
+              <v-icon>fas fa-edit</v-icon>
+            </v-btn>
           </div>
-        </v-card>
-      </v-col>
-    </v-row>
+        </template>
+      </v-data-table>
+    </div>
   </div>
 </template>
 
@@ -240,70 +53,33 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'Index',
+  name: 'Roles',
   data() {
     return {
-      roles: [
+      items: [
         {
-          id: 1,
-          title: 'نقش شماره 1',
+          title: 'مدیر فروش',
         },
         {
-          id: 2,
-          title: 'نقش شماره 2',
+          title: 'مدیر فروش',
         },
         {
-          id: 3,
-          title: 'نقش شماره 3',
+          title: 'مدیر فروش',
         },
         {
-          id: 4,
-          title: 'نقش شماره 4',
+          title: 'مدیر فروش',
         },
         {
-          id: 5,
-          title: 'نقش شماره 5',
-        },
-        {
-          id: 6,
-          title: 'نقش شماره 6',
-        },
-        {
-          id: 7,
-          title: 'نقش شماره 7',
-        },
-        {
-          id: 8,
-          title: 'نقش شماره 8',
+          title: 'مدیر فروش',
         },
       ],
-      permissionGroup: [
+      headers: [
         {
-          id: 1,
-          title: 'مدیریت محصولات',
+          text: 'عنوان',
+          value: 'title',
+          width: '300px',
         },
-        {
-          id: 2,
-          title: 'مدیر بازرسی',
-        },
-        {
-          id: 3,
-          title: 'پشتیبان',
-        },
-      ],
-      permissions: [
-        {
-          id: 1,
-          title: 'ثبت',
-        },
-        {
-          id: 2,
-          title: 'ویرایش',
-        },
-        {
-          id: 3,
-          title: 'حذف',
-        },
+        { text: 'عملیات', value: 'actions', width: '100px' },
       ],
     }
   },
@@ -311,19 +87,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.tlf-v-scroll {
-  background-color: $near-white;
-  border-radius: 26px;
-}
-
-.tlf-role-item.selected {
-  background-color: $primary;
-  color: white;
-}
-
-.tlf-role-form-card-title {
-  font-size: 26px;
-  font-weight: 500;
-  color: $dark-grey;
+.v-data-footer {
+  border: none !important;
 }
 </style>
