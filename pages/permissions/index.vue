@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div class="white--text pa-md-8 pa-6" style="font-size: 1.6rem">نقش‌ها</div>
-
+    <v-row>
+      <div class="white--text pa-md-8 pa-6" style="font-size: 1.6rem">
+        دسترسی‌ها
+      </div>
+      <v-spacer></v-spacer>
+      <v-btn class="px-10 ma-8 rounded-xl" color="primary">افزودن دسترسی</v-btn>
+    </v-row>
     <div class="mb-8">
       <v-data-table hide-default-footer :items="items" :headers="headers">
         <template #top="{ pagination, options, updateOptions }">
@@ -10,15 +15,7 @@
               ><v-text-field
                 height="40"
                 background-color="#FBFBFB"
-                placeholder="جستجو عنوان مقاله..."
-                rounded
-              ></v-text-field
-            ></v-col>
-            <v-col class="pt-1" cols="12" lg="3" md="3"
-              ><v-text-field
-                height="40"
-                background-color="#FBFBFB"
-                placeholder="جستجو دسته..."
+                placeholder="جستوجوی دسترسی..."
                 rounded
               ></v-text-field
             ></v-col>
@@ -39,6 +36,9 @@
         </template>
         <template #[`item.actions`]>
           <div class="d-flex flex-row py-6">
+            <v-btn fab x-small color="error" elevation="0"
+              ><v-icon>fas fa-trash-alt</v-icon></v-btn
+            >
             <v-btn fab x-small color="warning" class="mr-4" elevation="0">
               <v-icon>fas fa-edit</v-icon>
             </v-btn>
@@ -53,31 +53,41 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'Roles',
+  name: 'Permissions',
   data() {
     return {
       items: [
         {
-          title: 'مدیر فروش',
+          title: 'لیست درخواست‌ها',
+          slug: 'test.slug',
         },
         {
-          title: 'مدیر فروش',
+          title: 'لیست درخواست‌ها',
+          slug: 'test.slug',
         },
         {
-          title: 'مدیر فروش',
+          title: 'لیست درخواست‌ها',
+          slug: 'test.slug',
         },
         {
-          title: 'مدیر فروش',
+          title: 'لیست درخواست‌ها',
+          slug: 'test.slug',
         },
         {
-          title: 'مدیر فروش',
+          title: 'لیست درخواست‌ها',
+          slug: 'test.slug',
         },
       ],
       headers: [
         {
           text: 'عنوان',
           value: 'title',
-          width: '300px',
+          width: '100px',
+        },
+        {
+          text: 'slug',
+          value: 'slug',
+          width: '100px',
         },
         { text: 'عملیات', value: 'actions', width: '100px' },
       ],
