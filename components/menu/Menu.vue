@@ -28,8 +28,9 @@
 
               <v-icon size='18'>{{ item.icon }}</v-icon>
               <span>{{ item.title }}</span>
-              <span
-                style='background-color: #2D9DCD;
+              <div class='d-flex grow justify-end'>
+                <span
+                  style='background-color: #2D9DCD;
                 color: white;
                 font-size: 10px;
                 border-radius: 15px;
@@ -39,7 +40,8 @@
                 justify-content: center;
                 align-items: center;
                 justify-self: flex-end;'
-                v-if='item.caption'>5 مورد</span>
+                  v-if='item.caption'>5 مورد</span>
+              </div>
 
             </div>
           </nuxt-link>
