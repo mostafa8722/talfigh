@@ -20,6 +20,17 @@ export default Vue.extend({
       items: [
         {
           type: 'divider',
+          title: 'مدیریت محصولات'
+        },
+        {
+          type: 'item',
+          icon: 'fa-shopping-cart',
+          title: 'محصولات',
+          to: '/products',
+          caption: '5 مورد'
+        },
+        {
+          type: 'divider',
           title: 'مدیریت کاربران'
         },
         {
