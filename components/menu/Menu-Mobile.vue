@@ -92,14 +92,15 @@
         <div class='d-flex align-center' style='column-gap: 1rem'>
           <div>
             <v-badge content='1' color='#C9344F' left offset-y='1rem' offset-x='0.5rem'>
-              <v-icon color='#A4A4A4' size='30'>far fa-bell</v-icon>
+              <v-icon @click='toggleSubMenu' color='#A4A4A4' size='30'>far fa-bell</v-icon>
             </v-badge>
           </div>
           <v-icon color='#A4A4A4' size='30'>fas fa-user-circle</v-icon>
         </div>
       </div>
       <div
-        class='d-flex align-self-end white align-center justify-center px-3 py-5'
+        v-if='showSubMenu'
+        class='d-flex sub-menu align-self-end white align-center justify-center px-3 py-5'
         style='column-gap: 0.1rem; border-radius: 0 50px 50px 50px; width: max-content;'>
 
         <v-btn text>
@@ -136,7 +137,8 @@ export default Vue.extend({
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'پنل تلفیق هنر'
+      title: 'پنل تلفیق هنر',
+      showSubMenu: false
     }
   },
   props: {
@@ -178,7 +180,15 @@ export default Vue.extend({
           .style
           .transform = 'rotate(0deg)'
       }
+    },
+    toggleSubMenu(){
+      this.showSubMenu = !this.showSubMenu
+      setTimeout(()=>{
+        const menu: any = document.querySelector('.menu')
+        this.$emit('heightMenu', menu.clientHeight)
+      },1)
     }
+
   },
   mounted() {
     const menu: any = document.querySelector('.menu')
