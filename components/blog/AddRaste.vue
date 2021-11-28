@@ -6,13 +6,13 @@
       <span>اضافه کردن مدیر</span>
     </v-btn>
     <v-text-field
-      append-icon='fas fa-search'
       class='mt-4'
+      append-icon='fas fa-search'
       dense
       filled
+      rounded
       hide-details
       placeholder='جستجوی مدیر'
-      rounded
       style='min-height: 36px !important;' />
 
     <v-virtual-scroll
@@ -34,7 +34,6 @@
 
 <script lang='ts'>
 import Vue from 'vue'
-
 export default Vue.extend(
   {
     name: 'AddRaste',
@@ -69,7 +68,6 @@ export default Vue.extend(
   background: #2D9DCD !important;
   border-radius: 76px !important;
 }
-
 .border-bt {
   border-bottom: #F2F2F2 1px solid;
   border-radius: 16px ;
