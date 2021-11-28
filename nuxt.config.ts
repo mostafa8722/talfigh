@@ -35,6 +35,7 @@ const config: NuxtConfig = {
     '~/plugins/repositories.ts',
     '~/plugins/errors.ts',
     '~/plugins/vue-smooth-dnd.js',
+    "~/plugins/th-components.ts",
     {src: '~plugins/vuelayers.js', ssr: false},
     { src: '~/plugins/TiptapVuetify', mode: 'client' }
   ],
