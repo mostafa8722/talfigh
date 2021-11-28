@@ -31,47 +31,68 @@
         </v-col>
       </v-row>
       <v-row style='column-gap: 0.5rem;row-gap: 1rem;' class='mt-5' align='start'>
-        <v-col cols='12' sm='4'>
-          <span class='white--text' style='font-size: 14px; font-weight: 400'>محتوا کوتاه محصول</span>
+        <v-col cols='12'>
+          <span class='white--text' style='font-size: 14px; font-weight: 400'>
+            محتوا کوتاه محصول (
+            {{ counterCH }}
+            )
+          </span>
           <v-textarea
+            v-model='description'
             class='elevation-3 mt-3'
             solo
+            height='150'
+            :rules='[rules.counter]'
+            counter
+            @input='showNumsCh'
+            maxlength='100'
             hide-details
             placeholder='محتوا کوتاه محصول'></v-textarea>
         </v-col>
-        <v-col cols='5' sm='3'>
-          <span class='white--text' style='font-size: 14px; font-weight: 400'>انتخاب امتیاز</span>
-          <v-select
-            class='elevation-3 mt-3'
-            :items='rateItems'
-            append-icon='fa-chevron-down'
-            hide-details
-            solo
-          ></v-select>
-        </v-col>
-        <v-col cols='5' sm='3'>
-          <span class='white--text' style='font-size: 14px; font-weight: 400'>انتخاب کارگاه</span>
-          <v-select
-            class='elevation-3 mt-3'
-            :items='workShopItems'
-            hide-details
-            append-icon='fa-chevron-down'
-            solo
-          ></v-select>
+        <v-col cols='12'>
+                    <span class='white--text' style='font-size: 14px; font-weight: 400'>
+            محتوا محصول
+          </span>
+          <Editor class='mt-3' />
         </v-col>
       </v-row>
       <v-row style='column-gap: 0.5rem;row-gap: 1rem;' class='mt-5' align='start'>
-        <v-col md='4' sm='6' cols='12'>
+        <v-col md='4' cols='12'>
           <v-card rounded='xl' class='py-4 px-5'>
-            <v-text-field
-              class='mt-4'
-              append-icon='fas fa-search'
-              style='min-height: 36px !important;'
+<!--            <v-text-field-->
+<!--              class='mt-4'-->
+<!--              append-icon='fas fa-search'-->
+<!--              style='min-height: 36px !important;'-->
+<!--              filled-->
+<!--              rounded-->
+<!--              dense-->
+<!--              placeholder='جستجوی دسته'-->
+<!--              hide-details />-->
+            <v-autocomplete
+              chips
+              deletable-chips
               filled
+              multiple
               rounded
               dense
-              placeholder='جستجوی دسته'
-              hide-details />
+              background-color='#FBFBFB'
+              append-icon='fa-search'
+              :items='categorItems'
+              v-model='values'
+            >
+              <template v-slot:selection="data">
+                <v-chip
+                  v-bind="data.attrs"
+                  :input-value="data.selected"
+                  @click="data.select"
+                  color='warning'
+                  class='elevation-3'
+                >
+                  {{ data.item }}
+                </v-chip>
+              </template>
+            </v-autocomplete>
+
             <v-virtual-scroll
               class='mt-4 tlf-v-scroll'
               :items='categories'
@@ -79,7 +100,8 @@
               height='400'
             >
               <template #default='{item}'>
-                <div class='px-4 py-4 tlf-role-item' :class='{activate: item.isSelect}'
+                <div class='px-4 py-4 tlf-role-item'
+                     :class='{activate: item.isSelect}'
                      @click='myToggleFunction($event, item.id)'>
                   {{ item.title }}
                 </div>
@@ -87,23 +109,45 @@
             </v-virtual-scroll>
           </v-card>
         </v-col>
-        <v-col md='6' sm='4' cols='12'>
-          <span class='white--text' style='font-size: 14px; font-weight: 400'>دسته های محصول</span>
-          <v-row class='mt-3'>
-            <v-col v-for='select in categories' :key='select.id'
-                   v-if='select.isSelect'
-                   cols='4'>
-              <v-btn @click='unSelectCategories($event, select.id)' rounded color='warning'>
-                <span style='color: #FFFFFF'>{{ select.title }}</span>
-                <div class='mr-3'
-                     style='border-radius: 50%;
-                     background-color: #000000; padding: 1px 4px'>
-                  <v-icon size='15' color='#ffffff'>fa-times</v-icon>
-                </div>
-              </v-btn>
-            </v-col>
-          </v-row>
+        <v-col cols='12' md='3'>
+          <span class='white--text' style='font-size: 14px; font-weight: 400'>انتخاب امتیاز</span>
+          <v-select
+            class='elevation-3 mt-3'
+            :items='rateItems'
+            append-icon='fa-chevron-down'
+            label='انتخاب امتیاز'
+            hide-details
+            solo
+          ></v-select>
         </v-col>
+        <v-col cols='12' md='3'>
+          <span class='white--text' style='font-size: 14px; font-weight: 400'>انتخاب کارگاه</span>
+          <v-select
+            class='elevation-3 mt-3'
+            :items='workShopItems'
+            hide-details
+            label='انتخاب کارگاه'
+            append-icon='fa-chevron-down'
+            solo
+          ></v-select>
+        </v-col>
+<!--        <v-col md='6' sm='4' cols='12'>-->
+<!--          <span class='white&#45;&#45;text' style='font-size: 14px; font-weight: 400'>دسته های محصول</span>-->
+<!--          <v-row class='mt-3'>-->
+<!--            <v-col v-for='select in categories' :key='select.id'-->
+<!--                   v-if='select.isSelect'-->
+<!--                   cols='4'>-->
+<!--              <v-btn @click='unSelectCategories($event, select.id)' rounded color='warning'>-->
+<!--                <span style='color: #FFFFFF'>{{ select.title }}</span>-->
+<!--                <div class='mr-3'-->
+<!--                     style='border-radius: 50%;-->
+<!--                     background-color: #000000; padding: 1px 4px'>-->
+<!--                  <v-icon size='15' color='#ffffff'>fa-times</v-icon>-->
+<!--                </div>-->
+<!--              </v-btn>-->
+<!--            </v-col>-->
+<!--          </v-row>-->
+<!--        </v-col>-->
       </v-row>
     </TLFContainer>
     <ProductsTableBox class='mt-10 mb-10 d-none d-md-block' />
@@ -118,11 +162,12 @@ import Vue from 'vue'
 import TLFContainer from '../../components/utilities/TLF-Container'
 import UsersTableBox from '../../components/users/UsersTableBox'
 import ProductsTableBox from '../../components/products/ProductsTableBox'
+import Editor from '../../components/Editor'
 
 
 export default Vue.extend({
   name: 'index',
-  components: { ProductsTableBox, UsersTableBox, TLFContainer },
+  components: { Editor, ProductsTableBox, UsersTableBox, TLFContainer },
   data() {
     return {
       rateItems: ['1 امتیاز', '2 امتیاز', '3 امتیاز'],
@@ -141,7 +186,28 @@ export default Vue.extend({
           isSelect: false
         }
       ],
-      files: []
+      categorItems: ['سفال','کوزه'],
+      values: [],
+      files: [],
+      counterCH: 100,
+      description: '',
+      rules:{
+        counter: value => value.length <= 100 || 'Max 100 characters',
+      }
+    }
+  },
+  watch: {
+    values(newValue, oldValue) {
+      console.log(newValue)
+      this.categories.forEach(c=>{
+        c.isSelect = false
+      })
+        newValue.forEach((i) => {
+          const itemSelect = this.categories.find((item) => {
+            return item.title === i
+          })
+          itemSelect.isSelect = !itemSelect.isSelect
+        })
     }
   },
   methods: {
@@ -150,6 +216,13 @@ export default Vue.extend({
         return item.id === id
       })
       itemSelect.isSelect = !itemSelect.isSelect
+      if (itemSelect.isSelect){
+        this.values.push(itemSelect.title)
+      }else{
+        this.values = this.values.filter((item,index)=>{
+          return item !== itemSelect.title
+        })
+      }
     },
     unSelectCategories(event, id) {
       const itemSelect = this.categories.find((item) => {
@@ -160,6 +233,9 @@ export default Vue.extend({
     addFiles(event) {
       this.files.push(URL.createObjectURL(event.target.files[0]))
       console.log(this.files)
+    },
+    showNumsCh(){
+      this.counterCH = 100 - this.description.length
     }
   }
 })

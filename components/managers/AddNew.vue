@@ -20,7 +20,6 @@
      :items="roles"
      :item-height="60"
      height="490"
-
    >
      <template #default="{item}">
        <div class="px-4 py-4 tlf-role-item"  @click='myToggleFunction'>
@@ -99,6 +98,11 @@ button{
 }
 .tlf-role-item{
   border-bottom: 1px solid #F2F2F2;
+  @include transition();
+  cursor: pointer;
+  &:hover{
+    background-color: #d8d7e0;
+  }
 }
 .tlf-role-item.selected {
   background-color: $primary;
