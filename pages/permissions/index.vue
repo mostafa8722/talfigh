@@ -1,15 +1,27 @@
 <template>
   <div>
     <v-row>
-      <div class="white--text pa-md-8 pa-6" style="font-size: 1.6rem">
+      <div class="white--text pa-md-10 pa-8" style="font-size: 1.6rem">
         دسترسی‌ها
       </div>
       <v-spacer></v-spacer>
-      <v-btn class="px-10 ma-8 rounded-xl" color="primary">افزودن دسترسی</v-btn>
+      <v-btn
+        class="px-10 ma-8 mt-md-10 mt-0 rounded-xl"
+        color="primary"
+        @click="addPermissionDialog = true"
+        >افزودن دسترسی</v-btn
+      >
     </v-row>
-    <div class="mb-8">
-      <v-data-table hide-default-footer :items="items" :headers="headers">
-        <template #top="{ pagination, options, updateOptions }">
+    <div class="mb-8 table-card">
+      <v-data-table
+        :items="items"
+        :headers="headers"
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        hide-default-footer
+        @page-count="pageCount = $event"
+      >
+        <template #top>
           <v-row class="pa-md-0 pa-4">
             <v-col class="pt-1" cols="12" lg="3" md="3"
               ><v-text-field
@@ -24,13 +36,6 @@
                 >جستجو</v-btn
               ></v-col
             >
-            <v-col cols="11" lg="5" md="5"
-              ><v-data-footer
-                :pagination="pagination"
-                :options="options"
-                items-per-page-text="$vuetify.dataTable.itemsPerPageText"
-                @update:options="updateOptions"
-            /></v-col>
           </v-row>
           <v-divider />
         </template>
@@ -45,7 +50,58 @@
           </div>
         </template>
       </v-data-table>
+      <div class="d-flex justify-end ma-4 pb-6">
+        <v-pagination v-model="page" :length="pageCount"></v-pagination>
+      </div>
     </div>
+    <th-modal v-model="addPermissionDialog" width="700">
+      <template #body>
+        <v-row>
+          <v-col cols="12" lg="4" md="4">
+            <span class="mr-4">عنوان گروه دسترسی</span>
+            <v-text-field
+              height="40"
+              class="pt-0"
+              background-color="#FBFBFB"
+              placeholder="عنوان گروه دسترسی"
+              rounded
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" lg="4" md="4">
+            <span class="mr-4">slug</span>
+            <v-text-field
+              height="40"
+              class="pt-0"
+              background-color="#FBFBFB"
+              placeholder="slug"
+              rounded
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" lg="4" md="4">
+            <span class="mr-4">توضیحات رسته</span>
+            <v-textarea
+              class="pt-0"
+              background-color="#FBFBFB"
+              placeholder="توضیحات رسته"
+              rounded
+            ></v-textarea>
+          </v-col>
+        </v-row>
+      </template>
+      <template #actions>
+        <div>
+          <v-btn
+            rounded
+            color="error"
+            class="px-8"
+            text
+            @click="addPermissionDialog = false"
+            >لغو</v-btn
+          >
+          <v-btn rounded color="primary" class="px-8">ثبت</v-btn>
+        </div>
+      </template>
+    </th-modal>
   </div>
 </template>
 
@@ -56,25 +112,29 @@ export default Vue.extend({
   name: 'Permissions',
   data() {
     return {
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 10,
+      addPermissionDialog: false,
       items: [
         {
-          title: 'لیست درخواست‌ها',
+          title: 'حذف و ویرایش',
           slug: 'test.slug',
         },
         {
-          title: 'لیست درخواست‌ها',
+          title: 'حذف و ویرایش',
           slug: 'test.slug',
         },
         {
-          title: 'لیست درخواست‌ها',
+          title: 'حذف و ویرایش',
           slug: 'test.slug',
         },
         {
-          title: 'لیست درخواست‌ها',
+          title: 'حذف و ویرایش',
           slug: 'test.slug',
         },
         {
-          title: 'لیست درخواست‌ها',
+          title: 'حذف و ویرایش',
           slug: 'test.slug',
         },
       ],
@@ -97,7 +157,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.v-data-footer {
-  border: none !important;
+.table-card {
+  background-color: #fff;
 }
 </style>

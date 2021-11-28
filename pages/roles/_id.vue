@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="white--text pa-md-8 pa-6" style="font-size: 1.6rem">
+    <div class="white--text pa-md-10 pa-8" style="font-size: 1.6rem">
       ویرایش نقش
     </div>
 

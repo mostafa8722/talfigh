@@ -1,10 +1,19 @@
 <template>
   <div>
-    <div class="white--text pa-md-8 pa-6" style="font-size: 1.6rem">نقش‌ها</div>
+    <div class="white--text pa-md-10 pa-8" style="font-size: 1.6rem">
+      نقش‌ها
+    </div>
 
-    <div class="mb-8">
-      <v-data-table hide-default-footer :items="items" :headers="headers">
-        <template #top="{ pagination, options, updateOptions }">
+    <div class="mb-8 table-card">
+      <v-data-table
+        hide-default-footer
+        :items="items"
+        :headers="headers"
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        @page-count="pageCount = $event"
+      >
+        <template #top>
           <v-row class="pa-md-0 pa-4">
             <v-col class="pt-1" cols="12" lg="3" md="3"
               ><v-text-field
@@ -27,13 +36,6 @@
                 >جستجو</v-btn
               ></v-col
             >
-            <v-col cols="11" lg="5" md="5"
-              ><v-data-footer
-                :pagination="pagination"
-                :options="options"
-                items-per-page-text="$vuetify.dataTable.itemsPerPageText"
-                @update:options="updateOptions"
-            /></v-col>
           </v-row>
           <v-divider />
         </template>
@@ -45,6 +47,9 @@
           </div>
         </template>
       </v-data-table>
+      <div class="d-flex justify-end ma-4 pb-6">
+        <v-pagination v-model="page" :length="pageCount"></v-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -56,6 +61,9 @@ export default Vue.extend({
   name: 'Roles',
   data() {
     return {
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 10,
       items: [
         {
           title: 'مدیر فروش',
@@ -87,7 +95,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.v-data-footer {
-  border: none !important;
+.table-card {
+  background-color: #fff;
 }
 </style>

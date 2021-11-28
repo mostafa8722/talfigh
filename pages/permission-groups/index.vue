@@ -1,12 +1,12 @@
 <template>
   <div>
     <v-row>
-      <div class="white--text pa-md-8 pa-6" style="font-size: 1.6rem">
+      <div class="white--text pa-md-10 pa-8" style="font-size: 1.6rem">
         گروه‌های دسترسی
       </div>
       <v-spacer></v-spacer>
       <v-btn
-        class="px-10 ma-8 rounded-xl"
+        class="px-10 ma-8 mt-md-10 mt-0 rounded-xl"
         color="primary"
         @click="addPermissionGroupDialog = true"
         >اضافه کردن گروه دسترسی تکی</v-btn
@@ -16,9 +16,9 @@
       <v-data-table
         :items="items"
         :headers="headers"
+        hide-default-footer
         :page.sync="page"
         :items-per-page="itemsPerPage"
-        hide-default-footer
         @page-count="pageCount = $event"
       >
         <template #top>
@@ -70,6 +70,7 @@
           <v-col cols="12">
             <span class="mr-4">انتخاب دسترسی را جستجو کنید</span>
             <v-autocomplete
+              v-model="selectedPermissions"
               class="pt-0"
               background-color="#FBFBFB"
               rounded
@@ -81,11 +82,7 @@
               item-text="text"
             >
               <template #selection="data">
-                <v-chip
-                  close
-                  color="warning"
-                  @click:close="remove(data.item)"
-                >
+                <v-chip close color="warning" @click:close="remove(data.item)">
                   {{ data.item.text }}
                 </v-chip>
               </template>
@@ -93,6 +90,19 @@
           </v-col>
           <v-col cols="12"> </v-col>
         </v-row>
+      </template>
+      <template #actions>
+        <div>
+          <v-btn
+            rounded
+            color="error"
+            class="px-8"
+            text
+            @click="addPermissionGroupDialog = false"
+            >لغو</v-btn
+          >
+          <v-btn rounded color="primary" class="px-8">ثبت</v-btn>
+        </div>
       </template>
     </th-modal>
   </div>
@@ -109,6 +119,7 @@ export default Vue.extend({
       page: 1,
       pageCount: 0,
       itemsPerPage: 10,
+      selectedPermissions: [] as number[],
       permissions: [
         { id: 1, text: 'تستی' },
         { id: 2, text: 'تستی2' },
@@ -118,23 +129,18 @@ export default Vue.extend({
       items: [
         {
           title: 'لیست درخواست‌ها',
-          slug: 'test.slug',
         },
         {
           title: 'لیست درخواست‌ها',
-          slug: 'test.slug',
         },
         {
           title: 'لیست درخواست‌ها',
-          slug: 'test.slug',
         },
         {
           title: 'لیست درخواست‌ها',
-          slug: 'test.slug',
         },
         {
           title: 'لیست درخواست‌ها',
-          slug: 'test.slug',
         },
       ],
       headers: [
@@ -143,19 +149,14 @@ export default Vue.extend({
           value: 'title',
           width: '100px',
         },
-        {
-          text: 'slug',
-          value: 'slug',
-          width: '100px',
-        },
         { text: 'عملیات', value: 'actions', width: '100px' },
       ],
     }
   },
   methods: {
     remove(item: any) {
-      const index = this.permissions.indexOf(item.name)
-      if (index >= 0) this.permissions.splice(index, 1)
+      const index = this.selectedPermissions.indexOf(item.id)
+      if (index >= 0) this.selectedPermissions.splice(index, 1)
     },
   },
 })
