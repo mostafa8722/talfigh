@@ -47,6 +47,7 @@
         </div>
 
       </v-col>
+
     </v-row>
 
   </v-container>
@@ -56,7 +57,6 @@
 <script lang='ts'>
 import Vue from 'vue'
 import AddRaste from '~/components/blog/AddRaste.vue'
-
 export default Vue.extend({
   name: 'BlogForm',
   components: { AddRaste },
@@ -90,7 +90,7 @@ export default Vue.extend({
 
       ]
     }
-  }
+  },
 })
 </script>
 
