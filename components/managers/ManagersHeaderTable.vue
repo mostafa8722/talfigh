@@ -1,20 +1,23 @@
 <template>
   <div class='pt-7 px-4'>
-    <div class='d-flex justify-space-between align-center'>
-      <div class='d-flex align-center' style='column-gap: 1rem'>
+    <div
+      style='row-gap: 1rem'
+      class='d-flex flex-wrap justify-space-between align-center'>
+      <div class='d-flex flex-wrap align-center'
+           style='column-gap: 1rem; row-gap: 1rem'>
         <input placeholder='جستجوی مدیر...' type='text' class='input__search py-2 pr-5'/>
-        <input placeholder='جستجوی کد ملی...' type='text' class='input__search py-2 pr-5'/>
-
+        <input placeholder='جستجوی با شماره کد ملی...' type='text' class='input__search py-2 pr-5'/>
         <v-btn
           style='color: white; font-size: 0.9rem; font-weight: 500; font-family: IranYekanFN, serif'
           color='#7A7A7A'
           class='px-10'
           rounded>جستجو</v-btn>
       </div>
-      <div class='d-flex align-center' style='column-gap: 1.5rem'>
+      <div class='d-flex align-center'
+           style='column-gap: 1.5rem;'>
         <div class='d-flex align-center' style='column-gap: 1rem'>
-          <img src='@/static/icons/arrow.svg' alt=''>
-          <img style='transform: rotate(180deg)' src='@/static/icons/arrow.svg' alt=''>
+          <img class='paginator-controller' src='@/static/icons/arrow.svg' style='cursor:pointer;' alt=''>
+          <img class='paginator-controller' style='transform: rotate(180deg); cursor:pointer;' src='@/static/icons/arrow.svg' alt=''>
         </div>
         <div class='d-flex align-center' style='column-gap: 0.5rem'>
           <span class='text__range'>1-50</span>
@@ -56,6 +59,14 @@ export default Vue.extend({
   font-weight: 500 !important;
   font-size: 1rem !important;
   font-style: normal;
+}
+
+.paginator-controller {
+  @include transition();
+  opacity: 0.3;
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 </style>

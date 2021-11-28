@@ -1,9 +1,9 @@
 <template>
   <div style='padding-bottom: 250px' class='white ma-0 container__table'>
     <div class='d-flex flex-column'>
-      <ManagersHeaderTable />
+      <ProductsHeaderTable />
       <v-divider class='mt-7'></v-divider>
-      <ManagersBodyTable />
+      <ProductsBodyTable />
     </div>
   </div>
 </template>
@@ -11,12 +11,12 @@
 <script>
 import UsersHeaderTable from '~/components/users/UsersHeaderTable'
 import UsersBodyTable from '~/components/users/UsersBodyTable'
-import ManagersHeaderTable from '~/components/managers/ManagersHeaderTable'
-import ManagersBodyTable from '~/components/managers/ManagersBodyTable'
+import ProductsHeaderTable from './ProductsHeaderTable'
+import ProductsBodyTable from './ProductsBodyTable'
 
 export default {
-  name: 'ManagersTableBox',
-  components: { ManagersBodyTable, ManagersHeaderTable, UsersBodyTable, UsersHeaderTable },
+  name: 'ProductsTableBox',
+  components: { ProductsBodyTable, ProductsHeaderTable, UsersBodyTable, UsersHeaderTable },
   data() {
     return {
       images: {
