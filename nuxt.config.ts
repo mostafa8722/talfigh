@@ -17,7 +17,10 @@ const config: NuxtConfig = {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css' }
     ]
   },
 
@@ -33,6 +36,7 @@ const config: NuxtConfig = {
     '~/plugins/errors.ts',
     '~/plugins/vue-smooth-dnd.js',
     {src: '~plugins/vuelayers.js', ssr: false},
+    { src: '~/plugins/TiptapVuetify', mode: 'client' }
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -110,7 +114,8 @@ const config: NuxtConfig = {
           vue.transformAssetUrls['v-img'] = ['src', 'blank-src']
         }
       }
-    }
+    },
+    transpile: ['vuetify/lib', "tiptap-vuetify"]
   }
 }
 
