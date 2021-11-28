@@ -63,7 +63,7 @@ export default Vue.extend(
 </script>
 
 <style lang='scss' scoped>
-#plus {
+#plus{
 
   min-height: 38px !important;
   background: #2D9DCD !important;
@@ -72,17 +72,15 @@ export default Vue.extend(
 
 .border-bt {
   border-bottom: #F2F2F2 1px solid;
-  border-radius: 16px;
+  border-radius: 16px ;
   padding: 15px;
   width: 100% !important;
 }
-
-.activate {
-  background-color: #2D9DCD !important;
+.activate{
+  background-color: #2D9DCD!important;
   color: white !important;
 }
-
-button {
+button{
   width: 100%;
 
 }
