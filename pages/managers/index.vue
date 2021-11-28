@@ -11,7 +11,7 @@
 import Vue from 'vue'
 import ManagersComponent from '~/components/managers/ManagersComponent.vue'
 import TLFContainer from '~/components/utilities/TLF-Container.vue'
-import ManagersTableBox from '@/components/managers/ManagersTableBox.vue'
+import ManagersTableBox from '~/components/managers/ManagersTableBox.vue'
 
 export default Vue.extend({
   components: { ManagersTableBox, TLFContainer, ManagersComponent },
