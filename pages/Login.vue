@@ -38,7 +38,6 @@
               <v-btn
                 color="primary"
                 class="white--text"
-                :ripple="false"
                 min-height="48px"
                 block
                 >ورود به پنل</v-btn
@@ -47,7 +46,6 @@
                 block
                 class="mt-4"
                 min-height="48px"
-                :ripple="false"
                 outlined
                 >رمز خود را فراموش کردم</v-btn
               >
