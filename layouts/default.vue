@@ -138,6 +138,9 @@ export default Vue.extend({
   background: url("static/images/background.jpg") 50% 0;
 }
 
+
+
+
 //@media #{map-get($display-breakpoints, 'sm-and-down')}{
 //  .tlf-main {
 //    background: url("static/images/background.jpg") 50% 0;
