@@ -42,13 +42,6 @@
                 block
                 >ورود به پنل</v-btn
               >
-              <v-btn
-                block
-                class="mt-4"
-                min-height="48px"
-                outlined
-                >رمز خود را فراموش کردم</v-btn
-              >
             </div>
           </v-card-text>
         </v-card>
