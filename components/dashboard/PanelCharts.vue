@@ -8,7 +8,6 @@
 
             <v-img :src='`images/panel/${chart.icon}.png`' height='27.5px' max-width='39px'></v-img>
             <div class='mr-2'>{{ chart.title }}</div>
-
           </div>
 
           <v-img src='images/panel/chart.png'></v-img>
