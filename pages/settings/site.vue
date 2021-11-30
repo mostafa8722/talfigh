@@ -37,7 +37,7 @@
 
         <v-col cols="3" class="mr-10 d-flex">
           <v-icon size="36" color="white">fab fa-facebook-f</v-icon>
-          <v-text-field class="rounded-lg mr-6"
+          <v-text-field class="rounded-lg mr-12"
                         background-color="white"
                         placeholder="تلفیق هنر"
                         solo
@@ -47,6 +47,7 @@
                         outlined/>
         </v-col>
       </v-row>
+
       <v-row>
         <v-col cols="3" class="d-flex">
           <v-icon size="36" color="white">fab fa-whatsapp</v-icon>
@@ -72,6 +73,47 @@
                         outlined/>
         </v-col>
       </v-row>
+
+      <v-row>
+        <v-col cols="3" class="d-flex">
+          <v-icon size="36" color="white">fab fa-telegram-plane</v-icon>
+          <v-text-field class="rounded-lg mr-6"
+                        background-color="white"
+                        placeholder="تلفیق هنر"
+                        solo
+                        filled
+                        hide-details
+                        dense
+                        outlined/>
+        </v-col>
+
+        <v-col cols="3" class="mr-10 d-flex">
+          <v-img src="~/static/images/aparat.png" max-width="48px" contain/>
+          <v-text-field class="rounded-lg mr-6"
+                        background-color="white"
+                        placeholder="تلفیق هنر"
+                        solo
+                        filled
+                        hide-details
+                        dense
+                        outlined/>
+        </v-col>
+      </v-row>
+
+      <div class="mt-10">
+        <p class="tlf-subtitle">عکس نوار - page icon</p>
+        <v-row class="align-end">
+          <v-col cols="3">
+            <v-btn color="primary" rounded>
+              آپلود عکس بزرگ بالا
+            </v-btn>
+          </v-col>
+
+          <v-col cols="2">
+            <v-img src="~/static/images/logo.png"/>
+          </v-col>
+        </v-row>
+      </div>
 
     </div>
   </div>
