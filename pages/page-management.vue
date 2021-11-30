@@ -167,6 +167,9 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: "مدیریت صفحه‌ها"
+  },
 })
 </script>
 

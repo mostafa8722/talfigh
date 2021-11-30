@@ -27,6 +27,9 @@ export default Vue.extend({
   async fetch() {
     await this.$store.dispatch('posts/getPosts')
   },
+    head: {
+      title: "پنل مدیریت تلفیق هنر"
+    },
   computed: {
     ...mapGetters({
       posts: 'posts/posts'

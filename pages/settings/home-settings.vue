@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" lg="3" md="3">
         <span class="white--text" style="font-size: 1.6rem"
-          >تنظیمات پاورقی</span
+          >تنظیمات صفحه اصلی</span
         >
       </v-col>
       <v-col cols="12" lg="3" md="3"
@@ -392,6 +392,9 @@ export default Vue.extend({
         { icon: '', text: '' },
       ],
     }
+  },
+  head: {
+    title: "تنظیمات صفحه اصلی"
   },
   methods: {
     newTip() {

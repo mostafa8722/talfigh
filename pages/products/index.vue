@@ -196,6 +196,9 @@ export default Vue.extend({
       }
     }
   },
+  head: {
+    title: "مدیریت محصول‌ها"
+  },
   watch: {
     values(newValue, oldValue) {
       console.log(newValue)

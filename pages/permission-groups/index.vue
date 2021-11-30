@@ -153,6 +153,9 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: "گروه‌های دسترسی"
+  },
   methods: {
     remove(item: any) {
       const index = this.selectedPermissions.indexOf(item.id)

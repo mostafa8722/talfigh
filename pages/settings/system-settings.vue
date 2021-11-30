@@ -79,6 +79,9 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: "تنظیمات سیستمی"
+  },
   methods: {
     newTip() {
       this.tips.push({

@@ -153,6 +153,9 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: "دسترسی‌ها"
+  },
 })
 </script>
 

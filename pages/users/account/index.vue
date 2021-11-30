@@ -33,7 +33,10 @@ import TLFContainer from '../../../components/utilities/TLF-Container'
 
 export default Vue.extend({
   name: 'index',
-  components: { TLFContainer, AccountBox, AccountCard }
+  components: { TLFContainer, AccountBox, AccountCard },
+  head: {
+    title: "تکمیل اطلاعات حساب"
+  },
 })
 </script>
 

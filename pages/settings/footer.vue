@@ -183,6 +183,9 @@ export default Vue.extend({
   data() {
     return {}
   },
+  head: {
+    title: "تنظیمات پاورقی"
+  },
 })
 </script>
 

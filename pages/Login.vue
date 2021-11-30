@@ -57,6 +57,9 @@ export default {
   data() {
     return {}
   },
+  head: {
+    title: 'صفحه ورود'
+  }
 }
 </script>
 

@@ -210,6 +210,9 @@ export default Vue.extend({
       ]
     }
   },
+  head: {
+    title: "داشبورد"
+  },
   mounted() {
     this.fillData()
   },

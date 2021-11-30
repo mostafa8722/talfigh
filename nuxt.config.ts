@@ -5,8 +5,7 @@ import fa from 'vuetify/src/locale/fa'
 const config: NuxtConfig = {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - پنل مدیریت تلفیق هنر',
-    title: 'nuxt-boilerplate',
+    titleTemplate: '%s',
     htmlAttrs: {
       lang: 'en'
     },

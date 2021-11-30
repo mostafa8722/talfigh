@@ -76,7 +76,7 @@ export default Vue.extend({
           type: 'item',
           icon: 'fa-pen',
           title: 'صفحه سازی',
-          to: '/custom'
+          to: '/page-management'
         },
         {
           type: 'item',
@@ -102,6 +102,12 @@ export default Vue.extend({
           icon: 'fa-edit',
           title: 'تنظیمات صفحه اصلی',
           to: '/settings/system-settings'
+        },
+        {
+          type: 'item',
+          icon: 'fa-edit',
+          title: 'تنظیمات پاورقی',
+          to: '/settings/footer'
         }
       ],
       isMobile: false,

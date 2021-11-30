@@ -71,6 +71,9 @@ export default Vue.extend({
       items: generateItems(5, (i: any) => ({ id: i, data: 'منوی اصلی ' + i })),
     }
   },
+  head: {
+    title: "منو ناوبری"
+  },
   methods: {
     onDrop(dropResult: any) {
       this.items = applyDrag(this.items, dropResult)

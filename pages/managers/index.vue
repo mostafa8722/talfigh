@@ -18,7 +18,10 @@ export default Vue.extend({
   data() {
     return {
     }
-  }
+  },
+  head: {
+    title: "مدیرها"
+  },
 })
 </script>
 

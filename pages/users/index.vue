@@ -61,7 +61,10 @@ export default Vue.extend({
   components: { TLFContainer, UsersTableBox },
   data() {
     return {}
-  }
+  },
+  head: {
+    title: "لیست کاربرها"
+  },
 })
 </script>
 

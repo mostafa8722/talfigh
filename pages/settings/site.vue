@@ -288,6 +288,9 @@ export default Vue.extend({
       },
     }
   },
+  head: {
+    title: "تنظیمات سایت"
+  },
   methods: {
     setSelectedPosition(event: any) {
       this.mapOptions.selectedLocation = event.coordinate

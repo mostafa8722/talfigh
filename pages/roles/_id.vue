@@ -154,6 +154,9 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: "ویرایش نقش"
+  },
   methods: {
     isPermissionGroupCompletelySelected(permissionGroup: PermissionGroup) {
       return permissionGroup.permissions.every((permission: Permission) =>

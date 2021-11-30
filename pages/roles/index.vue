@@ -91,6 +91,9 @@ export default Vue.extend({
       ],
     }
   },
+  head: {
+    title: "نقش‌ها"
+  },
 })
 </script>
 
