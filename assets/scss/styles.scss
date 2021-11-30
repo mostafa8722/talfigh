@@ -1,11 +1,28 @@
 @import "fonts";
 
+
 body {
   font-family: IranYekanFN, serif !important;
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6, input, textarea,span, .v-application {
+::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #F2994A !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e3893a !important;
+}
+
+h1, h2, h3, h4, h5, h6, input, textarea, span, .v-application {
   font-family: IranYekanFN, serif !important;
 }
 
@@ -14,15 +31,16 @@ h1, h2, h3, h4, h5, h6, input, textarea,span, .v-application {
     color: $dark-grey;
     font-family: IranYekanFN, serif !important;
   }
+
   font-family: IranYekanFN, serif !important;
 }
 
-.v-btn{
+.v-btn {
   letter-spacing: 0 !important;
 }
 
-.v-text-field--outlined fieldset{
-  color:#E2E2E2;
+.v-text-field--outlined fieldset {
+  color: #E2E2E2;
 }
 
 .v-dialog {
