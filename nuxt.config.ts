@@ -71,6 +71,10 @@ const config: NuxtConfig = {
     }
   },
 
+  server: {
+    port: 8000
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     rtl: true,
