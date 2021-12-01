@@ -1,8 +1,8 @@
 <template>
 
-  <div>
-    <user-panel></user-panel>
-  </div>
+
+<user-panel></user-panel>
+
 
 </template>
 
