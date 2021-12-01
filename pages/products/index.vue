@@ -150,7 +150,7 @@
 <!--        </v-col>-->
       </v-row>
     </TLFContainer>
-    <ProductsTableBox class='mt-10 mb-10 d-none d-md-block' />
+    <ProductsTableBox class='mt-10 mb-10' />
     <v-btn width='230' height='35' class='mr-5 mb-3 mt-3 d-inline-block d-md-none' rounded color='primary'>
       <span class='text-btn'>ذخیره اطلاعات محصول</span>
     </v-btn>

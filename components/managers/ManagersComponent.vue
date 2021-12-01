@@ -5,10 +5,10 @@
           اضافه کردن مدیران
         </div>
       </v-col>
-      <v-col cols='12' sm='3'>
+      <v-col cols='12' lg='3'>
         <add-new class='' style='height: 100%'></add-new>
       </v-col>
-      <v-col cols='12' sm='9'>
+      <v-col cols='12' lg='9'>
         <details-form class=''></details-form>
       </v-col>
       <v-col cols='12'>

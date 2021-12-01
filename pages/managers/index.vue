@@ -3,7 +3,7 @@
     <TLFContainer>
       <managers-component></managers-component>
     </TLFContainer>
-    <ManagersTableBox class='mb-10 d-none d-md-block' />
+    <ManagersTableBox class='mb-10' />
   </div>
 </template>
 

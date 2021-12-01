@@ -44,7 +44,8 @@
         </div>
       </v-col>
     </TLFContainer>
-    <UsersTableBox class='mt-10 mb-10 d-none d-md-block' />
+<!-- d-none d-md-block-->
+    <UsersTableBox class='mt-10 mb-10' />
     <v-btn width='230' height='35' class='mr-5 mt-5 mb-5 d-md-none d-inline-block' rounded color='primary'>
       <span class='text-btn'>خروجی فایل اکسل</span>
     </v-btn>

@@ -19,50 +19,6 @@ export default {
   components: { ProductsBodyTable, ProductsHeaderTable, UsersBodyTable, UsersHeaderTable },
   data() {
     return {
-      images: {
-        topBig: '/images/settings-sample.jpg'
-      },
-      items: [
-        {
-          fullName: 'حسین دانش فر',
-          registeryDate: '1400/12/12',
-          category: 'کوزه، سفال'
-        },
-        {
-          fullName: 'حسین دانش فر',
-          registeryDate: '1400/12/12',
-          category: 'کوزه، سفال'
-        },
-        {
-          fullName: 'حسین دانش فر',
-          registeryDate: '1400/12/12',
-          category: 'کوزه، سفال'
-        },
-        {
-          fullName: 'حسین دانش فر',
-          registeryDate: '1400/12/12',
-          category: 'کوزه، سفال'
-        },
-        {
-          fullName: 'حسین دانش فر',
-          registeryDate: '1400/12/12',
-          category: 'کوزه، سفال'
-        }
-      ],
-      headers: [
-        {
-          text: 'نام و نام‌خانوادگی',
-          value: 'fullName',
-          width: '100px'
-        },
-        {
-          text: 'تاریخ عضویت',
-          value: 'registeryDate',
-          width: '100px'
-        },
-        { text: 'دسته', value: 'category', width: '200px' },
-        { text: 'عملیات', value: 'actions', width: '200px' }
-      ]
     }
   }
 }
