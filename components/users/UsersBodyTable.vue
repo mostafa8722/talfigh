@@ -1,7 +1,9 @@
 <template>
   <div>
     <div v-for='item in items' :key='item.id' >
-    <div class='d-flex px-7 py-7 justify-space-between align-center'>
+    <div
+      class='d-flex flex-column flex-md-row item-list
+      px-7 py-7 justify-space-between align-start align-md-center gap-responsive'>
       <span
         style='color: #197095;
                font-size: 1rem;
@@ -125,4 +127,19 @@ span{
     background-color: #c26f23 !important
   }
 }
+
+.item-list{
+  @include transition();
+  &:hover{
+    background-color: #ece9e9;
+  }
+}
+
+.gap-responsive{
+  @media screen and (max-width: 960px){
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+
 </style>

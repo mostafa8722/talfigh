@@ -1,10 +1,9 @@
-<script lang='ts'>
-import Vue from 'vue'
+<script>
 import { Line, mixins } from 'vue-chartjs'
 
 const { reactiveProp } = mixins
 
-export default Vue.extend({
+export default {
   name: 'LineChart',
   extends: Line,
   mixins: [reactiveProp],
@@ -12,7 +11,7 @@ export default Vue.extend({
   mounted() {
     this.renderChart(this.chartData, this.options)
   }
-})
+}
 </script>
 
 <style scoped lang='scss'>

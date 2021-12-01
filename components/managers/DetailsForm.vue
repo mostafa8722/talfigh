@@ -1,7 +1,7 @@
 <template>
     <v-card rounded='xl' class='px-5 py-7'>
       <v-row align='center'>
-        <v-col sm='6' cols='12'>
+        <v-col md='6' cols='12'>
             <div class='d-flex flex-wrap mb-9'>
               <div class='' id='title'>عنوان مدیر</div>
               <v-btn depressed rounded  color='#009D4C' class='activate mt-2 mx-4 chp'  >
@@ -20,9 +20,9 @@
       <v-textarea placeholder='توضیحات' outlined class='d-flex rounded-lg mt-2' rows="10" ></v-textarea>
 
         </v-col>
-        <v-col cols='12' sm='6'  class='pl-14'>
+        <v-col cols='12' md='6'  class='pl-14'>
           <v-row>
-            <v-col cols='12' sm='6' class=''>
+            <v-col cols='12' md='6' class=''>
                  <span>نام</span>
               <v-text-field class='mt-2 rounded-lg' outlined placeholder='نام'></v-text-field>
             <span>ایمیل</span>
@@ -30,7 +30,7 @@
             <span> رمز عبور</span>
               <v-text-field class='rounded-lg mt-2' placeholder='رمز عبور' outlined></v-text-field>
             </v-col>
-            <v-col cols='12' sm='6' class=''>
+            <v-col cols='12' md='6' class=''>
             <span>  نام خانوادگی</span>
               <v-text-field class='rounded-lg mt-2' placeholder=' نام خانوادگی' outlined></v-text-field>
               <span>موبایل</span>
