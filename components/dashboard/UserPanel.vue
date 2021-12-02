@@ -1,17 +1,18 @@
 <template>
   <div>
     <panel-charts></panel-charts>
-    <panel-detailes></panel-detailes>
+    <panel-details></panel-details>
   </div>
 </template>
 
 <script lang='ts'>
 import PanelCharts from './PanelCharts.vue'
-import PanelDetails from './PanelDetails.vue'
+
 import Vue from 'vue'
+import PanelDetails from '~/components/dashboard/panel-details.vue'
 export default Vue.extend({
   name: 'UserPanel',
-  components: { PanelCharts }
+  components: { PanelDetails, PanelCharts }
 })
 </script>
 
