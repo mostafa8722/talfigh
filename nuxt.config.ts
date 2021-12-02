@@ -25,7 +25,8 @@ const config: NuxtConfig = {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/scss/styles.scss'
+    '~/assets/scss/styles.scss',
+    '@fortawesome/fontawesome-free/css/all.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -97,9 +98,9 @@ const config: NuxtConfig = {
         }
       }
     },
-    defaultAssets:{
-      icons:'fa'
-    }
+        icons: {
+          iconfont: 'fa', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+        },
   },
 
   styleResources: {
