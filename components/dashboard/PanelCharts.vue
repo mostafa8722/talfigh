@@ -14,6 +14,55 @@
 
         </v-card>
       </v-col>
+      <v-col>
+        <v-container class='py-0' fluid>
+          <v-card class='pr-10 py-9 pl-16'>
+            <div class='d-flex'>
+              <div class='bold'> پاداش و کسر</div>
+              <div class='mr-auto read'>خواندن همه</div>
+            </div>
+            <v-divider class='my-3'></v-divider>
+            <div class='d-flex mb-2'>
+              <div class='my-auto ml-2'>
+                <v-icon color='#00BB5A'>fas fa-circle</v-icon>
+                <span class='mx-1'>123</span></div>
+              <div class='my-auto titl'>پاداش شما</div>
+              <v-btn class='mr-auto' color='#00BB5A' depressed rounded style='color: white'>خواندن پیام</v-btn>
+            </div>
+
+            <div class='d-flex '>
+              <div class='my-auto ml-2'>
+                <v-icon color='#00BB5A'>fas fa-circle</v-icon>
+                <span class='mx-1'>5412</span></div>
+              <div class='my-auto titl'>کسر بدهی شما</div>
+              <v-btn class='mr-auto' color='#00BB5A' depressed rounded style='color: white'>خواندن پیام</v-btn>
+            </div>
+          </v-card>
+          <v-card class='pr-10 py-9 pl-16 mt-2'>
+            <div class='d-flex'>
+              <div class='bold'> پیام های شما</div>
+              <div class='mr-auto read'>خواندن همه</div>
+            </div>
+            <v-divider class='my-3'></v-divider>
+            <div class='d-flex mb-2'>
+              <div class='my-auto ml-2'>
+                <v-icon color='red'>fas fa-circle</v-icon>
+                <span class='mx-1'>123</span></div>
+              <div class='my-auto titl'>پاداش شما</div>
+              <v-btn class='mr-auto' color='primary' depressed rounded>خواندن پیام</v-btn>
+            </div>
+
+            <div class='d-flex '>
+              <div class='my-auto ml-2'>
+                <v-icon color='red'>fas fa-circle</v-icon>
+                <span class='mx-1'>5412</span></div>
+              <div class='my-auto titl'>کسر بدهی شما</div>
+              <v-btn class='mr-auto' color='primary' depressed rounded>خواندن پیام</v-btn>
+            </div>
+          </v-card>
+        </v-container>
+
+      </v-col>
     </v-row>
 
   </v-container>
@@ -36,5 +85,27 @@ export default Vue.extend({
 })
 </script>
 <style lang='scss' scoped>
+.read {
+  margin-top: auto;
+  margin-left: 30px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 17px;
+  color: #A2A2A2;
 
+}
+
+.titl {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 223.02%;
+  /* or 27px */
+
+  text-align: right;
+
+  color: #404040;
+
+}
 </style>

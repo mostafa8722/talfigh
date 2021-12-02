@@ -1,7 +1,7 @@
 <template>
   <div>
-    <panel-charts></panel-charts>
     <panel-details></panel-details>
+    <panel-charts></panel-charts>
   </div>
 </template>
 
