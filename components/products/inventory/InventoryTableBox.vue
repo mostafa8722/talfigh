@@ -1,5 +1,5 @@
 <template>
-  <div style='padding-bottom: 250px' class='white ma-0 container__table'>
+  <div class='white ma-0 container__table rounded-lg'>
     <div class='d-flex flex-column'>
       <ProductsHeaderTable />
       <v-divider class='mt-7'></v-divider>
@@ -11,11 +11,11 @@
 <script>
 import UsersHeaderTable from '~/components/users/UsersHeaderTable'
 import UsersBodyTable from '~/components/users/UsersBodyTable'
-import ProductsHeaderTable from './ProductsHeaderTable'
-import ProductsBodyTable from './ProductsBodyTable'
+import ProductsHeaderTable from './InventoryHeaderTable'
+import ProductsBodyTable from './InventoryBodyTable'
 
 export default {
-  name: 'ProductsTableBox',
+  name: 'InventoryTableBox',
   components: { ProductsBodyTable, ProductsHeaderTable, UsersBodyTable, UsersHeaderTable },
   data() {
     return {
