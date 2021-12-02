@@ -72,9 +72,9 @@ export default {
 
 .container__table {
   height: auto;
-  @media screen and (max-width: 600px) {
-    width: 1200px;
-  }
+  //@media screen and (max-width: 600px) {
+  //  width: 1200px;
+  //}
 
 }
 </style>
