@@ -1,7 +1,7 @@
 <template>
   <v-container class='d-flex flex-column' fluid>
-    <div id='title' class='ml-auto mb-8'>قرارداد فی مابین</div>
-    <v-card  class='  pa-6 ' rounded='xl'>
+    <div id='title' class='ml-auto mb-10'>قرارداد فی مابین</div>
+    <v-card  class='px-5 py-3' rounded='xl'>
     <div class='d-flex flex-column'>
       <v-checkbox
         class="black-label"

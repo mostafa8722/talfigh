@@ -1,19 +1,22 @@
 <template>
   <div>
-    <v-row>
-      <div class="white--text pa-md-10 pa-8" style="font-size: 1.6rem">
-        دسترسی‌ها
-      </div>
-      <v-spacer></v-spacer>
-      <v-btn
-        class="px-10 ma-8 mt-md-10 mt-0 rounded-xl"
-        color="primary"
-        @click="addPermissionDialog = true"
+    <TLFContainer>
+      <v-row>
+        <div class="white--text" style="font-size: 1.6rem">
+          دسترسی‌ها
+        </div>
+        <v-spacer></v-spacer>
+        <v-btn
+          class="px-10 rounded-xl"
+          color="primary"
+          @click="addPermissionDialog = true"
         >افزودن دسترسی</v-btn
-      >
-    </v-row>
-    <div class="mb-8 table-card">
+        >
+      </v-row>
+    </TLFContainer>
+    <div class="mb-8 mt-10 table-card">
       <v-data-table
+        class='px-5'
         :items="items"
         :headers="headers"
         :page.sync="page"
@@ -22,7 +25,7 @@
         @page-count="pageCount = $event"
       >
         <template #top>
-          <v-row class="pa-md-0 pa-4">
+          <v-row class="pa-md-0 pa-4 px-md-5">
             <v-col class="pt-1" cols="12" lg="3" md="3"
               ><v-text-field
                 height="40"
@@ -107,9 +110,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import TLFContainer from '~/components/utilities/TLF-Container.vue'
 
 export default Vue.extend({
   name: 'Permissions',
+  components: { TLFContainer },
   data() {
     return {
       page: 1,

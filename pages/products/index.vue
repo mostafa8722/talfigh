@@ -150,7 +150,101 @@
 <!--        </v-col>-->
       </v-row>
     </TLFContainer>
-    <ProductsTableBox class='mt-10 mb-10' />
+    <div class='my-10'>
+      <v-data-table class='px-5'
+                    hide-default-footer :items='items'
+                    hide-default-header :headers='headers'>
+        <template #top='{ pagination, options, updateOptions }'>
+          <v-row class='pa-md-0 pa-4'>
+            <v-col class='pt-1' cols='12' lg='3' md='3'
+            >
+              <v-text-field
+                height='40'
+                background-color='#FBFBFB'
+                placeholder='جستجو عنوان محصول...'
+                rounded
+              ></v-text-field
+              >
+            </v-col>
+            <v-col class='pt-1' cols='12' lg='3' md='3'
+            >
+              <v-text-field
+                height='40'
+                background-color='#FBFBFB'
+                placeholder='جستجو دسته...'
+                rounded
+              ></v-text-field
+              >
+            </v-col>
+            <v-col cols='12' lg='1' md='1'
+            >
+              <v-btn class='white--text px-8 mt-2' rounded color='#7A7A7A'
+              >جستجو
+              </v-btn
+              >
+            </v-col
+            >
+            <v-spacer></v-spacer>
+            <v-col style='justify-self: flex-end' cols='12' lg='4' md='4'
+            >
+              <v-data-footer
+                :pagination='pagination'
+                :options='options'
+                items-per-page-text='$vuetify.dataTable.itemsPerPageText'
+                @update:options='updateOptions'
+              />
+            </v-col>
+          </v-row>
+        </template>
+        <template v-slot:item.title='{ item }'>
+           <span
+             class=''
+             style='color: #197095; font-size: 1rem; font-weight: 500;'>
+             {{ item.title }}
+           </span>
+        </template>
+        <template v-slot:item.date='{ item }'>
+           <span
+             style='color: #197095; font-size: 1rem; font-weight: 500;'>
+             {{ item.date }}
+           </span>
+        </template>
+        <template v-slot:item.category='{ item }'>
+                  <span
+                    style='color: #848484;
+               font-size: 1rem;
+               font-weight: 500;'>
+          دسته:
+        </span>
+           <span
+             style='color: #197095; font-size: 1rem; font-weight: 500;'>
+             {{ item.category }}
+           </span>
+        </template>
+        <template v-slot:item.inventory='{ item }'>
+                  <span
+                    style='color: #848484;
+               font-size: 1rem;
+               font-weight: 500;'>
+          موجودی:
+        </span>
+           <span
+             style='color: #197095; font-size: 1rem; font-weight: 500;'>
+             {{ item.inventory }}
+           </span>
+        </template>
+        <template #[`item.actions`]>
+          <div class='d-flex py-6' style='column-gap: 0.5rem'>
+            <v-btn fab x-small elevation='0' color='error'>
+              <v-icon color='#fff' size='15'>fa-trash-alt</v-icon>
+            </v-btn>
+            <v-btn fab x-small elevation='0' color='warning'>
+              <v-icon color='#fff' size='15'>fa-edit</v-icon>
+            </v-btn>
+          </div>
+        </template>
+      </v-data-table>
+    </div>
     <v-btn width='230' height='35' class='mr-5 mb-3 mt-3 d-inline-block d-md-none' rounded color='primary'>
       <span class='text-btn'>ذخیره اطلاعات محصول</span>
     </v-btn>
@@ -184,6 +278,65 @@ export default Vue.extend({
           id: 2,
           title: 'کوزه',
           isSelect: false
+        }
+      ],
+      items: [
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          date: '1370/10/10',
+          inventory: '5'
+        },
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          date: '1370/10/10',
+          inventory: '5'
+        },
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          date: '1370/10/10',
+          inventory: '5'
+        },
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          date: '1370/10/10',
+          inventory: '5'
+        },
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          date: '1370/10/10',
+          inventory: '5'
+        }
+      ],
+      headers: [
+        {
+          text: '',
+          value: 'title',
+          width: '100px'
+        },
+        {
+          text: '',
+          value: 'date',
+          width: '100px'
+        },
+        {
+          text: '',
+          value: 'category',
+          width: '100px'
+        },
+        {
+          text: '',
+          value: 'inventory',
+          width: '200px'
+        },
+        {
+          text: '',
+          value: 'actions',
+          width: '200px'
         }
       ],
       categorItems: ['سفال','کوزه'],
@@ -245,6 +398,46 @@ export default Vue.extend({
 </script>
 
 <style scoped lang='scss'>
+
+.edit-btn {
+  @include transition();
+  cursor: pointer;
+
+  &:hover {
+    background-color: #c26f23 !important
+  }
+}
+
+
+.box {
+  outline: 2px solid #efefef;
+  background-color: #9f9f9f;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+}
+.label {
+  font-size: 0.9rem;
+  color: #fff;
+}
+.button {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 204px;
+}
+.image {
+  width: 101px;
+  height: 70px;
+  margin-right: 10%;
+  border-radius: 80px;
+}
+.add {
+  &:hover {
+    cursor: pointer;
+  }
+}
+.v-data-footer {
+  border: none !important;
+}
 
 .title {
   font-size: 1.6rem !important;

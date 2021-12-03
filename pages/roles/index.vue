@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div class="white--text pa-md-10 pa-8" style="font-size: 1.6rem">
-      نقش‌ها
-    </div>
-
-    <div class="mb-8 table-card">
+    <TLFContainer>
+      <div class="white--text" style="font-size: 1.6rem">
+        نقش‌ها
+      </div>
+    </TLFContainer>
+    <div class="mb-8 mt-10 table-card">
       <v-data-table
+        class='px-5'
         hide-default-footer
         :items="items"
         :headers="headers"
@@ -14,7 +16,7 @@
         @page-count="pageCount = $event"
       >
         <template #top>
-          <v-row class="pa-md-0 pa-4">
+          <v-row class="pa-md-0 pa-4 px-md-5">
             <v-col class="pt-1" cols="12" lg="3" md="3"
               ><v-text-field
                 height="40"
@@ -56,9 +58,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import TLFContainer from '~/components/utilities/TLF-Container.vue'
 
 export default Vue.extend({
   name: 'Roles',
+  components: { TLFContainer },
   data() {
     return {
       page: 1,

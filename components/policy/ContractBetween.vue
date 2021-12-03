@@ -1,9 +1,9 @@
 <template>
-  <div id='wrapper'>
+  <TLFContainer>
     <agree-card v-if='!mobile'></agree-card>
     <agree-card-mobile v-if='mobile'></agree-card-mobile>
     <contract-text></contract-text>
-  </div>
+  </TLFContainer>
 </template>
 
 <script lang='ts'>
@@ -11,9 +11,10 @@ import Vue from 'vue'
 import ContractText from '~/components/policy/ContractText.vue'
 import AgreeCard from '~/components/contract/AgreeCard.vue'
 import AgreeCardMobile from '~/components/contract/AgreeCardMobile.vue'
+import TLFContainer from '~/components/utilities/TLF-Container.vue'
 export default Vue.extend({
   name: 'ContractBetween',
-  components: { AgreeCardMobile, AgreeCard, ContractText },
+  components: { TLFContainer, AgreeCardMobile, AgreeCard, ContractText },
   data(){
     return{
       agreed:true
@@ -33,7 +34,6 @@ export default Vue.extend({
   margin-right: 61px;
   margin-top:57px;
   margin-left:89px;
-
 }
 
 @media #{map-get($display-breakpoints, 'sm-and-down')}{

@@ -178,7 +178,32 @@ export default Vue.extend({
           title: 'عنوان محصول',
           category: 'کوزه، سفال',
           inventory: '5'
-        }
+        },
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          inventory: '5'
+        },
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          inventory: '5'
+        },
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          inventory: '5'
+        },
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          inventory: '5'
+        },
+        {
+          title: 'عنوان محصول',
+          category: 'کوزه، سفال',
+          inventory: '5'
+        },
       ],
       headers: [
         {
