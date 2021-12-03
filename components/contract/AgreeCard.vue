@@ -1,6 +1,6 @@
 <template>
-  <v-container class='d-flex' fluid>
-    <v-card  class='d-inline-flex pa-6 ' rounded='xl'>
+  <div>
+    <v-card class='d-inline-flex px-5 py-3 ' rounded='xl'>
       <div class='d-inline-flex'>
         <div class='d-flex'>
           <v-checkbox
@@ -15,7 +15,7 @@
       </div>
     </v-card>
     <div   class='my-auto mr-8  ' id='date'>تاریخ تایید شما : 54/151/5</div>
-  </v-container>
+  </div>
 </template>
 
 <script lang='ts'>

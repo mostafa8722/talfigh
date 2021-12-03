@@ -168,7 +168,7 @@
       <v-col cols="12" lg="9" md="9"></v-col>
       <v-col cols="12" lg="3" md="3"
         ><v-btn class="px-10 rounded-xl" color="primary"
-          >آپلود عکس بزرگ بالا</v-btn
+          >ذخیره محتویات</v-btn
         ></v-col
       >
     </v-row>

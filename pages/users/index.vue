@@ -111,36 +111,18 @@
            </span>
         </template>
         <template v-slot:item.date='{ item }'>
-                  <span
-                    style='color: #848484;
-               font-size: 1rem;
-               font-weight: 500;'>
-          عضویت:
-        </span>
           <span
             style='color: #197095; font-size: 1rem; font-weight: 500;'>
              {{ item.date }}
            </span>
         </template>
         <template v-slot:item.mobile='{ item }'>
-                  <span
-                    style='color: #848484;
-               font-size: 1rem;
-               font-weight: 500;'>
-          موبایل:
-        </span>
           <span
             style='color: #197095; font-size: 1rem; font-weight: 500;'>
              {{ item.mobile }}
            </span>
         </template>
         <template v-slot:item.role='{ item }'>
-                  <span
-                    style='color: #848484;
-               font-size: 1rem;
-               font-weight: 500;'>
-          نقش:
-        </span>
           <span
             style='color: #197095; font-size: 1rem; font-weight: 500;'>
              {{ item.type }}
@@ -190,7 +172,7 @@ export default Vue.extend({
           nationalCode: '25616161',
           date: '1370/10/10',
           mobile: '09356665165',
-          type: 'مدیرعامل',
+          type: 'رزروی',
           status: 0,
         },
         {
@@ -199,7 +181,7 @@ export default Vue.extend({
           nationalCode: '25616161',
           date: '1370/10/10',
           mobile: '09356665165',
-          type: 'مدیرعامل',
+          type: 'رزروی',
           status: 1,
         },
         {
@@ -208,7 +190,7 @@ export default Vue.extend({
           nationalCode: '25616161',
           date: '1370/10/10',
           mobile: '09356665165',
-          type: 'مدیرعامل',
+          type: 'رزروی',
           status: 1,
         },
         {
@@ -217,7 +199,7 @@ export default Vue.extend({
           nationalCode: '25616161',
           date: '1370/10/10',
           mobile: '09356665165',
-          type: 'مدیرعامل',
+          type: 'رزروی',
           status: 0,
         },
         {
@@ -226,7 +208,7 @@ export default Vue.extend({
           nationalCode: '25616161',
           date: '1370/10/10',
           mobile: '09356665165',
-          type: 'مدیرعامل',
+          type: 'رزروی',
           status: 1,
         },
       ],
