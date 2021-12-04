@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'UnauthorizedPage',
+  name: 'MaintenancePage',
   layout: 'empty',
   data() {
     return {}

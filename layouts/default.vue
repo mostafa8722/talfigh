@@ -1,14 +1,14 @@
 <template>
-  <v-app class='container__app tlf-main' dark>
-    <Menu :items='items' v-if='!isMobile' />
-    <MenuMobile @heightMenu='setMarginMain' :items='items' v-if='isMobile' />
-    <v-main :style='{marginTop: marginTopMenuMobile + "px"}'>
+  <v-app class="container__app tlf-main" dark>
+    <Menu v-if="!isMobile" :items="items" />
+    <MenuMobile v-if="isMobile" :items="items" @heightMenu="setMarginMain" />
+    <v-main :style="{ marginTop: marginTopMenuMobile + 'px' }">
       <Nuxt />
     </v-main>
   </v-app>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import Vue from 'vue'
 import Menu from '~/components/menu/Menu.vue'
 import MenuMobile from '~/components/menu/Menu-Mobile.vue'
@@ -26,13 +26,13 @@ export default Vue.extend({
           type: 'item',
           icon: '',
           title: 'اضافه کردن محصول',
-          to: '/products',
+          to: '/products'
         },
         {
           type: 'item',
           icon: '',
           title: 'موجودی محصول',
-          to: '/products/inventory',
+          to: '/products/inventory'
         },
         {
           type: 'divider',
@@ -116,41 +116,38 @@ export default Vue.extend({
         }
       ],
       isMobile: false,
-      marginTopMenuMobile: 0,
-    }
-  },
-  methods: {
-    setMarginMain(number: any){
-      this.marginTopMenuMobile = number
+      marginTopMenuMobile: 0
     }
   },
   mounted() {
-    let $ = this
+    const $ = this
 
     window.addEventListener('resize', () => {
       this.isMobile = window.innerWidth < 960
-      if (!this.isMobile){
+      if (!this.isMobile) {
         this.marginTopMenuMobile = 0
       }
     })
 
-    if (!this.isMobile){
+    if (!this.isMobile) {
       this.marginTopMenuMobile = 0
     }
     this.isMobile = window.innerWidth < 960
+  },
+  methods: {
+    setMarginMain(number: any) {
+      this.marginTopMenuMobile = number
+    }
   }
 })
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '~vuetify/src/styles/styles.sass';
 
 .tlf-main {
-  background: url("static/images/background.jpg") 50% 0;
+  background: url('static/images/background.jpg') 50% 0 !important;
 }
-
-
-
 
 //@media #{map-get($display-breakpoints, 'sm-and-down')}{
 //  .tlf-main {
