@@ -37,6 +37,7 @@ const config: NuxtConfig = {
     '~/plugins/vue-smooth-dnd.js',
     "~/plugins/th-components.ts",
     {src: '~plugins/vuelayers.js', ssr: false},
+     '~plugins/vuetify-draggable-treeview.js',
     { src: '~/plugins/TiptapVuetify', mode: 'client' }
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
