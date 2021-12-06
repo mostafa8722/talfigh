@@ -1,5 +1,5 @@
 <template>
-  <TLFContainer>
+  <div class="pa-2 pa-md-4">
     <v-row>
       <v-col cols="12" lg="3" md="3"
         ><v-autocomplete
@@ -66,41 +66,56 @@
         </v-row>
         <v-card>
           <v-card-title class="card-title pa-10">نام منو</v-card-title>
-          <v-card-text>
+          <v-card-text class="pa-2">
             <v-draggable-treeview v-model="treeItems" class="card">
-              <template #prepend="{ item }" class="card">
-                <span>{{ item.name }}</span>
+              <template #label="{ item }" class="card">
+                <div>{{ item.name }}</div>
               </template>
-              <template #label>
+              <template #append>
                 <v-row>
-                  <v-col cols="1"></v-col>
-                  <v-col
-                    align-self="center"
-                    cols="12"
-                    lg="3"
-                    md="3"
-                    sm="3"
-                  ></v-col>
-                  <v-col cols="12" lg="4" md="4" sm="4"
-                    ><v-btn
-                      color="warning"
-                      class="ma-1"
-                      elevation="0"
-                      x-small
-                      fab
-                    >
-                      <v-icon>fas fa-pencil-alt</v-icon> </v-btn
-                    ><v-btn
-                      class="ma-1"
-                      color="error"
-                      elevation="0"
-                      x-small
-                      fab
-                    >
-                      <v-icon>fas fa-trash-alt</v-icon> </v-btn
-                    ><v-btn color="primary" small class="ma-2" icon>
-                      <v-icon>fas fa-plus</v-icon>
-                    </v-btn>
+                  <v-col cols="12" lg="4" md="4" class="pr-4 pr-md-0">
+                    <div class="float-left">
+                      <v-btn
+                        color="warning"
+                        class="ma-1 card-btn"
+                        elevation="0"
+                        x-small
+                        fab
+                      >
+                        <v-icon
+                          :size="
+                            $vuetify.breakpoint.lg || $vuetify.breakpoint.md
+                              ? ''
+                              : 15
+                          "
+                          >fas fa-pencil-alt</v-icon
+                        > </v-btn
+                      ><v-btn
+                        class="ma-1 card-btn"
+                        color="error"
+                        elevation="0"
+                        x-small
+                        fab
+                      >
+                        <v-icon
+                          :size="
+                            $vuetify.breakpoint.lg || $vuetify.breakpoint.md
+                              ? ''
+                              : 15
+                          "
+                          >fas fa-trash-alt</v-icon
+                        > </v-btn
+                      ><v-btn color="primary" small class="ma-2 card-btn" icon>
+                        <v-icon
+                          :size="
+                            $vuetify.breakpoint.lg || $vuetify.breakpoint.md
+                              ? ''
+                              : 15
+                          "
+                          >fas fa-plus</v-icon
+                        >
+                      </v-btn>
+                    </div>
                   </v-col>
                 </v-row>
               </template>
@@ -117,15 +132,12 @@
         </v-card></v-col
       >
     </v-row>
-  </TLFContainer>
+  </div>
 </template>
 
 <script>
-import TLFContainer from '~/components/utilities/TLF-Container.vue'
-
 export default {
   name: 'Cards',
-  components: { TLFContainer },
   data() {
     return {
       items: [
@@ -244,6 +256,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: 800px) {
+  .card-btn {
+    max-width: 25px;
+    max-height: 25px;
+  }
+}
 .card-title {
   color: #747474;
   font-size: 1.6rem;
