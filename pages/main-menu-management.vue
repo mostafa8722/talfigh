@@ -106,6 +106,14 @@
               </template>
             </v-draggable-treeview>
           </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <div class="ml-4 mb-5">
+              <v-btn color="primary" class="px-10" rounded>
+                ذخیره اطلاعات رسته
+              </v-btn>
+            </div>
+          </v-card-actions>
         </v-card></v-col
       >
     </v-row>
