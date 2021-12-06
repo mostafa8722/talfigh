@@ -47,6 +47,23 @@
         </v-expansion-panels>
       </v-col>
       <v-col cols="12" lg="9" md="9">
+        <span class="white--text" style="font-size: 0.9rem"
+          >منوی مورد نظر را انتخاب کنید</span
+        >
+        <v-row>
+          <v-col cols="12" lg="5" md="5">
+            <v-autocomplete
+              label="نام منو"
+              :items="items"
+              item-text="name"
+              background-color="#fff"
+              class="my-4"
+              hide-details
+              outlined
+            >
+            </v-autocomplete>
+          </v-col>
+        </v-row>
         <v-card>
           <v-card-title class="card-title pa-10">نام منو</v-card-title>
           <v-card-text>
