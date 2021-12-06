@@ -1,7 +1,11 @@
 <template>
   <ClientOnly>
     <!-- Use the component in the right place of the template -->
-    <tiptap-vuetify :card-props="{ height: 200 }" v-model="content" :extensions="extensions"/>
+    <tiptap-vuetify
+      @input='changeContent'
+      :card-props="{ height: 200 }"
+      v-model="content"
+      :extensions="extensions"/>
 
     <template #placeholder>
       Loading...
@@ -34,6 +38,11 @@ export default {
   name: 'Editor',
   // specify TiptapVuetify component in "components"
   components: { TiptapVuetify },
+  props: {
+    value: {
+      required: false
+    }
+  },
   data: () => ({
     // declare extensions you want to use
     extensions: [
@@ -62,10 +71,20 @@ export default {
       HardBreak
     ],
     // starting editor's content
-    content:
-    `
-      <h1 align='center'>Hello TLF</h1>
-    `
-  })
+    content: ''
+  }),
+  methods: {
+    changeContent(){
+      this.$emit('content', this.content)
+    }
+  },
+  watch: {
+    value(val){
+      this.content = val
+    }
+  },
+  mounted() {
+    this.content = this.$props.value
+  }
 }
 </script>

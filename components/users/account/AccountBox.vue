@@ -14,17 +14,18 @@
        <div class='d-flex flex-wrap form-inputs'
             style='column-gap: 1.9rem; row-gap: 1rem; width: 45%'>
          <div class='d-flex flex-column align-start justify-start' style='row-gap: 0.5rem'>
-           <label for='name__input'>نام</label>
-           <input style='width: 200px' type='text' placeholder='الیاس' id='name__input'>
+           <label>نام</label>
+           <v-text-field type='text' :rules='[rules.required]' hide-details outlined v-model='firstname'
+                         style='width: 200px' placeholder='الیاس' class='name__input'></v-text-field>
          </div>
          <div class='d-flex flex-column align-start justify-start' style='row-gap: 0.5rem'>
-           <label for='family__input'>نام خانوادگی</label>
-           <input style='width: 200px' type='text' placeholder='ملکپور' id='family__input'>
+           <label>نام خانوادگی</label>
+           <v-text-field type='text' hide-details outlined :rules='[rules.required]' v-model='lastname' style='width: 200px' placeholder='ملکپور' class='family__input'></v-text-field>
          </div>
          <div class='d-flex flex-column align-start justify-start' style='row-gap: 0.5rem'>
-           <label for='sheba__input'>شماره شبا</label>
+           <label>شماره شبا</label>
            <div style='' class='d-flex align-center'>
-             <input style='width: 395px;' type='text' placeholder='شماره شبا' id='sheba__input'>
+             <v-text-field v-model='sheba_number' type='text' class='sheba__input' hide-details outlined style='width: 395px;' placeholder='شماره شبا' id='sheba__input'></v-text-field>
              <span
                style='font-weight: 800;
                display: flex;
@@ -33,7 +34,6 @@
                padding-right: 0.5rem;
                color: #747474;
                font-size: 0.9rem;
-               border-radius: 10px 0 0 10px;
                border: 2px solid #E2E2E2;
                border-right: none;
                transform: translateX(10px);
@@ -43,31 +43,82 @@
            </div>
          </div>
          <div class='d-flex flex-column align-start justify-start' style='row-gap: 0.5rem'>
-           <label for='account__input'>شماره حساب</label>
-           <input style='width: 435px;' type='text' placeholder='شماره حساب' id='account__input'>
+           <label>شماره حساب</label>
+           <v-text-field hide-details outlined :rules='[rules.required]' v-model='account_number' type='text' style='width: 435px;' placeholder='شماره حساب' class='account__input'></v-text-field>
          </div>
        </div>
        <AccountCard class='d-none d-lg-flex' />
     </div>
     <v-btn
+      @click='updateAccount'
       style='border-width: 2px'
       width='150'
       height='35'
       class='mt-15 d-none d-sm-inline-block align-self-end'
       rounded
       outlined
+      :disabled='!firstname || !lastname || !account_number'
       color='#00B728'>
       <span class='text-btn'>ذخیره اطلاعات</span>
     </v-btn>
   </div>
 </template>
 
-<script>
-import AccountCard from './AccountCard'
-export default {
+<script lang='ts'>
+import Vue from 'vue'
+
+import AccountCard from '~/components/users/account/AccountCard.vue'
+
+export default Vue.extend({
   name: 'AccountBox',
-  components: { AccountCard }
-}
+  components: { AccountCard },
+  computed: {
+    firstname: {
+      get(){
+        return (this as any).$store.getters['users/account/getFirstName']
+      },
+      set(value){
+        (this as any).$store.commit('users/account/setFirstName', value)
+      }
+    },
+    lastname: {
+      get(){
+        return (this as any).$store.getters['users/account/getLastName']
+      },
+      set(value){
+        (this as any).$store.commit('users/account/setLastName', value)
+      }
+    },
+    account_number: {
+      get(){
+        return (this as any).$store.getters['users/account/getAccountNumber']
+      },
+      set(value){
+        (this as any).$store.commit('users/account/setAccountNumber', value)
+      }
+    },
+    sheba_number: {
+      get(){
+        return (this as any).$store.getters['users/account/getShebaNumber']
+      },
+      set(value){
+        (this as any).$store.commit('users/account/setShebaNumber', value)
+      }
+    },
+  },
+  data(){
+    return{
+      rules: {
+        required: (value: string) => !!value || 'این فیلد الزامی می باشد'
+      }
+    }
+  },
+  methods: {
+    updateAccount(){
+      this.$store.dispatch('users/account/updateUserAccount')
+    }
+  }
+})
 </script>
 
 <style scoped lang='scss'>
@@ -101,18 +152,18 @@ label{
 }
 
 @media screen and (max-width: 600px){
-  #name__input, #family__input, #account__input{
+  .name__input, .family__input, .account__input{
     width: 300px !important;
   }
-  #sheba__input{
+  .sheba__input{
     width: 263px !important;
   }
 }
 @media screen and (max-width: 1400px){
-  #name__input, #family__input, #account__input{
+  .name__input, .family__input, .account__input{
     width: 100% !important;
   }
-  #sheba__input{
+  .sheba__input{
     width: 100% !important;
   }
 
@@ -122,5 +173,4 @@ label{
     }
   }
 }
-
 </style>
