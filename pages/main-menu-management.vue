@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-2 pa-md-4">
+  <div class="pa-2 pa-md-10">
     <v-row>
       <v-col cols="12" lg="3" md="3"
         ><v-autocomplete
