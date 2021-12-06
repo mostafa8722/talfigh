@@ -189,7 +189,7 @@ export default {
   data() {
     return {
       selectedCategory: {},
-      editCategoryDialog: true,
+      editCategoryDialog: false,
       categories: [
         {
           id: 1,
