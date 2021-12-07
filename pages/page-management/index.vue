@@ -134,7 +134,7 @@
         </template>
       </v-data-table>
     </div>
-    <th-modal v-model='modal.show'>
+    <th-modal @input='updateModal' v-model='modal.show'>
       <template #title>
         {{ modal.title }}
       </template>
@@ -244,9 +244,17 @@ export default Vue.extend({
         (this as any).modal = {
           show: true,
           title: 'حذف صفحه',
-          body: 'مایل به ادامه این عملیات هستید؟',
+          body: 'آیا مطمئن از حذف این صفحه هستید؟',
           action: ''
         }
+      }
+    },
+    updateModal(value: any){
+      (this as any).modal = {
+        show: value,
+        title: '',
+        body: '',
+        action: ''
       }
     }
   },

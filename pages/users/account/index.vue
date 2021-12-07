@@ -24,7 +24,7 @@
         <span class='text-btn'>ذخیره اطلاعات</span>
       </v-btn>
     </div>
-    <th-modal v-model='modal.show'>
+    <th-modal @input='updateModal' v-model='modal.show'>
       <template #title>
         {{ modal.title }}
       </template>
@@ -64,6 +64,14 @@ export default Vue.extend({
         action: ''
       })
     },
+    updateModal(value: any){
+      (this as any).modal = {
+        show: value,
+        title: '',
+        body: '',
+        action: ''
+      }
+    }
   },
   computed: {
     modal: {
@@ -71,6 +79,7 @@ export default Vue.extend({
         return (this as any).$store.getters['users/account/getModal']
       },
       set(value) {
+        (this as any).$store.commit('users/account/SET_MODAL', value)
       }
     },
     firstname: {

@@ -46,7 +46,7 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <th-modal v-model='modal.show'>
+    <th-modal @input='updateModal' v-model='modal.show'>
       <template #title>
         {{ modal.title }}
       </template>
@@ -99,6 +99,14 @@ export default Vue.extend({
         body: '',
         action: ''
       })
+    },
+    updateModal(value: any){
+      (this as any).modal = {
+        show: value,
+        title: '',
+        body: '',
+        action: ''
+      }
     }
   },
   computed: {
@@ -129,6 +137,9 @@ export default Vue.extend({
     modal: {
       get(){
         return (this as any).$store.getters['pages/getModal']
+      },
+      set(value){
+        (this as any).$store.commit('pages/SET_MODAL', value)
       }
     }
   },

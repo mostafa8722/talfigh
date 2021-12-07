@@ -3,6 +3,19 @@
     <agree-card v-if='!mobile'></agree-card>
     <agree-card-mobile v-if='mobile'></agree-card-mobile>
     <contract-text></contract-text>
+    <th-modal :value='modal.show' @input='updateModal'>
+      <template #title>
+        {{ modal.title }}
+      </template>
+      <template #body>
+        {{ modal.body }}
+      </template>
+      <template #actions>
+        <v-btn @click='confirmModal' :color='modal.action'>
+          باشه
+        </v-btn>
+      </template>
+    </th-modal>
   </TLFContainer>
 </template>
 
@@ -23,6 +36,32 @@ export default Vue.extend({
   computed:{
     mobile(){
       return this.$vuetify.breakpoint.mobile
+    },
+    modal: {
+      get() {
+        return (this as any).$store.getters['contract/getModal']
+      },
+      set(value) {
+        (this as any).$store.commit('contract/SET_MODAL', value)
+      }
+    },
+  },
+  methods: {
+    confirmModal(){
+      (this as any).modal = {
+        show: false,
+        title: '',
+        body: '',
+        action: ''
+      }
+    },
+    updateModal(value: any){
+      (this as any).modal = {
+          show: value,
+          title: '',
+          body: '',
+          action: ''
+      }
     }
   }
 })

@@ -5,11 +5,11 @@
     <div class='d-flex flex-column'>
       <v-checkbox
         class="black-label"
-        v-model="agreed"
+        v-model="confirm"
         label='اینجانب تمامی قوانین رو مطالعه کرده و آن را قبول دارم'
       >
       </v-checkbox>
-      <v-btn class='mr-auto mt-10 mb-4' width='150px' height='38px' color='primary' rounded depressed>
+      <v-btn @click='confirmContract' class='mr-auto mt-10 mb-4' width='150px' height='38px' color='primary' rounded depressed>
         ذخیره تغییرات
       </v-btn>
       <div   class='my-auto mr-8  ' id='date'>تاریخ تایید شما : 54/151/5</div>
@@ -23,9 +23,23 @@ export default Vue.extend({
   name: 'AgreeCardMobile',
   data(){
     return{
-      agreed:true
     }
   },
+  methods: {
+    confirmContract(){
+      (this as any).$store.dispatch('contract/confirmContract')
+    }
+  },
+  computed: {
+    confirm: {
+      get(){
+        return (this as any).$store.getters['contract/getContract']
+      },
+      set(value){
+        (this as any).$store.commit('contract/SetContract', value)
+      }
+    }
+  }
 })
 </script>
 <style lang='scss' scoped>
