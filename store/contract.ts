@@ -49,7 +49,7 @@ export const mutations: MutationTree<ContractState> = {
 
 export const actions: ActionTree<ContractState, any> = {
   async confirmContract({ commit, state }) {
-    const res = await this.$repositories.contract().confirmContract(state.contract)
+    const res = await (this as any).$repositories.contract().confirmContract(state.contract)
     commit('SET_MODAL_Res', res)
   },
 }
