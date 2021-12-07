@@ -11,6 +11,7 @@ export default class PageRepository extends Repository {
     })
     return res.data
   }
+
   async updatePage(data: Page, id: number): Promise<Page> {
     const res = await this.axios.patch(`/pages/update/${id}`,data,{
       headers: {
@@ -20,6 +21,7 @@ export default class PageRepository extends Repository {
     })
     return res.data
   }
+
   async deletePage(id: number){
     const res = await this.axios.delete(`/pages/delete/${id}`,{
       headers: {
@@ -29,6 +31,7 @@ export default class PageRepository extends Repository {
     })
     return res.data
   }
+
   async getPages(): Promise<Page[]> {
     const res = await this.axios.get('/pages',{
       headers: {
@@ -38,6 +41,7 @@ export default class PageRepository extends Repository {
     })
     return res.data
   }
+
   async getPage(id: number): Promise<Page> {
     const res = await this.axios.get(`/pages/${id}`,{
       headers: {
