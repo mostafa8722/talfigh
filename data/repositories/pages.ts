@@ -1,7 +1,7 @@
 import Repository from '~/data/repositories/repository'
 import { Page } from '~/data/models/page'
 
-export default class PageRepository extends Repository {
+export default class Pages extends Repository {
   async sendPage(data: Page): Promise<Page> {
     const res = await this.axios.post('/pages/store',data,{
       headers: {

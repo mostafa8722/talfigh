@@ -1,8 +1,9 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import PostRepository from "~/data/repositories/postRepository";
-import PageRepository from '~/data/repositories/pageRepository'
-import AccountRepository from '~/data/repositories/users/accountRepository'
-import ContractRepository from '~/data/repositories/contractRepository'
+import Pages from '~/data/repositories/pages'
+import Account from '~/data/repositories/users/account'
+import Users from '~/data/repositories/users/users'
+import Contract from '~/data/repositories/contract'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -12,8 +13,13 @@ export default class Repositories {
   }
 
   posts = () => new PostRepository(this.axios)
-  pages = () => new PageRepository(this.axios)
-  account = () => new AccountRepository(this.axios)
-  contract = () => new ContractRepository(this.axios)
+
+  pages = () => new Pages(this.axios)
+
+  account = () => new Account(this.axios)
+
+  contract = () => new Contract(this.axios)
+
+  users = () => new Users(this.axios)
 
 }

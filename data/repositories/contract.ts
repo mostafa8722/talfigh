@@ -1,7 +1,7 @@
 import Repository  from '~/data/repositories/repository'
 import { ContractConfirm } from '~/data/models/contract'
 
-export default class ContractRepository extends Repository {
+export default class Contract extends Repository {
   async confirmContract(data: boolean): Promise<ContractConfirm> {
     const res = await this.axios.post('/profile/confirm-plans', {
       confirm: data

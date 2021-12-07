@@ -1,7 +1,10 @@
 <template>
   <div class='container__card'>
     <span class='bank__card' style='font-weight: bold; font-size: 1.6rem; color: white'>کارت بانک ملت</span>
-    <span class='user__card' style='font-weight: bold; font-size: 1.1rem; color: white; margin-top: 2rem'>کارت به نام: {{firstname}}</span>
+    <span class='user__card' style='font-weight: bold; font-size: 1.1rem; color: white; margin-top: 2rem'>
+      کارت به نام:
+      {{firstname}} {{ lastname }}
+    </span>
     <span class='sheba__card' style='font-weight: 500; font-size: 1.5rem; color: white; margin-top: 1.43rem'>
       IR {{ sheba_number }}
     </span>

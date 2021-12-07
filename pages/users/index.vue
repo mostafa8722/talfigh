@@ -44,19 +44,20 @@
         </div>
       </v-col>
     </TLFContainer>
-<!-- d-none d-md-block-->
+    <!-- d-none d-md-block-->
     <div class='my-10'>
       <v-data-table class='px-5 py-5'
-                    hide-default-footer :items='items'
+                    hide-default-footer :items='users'
                     hide-default-header :headers='headers'>
         <template #top='{ pagination, options, updateOptions }'>
           <v-row class='pa-md-0 pa-4'>
             <v-col class='pt-1' cols='12' lg='2' md='2'
             >
               <v-text-field
+                v-model.trim='search.firstName'
                 height='40'
                 background-color='#FBFBFB'
-                placeholder='جستجو مدیر...'
+                placeholder='جستجو نام...'
                 rounded
               ></v-text-field
               >
@@ -64,16 +65,28 @@
             <v-col class='pt-1' cols='12' lg='2' md='2'
             >
               <v-text-field
+                v-model.trim='search.lastName'
                 height='40'
                 background-color='#FBFBFB'
-                placeholder='جستجو با شماره کد ملی...'
+                placeholder='جستجو نام خانوادگی...'
+                rounded
+              ></v-text-field
+              >
+            </v-col>
+            <v-col class='pt-1' cols='12' lg='2' md='2'
+            >
+              <v-text-field
+                v-model.trim='search.nationalCode'
+                height='40'
+                background-color='#FBFBFB'
+                placeholder='جستجو با کد ملی...'
                 rounded
               ></v-text-field
               >
             </v-col>
             <v-col cols='12' lg='1' md='1'
             >
-              <v-btn class='white--text px-8 mt-2' rounded color='#7A7A7A'
+              <v-btn @click='searchBtn' class='white--text px-8 mt-2' rounded color='#7A7A7A'
               >جستجو
               </v-btn
               >
@@ -95,21 +108,21 @@
            <span
              class=''
              style='color: #197095; font-size: 1rem; font-weight: 500;'>
-             {{ item.fullName }}
+             {{ item.firstname }} {{ item.lastname }}
            </span>
         </template>
-        <template v-slot:item.nationalCode='{ item }'>
-                            <span
-                              style='color: #848484;
-               font-size: 1rem;
-               font-weight: 500;'>
-          به شماره ملی:
-        </span>
-          <span
-            style='color: #197095; font-size: 1rem; font-weight: 500;'>
-             {{ item.nationalCode }}
-           </span>
-        </template>
+        <!--        <template v-slot:item.nationalCode='{ item }'>-->
+        <!--                            <span-->
+        <!--                              style='color: #848484;-->
+        <!--               font-size: 1rem;-->
+        <!--               font-weight: 500;'>-->
+        <!--          به شماره ملی:-->
+        <!--        </span>-->
+        <!--          <span-->
+        <!--            style='color: #197095; font-size: 1rem; font-weight: 500;'>-->
+        <!--             {{ item.national_code }}-->
+        <!--           </span>-->
+        <!--        </template>-->
         <template v-slot:item.date='{ item }'>
           <span
             style='color: #197095; font-size: 1rem; font-weight: 500;'>
@@ -119,13 +132,13 @@
         <template v-slot:item.mobile='{ item }'>
           <span
             style='color: #197095; font-size: 1rem; font-weight: 500;'>
-             {{ item.mobile }}
+             {{ item.mobile1 }}
            </span>
         </template>
         <template v-slot:item.role='{ item }'>
           <span
             style='color: #197095; font-size: 1rem; font-weight: 500;'>
-             {{ item.type }}
+             {{ item.account_type }}
            </span>
         </template>
         <template v-slot:item.actions='{item}'>
@@ -157,6 +170,7 @@
 
 <script lang='ts'>
 import Vue from 'vue'
+import _ from 'lodash'
 import UsersTableBox from '~/components/users/UsersTableBox.vue'
 import TLFContainer from '~/components/utilities/TLF-Container.vue'
 
@@ -165,64 +179,17 @@ export default Vue.extend({
   components: { TLFContainer, UsersTableBox },
   data() {
     return {
-      items: [
-        {
-          id:1,
-          fullName: 'الیاس ملکپور',
-          nationalCode: '25616161',
-          date: '1370/10/10',
-          mobile: '09356665165',
-          type: 'رزروی',
-          status: 0,
-        },
-        {
-          id:1,
-          fullName: 'الیاس ملکپور',
-          nationalCode: '25616161',
-          date: '1370/10/10',
-          mobile: '09356665165',
-          type: 'رزروی',
-          status: 1,
-        },
-        {
-          id:1,
-          fullName: 'الیاس ملکپور',
-          nationalCode: '25616161',
-          date: '1370/10/10',
-          mobile: '09356665165',
-          type: 'رزروی',
-          status: 1,
-        },
-        {
-          id:1,
-          fullName: 'الیاس ملکپور',
-          nationalCode: '25616161',
-          date: '1370/10/10',
-          mobile: '09356665165',
-          type: 'رزروی',
-          status: 0,
-        },
-        {
-          id:1,
-          fullName: 'الیاس ملکپور',
-          nationalCode: '25616161',
-          date: '1370/10/10',
-          mobile: '09356665165',
-          type: 'رزروی',
-          status: 1,
-        },
-      ],
       headers: [
         {
           text: '',
           value: 'fullName',
           width: '100px'
         },
-        {
-          text: '',
-          value: 'nationalCode',
-          width: '100px'
-        },
+        // {
+        //   text: '',
+        //   value: 'nationalCode',
+        //   width: '100px'
+        // },
         {
           text: '',
           value: 'date',
@@ -242,13 +209,71 @@ export default Vue.extend({
           text: '',
           value: 'actions',
           width: '200'
-        },
+        }
       ],
+      firstNameSearch: '',
+      lastNameSearch: '',
+      nationalCodeSearch: '',
+      search: {
+        firstName: '',
+        lastName: '',
+        nationalCode: ''
+      }
     }
   },
   head: {
-    title: "لیست کاربرها"
+    title: 'لیست کاربرها'
   },
+  computed: {
+    users: {
+      get() {
+        return (this as any).$store.getters['users/users/getUsers']
+      },
+      set(value) {
+        (this as any).$store.commit('users/users/SetUsersAfterSearch', value)
+      }
+    },
+    usersWithName: {
+      get() {
+        return (this as any).$store.getters['users/users/getUsersWithNameSearch']
+      }
+    },
+    usersWithFamily: {
+      get() {
+        return (this as any).$store.getters['users/users/getUsersWithFamilySearch']
+      }
+    },
+    usersWithCode: {
+      get() {
+        return (this as any).$store.getters['users/users/getUsersWithCodeSearch']
+      }
+    }
+  },
+  methods: {
+    searchBtn() {
+
+
+      if (
+        !(this as any).search.firstName &&
+        !(this as any).search.lastName &&
+        !(this as any).search.nationalCode
+      ) {
+        (this as any).$store.dispatch('users/users/getUsers')
+      } else {
+        (this as any).$store.dispatch('users/users/searchUsers', (this as any).search)
+          .then(() => {
+            (this as any).users = _.union(
+              (this as any).usersWithName,
+              (this as any).usersWithFamily,
+              (this as any).usersWithCode,
+            )
+          })
+      }
+    }
+  },
+  created() {
+    (this as any).$store.dispatch('users/users/getUsers')
+  }
 })
 </script>
 
@@ -279,8 +304,8 @@ export default Vue.extend({
   border: none !important;
 }
 
-.container__head{
-  @media screen and (max-width: 600px){
+.container__head {
+  @media screen and (max-width: 600px) {
     //width: 1200px;
   }
 }

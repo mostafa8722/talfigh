@@ -84,4 +84,8 @@ export const actions: ActionTree<UserAccountState, any> = {
     })
     commit('SET_MODAL_Res', res)
   },
+  async getUserAccount({ commit }) {
+    const res = await this.$repositories.account().getUserAccount()
+    commit('setInfoAccount', res)
+  },
 }

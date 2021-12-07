@@ -114,6 +114,9 @@ export default Vue.extend({
         (this as any).$store.commit('users/account/setShebaNumber', value)
       }
     },
+  },
+  created() {
+    (this as any).$store.dispatch('users/account/getUserAccount')
   }
 })
 </script>

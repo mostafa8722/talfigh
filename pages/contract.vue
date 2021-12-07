@@ -7,7 +7,10 @@ import Vue from 'vue'
 import ContractBetween from '~/components/policy/ContractBetween.vue'
 export default Vue.extend({
   name: 'contract',
-  components: { ContractBetween }
+  components: { ContractBetween },
+  head: {
+    title: "قرارداد"
+  },
 })
 </script>
 

@@ -25,21 +25,21 @@
          <div class='d-flex flex-column align-start justify-start' style='row-gap: 0.5rem'>
            <label>شماره شبا</label>
            <div style='' class='d-flex align-center'>
-             <v-text-field v-model='sheba_number' type='text' class='sheba__input' hide-details outlined style='width: 395px;' placeholder='شماره شبا' id='sheba__input'></v-text-field>
-             <span
-               style='font-weight: 800;
-               display: flex;
-               align-items: center;
-               justify-content: center;
-               padding-right: 0.5rem;
-               color: #747474;
-               font-size: 0.9rem;
-               border: 2px solid #E2E2E2;
-               border-right: none;
-               transform: translateX(10px);
-               height: 100%;
-               width: 50px;
-               '>IR</span>
+             <v-text-field suffix="IR" v-model='sheba_number' type='text' class='sheba__input' hide-details outlined style='width: 435px' placeholder='شماره شبا' id='sheba__input'></v-text-field>
+<!--             <span-->
+<!--               style='font-weight: 800;-->
+<!--               display: flex;-->
+<!--               align-items: center;-->
+<!--               justify-content: center;-->
+<!--               padding-right: 0.5rem;-->
+<!--               color: #747474;-->
+<!--               font-size: 0.9rem;-->
+<!--               border: 2px solid #E2E2E2;-->
+<!--               border-right: none;-->
+<!--               transform: translateX(10px);-->
+<!--               height: 100%;-->
+<!--               width: 50px;-->
+<!--               '>IR</span>-->
            </div>
          </div>
          <div class='d-flex flex-column align-start justify-start' style='row-gap: 0.5rem'>
@@ -152,18 +152,16 @@ label{
 }
 
 @media screen and (max-width: 600px){
-  .name__input, .family__input, .account__input{
-    width: 300px !important;
+  .name__input, .family__input, .account__input, .sheba__input{
+    width: 100% !important;
   }
-  .sheba__input{
-    width: 263px !important;
+
+  .form-inputs{
+      width: 100% !important;
   }
 }
 @media screen and (max-width: 1400px){
-  .name__input, .family__input, .account__input{
-    width: 100% !important;
-  }
-  .sheba__input{
+  .name__input, .family__input, .account__input, .sheba__input{
     width: 100% !important;
   }
 
