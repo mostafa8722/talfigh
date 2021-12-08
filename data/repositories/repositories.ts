@@ -4,6 +4,7 @@ import Pages from '~/data/repositories/pages'
 import Account from '~/data/repositories/users/account'
 import Users from '~/data/repositories/users/users'
 import Contract from '~/data/repositories/contract'
+import Profile from '~/data/repositories/users/profile'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -21,5 +22,7 @@ export default class Repositories {
   contract = () => new Contract(this.axios)
 
   users = () => new Users(this.axios)
+
+  profile = () => new Profile(this.axios)
 
 }

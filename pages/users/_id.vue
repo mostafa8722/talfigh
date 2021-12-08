@@ -6,17 +6,19 @@
     <v-card class="rounded-xl mt-6 mt-md-12 pa-6 pa-md-12 pb-md-16">
       <v-row>
         <v-col cols="12" lg="3" md="6">
-          <div v-if='isLegal' class="d-flex flex-column">
+          <div v-if='user.account_type' class="d-flex flex-column">
             <div class="mb-2 mr-2">نام</div>
             <v-text-field
               class="rounded-lg"
               placeholder="نام"
+              v-model='user.firstname'
               outlined
             ></v-text-field>
             <div class="mb-2 mr-2">ایمیل</div>
             <v-text-field
               class="rounded-lg"
               placeholder="ایمیل"
+              v-model='user.email'
               outlined
             ></v-text-field>
 
@@ -24,6 +26,7 @@
             <v-text-field
               class="rounded-lg"
               placeholder="نام نمایشی"
+              v-model='user.display_name'
               outlined
             ></v-text-field>
 
@@ -51,6 +54,7 @@
           <div v-else class="d-flex flex-column">
             <div class="mb-2 mr-2">نام</div>
             <v-text-field
+              v-model='user.firstname'
               class="rounded-lg"
               placeholder="نام"
               outlined
@@ -58,12 +62,14 @@
             <div class="mb-2 mr-2">نام کاربری</div>
             <v-text-field
               class="rounded-lg"
+              v-model='user.username'
               placeholder="نام کاربری"
               outlined
             ></v-text-field>
 
             <div class="mb-2 mr-2">موبایل اول</div>
             <v-text-field
+              v-model='user.mobile1'
               class="rounded-lg"
               placeholder="موبایل اول"
               outlined
@@ -71,6 +77,7 @@
 
             <div class="mb-2 mr-2">موبایل دوم</div>
             <v-text-field
+              v-model='user.mobile2'
               class="rounded-lg"
               placeholder="موبایل دوم"
               outlined
@@ -92,17 +99,19 @@
           </div>
         </v-col>
         <v-col cols="12" lg="3" md="6">
-          <div v-if='isLegal' class="d-flex flex-column">
+          <div v-if='user.account_type' class="d-flex flex-column">
           <div class="mb-2 mr-2">نام خانوادگی</div>
           <v-text-field
             class="rounded-lg"
             placeholder="نام خانوادگی"
+            v-model='user.lastname'
             outlined
           ></v-text-field>
           <div class="mb-2 mr-2">نام کاربری</div>
           <v-text-field
             class="rounded-lg"
             placeholder="نام کاربری"
+            v-model='user.username'
             outlined
           ></v-text-field>
 
@@ -138,12 +147,14 @@
           <div class="mb-2 mr-2">نام خانوادگی</div>
           <v-text-field
             class="rounded-lg"
+            v-model='user.lastname'
             placeholder="نام خانوادگی"
             outlined
           ></v-text-field>
           <div class="mb-2 mr-2">نام نمایشی</div>
           <v-text-field
             class="rounded-lg"
+            v-model='user.display_name'
             placeholder="نام نمایشی"
             outlined
           ></v-text-field>
@@ -152,6 +163,7 @@
           <v-text-field
             class="rounded-lg"
             placeholder="ایمیل"
+            v-model='user.email'
             outlined
           ></v-text-field>
 
@@ -178,7 +190,7 @@
         </div>
         </v-col>
         <v-col cols="12" lg="4" md="6">
-          <v-radio-group v-model="isLegal">
+          <v-radio-group v-model="user.account_type">
             <v-radio
               :value="false"
               label="ادامه ثبت نام به عنوان شخص حقیقی"
@@ -189,7 +201,7 @@
               label="ادامه ثبت نام به عنوان شخص حقوقی"
             ></v-radio>
           </v-radio-group>
-          <div v-if='isLegal' class='mt-10'>
+          <div v-if='user.account_type' class='mt-10'>
             <div class="mb-2 mr-2">شماره موبایل</div>
             <v-text-field
               class="rounded-lg"
@@ -246,7 +258,7 @@
         </v-col>
       </v-row>
       <div class="float-md-left d-flex justify-center">
-        <v-btn class="px-10" rounded outlined color="success"
+        <v-btn @click='updateUser' class="px-10" rounded outlined color="success"
           >ذخیره اطلاعات</v-btn
         >
       </div>
@@ -263,7 +275,6 @@ export default Vue.extend({
   components: { TLFContainer },
   data() {
     return {
-      isLegal: false,
       mapOptions: {
         zoom: 16,
         maxZoom: 18,
@@ -280,9 +291,22 @@ export default Vue.extend({
   },
   methods: {
     setSelectedPosition(event: any) {
-      this.mapOptions.selectedLocation = event.coordinate
+      (this as any).mapOptions.selectedLocation = event.coordinate
     },
+    updateUser(){
+
+    }
   },
+  computed: {
+    user: {
+      get(){
+        return (this as any).$store.getters['users/profile/getUser']
+      },
+    }
+  },
+  created() {
+    (this as any).$store.dispatch('users/profile/getUser', this.$route.params.id)
+  }
 })
 </script>
 
