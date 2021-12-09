@@ -6,19 +6,19 @@
     <v-card class="rounded-xl mt-6 mt-md-12 pa-6 pa-md-12 pb-md-16">
       <v-row>
         <v-col cols="12" lg="3" md="6">
-          <div v-if='user.account_type' class="d-flex flex-column">
+          <div v-if='account_type' class="d-flex flex-column">
             <div class="mb-2 mr-2">نام</div>
             <v-text-field
               class="rounded-lg"
               placeholder="نام"
-              v-model='user.firstname'
+              v-model='firstname'
               outlined
             ></v-text-field>
             <div class="mb-2 mr-2">ایمیل</div>
             <v-text-field
               class="rounded-lg"
               placeholder="ایمیل"
-              v-model='user.email'
+              v-model='email'
               outlined
             ></v-text-field>
 
@@ -26,7 +26,7 @@
             <v-text-field
               class="rounded-lg"
               placeholder="نام نمایشی"
-              v-model='user.display_name'
+              v-model='display_name'
               outlined
             ></v-text-field>
 
@@ -34,6 +34,7 @@
             <v-text-field
               class="rounded-lg"
               placeholder="کیء اقتصادی"
+              v-model='economic_code'
               outlined
             ></v-text-field>
 
@@ -41,6 +42,7 @@
             <v-text-field
               class="rounded-lg"
               placeholder="شناسه ثبت"
+              v-model='registration_id'
               outlined
             ></v-text-field>
 
@@ -54,7 +56,7 @@
           <div v-else class="d-flex flex-column">
             <div class="mb-2 mr-2">نام</div>
             <v-text-field
-              v-model='user.firstname'
+              v-model='firstname'
               class="rounded-lg"
               placeholder="نام"
               outlined
@@ -62,14 +64,14 @@
             <div class="mb-2 mr-2">نام کاربری</div>
             <v-text-field
               class="rounded-lg"
-              v-model='user.username'
+              v-model='username'
               placeholder="نام کاربری"
               outlined
             ></v-text-field>
 
             <div class="mb-2 mr-2">موبایل اول</div>
             <v-text-field
-              v-model='user.mobile1'
+              v-model='mobile1'
               class="rounded-lg"
               placeholder="موبایل اول"
               outlined
@@ -77,7 +79,7 @@
 
             <div class="mb-2 mr-2">موبایل دوم</div>
             <v-text-field
-              v-model='user.mobile2'
+              v-model='mobile2'
               class="rounded-lg"
               placeholder="موبایل دوم"
               outlined
@@ -94,24 +96,25 @@
             <v-text-field
               class="rounded-lg"
               placeholder="تاریخ تولد"
+              v-model='birthdate'
               outlined
             ></v-text-field>
           </div>
         </v-col>
         <v-col cols="12" lg="3" md="6">
-          <div v-if='user.account_type' class="d-flex flex-column">
+          <div v-if='account_type' class="d-flex flex-column">
           <div class="mb-2 mr-2">نام خانوادگی</div>
           <v-text-field
             class="rounded-lg"
             placeholder="نام خانوادگی"
-            v-model='user.lastname'
+            v-model='lastname'
             outlined
           ></v-text-field>
           <div class="mb-2 mr-2">نام کاربری</div>
           <v-text-field
             class="rounded-lg"
             placeholder="نام کاربری"
-            v-model='user.username'
+            v-model='username'
             outlined
           ></v-text-field>
 
@@ -119,12 +122,14 @@
           <v-text-field
             class="rounded-lg"
             placeholder="نام سازمان"
+            v-model='organization'
             outlined
           ></v-text-field>
 
           <div class="mb-2 mr-2">شناسه ملی</div>
           <v-text-field
             class="rounded-lg"
+            v-model='national_id'
             placeholder="شناسه ملی"
             outlined
           ></v-text-field>
@@ -139,6 +144,7 @@
           <div class="mb-2 mr-2">شماره تلفن</div>
           <v-text-field
             class="rounded-lg"
+            v-model='phone'
             placeholder="شماره تلفن"
             outlined
           ></v-text-field>
@@ -147,14 +153,14 @@
           <div class="mb-2 mr-2">نام خانوادگی</div>
           <v-text-field
             class="rounded-lg"
-            v-model='user.lastname'
+            v-model='lastname'
             placeholder="نام خانوادگی"
             outlined
           ></v-text-field>
           <div class="mb-2 mr-2">نام نمایشی</div>
           <v-text-field
             class="rounded-lg"
-            v-model='user.display_name'
+            v-model='display_name'
             placeholder="نام نمایشی"
             outlined
           ></v-text-field>
@@ -163,13 +169,14 @@
           <v-text-field
             class="rounded-lg"
             placeholder="ایمیل"
-            v-model='user.email'
+            v-model='email'
             outlined
           ></v-text-field>
 
           <div class="mb-2 mr-2">کد ملی</div>
           <v-text-field
             class="rounded-lg"
+            v-model='national_code'
             placeholder="کد ملی"
             outlined
           ></v-text-field>
@@ -178,19 +185,21 @@
           <v-text-field
             class="rounded-lg"
             placeholder="نام پدر"
+            v-model='father_name'
             outlined
           ></v-text-field>
 
           <div class="mb-2 mr-2">شماره تلفن ثابت</div>
           <v-text-field
             class="rounded-lg"
+            v-model='phone'
             placeholder="شماره تلفن ثابت"
             outlined
           ></v-text-field>
         </div>
         </v-col>
         <v-col cols="12" lg="4" md="6">
-          <v-radio-group v-model="user.account_type">
+          <v-radio-group v-model="account_type">
             <v-radio
               :value="false"
               label="ادامه ثبت نام به عنوان شخص حقیقی"
@@ -201,10 +210,11 @@
               label="ادامه ثبت نام به عنوان شخص حقوقی"
             ></v-radio>
           </v-radio-group>
-          <div v-if='user.account_type' class='mt-10'>
+          <div v-if='account_type' class='mt-10'>
             <div class="mb-2 mr-2">شماره موبایل</div>
             <v-text-field
               class="rounded-lg"
+              v-model='mobile1'
               placeholder="شماره موبایل"
               outlined
             ></v-text-field>
@@ -298,11 +308,158 @@ export default Vue.extend({
     }
   },
   computed: {
-    user: {
+    email: {
+        get(){
+          return (this as any).$store.getters['users/profile/getEmail']
+        },
+      set(value){
+        (this as any).$store.commit('users/profile/setEmail', value)
+      }
+    },
+    username: {
       get(){
-        return (this as any).$store.getters['users/profile/getUser']
+        return (this as any).$store.getters['users/profile/getUserName']
       },
-    }
+      set(value){
+        (this as any).$store.commit('users/profile/setUserName', value)
+      }
+    },
+    firstname: {
+      get(){
+        return (this as any).$store.getters['users/profile/getFirstName']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setFirstName', value)
+      }
+    },
+    lastname: {
+      get(){
+        return (this as any).$store.getters['users/profile/getLastName']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setLastName', value)
+      }
+    },
+    mobile1: {
+      get(){
+        return (this as any).$store.getters['users/profile/getMobile1']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setMobile1', value)
+      }
+    },
+    mobile2: {
+      get(){
+        return (this as any).$store.getters['users/profile/getMobile2']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setMobile2', value)
+      }
+    },
+    display_name: {
+      get(){
+        return (this as any).$store.getters['users/profile/getDisplayName']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setDisplayName', value)
+      }
+    },
+    account_type: {
+      get(){
+        return (this as any).$store.getters['users/profile/getAccountType']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setAccountType', value)
+      }
+    },
+    confirm_plan: {
+      get(){
+        return (this as any).$store.getters['users/profile/getConfirmPlan']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setConfirmPlan', value)
+      }
+    },
+    confirm_datetime: {
+      get(){
+        return (this as any).$store.getters['users/profile/getConfirmDateTime']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setConfirmDateTime', value)
+      }
+    },
+    national_code: {
+      get(){
+        return (this as any).$store.getters['users/profile/getNationalCode']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setNationalCode', value)
+      }
+    },
+    father_name: {
+      get(){
+        return (this as any).$store.getters['users/profile/getFatherName']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setFatherName', value)
+      }
+    },
+    birthdate: {
+      get(){
+        return (this as any).$store.getters['users/profile/getBirthDate']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setBirthDate', value)
+      }
+    },
+    phone: {
+      get(){
+        return (this as any).$store.getters['users/profile/getPhone']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setPhone', value)
+      }
+    },
+    address_id: {
+      get(){
+        return (this as any).$store.getters['users/profile/getAddressID']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setAddressID', value)
+      }
+    },
+    organization: {
+      get(){
+          return (this as any).$store.getters['users/profile/getOrganization']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setOrganization', value)
+      }
+    },
+    economic_code: {
+      get(){
+        return (this as any).$store.getters['users/profile/getEconomicCode']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setEconomicCode', value)
+      }
+    },
+    national_id: {
+      get(){
+        return (this as any).$store.getters['users/profile/getNationalID']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setNationalID', value)
+      }
+    },
+    registration_id: {
+      get(){
+        return (this as any).$store.getters['users/profile/getRegistrationID']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setRegistrationID', value)
+      }
+    },
   },
   created() {
     (this as any).$store.dispatch('users/profile/getUser', this.$route.params.id)

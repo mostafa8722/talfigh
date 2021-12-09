@@ -11,5 +11,11 @@ export type User = {
   confirm_plan: number,
   confirm_datetime: string,
   created_at: string,
-  updated_at: string
+  updated_at: string,
+  personalParty: [
+    {
+      national_code: string,
+      birthdate: string
+    }
+  ]
 }
