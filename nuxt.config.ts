@@ -38,7 +38,8 @@ const config: NuxtConfig = {
     "~/plugins/th-components.ts",
     {src: '~plugins/vuelayers.js', ssr: false},
      '~plugins/vuetify-draggable-treeview.js',
-    { src: '~/plugins/TiptapVuetify', mode: 'client' }
+    { src: '~/plugins/TiptapVuetify', mode: 'client' },
+    { src: '~/plugins/vue-persian-datepicker', mode: 'client' },
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
