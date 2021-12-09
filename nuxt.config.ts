@@ -17,15 +17,9 @@ const config: NuxtConfig = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
-      },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' },
-      {
-        rel: 'stylesheet',
-        href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css'
-      }
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css' }
     ]
   },
 
@@ -41,10 +35,11 @@ const config: NuxtConfig = {
     '~/plugins/repositories.ts',
     '~/plugins/errors.ts',
     '~/plugins/vue-smooth-dnd.js',
-    '~/plugins/th-components.ts',
-    { src: '~plugins/vuelayers.js', ssr: false },
-    '~plugins/vuetify-draggable-treeview.js',
-    { src: '~/plugins/TiptapVuetify', mode: 'client' }
+    "~/plugins/th-components.ts",
+    {src: '~plugins/vuelayers.js', ssr: false},
+     '~plugins/vuetify-draggable-treeview.js',
+    { src: '~/plugins/TiptapVuetify', mode: 'client' },
+    { src: '~/plugins/vue-persian-datepicker', mode: 'client' },
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -107,9 +102,9 @@ const config: NuxtConfig = {
         }
       }
     },
-    icons: {
-      iconfont: 'fa' // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
-    }
+        icons: {
+          iconfont: 'fa', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+        },
   },
 
   styleResources: {

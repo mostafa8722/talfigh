@@ -77,16 +77,8 @@ export const mutations: MutationTree<ProfileState> = {
   setUserWithRes(state, user) {
     if (user.data.account_type == '1') {
       state.user = { ...user.data, ...user.data.organizeParty[0] }
-      // state.user.national_code = ''
-      // state.user.father_name = ''
-      // state.user.birthdate = ''
-      // state.user.address_id = ''
     } else {
       state.user = { ...user.data, ...user.data.personalParty[0] }
-      // state.user.organization = ''
-      // state.user.economic_code = ''
-      // state.user.national_id = ''
-      // state.user.registration_id = ''
     }
     // state.user.account_type = user.data.account_type
   },
