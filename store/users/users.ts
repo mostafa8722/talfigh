@@ -88,7 +88,10 @@ export const mutations: MutationTree<UserState> = {
     state.page = page.meta.current_page
   },
   SetTotalPage(state, total) {
-    state.totalPage = total.meta.last_page
+    if (total.meta)
+      state.totalPage = total.meta.last_page
+    else
+      state.totalPage = total
   },
   isLoadPaginate(state, payload) {
     state.isLoadPaginate = payload
@@ -121,6 +124,9 @@ export const actions: ActionTree<UserState, any> = {
     commit('SetUsersWithFamilySearch', [])
     commit('SetUsersWithCodeSearch', [])
 
+    commit('SetPage', 1)
+    commit('SetTotalPage', 1)
+
     if (search.firstName) {
       const res = await this.$repositories.users().getUsersWithName(search.firstName)
       commit('SetUsersWithNameSearch', res)
@@ -133,5 +139,7 @@ export const actions: ActionTree<UserState, any> = {
       const res = await this.$repositories.users().getUsersWithCode(search.nationalCode)
       commit('SetUsersWithCodeSearch', res)
     }
+
+    commit('isLoadPaginate', false)
   }
 }

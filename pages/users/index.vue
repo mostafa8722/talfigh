@@ -111,24 +111,24 @@
              {{ item.firstname }} {{ item.lastname }}
            </span>
         </template>
-        <!--        <template v-slot:item.nationalCode='{ item }'>-->
-        <!--                            <span-->
-        <!--                              style='color: #848484;-->
-        <!--               font-size: 1rem;-->
-        <!--               font-weight: 500;'>-->
-        <!--          به شماره ملی:-->
-        <!--        </span>-->
-        <!--          <span-->
-        <!--            style='color: #197095; font-size: 1rem; font-weight: 500;'>-->
-        <!--             {{ item.national_code }}-->
-        <!--           </span>-->
-        <!--        </template>-->
-        <template v-slot:item.date='{ item }'>
-          <span
-            style='color: #197095; font-size: 1rem; font-weight: 500;'>
-             {{ item.date }}
-           </span>
-        </template>
+                <template v-slot:item.nationalCode='{ item }'>
+                                    <span
+                                      style='color: #848484;
+                       font-size: 1rem;
+                       font-weight: 500;'>
+                  به شماره ملی:
+                </span>
+                  <span
+                    style='color: #197095; font-size: 1rem; font-weight: 500;'>
+                     {{ item.personalParty[0].national_code }}
+                   </span>
+                </template>
+<!--        <template v-slot:item.date='{ item }'>-->
+<!--          <span-->
+<!--            style='color: #197095; font-size: 1rem; font-weight: 500;'>-->
+<!--             {{ item.personalParty[0].birthdate }}-->
+<!--           </span>-->
+<!--        </template>-->
         <template v-slot:item.mobile='{ item }'>
           <span
             style='color: #197095; font-size: 1rem; font-weight: 500;'>
@@ -187,16 +187,16 @@ export default Vue.extend({
           value: 'fullName',
           width: '100px'
         },
-        // {
-        //   text: '',
-        //   value: 'nationalCode',
-        //   width: '100px'
-        // },
         {
           text: '',
-          value: 'date',
+          value: 'nationalCode',
           width: '100px'
         },
+        // {
+        //   text: '',
+        //   value: 'date',
+        //   width: '100px'
+        // },
         {
           text: '',
           value: 'mobile',
@@ -283,7 +283,7 @@ export default Vue.extend({
   },
   methods: {
     searchBtn() {
-
+      (this as any).isLoadPaginate = true
       if (
         !(this as any).search.firstName &&
         !(this as any).search.lastName &&
