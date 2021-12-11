@@ -3,7 +3,30 @@ import { User } from '~/data/models/users/profile'
 import { assign, concat, flattenDeep, toNumber } from 'lodash'
 
 export const state = () => ({
-  user: {} as User
+  user: {} as User,
+  password: '',
+  email: '',
+  username: '',
+  firstname: '',
+  lastname: '',
+  mobile1: '',
+  mobile2: '',
+  display_name: '',
+  account_type: '',
+  confirm_plan: '',
+  confirm_datetime: '',
+  phone: '',
+  national_code: '',
+  father_name: '',
+  birthdate: '',
+  address_id: '',
+  organization: '',
+  economic_code: '',
+  national_id: '',
+  registration_id: '',
+  address: '',
+  city_id: '',
+  province_id: '',
 })
 export type ProfileState = ReturnType<typeof state>
 
@@ -11,62 +34,74 @@ export const getters: GetterTree<ProfileState, any> = {
   getUser(state) {
     return state.user
   },
+  getPassword(state) {
+    return state.password
+  },
   getEmail(state) {
-    return state.user.email
+    return state.email
   },
   getUserName(state) {
-    return state.user.username
+    return state.username
   },
   getFirstName(state) {
-    return state.user.firstname
+    return state.firstname
   },
   getLastName(state) {
-    return state.user.lastname
+    return state.lastname
   },
   getMobile1(state) {
-    return state.user.mobile1
+    return state.mobile1
   },
   getMobile2(state) {
-    return state.user.mobile2
+    return state.mobile2
   },
   getDisplayName(state) {
-    return state.user.display_name
+    return state.display_name
   },
   getAccountType(state) {
-    return state.user.account_type === '1'
+    return state.account_type === '1'
   },
   getConfirmPlan(state) {
-    return state.user.confirm_plan
+    return state.confirm_plan
   },
   getConfirmDateTime(state) {
-    return state.user.confirm_datetime
+    return state.confirm_datetime
   },
   getNationalCode(state) {
-    return state.user.national_code
+    return state.national_code
   },
   getFatherName(state) {
-    return state.user.father_name
+    return state.father_name
   },
   getBirthDate(state) {
-    return state.user.birthdate
+    return state.birthdate
   },
   getPhone(state) {
-    return state.user.phone
+    return state.phone
   },
   getAddressID(state) {
-    return state.user.address_id
+    return state.address_id
   },
   getOrganization(state) {
-    return state.user.organization
+    return state.organization
   },
   getEconomicCode(state) {
-    return state.user.economic_code
+    return state.economic_code
   },
   getNationalID(state) {
-    return state.user.national_id
+    return state.national_id
   },
   getRegistrationID(state) {
-    return state.user.registration_id
+    return state.registration_id
+  },
+  getAddress(state) {
+    return state.address
+  },
+  getCity(state) {
+    return state.city_id
+  },
+  getProvince(state) {
+    return state.province_id
   }
 }
 
@@ -75,72 +110,107 @@ export const mutations: MutationTree<ProfileState> = {
     state.user = user
   },
   setUserWithRes(state, user) {
-    if (user.data.account_type == '1') {
-      state.user = { ...user.data, ...user.data.organizeParty[0] }
-    } else {
-      state.user = { ...user.data, ...user.data.personalParty[0] }
-    }
+    // if (user.data.account_type == '1') {
+    //   state.user = { ...user.data, ...user.data.organizeParty[0] }
+    // } else {
+    //   state.user = { ...user.data, ...user.data.personalParty[0] }
+    // }
     // state.user.account_type = user.data.account_type
+
+    state.firstname = user.data.firstname
+    state.lastname = user.data.lastname
+    state.username = user.data.username
+    state.email = user.data.email
+    state.mobile1 = user.data.mobile1
+    state.mobile2 = user.data.mobile2
+    state.display_name = user.data.display_name
+    state.account_type = user.data.account_type
+    state.confirm_plan = user.data.confirm_plan
+    state.confirm_datetime = user.data.confirm_datetime
+    state.address = user.data.address.address
+    state.city_id = user.data.address.city_id
+    state.province_id = user.data.address.province_id
+    state.phone = state.account_type == '1'
+      ? user.data.partyOrganize?.phone : user.data.partyPersonal?.phone
+    state.national_code = user.data.partyPersonal?.national_code || ""
+    state.father_name = user.data.partyPersonal?.father_name || ""
+    state.birthdate = user.data.partyPersonal?.birthdate || ""
+    state.organization = user.data.partyOrganize?.organization || ""
+    state.economic_code = user.data.partyOrganize?.economic_code || ""
+    state.national_id = user.data.partyOrganize?.national_id || ""
+    state.registration_id = user.data.partyOrganize?.registration_id || ""
   },
   setEmail(state, email) {
-    state.user.email = email
+    state.email = email
   },
   setUserName(state, userName) {
-    state.user.username = userName
+    state.username = userName
   },
   setFirstName(state, firstName) {
-    state.user.firstname = firstName
+    state.firstname = firstName
   },
   setLastName(state, lastName) {
-    state.user.lastname = lastName
+    state.lastname = lastName
   },
   setMobile1(state, mobile) {
-    state.user.mobile1 = mobile
+    state.mobile1 = mobile
   },
   setMobile2(state, mobile) {
-    state.user.mobile2 = mobile
+    state.mobile2 = mobile
   },
   setDisplayName(state, displayName) {
-    state.user.display_name = displayName
+    state.display_name = displayName
   },
   setAccountType(state, accountType) {
     if (accountType)
-      state.user.account_type = '1'
+      state.account_type = '1'
     else
-      state.user.account_type = '0'
+      state.account_type = '0'
   },
   setConfirmPlan(state, confirmPlan) {
-    state.user.confirm_plan = confirmPlan
+    state.confirm_plan = confirmPlan
   },
   setConfirmDateTime(state, confirmDateTime) {
-    state.user.confirm_datetime = confirmDateTime
+    state.confirm_datetime = confirmDateTime
   },
   setNationalCode(state, nationalCode) {
-    state.user.national_code = nationalCode
+    state.national_code = nationalCode
   },
   setFatherName(state, fatherName) {
-    state.user.father_name = fatherName
+    state.father_name = fatherName
   },
   setBirthDate(state, birthDate) {
-    state.user.birthdate = birthDate
+    state.birthdate = birthDate
   },
   setPhone(state, phone) {
-    state.user.phone = phone
+    state.phone = phone
   },
   setAddressID(state, addressID) {
-    state.user.address_id = addressID
+    state.address_id = addressID
   },
   setOrganization(state, organization) {
-    state.user.organization = organization
+    state.organization = organization
   },
   setEconomicCode(state, economicCode) {
-    state.user.economic_code = economicCode
+    state.economic_code = economicCode
   },
   setNationalID(state, nationalID) {
-    state.user.national_id = nationalID
+    state.national_id = nationalID
   },
   setRegistrationID(state, registrationID) {
-    state.user.registration_id = registrationID
+    state.registration_id = registrationID
+  },
+  setAddress(state, address) {
+    state.address = address
+  },
+  setCity(state, city) {
+    state.city_id = city
+  },
+  setProvince(state, province) {
+    state.province_id = province
+  },
+  setPassword(state, password) {
+    state.password = password
   }
 }
 

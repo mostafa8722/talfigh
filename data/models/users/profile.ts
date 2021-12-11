@@ -10,7 +10,10 @@ export type User = {
   account_type: string,
   confirm_plan: number,
   confirm_datetime: string,
-  phone: string
+  phone: string,
+  address: string,
+  city_id: number,
+  province_id: number,
   // Personal
   national_code: string,
   father_name: string,

@@ -38,18 +38,22 @@
               outlined
             ></v-text-field>
 
+            <div class="mb-2 mr-2">استان</div>
+            <v-select
+              class="rounded-lg"
+              placeholder="استان"
+              :items='provinces'
+              item-text='name'
+              item-value='id'
+              v-model='province'
+              outlined
+            ></v-select>
+
             <div class="mb-2 mr-2">شناسه ثبت</div>
             <v-text-field
               class="rounded-lg"
               placeholder="شناسه ثبت"
               v-model='registration_id'
-              outlined
-            ></v-text-field>
-
-            <div class="mb-2 mr-2">شهر</div>
-            <v-text-field
-              class="rounded-lg"
-              placeholder="شهر"
               outlined
             ></v-text-field>
           </div>
@@ -85,20 +89,58 @@
               outlined
             ></v-text-field>
 
+            <div class="mb-2 mr-2">استان</div>
+            <v-select
+              class="rounded-lg"
+              placeholder="استان"
+              outlined
+              :items='provinces'
+              item-text='name'
+              item-value='id'
+              v-model='province'
+            ></v-select>
+
             <div class="mb-2 mr-2">آدرس</div>
             <v-text-field
               class="rounded-lg"
+              v-model='address'
               placeholder="آدرس"
               outlined
             ></v-text-field>
 
             <div class="mb-2 mr-2">تاریخ تولد</div>
-            <v-text-field
-              class="rounded-lg"
-              placeholder="تاریخ تولد"
-              v-model='birthdate'
-              outlined
-            ></v-text-field>
+            <date-picker v-model='birthdate' />
+<!--            <v-text-field-->
+<!--              class="rounded-lg"-->
+<!--              placeholder="تاریخ تولد"-->
+<!--              v-model='date'-->
+<!--              outlined-->
+<!--            ></v-text-field>-->
+<!--            <v-date-picker v-model='date' :first-day-of-week='0' locale='fa'></v-date-picker>-->
+<!--            <v-menu-->
+<!--              v-model="menu"-->
+<!--              :close-on-content-click="false"-->
+<!--              max-width="350"-->
+<!--            >-->
+<!--              <template v-slot:activator="{ on, attrs }">-->
+<!--                <v-text-field-->
+<!--                  readonly-->
+<!--                  class="rounded-lg"-->
+<!--                  placeholder="تاریخ تولد"-->
+<!--                  v-model='date'-->
+<!--                  outlined-->
+<!--                  v-bind="attrs"-->
+<!--                  v-on="on"-->
+<!--                ></v-text-field>-->
+<!--              </template>-->
+<!--              <v-date-picker-->
+<!--                locale='fa'-->
+<!--                first-day-of-week='6'-->
+<!--                locale-first-day-of-year='30'-->
+<!--                v-model="date"-->
+<!--                @change="menu = false"-->
+<!--              ></v-date-picker>-->
+<!--            </v-menu>-->
           </div>
         </v-col>
         <v-col cols="12" lg="3" md="6">
@@ -134,12 +176,16 @@
             outlined
           ></v-text-field>
 
-          <div class="mb-2 mr-2">استان</div>
-          <v-text-field
-            class="rounded-lg"
-            placeholder="استان"
-            outlined
-          ></v-text-field>
+          <div class="mb-2 mr-2">شهر</div>
+            <v-select
+              class="rounded-lg"
+              placeholder="شهر"
+              :items='cities'
+              item-text='name'
+              item-value='id'
+              v-model='city'
+              outlined
+            ></v-select>
 
           <div class="mb-2 mr-2">شماره تلفن</div>
           <v-text-field
@@ -181,6 +227,17 @@
             outlined
           ></v-text-field>
 
+            <div class="mb-2 mr-2">شهر</div>
+            <v-select
+              class="rounded-lg"
+              placeholder="شهر"
+              outlined
+              :items='cities'
+              item-text='name'
+              item-value='id'
+              v-model='city'
+            ></v-select>
+
           <div class="mb-2 mr-2">نام پدر</div>
           <v-text-field
             class="rounded-lg"
@@ -216,6 +273,16 @@
               class="rounded-lg"
               v-model='mobile1'
               placeholder="شماره موبایل"
+              outlined
+            ></v-text-field>
+          </div>
+          <div class='mt-10'>
+            <div class="mb-2 mr-2">رمز عبور</div>
+            <v-text-field
+              class="rounded-lg"
+              v-model='password'
+              type='password'
+              placeholder="رمز عبور"
               outlined
             ></v-text-field>
           </div>
@@ -279,12 +346,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import TLFContainer from '~/components/utilities/TLF-Container.vue'
+import { debounce, filter, find } from 'lodash'
 
 export default Vue.extend({
   name: 'BasicInformation',
   components: { TLFContainer },
   data() {
     return {
+      menu: false,
+      cities: [],
       mapOptions: {
         zoom: 16,
         maxZoom: 18,
@@ -304,7 +374,7 @@ export default Vue.extend({
       (this as any).mapOptions.selectedLocation = event.coordinate
     },
     updateUser(){
-
+          console.log(...arguments)
     }
   },
   computed: {
@@ -460,9 +530,66 @@ export default Vue.extend({
         (this as any).$store.commit('users/profile/setRegistrationID', value)
       }
     },
+    address: {
+      get(){
+        return (this as any).$store.getters['users/profile/getAddress']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setAddress', value)
+      }
+    },
+    city: {
+      get(){
+        return (this as any).$store.getters['users/profile/getCity']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setCity', value)
+      }
+    },
+    province: {
+      get(){
+        return (this as any).$store.getters['users/profile/getProvince']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setProvince', value)
+      }
+    },
+    password: {
+      get(){
+        return (this as any).$store.getters['users/profile/getPassword']
+      },
+      set(value){
+        (this as any).$store.commit('users/profile/setPassword', value)
+      }
+    },
+    provinces: {
+      get(){
+        return (this as any).$store.getters['cities/provinces/getProvincesWithCity']
+      }
+    },
   },
   created() {
-    (this as any).$store.dispatch('users/profile/getUser', this.$route.params.id)
+    (this as any).$store.dispatch('users/profile/getUser', this.$route.params.id);
+    (this as any).$store.dispatch('cities/provinces/getProvincesWithCity').then(()=>{
+      debounce(()=>{
+        if ((this as any).provinces){
+          let finds = find((this as any).provinces, (item)=>{
+            return item.id == (this as any).province
+          });
+          (this as any).cities = finds.city
+        }
+      }, 1000)
+    })
+  },
+  watch: {
+    province(){
+      let finds = find((this as any).provinces, (item)=>{
+        return item.id == (this as any).province
+      });
+      (this as any).cities = finds.city
+    },
+  },
+  mounted() {
   }
 })
 </script>
