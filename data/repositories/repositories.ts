@@ -3,7 +3,8 @@ import PostRepository from '~/data/repositories/postRepository'
 import PageRepository from '~/data/repositories/pageRepository'
 import AccountRepository from '~/data/repositories/users/accountRepository'
 import ContractRepository from '~/data/repositories/contractRepository'
-import ScoreRepository from '~/data/repositories/scores'
+import Score from '~/data/repositories/scores'
+import systemSettings from '~/data/repositories/system-settings'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -20,6 +21,7 @@ export default class Repositories {
 
   contract = () => new ContractRepository(this.axios)
 
-  scores = () => new ScoreRepository(this.axios)
+  scores = () => new Score(this.axios)
+  
 
 }

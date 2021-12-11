@@ -1,7 +1,7 @@
 import Repository from '~/data/repositories/repository'
 import Score from '~/data/models/score'
 
-export default class ScoreRepository extends Repository {
+export default class Scores extends Repository {
 
   headers = {
     'Accept': 'application/json',
