@@ -7,6 +7,7 @@ import Contract from '~/data/repositories/contract'
 import Scores from '~/data/repositories/scores'
 import System from '~/data/repositories/settings/system'
 import Profile from '~/data/repositories/users/profile'
+import Cities from '~/data/repositories/cities/cities'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -30,5 +31,7 @@ export default class Repositories {
   systemSettings = () => new System(this.axios)
 
   profile = () => new Profile(this.axios)
+
+  cities = () => new Cities(this.axios)
 
 }
