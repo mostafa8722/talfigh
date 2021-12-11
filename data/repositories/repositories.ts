@@ -4,7 +4,7 @@ import Pages from '~/data/repositories/pages'
 import Account from '~/data/repositories/users/account'
 import Users from '~/data/repositories/users/users'
 import Contract from '~/data/repositories/contract'
-
+import Score from '~/data/repositories/scores'
 export default class Repositories {
   axios: NuxtAxiosInstance
 
@@ -21,5 +21,8 @@ export default class Repositories {
   contract = () => new Contract(this.axios)
 
   users = () => new Users(this.axios)
+
+  scores = () => new Score(this.axios)
+
 
 }
