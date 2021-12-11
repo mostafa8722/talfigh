@@ -1,11 +1,11 @@
 type Score = {
-
-  name: '',
-  calories: 0,
-  fat: 0,
-  carbs: 0,
-  protein: 0
-
+  id?: number
+  title?: string
+  price?: number
+  rate_number?: number
+  is_archive?: number
+  created_at?: string
+  updated_at?: string
 }
 
 export default Score

@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-data-table
       :headers='headers'
-      :items='items'
+      :items='filteredItems'
       class='elevation-1'
       sort-by='calories'
     >
@@ -15,16 +15,32 @@
         </v-dialog>
 
         <v-dialog v-model='dialogDelete' max-width='500px'>
-          <v-card class='wrapper-card'>
-            <v-card-title class='text-h5'>از حذف کردن این مورد اطمینان دارید؟</v-card-title>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color='blue darken-1' text @click='closeDelete'>خیر</v-btn>
-              <v-btn color='blue darken-1' text @click='deleteItemConfirm'>بله</v-btn>
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-card>
+          <!--          <v-card class='wrapper-card'>-->
+          <!--            <v-card-title class='text-h5'>از حذف کردن این مورد اطمینان دارید؟</v-card-title>-->
+          <!--            <v-card-actions>-->
+          <!--              <v-spacer></v-spacer>-->
+          <!--              <v-btn color='blue darken-1' text @click=' '>خیر</v-btn>-->
+          <!--              <v-btn color='blue darken-1' text @click=' '>بله</v-btn>-->
+          <!--              <v-spacer></v-spacer>-->
+          <!--            </v-card-actions>-->
+          <!--           </v-card>-->
         </v-dialog>
+        <th-modal v-model='confirmDelete' el='thModal'>
+          <template #title>
+            {{ modal.title }}
+          </template>
+          <template #body>
+            {{ modal.body }}
+          </template>
+          <template #actions>
+            <v-btn :color='modal.action' @click='confirmModal'>
+              بله
+            </v-btn>
+            <v-btn :color='modal.action' @click='()=>confirmDelete=false'>
+              خیر
+            </v-btn>
+          </template>
+        </th-modal>
 
       </template>
       <!--      edit and delete buttons-->
@@ -32,21 +48,25 @@
         <v-icon
           class='mr-2'
           small
+          @click='deleteItem(item)'
+        >
+          mdi-archive
+        </v-icon>
+        <v-icon
+          class='mr-2'
+          small
           @click='editItem(item)'
         >
           mdi-pencil
         </v-icon>
-        <v-icon
-          small
-          @click='deleteItem(item)'
-        >
-          mdi-delete
-        </v-icon>
       </template>
+
+
       <template v-slot:no-data>
         چیزی برای نمایش وجود ندازد
       </template>
     </v-data-table>
+
   </v-container>
 </template>
 
@@ -54,6 +74,8 @@
 <script lang='ts'>
 import Vue from 'vue'
 import AddCard from '~/components/financial/score/AddCard.vue'
+import Score from '~/data/models/score'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
   name: 'ScoreTable',
@@ -62,165 +84,87 @@ export default Vue.extend({
     return {
       dialog: false,
       dialogDelete: false,
+      confirmDelete: false,
+      modalConfirm: false,
+      lastId: 0,
       headers: [
-        { text: 'شناسه', value: 'calories', align: 'start' },
-        { text: 'امتیازدهی', value: 'fat', align: 'start' },
-        { text: 'مبلغ', value: 'fat', align: 'start' },
+        { text: 'شناسه', value: 'id', align: 'start' },
+        { text: 'امتیازدهی', value: 'title', align: 'start' },
+        { text: 'مبلغ', value: 'price', align: 'start' },
         { text: 'Actions', value: 'actions', sortable: false }
       ],
-      items: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
-      },
+        id: 0,
+        title: '',
+        price: 0,
+        is_archive: 0,
+        rate_number: 0,
+        created_at: '',
+        updated_at: ''
+      } as Score,
       defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
+        id: 0,
+        title: '',
+        price: '',
+        is_archive: 0,
+        created_at: '',
+        updated_at: ''
       }
     }
   },
   computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    }
-  },
+    ...mapGetters({
+      items: 'finance/scores/GET_SCORES'
+    }),
+    filteredItems() {
+      return this.items.filter((e: Score) => {
 
-  watch: {
-    dialog(val) {
-      val || this.close()
-    },
-    dialogDelete(val) {
-      val || this.closeDelete()
-    }
-  },
-
-  created() {
-    this.initialize()
-  },
-
-  methods: {
-    initialize() {
-      this.items = [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7
-        }
-      ]
-    },
-
-    editItem(item) {
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
-    },
-
-    deleteItem(item) {
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialogDelete = true
-    },
-
-    deleteItemConfirm() {
-      this.items.splice(this.editedIndex, 1)
-      this.closeDelete()
-    },
-
-    close() {
-      this.dialog = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
+        return e.is_archive != 1
       })
-    },
 
-    closeDelete() {
-      this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
-
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.items[this.editedIndex], this.editedItem)
-      } else {
-        this.items.push(this.editedItem)
+    }
+    ,
+    modal: {
+      get() {
+        return (this as any).$store.getters['finance/scores/getModal']
+      },
+      set(value) {
+        (this as any).$store.commit('finance/scores/SET_MODAL', value)
       }
-      this.close()
+    },
+    formTitle(): string {
+      return (this as any).editedIndex === -1 ? 'New Item' : 'Edit Item'
+    }
+
+  },
+  methods: {
+    editItem(item: Score) {
+
+      console.log(item.id)
+      this.$data.lastId = item.id
+      this.$data.dialog = true
+      this.modal = {
+        show: true,
+        title: 'حذف صفحه',
+        body: 'آیا مطمئن از حذف این صفحه هستید؟',
+        action: ''
+      }
+    },
+    deleteItem(item: Score) {
+      console.log(item.id)
+      this.$data.lastId = item.id
+      this.$data.confirmDelete = true
+      this.modal = {
+        show: true,
+        title: 'حذف صفحه',
+        body: 'آیا مطمئن از حذف این صفحه هستید؟',
+        action: ''
+      }
+    },
+    confirmModal() {
+      this.$store.dispatch('finance/scores/archiveScores', this.$data.lastId)
+      this.$data.confirmDelete = false
     }
   }
 })

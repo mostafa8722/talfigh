@@ -2,6 +2,7 @@
   <v-container fluid>
     <tlf-container>
       <div class='txt'>امتیاز و مبلغ</div>
+
     </tlf-container>
     <div id='add'>
       <sum-score></sum-score>
@@ -13,12 +14,18 @@
 import Vue from 'vue'
 import SumScore from '~/components/financial/score/SumScore.vue'
 import TlfContainer from '~/components/utilities/TLF-Container.vue'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
   name: 'score',
   components: { SumScore, TlfContainer },
-  data() {
-    return {}
+  async fetch() {
+    await this.$store.dispatch('finance/scores/getScores')
+  },
+  computed: {
+    ...mapGetters({
+      items: 'finance/scores/GET_SCORES'
+    })
   }
 })
 </script>

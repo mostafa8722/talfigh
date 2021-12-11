@@ -4,19 +4,29 @@
       <div class=' d-flex flex-column'>
         <div class='txt-label mb-auto'>امتیاز دهی</div>
         <div class='my-auto'>
-          <v-text-field class='txt-input' dense filled label='امتیاز دهی' outlined></v-text-field>
+          <v-text-field v-model='item.title' class='txt-input' dense filled label='امتیاز دهی' outlined></v-text-field>
         </div>
       </div>
       <div class=' d-flex flex-column'>
         <div class='txt-label mb-auto mr-10'>مبلغ</div>
         <div class='my-auto'>
-          <v-text-field class='txt-input mr-10' dense filled label='مبلغ' outlined rounded></v-text-field>
+          <v-text-field v-model='item.price' class='txt-input mr-10' dense filled label='مبلغ' outlined
+                        rounded></v-text-field>
         </div>
       </div>
-      <v-btn v-if='!edit' class='mr-auto my-auto ' color='primary' depressed height='41px' rounded width='138px'>
+      <div class=' d-flex flex-column'>
+        <div class='txt-label mb-auto mr-10'>درجه</div>
+        <div class='my-auto'>
+          <v-text-field v-model='item.rate' class='txt-input mr-10' dense filled label='درجه' outlined
+                        rounded></v-text-field>
+        </div>
+      </div>
+      <v-btn v-if='!edit' class='mr-auto my-auto ' color='primary' depressed height='41px' rounded width='138px'
+             @click='addScore'>
         اضافه به لیست
       </v-btn>
-      <v-btn v-if='edit' class='mr-auto my-auto ' color='primary' depressed height='41px' rounded width='138px'>
+      <v-btn v-if='edit' class='mr-auto my-auto ' color='primary' depressed height='41px' rounded width='138px'
+             @click='updateItem'>
         ویرایش
       </v-btn>
     </v-card>
@@ -30,8 +40,30 @@ export default Vue.extend({
   name: 'AddCard',
   props: { edit: { type: Boolean, default: false } },
   data() {
-    return {}
+    return {
+      dialog: true,
+      modalConfirm: false,
+      item: {
+        title: '',
+        price: 0,
+        rate_number: 0
+      }
+    }
+  },
+
+  methods: {
+    addScore() {
+      this.$store.dispatch('finance/scores/setScore', this.$data.item)
+
+
+    },
+    updateItem() {
+      //TODO fix it after edit api was ready for scores
+      this.$store.dispatch('finance/scores/setScore', this.$data.item)
+    }
   }
+
+
 })
 </script>
 
