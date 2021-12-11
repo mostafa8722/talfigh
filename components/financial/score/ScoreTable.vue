@@ -45,20 +45,28 @@
       </template>
       <!--      edit and delete buttons-->
       <template v-slot:item.actions='{ item }'>
-        <v-icon
-          class='mr-2'
+        <v-btn
           small
+          color='#FF5C5C'
+          depressed
+          rounded
           @click='deleteItem(item)'
         >
-          mdi-archive
-        </v-icon>
-        <v-icon
-          class='mr-2'
+          <v-icon color='white' small>
+            fas fa-trash
+          </v-icon>
+        </v-btn>
+        <v-btn
           small
+          color='warning'
+          depressed
+          rounded
           @click='editItem(item)'
         >
-          mdi-pencil
-        </v-icon>
+          <v-icon color='white' small>
+            fas fa-edit
+          </v-icon>
+        </v-btn>
       </template>
 
 

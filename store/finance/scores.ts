@@ -4,19 +4,10 @@ import Score from '~/data/models/score'
 
 export const state = () => ({
   save: {} as Score,
-  res: [],
   resUpdate: [],
   scores: [] as Score[],
   scoreUpdate: {} as Score,
-  newScore: {
-    id: 0,
-    title: '',
-    price: 0,
-    rate_number: 0
-  } as Score,
-  title: '',
-  description: '',
-  meta_description: '',
+
   modal: {
     show: false,
     title: '',
@@ -30,30 +21,13 @@ export const getters: GetterTree<ScoreState, any> = {
   GET_SCORES(state) {
     return state.scores
   },
-  getTitle(state) {
-    return state.title
-  },
   getModal(state) {
     return state.modal
   },
-  res(state) {
-    return state.res
-  },
-  resUpdate(state) {
-    return state.resUpdate
-  }
 }
 
 export const mutations: MutationTree<ScoreState> = {
-  SET_RES(state, res) {
-    state.res = res
-  },
-  SET_TITLE(state, title) {
-    state.title = title
-  },
-  SET_RES_UPDATE(state, resUpdate) {
-    state.resUpdate = resUpdate
-  },
+
   SET_SCORES(state, scores) {
     console.log(scores)
     state.scores = scores.data
@@ -90,10 +64,7 @@ export const actions: ActionTree<ScoreState, any> = {
   //   const scoreRes = await this.$repositories.scores().updateScore(getters.getInfoUpdate, id)
   //   commit('SET_MODAL_Res', scoreRes)
   // },
-  // async deleteScore({ commit }, id) {
-  //   const scoreRes = await this.$repositories.scores().deleteScore(id)
-  //   commit('SET_MODAL_Res', scoreRes)
-  // },
+
   async getScores({ commit }) {
     const scoreRes = await this.$repositories.scores().getScores()
     commit('SET_SCORES', scoreRes)
@@ -104,8 +75,5 @@ export const actions: ActionTree<ScoreState, any> = {
     await dispatch('getScores')
     commit('SET_MODAL_Res', scoreRes)
   }
-  // async getScore({ commit }, id) {
-  //   const scoreRes = await this.$repositories.scores().getScore(id)
-  //   commit('SET_NOW_PAGE', scoreRes)
-  // }
+
 }
