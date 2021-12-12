@@ -1,10 +1,11 @@
 import Repository from '~/data/repositories/repository'
-import { User } from '~/data/models/users/users'
+import { City } from '~/data/models/cities/city'
+import { Province, ProvinceWithCity } from '~/data/models/cities/province'
+import {API} from '~/data/utils/Enums'
 
-export default class Users extends Repository {
-
-  async getUsers(page: number): Promise<User[]> {
-    const res = await this.axios.get('/users?page=' + page, {
+export default class Profile extends Repository {
+  async getCities(): Promise<City[]> {
+    const res = await this.axios.get(API.Web + '/guest/cities',{
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
@@ -13,10 +14,8 @@ export default class Users extends Repository {
     return res.data
   }
 
-  async getUsersWithName(search: string): Promise<User[]> {
-    const res = await this.axios.post('/users/searchFirstname', {
-      search: search
-    }, {
+  async getCity(id: number): Promise<City> {
+    const res = await this.axios.get(API.Web + '/guest/cities/' + id,{
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
@@ -25,10 +24,8 @@ export default class Users extends Repository {
     return res.data
   }
 
-  async getUsersWithFamily(search: string): Promise<User[]> {
-    const res = await this.axios.post('/users/searchLastname', {
-      search: search
-    }, {
+  async getProvinces(): Promise<Province[]> {
+    const res = await this.axios.get(API.Web + '/guest/provinces',{
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
@@ -37,10 +34,8 @@ export default class Users extends Repository {
     return res.data
   }
 
-  async getUsersWithCode(search: string): Promise<User[]> {
-    const res = await this.axios.post('/users/searchNationalCode', {
-      search: search
-    }, {
+  async getProvincesWithCities(): Promise<ProvinceWithCity[]> {
+    const res = await this.axios.get(API.Web + '/guest/provincesWithCities',{
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
@@ -49,4 +44,3 @@ export default class Users extends Repository {
     return res.data
   }
 }
-//

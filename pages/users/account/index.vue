@@ -24,7 +24,7 @@
         <span class='text-btn'>ذخیره اطلاعات</span>
       </v-btn>
     </div>
-    <th-modal @input='updateModal' v-model='modal.show'>
+    <th-modal @input='updateModal' :value='modal.show'>
       <template #title>
         {{ modal.title }}
       </template>

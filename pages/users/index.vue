@@ -47,6 +47,7 @@
     <!-- d-none d-md-block-->
     <div class='my-10'>
       <v-data-table class='px-5 py-5'
+                    :loading='isLoadPaginate'
                     hide-default-footer :items='users'
                     hide-default-header :headers='headers'>
         <template #top='{ pagination, options, updateOptions }'>
@@ -95,12 +96,11 @@
             <v-spacer></v-spacer>
             <v-col style='justify-self: flex-end' cols='12' lg='4' md='4'
             >
-              <v-data-footer
-                :pagination='pagination'
-                :options='options'
-                items-per-page-text='$vuetify.dataTable.itemsPerPageText'
-                @update:options='updateOptions'
-              />
+              <v-pagination
+                v-model="page"
+                :length="totalPage"
+                :total-visible="5"
+              ></v-pagination>
             </v-col>
           </v-row>
         </template>
@@ -111,24 +111,24 @@
              {{ item.firstname }} {{ item.lastname }}
            </span>
         </template>
-        <!--        <template v-slot:item.nationalCode='{ item }'>-->
-        <!--                            <span-->
-        <!--                              style='color: #848484;-->
-        <!--               font-size: 1rem;-->
-        <!--               font-weight: 500;'>-->
-        <!--          به شماره ملی:-->
-        <!--        </span>-->
-        <!--          <span-->
-        <!--            style='color: #197095; font-size: 1rem; font-weight: 500;'>-->
-        <!--             {{ item.national_code }}-->
-        <!--           </span>-->
-        <!--        </template>-->
-        <template v-slot:item.date='{ item }'>
-          <span
-            style='color: #197095; font-size: 1rem; font-weight: 500;'>
-             {{ item.date }}
-           </span>
-        </template>
+                <template v-slot:item.nationalCode='{ item }'>
+                                    <span
+                                      style='color: #848484;
+                       font-size: 1rem;
+                       font-weight: 500;'>
+                  به شماره ملی:
+                </span>
+                  <span
+                    style='color: #197095; font-size: 1rem; font-weight: 500;'>
+                     {{ item.personalParty[0].national_code }}
+                   </span>
+                </template>
+<!--        <template v-slot:item.date='{ item }'>-->
+<!--          <span-->
+<!--            style='color: #197095; font-size: 1rem; font-weight: 500;'>-->
+<!--             {{ item.personalParty[0].birthdate }}-->
+<!--           </span>-->
+<!--        </template>-->
         <template v-slot:item.mobile='{ item }'>
           <span
             style='color: #197095; font-size: 1rem; font-weight: 500;'>
@@ -138,7 +138,7 @@
         <template v-slot:item.role='{ item }'>
           <span
             style='color: #197095; font-size: 1rem; font-weight: 500;'>
-             {{ item.account_type }}
+             {{ item.account_type == 0 ? "حقیقی" : "حقوقی"}}
            </span>
         </template>
         <template v-slot:item.actions='{item}'>
@@ -155,9 +155,11 @@
                font-size: 0.8rem;
                font-weight: 300;' class='mr-1'>فعال سازی</span>
             </v-btn>
-            <v-btn x-small fab elevation='0' color='warning'>
-              <v-icon color='#fff' size='15'>fa-edit</v-icon>
-            </v-btn>
+            <nuxt-link :to='"users/" + item.id' >
+              <v-btn x-small fab elevation='0' color='warning'>
+                <v-icon color='#fff' size='15'>fa-edit</v-icon>
+              </v-btn>
+            </nuxt-link>
           </div>
         </template>
       </v-data-table>
@@ -185,16 +187,16 @@ export default Vue.extend({
           value: 'fullName',
           width: '100px'
         },
-        // {
-        //   text: '',
-        //   value: 'nationalCode',
-        //   width: '100px'
-        // },
         {
           text: '',
-          value: 'date',
+          value: 'nationalCode',
           width: '100px'
         },
+        // {
+        //   text: '',
+        //   value: 'date',
+        //   width: '100px'
+        // },
         {
           text: '',
           value: 'mobile',
@@ -218,7 +220,7 @@ export default Vue.extend({
         firstName: '',
         lastName: '',
         nationalCode: ''
-      }
+      },
     }
   },
   head: {
@@ -247,12 +249,41 @@ export default Vue.extend({
       get() {
         return (this as any).$store.getters['users/users/getUsersWithCodeSearch']
       }
+    },
+    page: {
+      get(){
+        return (this as any).$store.getters['users/users/getPage']
+      },
+      set(value){
+        (this as any).$store.commit('users/users/SetPage', value)
+      }
+    },
+    totalPage: {
+      get(){
+        return (this as any).$store.getters['users/users/getTotalPage']
+      },
+      set(value){
+        (this as any).$store.commit('users/users/SetTotalPage', value)
+      }
+    },
+    isLoadPaginate: {
+      get(){
+        return (this as any).$store.getters['users/users/isLoadPaginate']
+      },
+      set(value){
+        (this as any).$store.commit('users/users/isLoadPaginate', value)
+      }
+    }
+  },
+  watch: {
+    page(){
+      (this as any).isLoadPaginate = true;
+      (this as any).$store.dispatch('users/users/getUsers')
     }
   },
   methods: {
     searchBtn() {
-
-
+      (this as any).isLoadPaginate = true
       if (
         !(this as any).search.firstName &&
         !(this as any).search.lastName &&
@@ -269,7 +300,7 @@ export default Vue.extend({
             )
           })
       }
-    }
+    },
   },
   created() {
     (this as any).$store.dispatch('users/users/getUsers')

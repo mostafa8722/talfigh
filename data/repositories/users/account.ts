@@ -1,9 +1,10 @@
 import Repository from '~/data/repositories/repository'
 import { UserAccount } from '~/data/models/users/account'
+import { API } from '~/data/utils/Enums'
 
 export default class Account extends Repository {
   async updateUserAccount(data: UserAccount): Promise<UserAccount> {
-    const res = await this.axios.post('/bank-account/update',data,{
+    const res = await this.axios.post(API.Web + '/bank-account/update',data,{
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
@@ -13,7 +14,7 @@ export default class Account extends Repository {
   }
 
   async getUserAccount(): Promise<UserAccount> {
-    const res = await this.axios.post('/bank-account/load', {  },{
+    const res = await this.axios.post(API.Web + '/bank-account/load', {  },{
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
