@@ -17,9 +17,15 @@ const config: NuxtConfig = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
+      },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css' }
+      {
+        rel: 'stylesheet',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css'
+      }
     ]
   },
 
@@ -35,9 +41,9 @@ const config: NuxtConfig = {
     '~/plugins/repositories.ts',
     '~/plugins/errors.ts',
     '~/plugins/vue-smooth-dnd.js',
-    "~/plugins/th-components.ts",
-    {src: '~plugins/vuelayers.js', ssr: false},
-     '~plugins/vuetify-draggable-treeview.js',
+    '~/plugins/th-components.ts',
+    { src: '~plugins/vuelayers.js', ssr: false },
+    '~plugins/vuetify-draggable-treeview.js',
     { src: '~/plugins/TiptapVuetify', mode: 'client' }
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -64,7 +70,7 @@ const config: NuxtConfig = {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://talfigh.ventosco.com/admin/api',
+    baseURL: 'http://talfigh.ventosco.com/apiadmin/api',
     credentials: true,
     headers: {
       common: {
@@ -91,7 +97,7 @@ const config: NuxtConfig = {
       dark: false,
       themes: {
         light: {
-          primary: "#2D9DCD",
+          primary: '#2D9DCD',
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
@@ -101,9 +107,9 @@ const config: NuxtConfig = {
         }
       }
     },
-        icons: {
-          iconfont: 'fa', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
-        },
+    icons: {
+      iconfont: 'fa' // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+    }
   },
 
   styleResources: {
@@ -123,7 +129,7 @@ const config: NuxtConfig = {
         }
       }
     },
-    transpile: ['vuetify/lib', "tiptap-vuetify"]
+    transpile: ['vuetify/lib', 'tiptap-vuetify']
   }
 }
 
