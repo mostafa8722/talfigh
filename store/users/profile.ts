@@ -2,6 +2,8 @@ import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import { User } from '~/data/models/users/profile'
 import { assign, concat, flattenDeep, toNumber } from 'lodash'
 
+import { actions as action } from '~/store/utilities/modal'
+
 export const state = () => ({
   user: {} as User,
   password: '',
@@ -27,6 +29,8 @@ export const state = () => ({
   address: '',
   city_id: '',
   province_id: '',
+  latitude: "35.724583",
+  longitude: "51.363530",
 })
 export type ProfileState = ReturnType<typeof state>
 
@@ -218,5 +222,63 @@ export const actions: ActionTree<ProfileState, any> = {
   async getUser({ commit }, id) {
     const res = await this.$repositories.profile().getInfoUser(id)
     commit('setUserWithRes', res)
+  },
+  async updateUser({ commit, state }, id) {
+
+    let data:object
+    if (state.account_type == '1'){
+      data = {
+        email: state.email,
+        username: state.username,
+        firstname: state.firstname,
+        lastname: state.lastname,
+        mobile1: state.mobile1,
+        mobile2: state.mobile2,
+        display_name: state.display_name,
+        account_type: state.account_type,
+        phone: state.phone,
+        organization: state.organization,
+        economic_code: state.economic_code,
+        national_id: state.national_id,
+        registration_id: state.registration_id,
+        address: state.address,
+        city_id: state.city_id,
+        province_id: state.province_id,
+      }
+    }else {
+      data = {
+        email: state.email,
+        username: state.username,
+        firstname: state.firstname,
+        lastname: state.lastname,
+        mobile1: state.mobile1,
+        mobile2: state.mobile2,
+        display_name: state.display_name,
+        account_type: state.account_type,
+        phone: state.phone,
+        national_code: state.national_code,
+        father_name: state.father_name,
+        birthdate: state.birthdate,
+        address: state.address,
+        city_id: state.city_id,
+        province_id: state.province_id,
+        latitude: state.latitude,
+        longitude: state.longitude,
+      }
+    }
+
+    if (state.password){
+      assign(data, {
+        password: state.password
+      })
+    }
+
+    const res = await this.$repositories.profile().updateInfoUser(id, data)
+      .then((res)=>{
+        return res
+      })
+      .catch((error)=>{
+        throw error
+    })
   }
 }
