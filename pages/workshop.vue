@@ -1,23 +1,24 @@
 <template>
   <v-container fluid>
     <tlf-container>
-      <div class='txt'>امتیاز و مبلغ</div>
+      <div class='txt'>کارگاه</div>
+
     </tlf-container>
     <div id='add'>
-      <sum-score></sum-score>
+      <work-shop></work-shop>
     </div>
   </v-container>
 </template>
 
 <script lang='ts'>
 import Vue from 'vue'
-import SumScore from '~/components/financial/score/SumScore.vue'
 import TlfContainer from '~/components/utilities/TLF-Container.vue'
 import { mapGetters } from 'vuex'
+import WorkShop from '~/components/workshop/WorkShop.vue'
 
 export default Vue.extend({
-  components: { SumScore, TlfContainer },
-  head: { title: 'امتیاز و مبلغ' },
+  head: { title: 'کارگاه' },
+  components: { WorkShop, TlfContainer },
   async fetch() {
     await this.$store.dispatch('finance/scores/getScores')
   },

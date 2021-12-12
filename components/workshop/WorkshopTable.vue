@@ -86,7 +86,7 @@ import { Score } from '~/data/models/score'
 import { mapGetters } from 'vuex'
 
 export default Vue.extend({
-  name: 'ScoreTable',
+  name: 'WorkShopTable',
   components: { AddScore },
   data() {
     return {

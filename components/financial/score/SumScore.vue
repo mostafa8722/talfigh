@@ -2,7 +2,7 @@
   <v-container fluid>
 
     <!--    Add Score-->
-    <add-card></add-card>
+    <add-score></add-score>
 
     <!--Score Chart-->
     <score-table></score-table>
@@ -12,12 +12,12 @@
 <script lang='ts'>
 import Vue from 'vue'
 import ScoreTable from '~/components/financial/score/ScoreTable.vue'
-import AddCard from '~/components/financial/score/AddCard.vue'
+import AddScore from '~/components/financial/score/AddScore.vue'
 
 
 export default Vue.extend({
   name: 'SumScore',
-  components: { AddCard, ScoreTable },
+  components: { AddScore, ScoreTable },
   data() {
     return {}
   }
