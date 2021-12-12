@@ -8,6 +8,9 @@ import Profile from '~/data/repositories/users/profile'
 import Cities from '~/data/repositories/cities/cities'
 import Score from '~/data/repositories/scores'
 
+import Scores from '~/data/repositories/scores'
+import System from '~/data/repositories/settings/system'
+
 export default class Repositories {
   axios: NuxtAxiosInstance
 
@@ -27,6 +30,7 @@ export default class Repositories {
 
   scores = () => new Score(this.axios)
 
+  systemSettings = () => new System(this.axios)
   profile = () => new Profile(this.axios)
 
   cities = () => new Cities(this.axios)

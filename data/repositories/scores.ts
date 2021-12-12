@@ -1,5 +1,5 @@
 import Repository from '~/data/repositories/repository'
-import Score from '~/data/models/score'
+import { Score } from '~/data/models/score'
 
 export default class Scores extends Repository {
 
@@ -8,7 +8,7 @@ export default class Scores extends Repository {
     'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
   }
 
-  async sendScore(data: Score): Promise<Score> {
+  async setScore(data: Score): Promise<Score> {
     const res = await this.axios.post('/scores/store', data, {
       headers: this.headers
     })
