@@ -1,14 +1,16 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import PostRepository from "~/data/repositories/postRepository";
+import PostRepository from '~/data/repositories/postRepository'
 import Pages from '~/data/repositories/pages'
 import Account from '~/data/repositories/users/account'
 import Users from '~/data/repositories/users/users'
 import Contract from '~/data/repositories/contract'
-import Score from '~/data/repositories/scores'
+import Scores from '~/data/repositories/scores'
+import system from '~/data/repositories/settings/system'
+
 export default class Repositories {
   axios: NuxtAxiosInstance
 
-  constructor ($axios: NuxtAxiosInstance) {
+  constructor($axios: NuxtAxiosInstance) {
     this.axios = $axios
   }
 
@@ -22,7 +24,8 @@ export default class Repositories {
 
   users = () => new Users(this.axios)
 
-  scores = () => new Score(this.axios)
+  scores = () => new Scores(this.axios)
 
+  systemSettings = () => new system(this.axios)
 
 }

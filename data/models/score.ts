@@ -1,4 +1,4 @@
-type Score = {
+export type Score = {
   id?: number
   title?: string
   price?: number
@@ -8,4 +8,4 @@ type Score = {
   updated_at?: string
 }
 
-export default Score
+

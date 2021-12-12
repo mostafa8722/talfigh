@@ -82,7 +82,7 @@
 <script lang='ts'>
 import Vue from 'vue'
 import AddCard from '~/components/financial/score/AddCard.vue'
-import Score from '~/data/models/score'
+import { Score } from '~/data/models/score'
 import { mapGetters } from 'vuex'
 
 export default Vue.extend({
