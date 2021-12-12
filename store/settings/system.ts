@@ -1,71 +1,43 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
-import { Score } from '~/data/models/score'
+import { System } from '~/data/models/settings/system'
 
 
 export const state = () => ({
-  save: {} as Score,
-  resUpdate: [],
-  scores: [] as Score[],
-  scoreUpdate: {} as Score,
-
-  modal: {
-    show: false,
-    title: '',
-    body: '',
-    action: ''
-  }
+  save: {} as System,
+  settings: {},
+  res: null
 })
-export type ScoreState = ReturnType<typeof state>
+export type SettingState = ReturnType<typeof state>
 
-export const getters: GetterTree<ScoreState, any> = {
-  GET_SCORES(state) {
-    return state.scores
+export const getters: GetterTree<SettingState, any> = {
+  GET_SETTINGS(state) {
+    return state.settings
   },
-  getModal(state) {
-    return state.modal
+  GET_RES(state) {
+    return state.res
   }
 }
 
-export const mutations: MutationTree<ScoreState> = {
+export const mutations: MutationTree<SettingState> = {
 
-  SET_SCORES(state, scores) {
-    console.log(scores)
-    state.scores = scores.data
-  },
-  SET_MODAL_Res(state, modal) {
-    if (modal.data.success === true) {
-      state.modal = {
-        show: false,
-        title: 'موفقیت آمیز بود',
-        body: 'درخواست شما با موفقیت انجام شد',
-        action: 'success'
-      }
-    } else {
-      state.modal = {
-        show: false,
-        title: 'موفقیت آمیز نبود',
-        body: 'درخواست شما با موفقیت انجام نشد',
-        action: 'error'
-      }
-    }
-  },
-  SET_MODAL(state, modal) {
-    state.modal = modal
+  SET_SETTINGS(state, settings) {
+    state.settings = settings
+    console.log(settings)
   }
 }
 
-export const actions: ActionTree<ScoreState, any> = {
+export const actions: ActionTree<SettingState, any> = {
   async setSettings({ commit, dispatch }, data) {
-    const scoreRes = await this.$repositories.scores().setScore(data)
-    commit('SET_MODAL_Res', scoreRes)
-    await dispatch('getScores')
+    const response = await this.$repositories.systemSettings().setSettings(data)
+    commit('SET_MODAL_Res', response)
+    await dispatch('getSettings')
   },
 
 
   async getSettings({ commit }) {
-    const scoreRes = await this.$repositories.systemSettings().getSettings()
-    commit('SET_SCORES', scoreRes)
+    const response = await this.$repositories.systemSettings().getSettings()
+    console.log(response)
+    commit('SET_SETTINGS', response)
   }
-
 
 }

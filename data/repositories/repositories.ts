@@ -5,7 +5,7 @@ import Account from '~/data/repositories/users/account'
 import Users from '~/data/repositories/users/users'
 import Contract from '~/data/repositories/contract'
 import Scores from '~/data/repositories/scores'
-import system from '~/data/repositories/settings/system'
+import System from '~/data/repositories/settings/system'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -26,6 +26,6 @@ export default class Repositories {
 
   scores = () => new Scores(this.axios)
 
-  systemSettings = () => new system(this.axios)
+  systemSettings = () => new System(this.axios)
 
 }

@@ -1,6 +1,7 @@
 import Repository from '~/data/repositories/repository'
 import { System } from '~/data/models/settings/system'
 
+
 export default class system extends Repository {
 
   headers = {
@@ -15,7 +16,7 @@ export default class system extends Repository {
     return res.data
   }
 
-  async getSettings(): Promise<System[]> {
+  async getSettings(): Promise<System> {
     const res = await this.axios.get('/setting/system', {
       headers: this.headers
     })
