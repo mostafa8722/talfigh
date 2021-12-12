@@ -1,5 +1,5 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
-import Score from '~/data/models/score'
+import { Score } from '~/data/models/score'
 
 
 export const state = () => ({
@@ -56,7 +56,7 @@ export const mutations: MutationTree<ScoreState> = {
 
 export const actions: ActionTree<ScoreState, any> = {
   async setScore({ commit, dispatch }, data) {
-    const scoreRes = await this.$repositories.scores().sendScore(data)
+    const scoreRes = await this.$repositories.scores().setScore(data)
     commit('SET_MODAL_Res', scoreRes)
     await dispatch('getScores')
   },
