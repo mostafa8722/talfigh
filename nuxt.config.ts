@@ -64,7 +64,7 @@ const config: NuxtConfig = {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://talfigh.ventosco.com/admin/api',
+    baseURL: 'http://talfigh.ventosco.com/apiadmin/api',
     credentials: true,
     headers: {
       common: {

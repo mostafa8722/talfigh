@@ -336,7 +336,7 @@
               <vl-view
                 :zoom.sync="mapOptions.zoom"
                 :max-zoom.sync="mapOptions.maxZoom"
-                :center.sync="mapOptions.center"
+                :center="[latitude, longitude]"
                 :rotation.sync="mapOptions.rotation"
               >
               </vl-view>
@@ -349,11 +349,11 @@
               </vl-layer-tile>
 
               <vl-feature
-                v-if="mapOptions.selectedLocation"
+                v-if="latitude && longitude"
                 id="position-feature"
               >
                 <vl-geom-point
-                  :coordinates="mapOptions.selectedLocation"
+                  :coordinates="[latitude, longitude]"
                 ></vl-geom-point>
                 <vl-style-box>
                   <vl-style-icon
@@ -409,11 +409,11 @@ export default Vue.extend({
       mapOptions: {
         zoom: 16,
         maxZoom: 18,
-        center: [51.337712, 35.699735],
+        center: [(this as any).latitude, (this as any).longitude],
         default: [51.337712, 35.699735],
         rotation: 0,
         tileUrl: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-        selectedLocation: [51.337712, 35.699735],
+        selectedLocation: [(this as any).latitude, (this as any).longitude],
       },
     }
   },
@@ -422,7 +422,9 @@ export default Vue.extend({
   },
   methods: {
     setSelectedPosition(event: any) {
-      (this as any).mapOptions.selectedLocation = event.coordinate
+      (this as any).$store.commit('users/profile/setLatitude', event.coordinate[0]);
+
+      (this as any).$store.commit('users/profile/setLongitude', event.coordinate[1])
     },
     updateUser(){
       (this as any).$store.dispatch('users/profile/updateUser', this.$route.params.id)
@@ -664,6 +666,16 @@ export default Vue.extend({
     modal: {
       get(){
         return (this as any).$store.getters['utilities/modal/getModal']
+      }
+    },
+    latitude: {
+      get(){
+       return (this as any).$store.getters['users/profile/getLatitude']
+      }
+    },
+    longitude: {
+      get(){
+        return (this as any).$store.getters['users/profile/getLongitude']
       }
     },
     valueDateConvert(){

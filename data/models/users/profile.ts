@@ -14,6 +14,8 @@ export type User = {
   address: string,
   city_id: number,
   province_id: number,
+  latitude: string,
+  longitude: string,
   // Personal
   national_code: string,
   father_name: string,

@@ -28,8 +28,8 @@ export const state = () => ({
   address: '',
   city_id: '',
   province_id: '',
-  latitude: "35.724583",
-  longitude: "51.363530",
+  latitude: '',
+  longitude: '',
 })
 export type ProfileState = ReturnType<typeof state>
 
@@ -110,6 +110,12 @@ export const getters: GetterTree<ProfileState, any> = {
   },
   getProvince(state) {
     return state.province_id
+  },
+  getLatitude(state){
+    return Number(state.latitude)
+  },
+  getLongitude(state){
+    return Number(state.longitude)
   }
 }
 
@@ -136,6 +142,8 @@ export const mutations: MutationTree<ProfileState> = {
     state.confirm_plan = user.data.confirm_plan
     state.confirm_datetime = user.data.confirm_datetime
     state.address = user.data.address.address
+    state.latitude = user.data.address.latitude
+    state.longitude = user.data.address.longitude
     state.city_id = user.data.address.city_id
     state.province_id = user.data.address.province_id
     state.phone = state.account_type == '1'
@@ -221,6 +229,12 @@ export const mutations: MutationTree<ProfileState> = {
   },
   setPassword(state, password) {
     state.password = password
+  },
+  setLatitude(state, latitude){
+    state.latitude = latitude.toString()
+  },
+  setLongitude(state, longitude){
+    state.longitude = longitude.toString()
   }
 }
 
@@ -248,6 +262,8 @@ export const actions: ActionTree<ProfileState, any> = {
         national_id: state.national_id,
         registration_id: state.registration_id,
         address: state.address,
+        latitude: state.latitude,
+        longitude: state.longitude,
         city_id: state.city_id,
         province_id: state.province_id,
       }
@@ -265,12 +281,13 @@ export const actions: ActionTree<ProfileState, any> = {
         national_code: state.national_code,
         father_name: state.father_name,
         birthdate: moment.from(state.birthdate, 'fa', 'YYYY-MM-DD')
+          .locale('fa')
           .format('YYYY/MM/DD'),
         address: state.address,
-        city_id: state.city_id,
-        province_id: state.province_id,
         latitude: state.latitude,
         longitude: state.longitude,
+        city_id: state.city_id,
+        province_id: state.province_id,
       }
     }
 
