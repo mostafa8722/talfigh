@@ -1,7 +1,6 @@
 import Repository from '~/data/repositories/repository'
 import { System } from '~/data/models/settings/system'
 
-
 export default class system extends Repository {
 
   headers = {
