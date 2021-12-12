@@ -1,8 +1,7 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import { User } from '~/data/models/users/profile'
 import { assign, concat, flattenDeep, toNumber } from 'lodash'
-
-import { actions as action } from '~/store/utilities/modal'
+import moment from 'jalali-moment'
 
 export const state = () => ({
   user: {} as User,
@@ -78,6 +77,11 @@ export const getters: GetterTree<ProfileState, any> = {
     return state.father_name
   },
   getBirthDate(state) {
+    return moment.from(state.birthdate, 'fa',  'YYYY-MM-DD')
+      .locale('en')
+      .format('YYYY-MM-DD')
+  },
+  getBirthDateFa(state){
     return state.birthdate
   },
   getPhone(state) {
@@ -184,7 +188,9 @@ export const mutations: MutationTree<ProfileState> = {
     state.father_name = fatherName
   },
   setBirthDate(state, birthDate) {
-    state.birthdate = birthDate
+    state.birthdate = moment.from(birthDate, 'en',  'YYYY-MM-DD')
+      .locale('fa')
+      .format('YYYY-MM-DD')
   },
   setPhone(state, phone) {
     state.phone = phone
@@ -258,7 +264,8 @@ export const actions: ActionTree<ProfileState, any> = {
         phone: state.phone,
         national_code: state.national_code,
         father_name: state.father_name,
-        birthdate: state.birthdate,
+        birthdate: moment.from(state.birthdate, 'fa', 'YYYY-MM-DD')
+          .format('YYYY/MM/DD'),
         address: state.address,
         city_id: state.city_id,
         province_id: state.province_id,
@@ -274,11 +281,6 @@ export const actions: ActionTree<ProfileState, any> = {
     }
 
     const res = await this.$repositories.profile().updateInfoUser(id, data)
-      .then((res)=>{
-        return res
-      })
-      .catch((error)=>{
-        throw error
-    })
+    return res
   }
 }

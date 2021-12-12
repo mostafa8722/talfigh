@@ -124,38 +124,37 @@
             ></v-text-field>
 
             <div class="mb-2 mr-2">تاریخ تولد</div>
-            <date-picker v-model='birthdate' />
+<!--            <date-picker v-model='birthdate' />-->
 <!--            <v-text-field-->
 <!--              class="rounded-lg"-->
 <!--              placeholder="تاریخ تولد"-->
 <!--              v-model='date'-->
 <!--              outlined-->
 <!--            ></v-text-field>-->
-<!--            <v-date-picker v-model='date' :first-day-of-week='0' locale='fa'></v-date-picker>-->
-<!--            <v-menu-->
-<!--              v-model="menu"-->
-<!--              :close-on-content-click="false"-->
-<!--              max-width="350"-->
-<!--            >-->
-<!--              <template v-slot:activator="{ on, attrs }">-->
-<!--                <v-text-field-->
-<!--                  readonly-->
-<!--                  class="rounded-lg"-->
-<!--                  placeholder="تاریخ تولد"-->
-<!--                  v-model='date'-->
-<!--                  outlined-->
-<!--                  v-bind="attrs"-->
-<!--                  v-on="on"-->
-<!--                ></v-text-field>-->
-<!--              </template>-->
-<!--              <v-date-picker-->
-<!--                locale='fa'-->
-<!--                first-day-of-week='6'-->
-<!--                locale-first-day-of-year='30'-->
-<!--                v-model="date"-->
-<!--                @change="menu = false"-->
-<!--              ></v-date-picker>-->
-<!--            </v-menu>-->
+<!--            <v-date-picker first-day-of-week='6' v-model='date' locale='fa'></v-date-picker>-->
+            <v-menu
+              v-model="menu"
+              :close-on-content-click="false"
+              max-width="350"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  readonly
+                  class="rounded-lg"
+                  placeholder="تاریخ تولد"
+                  :value='valueDateConvert'
+                  outlined
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                locale='fa'
+                first-day-of-week='6'
+                v-model="birthdate"
+                @change="menu = false"
+              ></v-date-picker>
+            </v-menu>
           </div>
         </v-col>
         <v-col cols="12" lg="3" md="6">
@@ -443,13 +442,6 @@ export default Vue.extend({
              action: 'error'
            })
          }
-      }).catch((error:any)=>{
-        (this as any).$store.commit('utilities/modal/SET_MODAL', {
-          show: true,
-          title: 'آپدیت',
-          body: 'در روند آپدیت خطایی وجود دارد',
-          action: 'error'
-        })
       })
     },
     requiredValid(value:any){
@@ -673,6 +665,9 @@ export default Vue.extend({
       get(){
         return (this as any).$store.getters['utilities/modal/getModal']
       }
+    },
+    valueDateConvert(){
+      return (this as any).$store.getters['users/profile/getBirthDateFa']
     }
   },
   created() {

@@ -6,8 +6,8 @@ import Users from '~/data/repositories/users/users'
 import Contract from '~/data/repositories/contract'
 import Profile from '~/data/repositories/users/profile'
 import Cities from '~/data/repositories/cities/cities'
-
 import Score from '~/data/repositories/scores'
+
 export default class Repositories {
   axios: NuxtAxiosInstance
 
@@ -26,7 +26,6 @@ export default class Repositories {
   users = () => new Users(this.axios)
 
   scores = () => new Score(this.axios)
-
 
   profile = () => new Profile(this.axios)
 
