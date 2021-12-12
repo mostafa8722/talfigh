@@ -69,7 +69,7 @@ import Vue from 'vue'
 import { System } from '~/data/models/settings/system'
 
 export default Vue.extend({
-
+  head: { title: 'تنظیمات سیستمی' },
   async fetch() {
     await this.$store.dispatch('settings/system/getSettings')
     this.system = this.$store.getters['settings/system/GET_SETTINGS']
