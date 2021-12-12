@@ -134,7 +134,7 @@
         </template>
       </v-data-table>
     </div>
-    <th-modal @input='updateModal' v-model='modal.show'>
+    <th-modal @input='updateModal' :value='modal.show'>
       <template #title>
         {{ modal.title }}
       </template>

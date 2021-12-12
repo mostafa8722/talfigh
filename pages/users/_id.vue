@@ -11,6 +11,7 @@
             <v-text-field
               class="rounded-lg"
               placeholder="نام"
+              :rules='[requiredValid]'
               v-model='firstname'
               outlined
             ></v-text-field>
@@ -18,6 +19,8 @@
             <v-text-field
               class="rounded-lg"
               placeholder="ایمیل"
+              type='email'
+              :rules='[requiredValid]'
               v-model='email'
               outlined
             ></v-text-field>
@@ -26,6 +29,7 @@
             <v-text-field
               class="rounded-lg"
               placeholder="نام نمایشی"
+              :rules='[requiredValid]'
               v-model='display_name'
               outlined
             ></v-text-field>
@@ -34,6 +38,7 @@
             <v-text-field
               class="rounded-lg"
               placeholder="کیء اقتصادی"
+              :rules='[requiredValid]'
               v-model='economic_code'
               outlined
             ></v-text-field>
@@ -43,6 +48,7 @@
               class="rounded-lg"
               placeholder="استان"
               :items='provinces'
+              :rules='[requiredValid]'
               item-text='name'
               item-value='id'
               v-model='province'
@@ -53,6 +59,7 @@
             <v-text-field
               class="rounded-lg"
               placeholder="شناسه ثبت"
+              :rules='[requiredValid]'
               v-model='registration_id'
               outlined
             ></v-text-field>
@@ -61,6 +68,7 @@
             <div class="mb-2 mr-2">نام</div>
             <v-text-field
               v-model='firstname'
+              :rules='[requiredValid]'
               class="rounded-lg"
               placeholder="نام"
               outlined
@@ -69,6 +77,7 @@
             <v-text-field
               class="rounded-lg"
               v-model='username'
+              :rules='[requiredValid]'
               placeholder="نام کاربری"
               outlined
             ></v-text-field>
@@ -77,6 +86,8 @@
             <v-text-field
               v-model='mobile1'
               class="rounded-lg"
+              :rules='[requiredValid, numberValid]'
+              type='phone'
               placeholder="موبایل اول"
               outlined
             ></v-text-field>
@@ -85,6 +96,8 @@
             <v-text-field
               v-model='mobile2'
               class="rounded-lg"
+              :rules='[numberValid]'
+              typeof='phone'
               placeholder="موبایل دوم"
               outlined
             ></v-text-field>
@@ -94,6 +107,7 @@
               class="rounded-lg"
               placeholder="استان"
               outlined
+              :rules='[requiredValid]'
               :items='provinces'
               item-text='name'
               item-value='id'
@@ -104,6 +118,7 @@
             <v-text-field
               class="rounded-lg"
               v-model='address'
+              :rules='[requiredValid]'
               placeholder="آدرس"
               outlined
             ></v-text-field>
@@ -150,12 +165,14 @@
             class="rounded-lg"
             placeholder="نام خانوادگی"
             v-model='lastname'
+            :rules='[requiredValid]'
             outlined
           ></v-text-field>
           <div class="mb-2 mr-2">نام کاربری</div>
           <v-text-field
             class="rounded-lg"
             placeholder="نام کاربری"
+            :rules='[requiredValid]'
             v-model='username'
             outlined
           ></v-text-field>
@@ -164,6 +181,7 @@
           <v-text-field
             class="rounded-lg"
             placeholder="نام سازمان"
+            :rules='[requiredValid]'
             v-model='organization'
             outlined
           ></v-text-field>
@@ -172,6 +190,7 @@
           <v-text-field
             class="rounded-lg"
             v-model='national_id'
+            :rules='[requiredValid]'
             placeholder="شناسه ملی"
             outlined
           ></v-text-field>
@@ -182,6 +201,7 @@
               placeholder="شهر"
               :items='cities'
               item-text='name'
+              :rules='[requiredValid]'
               item-value='id'
               v-model='city'
               outlined
@@ -191,6 +211,8 @@
           <v-text-field
             class="rounded-lg"
             v-model='phone'
+            :rules='[requiredValid]'
+            type='phone'
             placeholder="شماره تلفن"
             outlined
           ></v-text-field>
@@ -199,6 +221,7 @@
           <div class="mb-2 mr-2">نام خانوادگی</div>
           <v-text-field
             class="rounded-lg"
+            :rules='[requiredValid]'
             v-model='lastname'
             placeholder="نام خانوادگی"
             outlined
@@ -207,6 +230,7 @@
           <v-text-field
             class="rounded-lg"
             v-model='display_name'
+            :rules='[requiredValid]'
             placeholder="نام نمایشی"
             outlined
           ></v-text-field>
@@ -216,6 +240,8 @@
             class="rounded-lg"
             placeholder="ایمیل"
             v-model='email'
+            :rules='[requiredValid]'
+            type='email'
             outlined
           ></v-text-field>
 
@@ -224,6 +250,8 @@
             class="rounded-lg"
             v-model='national_code'
             placeholder="کد ملی"
+            :rules='[requiredValid, numberValid]'
+            type='number'
             outlined
           ></v-text-field>
 
@@ -233,6 +261,7 @@
               placeholder="شهر"
               outlined
               :items='cities'
+              :rules='[requiredValid]'
               item-text='name'
               item-value='id'
               v-model='city'
@@ -242,6 +271,7 @@
           <v-text-field
             class="rounded-lg"
             placeholder="نام پدر"
+            :rules='[requiredValid]'
             v-model='father_name'
             outlined
           ></v-text-field>
@@ -250,6 +280,8 @@
           <v-text-field
             class="rounded-lg"
             v-model='phone'
+            :rules='[numberValid]'
+            type='phone'
             placeholder="شماره تلفن ثابت"
             outlined
           ></v-text-field>
@@ -272,6 +304,8 @@
             <v-text-field
               class="rounded-lg"
               v-model='mobile1'
+              :rules='[requiredValid, numberValid]'
+              type='phone'
               placeholder="شماره موبایل"
               outlined
             ></v-text-field>
@@ -335,11 +369,26 @@
         </v-col>
       </v-row>
       <div class="float-md-left d-flex justify-center">
-        <v-btn @click='updateUser' class="px-10" rounded outlined color="success"
+        <v-btn :disabled='disabled'
+               @click='updateUser' class="px-10" rounded outlined color="success"
           >ذخیره اطلاعات</v-btn
         >
       </div>
     </v-card>
+
+    <th-modal @input='updateModal' :value='modal.show'>
+      <template #title>
+        {{ modal.title }}
+      </template>
+      <template #body>
+        {{modal.body}}
+      </template>
+      <template #actions>
+        <v-btn @click='confirmModal' :color='modal.action'>
+          باشه
+        </v-btn>
+      </template>
+    </th-modal>
   </TLFContainer>
 </template>
 
@@ -355,6 +404,9 @@ export default Vue.extend({
     return {
       menu: false,
       cities: [],
+      rules: {
+      },
+      disabled: false,
       mapOptions: {
         zoom: 16,
         maxZoom: 18,
@@ -374,7 +426,57 @@ export default Vue.extend({
       (this as any).mapOptions.selectedLocation = event.coordinate
     },
     updateUser(){
-          console.log(...arguments)
+      (this as any).$store.dispatch('users/profile/updateUser', this.$route.params.id)
+        .then((res:any)=>{
+         if (res.success){
+           (this as any).$store.commit('utilities/modal/SET_MODAL', {
+             show: true,
+             title: 'آپدیت',
+             body: 'آپدیت با موفقیت انجام شد',
+             action: 'success'
+           })
+         }else{
+           (this as any).$store.commit('utilities/modal/SET_MODAL', {
+             show: true,
+             title: 'آپدیت',
+             body: 'آپدیت با موفقیت انجام نشد',
+             action: 'error'
+           })
+         }
+      }).catch((error:any)=>{
+        (this as any).$store.commit('utilities/modal/SET_MODAL', {
+          show: true,
+          title: 'آپدیت',
+          body: 'در روند آپدیت خطایی وجود دارد',
+          action: 'error'
+        })
+      })
+    },
+    requiredValid(value:any){
+      !!value ? (this as any).disabled = false : (this as any).disabled = true
+      return !!value || 'این فیلد الزامی می باشد'
+    },
+    numberValid(value:any){
+      !isNaN(value) || value == ""
+        ? (this as any).disabled = false
+        : (this as any).disabled = true
+      return !isNaN(value) || value == "" || 'مقدار عددی باید وارد شود'
+    },
+    confirmModal(){
+      (this as any).$store.commit('utilities/modal/SET_MODAL', {
+        show: false,
+        title: '',
+        body: '',
+        action: ''
+      })
+    },
+    updateModal(value: any){
+      (this as any).$store.commit('utilities/modal/SET_MODAL', {
+        show: false,
+        title: '',
+        body: '',
+        action: ''
+      })
     }
   },
   computed: {
@@ -567,6 +669,11 @@ export default Vue.extend({
         return (this as any).$store.getters['cities/provinces/getProvincesWithCity']
       }
     },
+    modal: {
+      get(){
+        return (this as any).$store.getters['utilities/modal/getModal']
+      }
+    }
   },
   created() {
     (this as any).$store.dispatch('users/profile/getUser', this.$route.params.id);
@@ -576,7 +683,7 @@ export default Vue.extend({
           let finds = find((this as any).provinces, (item)=>{
             return item.id == (this as any).province
           });
-          (this as any).cities = finds.city
+          (this as any).cities = finds?.city
         }
       }, 1000)
     })
@@ -586,7 +693,7 @@ export default Vue.extend({
       let finds = find((this as any).provinces, (item)=>{
         return item.id == (this as any).province
       });
-      (this as any).cities = finds.city
+      (this as any).cities = finds?.city
     },
   },
   mounted() {
