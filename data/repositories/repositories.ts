@@ -6,6 +6,7 @@ import Users from '~/data/repositories/users/users'
 import Contract from '~/data/repositories/contract'
 import Scores from '~/data/repositories/scores'
 import System from '~/data/repositories/settings/system'
+import MainPageSetting from '~/data/repositories/settings/mainPage'
 import Profile from '~/data/repositories/users/profile'
 import Cities from '~/data/repositories/cities/cities'
 
@@ -33,5 +34,7 @@ export default class Repositories {
   profile = () => new Profile(this.axios)
 
   cities = () => new Cities(this.axios)
+
+  mainPageSetting = () => new MainPageSetting(this.axios)
 
 }
