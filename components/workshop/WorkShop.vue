@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid>
+  <v-container class='pa-0' fluid>
 
     <!-- Add Workshop-->
-    <add-workshop></add-workshop>
+    <add-workshop class='mb-11'></add-workshop>
     <!--Workshop Chart-->
     <workshop-table></workshop-table>
   </v-container>
