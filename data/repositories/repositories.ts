@@ -10,6 +10,7 @@ import Score from '~/data/repositories/scores'
 
 import Scores from '~/data/repositories/scores'
 import System from '~/data/repositories/settings/system'
+import MainPageSetting from '~/data/repositories/settings/mainPage'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -35,5 +36,7 @@ export default class Repositories {
   profile = () => new Profile(this.axios)
 
   cities = () => new Cities(this.axios)
+
+  mainPageSetting = () => new MainPageSetting(this.axios)
 
 }
