@@ -92,7 +92,7 @@ const config: NuxtConfig = {
       dark: false,
       themes: {
         light: {
-          primary: '#2D9DCD',
+          primary: "#2D9DCD",
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
@@ -124,7 +124,7 @@ const config: NuxtConfig = {
         }
       }
     },
-    transpile: ['vuetify/lib', 'tiptap-vuetify']
+    transpile: ['vuetify/lib', "tiptap-vuetify"]
   }
 }
 
