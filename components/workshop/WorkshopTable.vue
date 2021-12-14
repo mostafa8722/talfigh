@@ -2,7 +2,7 @@
   <v-container class='pa-0' fluid>
     <v-data-table
       :headers='headers'
-      :items='filteredItems'
+      :items='items'
       class='elevation-1 px-5'
       sort-by='calories'
     >
@@ -11,7 +11,7 @@
         <v-dialog
           v-model='dialog'
         >
-          <add-score :edit='true'></add-score>
+          <add-workshop :edit='true'></add-workshop>
         </v-dialog>
 
         <v-dialog v-model='dialogDelete' max-width='500px'>
@@ -116,13 +116,14 @@
 
 <script lang='ts'>
 import Vue from 'vue'
-import AddScore from '~/components/financial/score/AddScore.vue'
-import { Score } from '~/data/models/score'
+
 import { mapGetters } from 'vuex'
+import AddWorkshop from '~/components/workshop/AddWorkshop.vue'
+import { Workshop } from '~/data/models/Workshop'
 
 export default Vue.extend({
   name: 'WorkShopTable',
-  components: { AddScore },
+  components: { AddWorkshop },
   data() {
     return {
       searchName: '',
@@ -133,43 +134,28 @@ export default Vue.extend({
       modalConfirm: false,
       lastId: 0,
       headers: [
-        { text: 'شناسه', value: 'id', align: 'start' },
+        { text: 'شناسه', value: 'city_id', align: 'start' },
         { text: 'نام کارگاه', value: 'title', align: 'start' },
-        { text: 'کد کارگاه', value: 'price', align: 'start' },
+        { text: 'کد کارگاه', value: 'code', align: 'start' },
         { text: 'عملیات', value: 'actions', align: 'center', sortable: false }
       ],
       editedIndex: -1,
       editedItem: {
-        id: 0,
+        code: 0,
         title: '',
-        price: 0,
-        is_archive: 0,
-        rate_number: 0,
-        created_at: '',
-        updated_at: ''
-      } as Score,
+        city_id: ''
+      } as Workshop,
       defaultItem: {
-        id: 0,
+        code: 0,
         title: '',
-        price: '',
-        is_archive: 0,
-        created_at: '',
-        updated_at: ''
+        city_id: ''
       }
     }
   },
   computed: {
     ...mapGetters({
-      items: 'finance/scores/GET_SCORES'
+      items: 'workshops/GET_WORKSHOPS'
     }),
-    filteredItems() {
-      return this.items.filter((e: Score) => {
-
-        return e.is_archive != 1
-      })
-
-    }
-    ,
     modal: {
       get() {
         return (this as any).$store.getters['finance/scores/getModal']
@@ -184,31 +170,31 @@ export default Vue.extend({
 
   },
   methods: {
-    editItem(item: Score) {
+    editItem(item: Workshop) {
 
-      console.log(item.id)
-      this.$data.lastId = item.id
+      console.log(item.code)
+      this.$data.lastId = item.code
       this.$data.dialog = true
       this.modal = {
         show: true,
-        title: 'حذف صفحه',
-        body: 'آیا مطمئن از حذف این صفحه هستید؟',
+        title: 'تغییر کارگاه',
+        body: 'آیا مطمئن از تغییر این مورد هستید؟',
         action: ''
       }
     },
-    deleteItem(item: Score) {
-      console.log(item.id)
-      this.$data.lastId = item.id
+    deleteItem(item: Workshop) {
+      console.log(item.code)
+      this.$data.lastId = item.code
       this.$data.confirmDelete = true
       this.modal = {
         show: true,
-        title: 'حذف صفحه',
-        body: 'آیا مطمئن از حذف این صفحه هستید؟',
+        title: 'حذف کارگاه',
+        body: 'آیا مطمئن از حذف این مورد هستید؟',
         action: ''
       }
     },
     confirmModal() {
-      this.$store.dispatch('finance/scores/archiveScores', this.$data.lastId)
+      this.$store.dispatch('workshops/deleteWorkshop', this.$data.lastId)
       this.$data.confirmDelete = false
     }
   }

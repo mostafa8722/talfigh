@@ -5,7 +5,7 @@ export default class Scores extends Repository {
 
   headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
+    'Authorization': '2|V4fPaEQfLvMQERIuErzXqhMtRw9WoDowzbGkYgmc'
   }
 
   async setScore(data: Score): Promise<Score> {
