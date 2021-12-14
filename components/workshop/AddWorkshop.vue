@@ -1,36 +1,35 @@
 <template>
-  <v-container fluid>
-    <v-card class='d-flex wrapper-card' height='132px'>
-      <div class=' d-flex flex-column'>
-        <div class='txt-label mb-auto'>امتیاز دهی</div>
-        <div class='my-auto'>
-          <v-text-field v-model='item.title' class='txt-input' dense filled label='امتیاز دهی' outlined></v-text-field>
-        </div>
-      </div>
-      <div class=' d-flex flex-column'>
-        <div class='txt-label mb-auto mr-10'>مبلغ</div>
-        <div class='my-auto'>
-          <v-text-field v-model='item.price' class='txt-input mr-10' dense filled label='مبلغ' outlined
-                        rounded></v-text-field>
-        </div>
-      </div>
-      <div class=' d-flex flex-column'>
-        <div class='txt-label mb-auto mr-10'>درجه</div>
-        <div class='my-auto'>
-          <v-text-field v-model='item.rate' class='txt-input mr-10' dense filled label='درجه' outlined
-                        rounded></v-text-field>
-        </div>
-      </div>
-      <v-btn v-if='!edit' class='mr-auto my-auto ' color='primary' depressed height='41px' rounded width='138px'
-             @click='addScore'>
-        اضافه به لیست
-      </v-btn>
-      <v-btn v-if='edit' class='mr-auto my-auto ' color='primary' depressed height='41px' rounded width='138px'
-             @click='updateItem'>
-        ویرایش
-      </v-btn>
-    </v-card>
+
+  <v-container class='d-flex wrapper-card' fluid>
+    <div class=' d-flex flex-column my-auto'>
+      <div class='txt-label mb-2   mr-10'>کد کارگاه</div>
+      <v-card class='  mr-10' elevation='4px' height='40px' rounded='lg'>
+        <v-text-field v-model='item.code' class='txt-input' dense filled outlined placeholder='
+          کد کارگاه' rounded>
+        </v-text-field>
+      </v-card>
+    </div>
+    <div class=' d-flex flex-column my-auto'>
+      <div class='txt-label mb-2  mr-10'>نام کارگاه</div>
+      <v-card class='  mr-10' elevation='4px' height='40px' rounded='lg'>
+        <v-text-field v-model='item.rate' class='txt-input' dense filled outlined placeholder='نام کارگاه' rounded>
+        </v-text-field>
+      </v-card>
+    </div>
+    <div class=' d-flex flex-column my-auto'>
+      <div class='txt-label mb-2  mr-10'>شهر کارگاه</div>
+      <v-card class='  mr-10' elevation='4px' height='40px' rounded='lg'>
+        <v-text-field v-model='item.rate' class='txt-input' dense filled outlined placeholder='شهر کارگاه' rounded>
+        </v-text-field>
+      </v-card>
+    </div>
+
+    <v-btn v-if='edit' class='mr-auto my-auto ' color='primary' depressed height='41px' rounded width='138px'
+           @click='updateItem'>
+      ویرایش
+    </v-btn>
   </v-container>
+
 </template>
 
 <script lang='ts'>
@@ -73,18 +72,17 @@ export default Vue.extend({
   font-weight: normal;
   font-size: 14px;
   line-height: 24px;
-  color: #000000;
+  color: #FFFFFF;
 }
 
 .wrapper-card {
-  padding: 11px 65px;
-  box-shadow: 0 28px 30px -16px rgba(0, 0, 0, 0.25);
-  border-radius: 28px;
+  height: 132px;
+
+
 }
 
 .txt-input {
-  border: 2px solid #FBFBFB;
-  box-sizing: border-box;
+
   border-radius: 10px
 
 }

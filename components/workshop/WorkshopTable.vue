@@ -1,13 +1,13 @@
 <template>
-  <v-container fluid>
+  <v-container class='pa-0' fluid>
     <v-data-table
       :headers='headers'
       :items='filteredItems'
-      class='elevation-1'
+      class='elevation-1 px-5'
       sort-by='calories'
     >
       <!--Delete Dialog-->
-      <template v-slot:top>
+      <template #top>
         <v-dialog
           v-model='dialog'
         >
@@ -42,6 +42,41 @@
           </template>
         </th-modal>
 
+      </template>
+      <template #top>
+        <v-row class='pa-md-0 pa-4 px-md-5'>
+          <v-col class='pt-1' cols='12' lg='3' md='3'
+          >
+            <v-text-field
+              v-model='searchCode'
+              background-color='#FBFBFB'
+              height='40'
+              placeholder='جستجوی بر اساس کد کارگاه'
+              rounded
+            ></v-text-field
+            >
+          </v-col>
+          <v-col class='pt-1' cols='12' lg='3' md='3'
+          >
+            <v-text-field
+              v-model='searchName'
+              background-color='#FBFBFB'
+              height='40'
+              placeholder='جستجوی نام کارگاه'
+              rounded
+            ></v-text-field
+            >
+          </v-col>
+          <v-col cols='12' lg='1' md='1'
+          >
+            <v-btn class='white--text px-8 mt-2' color='#7A7A7A' rounded
+            >جستجو
+            </v-btn
+            >
+          </v-col
+          >
+        </v-row>
+        <v-divider />
       </template>
       <!--      edit and delete buttons-->
       <template v-slot:item.actions='{ item }'>
@@ -90,6 +125,8 @@ export default Vue.extend({
   components: { AddScore },
   data() {
     return {
+      searchName: '',
+      searchCode: '',
       dialog: false,
       dialogDelete: false,
       confirmDelete: false,
@@ -97,9 +134,9 @@ export default Vue.extend({
       lastId: 0,
       headers: [
         { text: 'شناسه', value: 'id', align: 'start' },
-        { text: 'امتیازدهی', value: 'title', align: 'start' },
-        { text: 'مبلغ', value: 'price', align: 'start' },
-        { text: 'Actions', value: 'actions', sortable: false }
+        { text: 'نام کارگاه', value: 'title', align: 'start' },
+        { text: 'کد کارگاه', value: 'price', align: 'start' },
+        { text: 'عملیات', value: 'actions', align: 'center', sortable: false }
       ],
       editedIndex: -1,
       editedItem: {

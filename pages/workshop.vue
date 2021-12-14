@@ -1,12 +1,15 @@
 <template>
-  <v-container fluid>
-    <tlf-container>
-      <div class='txt'>کارگاه</div>
-
+  <v-container class='pa-0' fluid>
+    <tlf-container class='d-flex'>
+      <div class='txt'>ایجاد کارگاه</div>
+      <v-btn class='mr-auto my-auto ' color='primary' depressed height='38px' rounded width='185px'
+      >
+        ذخیره محتویات
+      </v-btn>
     </tlf-container>
-    <div id='add'>
+    <v-container id='add' class='pa-0' fluid>
       <work-shop></work-shop>
-    </div>
+    </v-container>
   </v-container>
 </template>
 
@@ -32,13 +35,15 @@ export default Vue.extend({
 
 <style lang='scss' scoped>
 .txt {
-  font-weight: 800;
-  font-size: 24px;
-  line-height: 41px;
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 45px;
+  text-align: center;
   color: #FFFFFF;
 }
 
 #add {
-  margin-top: 88px;
+  margin-top: 10px;
+
 }
 </style>
