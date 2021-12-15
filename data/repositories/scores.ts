@@ -2,10 +2,9 @@ import Repository from '~/data/repositories/repository'
 import { Score } from '~/data/models/score'
 
 export default class Scores extends Repository {
-
   headers = {
     'Accept': 'application/json',
-    'Authorization': '2|V4fPaEQfLvMQERIuErzXqhMtRw9WoDowzbGkYgmc'
+    'Authorization': 'Bearer 24|fLjLNE96BL0omAtyYW7BOfPlS2uz2gCQEcY9qco7'
   }
 
   async setScore(data: Score): Promise<Score> {

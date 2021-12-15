@@ -6,7 +6,7 @@ export default class Workshops extends Repository {
 
   headers = {
     'Accept': 'application/json',
-    'Authorization': '2|V4fPaEQfLvMQERIuErzXqhMtRw9WoDowzbGkYgmc'
+    'Authorization': 'Bearer 24|fLjLNE96BL0omAtyYW7BOfPlS2uz2gCQEcY9qco7'
   }
 
   async getWorkshops(): Promise<Workshop[]> {
