@@ -356,7 +356,6 @@ export default Vue.extend({
     },
 
        save(){
-
           this.$store.dispatch('settings/site/setSettings', this.site)
 
       },
