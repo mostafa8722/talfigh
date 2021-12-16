@@ -307,8 +307,7 @@ export default Vue.extend({
 
         await this.$store.dispatch('settings/site/getSettings')
         let site = this.$store.getters['settings/site/getSiteSetting']
-        console.log("tttt11",site.latitude)
-        console.log("tttt22",site.longitude)
+
         this.site = {
             id: site.id,
             page_title: site.page_title,
