@@ -13,7 +13,7 @@ export default class MainPage extends Repository {
     })
     return res.data
   };
-    async setSettings(data: SiteSetting): Promise<SiteSetting> {
+    async setSettings(data: SiteSetting): Promise<{data:SiteSetting,success:boolean}> {
         const res = await this.axios.patch('/setting/site/save', data, {
             headers: {
                 'Accept': 'application/json',

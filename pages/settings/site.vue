@@ -271,7 +271,7 @@ import Vue from 'vue';
 import { SiteSetting } from '~/data/models/settings/site'
 import { mapGetters } from 'vuex'
 import VueToast from 'vue-toast-notification';
-import UploadComponent from '~/components/UploadComponentBase64';
+import UploadComponent from '~/components/UploadComponentBase64.vue';
 Vue.use(VueToast);
 export default Vue.extend({
   name: "Site",
@@ -287,7 +287,28 @@ export default Vue.extend({
     },
   data() {
     return {
-        site: {},
+        site: {
+            id: Number,
+            page_title: "" as string,
+            instagram: "" as string,
+            facebook: "" as string,
+            whatsapp: "" as string,
+            google_plus: "" as string,
+            telegram: "" as string,
+            aparat: "" as string,
+            logo_menu: "" as string,
+            latitude: 0 as number,
+            longitude: 0 as number,
+            address: "" as string ,
+            zipcode: "" as string,
+            meta_description: "" as string,
+            fax: "" as string,
+            phone: "" as string,
+            mobile: "" as string,
+            email: "" as string,
+            created_at: "" as string,
+            updated_at: "" as string
+        },
         logo_menu:"",
       mapOptions: {
         zoom: 16,
@@ -339,9 +360,12 @@ export default Vue.extend({
     watch:{
         message(old_value,new_value){
 
-                this.$toast.success("settings updated successfully", {
-                    position: 'bottom-left'
-                })
+            this.$toast.open({
+                message: 'settings updated successfully',
+                type: 'success',
+                position:'bottom-left'
+                // all of other options may go here
+            });
 
         },
 
@@ -359,7 +383,7 @@ export default Vue.extend({
           this.$store.dispatch('settings/site/setSettings', this.site)
 
       },
-      addImage(base64){
+      addImage(base64: string){
         this.site.logo_menu = base64
       }
   },
