@@ -6,6 +6,7 @@ import Users from '~/data/repositories/users/users'
 import Contract from '~/data/repositories/contract'
 import Scores from '~/data/repositories/scores'
 import System from '~/data/repositories/settings/system'
+import Footer from '~/data/repositories/settings/footer'
 import MainPageSetting from '~/data/repositories/settings/mainPage'
 import Profile from '~/data/repositories/users/profile'
 import Cities from '~/data/repositories/cities/cities'
@@ -30,6 +31,8 @@ export default class Repositories {
   scores = () => new Scores(this.axios)
 
   systemSettings = () => new System(this.axios)
+
+  footerSettings = () => new Footer(this.axios)
 
   profile = () => new Profile(this.axios)
 
