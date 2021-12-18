@@ -2,9 +2,7 @@
   <div class="pa-2 pa-md-10">
     <v-row>
       <v-col cols="12" lg="3" md="3">
-        <span class="white--text" style="font-size: 1.6rem"
-          >رسته محصولات</span
-        >
+        <span class="white--text" style="font-size: 1.6rem">رسته محصولات</span>
       </v-col>
       <v-col cols="12" lg="3" md="3"
         ><v-btn class="button px-10 rounded-xl" color="primary"
@@ -13,7 +11,7 @@
       >
     </v-row>
     <v-row>
-      <v-col cols="12" lg="3" md="3">
+      <v-col cols="12" xl="3">
         <v-card class="pa-6 rounded-xl">
           <div style="font-size: 1.2rem; font-weight: 700">اضافه کردن رسته</div>
           <div class="mr-1 mt-6">عنوان رسته</div>
@@ -34,13 +32,13 @@
             >
           </v-row>
           <v-text-field
-                background-color="#FBFBFB"
-                height="40"
-                rounded
-                hide-details
-                append-icon="fas fa-search"
-                placeholder="جستجو"
-              ></v-text-field>
+            background-color="#FBFBFB"
+            height="40"
+            rounded
+            hide-details
+            append-icon="fas fa-search"
+            placeholder="جستجو"
+          ></v-text-field>
           <v-virtual-scroll
             class="mt-4 tlf-v-scroll"
             :items="categories"
@@ -83,7 +81,7 @@
           </v-virtual-scroll>
         </v-card>
       </v-col>
-      <v-col cols="12" lg="9" md="9">
+      <v-col cols="12" xl="9">
         <v-card class="rounded-xl">
           <v-card-title class="card-title pa-10"
             >چینش رسته محصولات</v-card-title
@@ -93,7 +91,7 @@
               <template #label="{ item }" class="card">
                 <div>{{ item.name }}</div>
               </template>
-              <template #append>
+              <template #append="{ item }">
                 <v-row>
                   <v-col cols="12" lg="4" md="4" class="pr-4 pr-md-0">
                     <div class="float-left">
@@ -103,6 +101,7 @@
                         elevation="0"
                         x-small
                         fab
+                        @click="showEditCategoryDialog(item.name)"
                       >
                         <v-icon
                           :size="
@@ -160,25 +159,22 @@
       </template>
       <template #body>
         <div class="mr-1 mt-2 black--text">عنوان رسته</div>
-          <v-row>
-            <v-col cols="8">
-              <v-text-field
-                v-model="selectedCategory"
-                height="40"
-                background-color="#FBFBFB"
-                class="pt-0"
-                placeholder="عنوان رسته"
-                rounded
-              ></v-text-field
-            ></v-col>
-            <v-col cols="3"
-              ><v-btn class="rounded-xl mt-1" color="primary"
-                >اضافه کردن</v-btn
-              ></v-col
-            >
-          </v-row>
+        <v-row>
+          <v-col cols="8">
+            <v-text-field
+              v-model="selectedCategory"
+              height="40"
+              background-color="#FBFBFB"
+              class="pt-0"
+              placeholder="عنوان رسته"
+              rounded
+            ></v-text-field
+          ></v-col>
+          <v-col cols="3"
+            ><v-btn class="rounded-xl mt-1" color="primary">ذخیره</v-btn></v-col
+          >
+        </v-row>
       </template>
-      
     </th-modal>
   </div>
 </template>
@@ -190,53 +186,16 @@ export default {
     return {
       selectedCategory: {},
       editCategoryDialog: false,
-      categories: [
-        {
-          id: 1,
-          title: 'کوزه'
-        },
-        {
-          id: 2,
-          title: 'سفال'
-        }
-      ],
-      treeItems: [
-        {
-          id: 1,
-          name: 'چوب1',
-          children: [{ name: 'چوب2' }, { name: 'چوب3' }]
-        },
-        {
-          id: 2,
-          name: 'چوب4',
-          children: [
-            { name: 'چوب5' },
-            { name: 'چوب6' },
-            {
-              name: 'چوب7',
-              children: [{ name: 'چوب8' }, { name: 'چوب9' }]
-            }
-          ]
-        },
-        {
-          id: 3,
-          name: 'چوب10',
-          children: [{ name: 'چوب11' }, { name: 'چوب12' }]
-        },
-        {
-          id: 4,
-          name: 'چوب13',
-          children: [{ name: 'چوب14' }, { name: 'چوب15' }]
-        }
-      ]
+      categories: [],
+      treeItems: [],
     }
   },
   methods: {
     showEditCategoryDialog(category) {
       this.selectedCategory = category
       this.editCategoryDialog = true
-    }
-  }
+    },
+  },
 }
 </script>
 

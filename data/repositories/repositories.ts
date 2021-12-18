@@ -9,6 +9,7 @@ import MainPageSetting from '~/data/repositories/settings/mainPage'
 import SiteSetting from '~/data/repositories/settings/site'
 import Profile from '~/data/repositories/users/profile'
 import Cities from '~/data/repositories/cities/cities'
+import Categories from '~/data/repositories/categories'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -36,5 +37,6 @@ export default class Repositories {
   mainPageSetting = () => new MainPageSetting(this.axios)
 
   siteSetting = () => new SiteSetting(this.axios)
-
+  
+  categories = () => new Categories(this.axios)
 }
