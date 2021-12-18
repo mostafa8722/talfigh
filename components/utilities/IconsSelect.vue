@@ -8,7 +8,8 @@
       class='icon__container__box d-flex flex-wrap'
       style='column-gap: 0.5rem; row-gap: 0.5rem'>
       <div @click="$emit('changeIcon', icon)"
-           v-for='(icon, index) in icons' :key='index' class='icon__box'>
+           v-for='(icon, index) in icons' :key='index'
+           :data-icon-box='icon' class='icon__box'>
         <v-icon :data-icon='icon' class='icon'>{{ icon }}</v-icon>
       </div>
     </div>
@@ -25,6 +26,10 @@ export default {
       required: true,
       default: 'نکته'
     },
+    selected: {
+      type: String,
+      required: false,
+    }
   },
   model: {
     event: 'changeIcon'
@@ -50,7 +55,7 @@ export default {
       const containerIcons = document.querySelector('.icon__container__box')
       containerIcons.classList.remove('d-none')
       containerIcons.classList.add('d-flex')
-    },
+    }
     // hideIcons(event){
     //   const containerIcons = document.querySelector('.icon__container__box')
     //   containerIcons.classList.add('d-none')
@@ -58,10 +63,18 @@ export default {
     // }
   },
   mounted() {
-    const icons = document.querySelectorAll('.icon__box')
+    const icons = this.$el.querySelectorAll('.icon__box')
+
     icons.forEach((item) => {
+
+      if (this.$props.selected) {
+        if (item.dataset.iconBox === this.$props.selected) {
+          item.classList.add('selected')
+        }
+      }
+
       item.addEventListener('click', (event) => {
-        icons.forEach((object)=>{
+        icons.forEach((object) => {
           object.classList.remove('selected')
         })
         event.currentTarget.classList.toggle('selected')
@@ -83,6 +96,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
   &:hover {
     border: 2px solid #F2994A;
   }
@@ -92,7 +106,7 @@ export default {
   border: 2px solid #F2994A
 }
 
-.icon__select__btn{
+.icon__select__btn {
   width: 50px;
   height: 50px;
   padding: 5px;
@@ -103,7 +117,8 @@ export default {
   align-items: center;
   border: 2px solid #F2994A;
   transition: background-color 0.5s ease-in-out;
-  &:hover{
+
+  &:hover {
     background-color: #f3f0f0;
   }
 }

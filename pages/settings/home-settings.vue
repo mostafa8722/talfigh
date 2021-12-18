@@ -7,7 +7,7 @@
         >
       </v-col>
       <v-col cols="12" lg="3" md="3"
-        ><v-btn class="button px-10 rounded-xl" color="primary"
+        ><v-btn @click='sendData' class="button px-10 rounded-xl" color="primary"
           >ذخیره محتویات</v-btn
         ></v-col
       >
@@ -92,44 +92,44 @@
           <span class="grey--text">آپلود عکس بزرگ بالا</span>
         </v-col>
         <v-col class='mt-2' cols='12' md='4' lg='4'>
-          <th-upload />
+          <th-upload-base64 @addImage='changeTopImage' />
         </v-col>
         <v-col class="mt-2" cols="12" lg="3" md="3">
           <div class="d-flex flex-row">
-            <v-img class="image" :src="images.topBig"></v-img>
+            <v-img class="image" :src="topImage"></v-img>
           </div>
         </v-col>
         <v-col cols="12">
           <span class="grey--text">آپلود عکس لوگو</span>
         </v-col>
         <v-col class='mt-2' cols='12' md='4' lg='4'>
-          <th-upload />
+          <th-upload-base64 @addImage='changeTopLogoImage' />
         </v-col>
         <v-col class="mt-2" cols="12" lg="3" md="3">
           <div class="d-flex flex-row">
-            <v-img class="image" :src="images.topBig"></v-img>
+            <v-img class="image" :src="topLogoImage"></v-img>
           </div>
         </v-col>
         <v-col cols="12">
           <span class="grey--text">آپلود عکس شعر بالا</span>
         </v-col>
         <v-col class='mt-2' cols='12' md='4' lg='4'>
-          <th-upload />
+          <th-upload-base64 @addImage='changeTopPoemImage' />
         </v-col>
         <v-col class="mt-2" cols="12" lg="3" md="3">
           <div class="d-flex flex-row">
-            <v-img class="image" :src="images.topBig"></v-img>
+            <v-img class="image" :src="topPoemImage"></v-img>
           </div>
         </v-col>
         <v-col cols="12">
           <span class="grey--text">آپلود عکس شعر پایین</span>
         </v-col>
         <v-col class='mt-2' cols='12' md='4' lg='4'>
-          <th-upload />
+          <th-upload-base64 @addImage='changeBottomPoemImage' />
         </v-col>
         <v-col class="mt-2" cols="12" lg="3" md="3">
           <div class="d-flex flex-row">
-            <v-img class="image" :src="images.topBig"></v-img>
+            <v-img class="image" :src="bottomPoemImage"></v-img>
           </div>
         </v-col>
         <v-col cols="12">
@@ -137,13 +137,12 @@
         </v-col>
         <v-row class="mt-2">
           <v-col class='mt-2' cols='12' md='4' lg='4'>
-            <th-upload />
+            <th-upload-base64 @addImage='changeSliders'  />
           </v-col>
           <div class="d-flex flex-row">
-            <v-img class="image mr-8" :src="images.topBig"></v-img>
-            <v-img class="image mr-8" :src="images.topBig"></v-img>
-            <v-img class="image mr-8" :src="images.topBig"></v-img>
-            <v-img class="image mr-8" :src="images.topBig"></v-img>
+            <v-img v-for='(slider, index) in slidersFile'
+                   :key='index'
+                   class="image mr-8" :src="slider"></v-img>
           </div>
         </v-row>
 
@@ -209,90 +208,45 @@
     </div>
     <v-card class="mt-4 pa-8 rounded-lg">
       <v-row>
-        <v-col class="pt-0" cols="12" lg="5" md="5">
-          <span class="label grey--text mr-1">عنوان نکته</span>
-
-          <v-text-field
-            outlined
-            class="rounded-lg pb-0 mt-2"
-            hide-details
-            placeholder="عنوان نکته"
-          ></v-text-field
-        ></v-col>
-        <v-col cols="12" lg="3" md="3">
-          <div class="mt-8">
-            <IconsSelect v-model='pointIcon' title='نکته' />
-<!--            <span class="label" style="color: #009d4c">انتخاب آیکن نکته</span>-->
-<!--            <v-icon class="mr-2" color="#009D4C">fas fa-plus-square</v-icon>-->
-<!--            <v-icon class="mr-2" color="#FF5C5C">fas fa-trash-alt</v-icon>-->
-          </div>
-        </v-col>
-
-        <v-col class="mt-2" cols="12" lg="4" md="4">
+        <v-col class="mt-2" cols="12" lg="6" md="6">
           <span class="grey--text">آپلود عکس چپ</span>
           <div class="d-flex flex-row">
-              <th-upload />
-            <v-img class="image" :src="images.topBig"></v-img>
-          </div>
-        </v-col>
-        <v-col class="pt-0" cols="12" lg="5" md="5">
-          <span class="label grey--text mr-1">عنوان نکته</span>
-
-          <v-text-field
-            outlined
-            class="rounded-lg pb-0 mt-2"
-            hide-details
-            placeholder="عنوان نکته"
-          ></v-text-field
-        ></v-col>
-        <v-col cols="12" lg="3" md="3">
-          <div class="mt-8">
-            <IconsSelect v-model='pointIcon' title='نکته' />
+              <th-upload-base64 @addImage='changeLeftPointImage'  />
+            <v-img class="image" :src="leftPointImage"></v-img>
           </div>
         </v-col>
 
-        <v-col class="mt-2" cols="12" lg="4" md="4">
-          <span class="grey--text">آپلود عکس چپ</span>
+        <v-col class="mt-2" cols="12" lg="6" md="6">
+          <span class="grey--text">آپلود عکس راست</span>
           <div class="d-flex flex-row">
-              <th-upload />
-            <v-img class="image" :src="images.topBig"></v-img>
+              <th-upload-base64 @addImage='changeRightPointImage'  />
+            <v-img class="image" :src="rightPointImage"></v-img>
           </div>
         </v-col>
-        <v-col class="pt-0" cols="12" lg="5" md="5">
-          <span class="label grey--text mr-1">عنوان نکته</span>
 
-          <v-text-field
-            outlined
-            class="rounded-lg pb-0 mt-2"
-            hide-details
-            placeholder="عنوان نکته"
-          ></v-text-field
-        ></v-col>
-        <v-col cols="12" lg="3" md="3">
-          <div class="mt-8">
-            <IconsSelect v-model='pointIcon' title='نکته' />
-          </div>
-        </v-col>
         <v-col class="mt-2" cols="12" lg="3" md="3"></v-col>
       </v-row>
-      <v-row v-for="(tip, index) in tips" :key="index">
+      <v-row v-for="(point, index) in points" :key="index">
         <v-col class="pt-5" cols="12" lg="5" md="5">
           <span class="label grey--text mr-1">عنوان نکته</span>
 
           <v-text-field
             outlined
             class="rounded-lg pb-0 mt-2"
+            :value='point.title'
             hide-details
+            @input='changePoint($event, index, "title")'
             placeholder="عنوان نکته"
           ></v-text-field
         ></v-col>
         <v-col cols="12" lg="7" md="7">
           <div class="mt-14">
-            <IconsSelect v-model='pointIcon' title='نکته' />
+            <IconsSelect @changeIcon='changePoint($event, index, "icon")'
+                         :selected='point.icon' title='نکته' />
           </div>
         </v-col>
       </v-row>
-      <div class="ma-4 add" @click="newTip">
+      <div class="ma-4 add" @click="addPoint">
         <span class="label" style="color: #009d4c">اضافه کردن نکته</span>
         <v-icon class="mr-2" color="#009D4C">fas fa-plus-square</v-icon>
       </div>
@@ -315,18 +269,20 @@
         <v-col class="mt-2" cols="12" lg="4" md="4">
           <span class="grey--text">آپلود عکس چپ</span>
           <div class="d-flex flex-row">
-              <th-upload />
-            <v-img class="image" :src="images.topBig"></v-img>
+              <th-upload-base64 @addImage='changeLeftFaqImage'  />
+            <v-img class="image" :src="faqLeftImage"></v-img>
           </div> </v-col
         ><v-col class="mt-2" cols="12" lg="8" md="8"></v-col>
       </v-row>
-      <v-row v-for="(question, index) in questions" :key="index">
+      <v-row v-for="(faq, index) in faqs" :key="index">
         <v-col class="pt-1" cols="12" lg="5" md="5">
           <span class="label grey--text mr-1">عنوان سوال</span>
 
           <v-text-field
             outlined
             class="rounded-lg pb-0 mt-2"
+            @input='changeFaq($event, index, "question")'
+            :value='faq.question'
             hide-details
             placeholder="عنوان سوال"
           ></v-text-field
@@ -336,8 +292,10 @@
 
           <v-text-field
             outlined
-            class="rounded-lg pb-0 mt-2"
+            :value='faq.link'
             hide-details
+            class="rounded-lg pb-0 mt-2"
+            @input='changeFaq($event, index, "link")'
             placeholder="لینک ادامه مطلب"
           ></v-text-field></v-col
         >
@@ -346,25 +304,43 @@
 
           <v-text-field
             outlined
-            class="rounded-lg pb-0 mt-2"
             hide-details
+            class="rounded-lg pb-0 mt-2"
+            @input='changeFaq($event, index, "answer")'
+            :value='faq.answer'
             placeholder="جواب سوال"
           ></v-text-field
         ></v-col>
         <v-col cols="12" xl="2" lg="3" md="2">
           <div class="mt-10">
-            <IconsSelect v-model='faqIcon' title='سوالات متداول' />
+            <IconsSelect
+              @changeIcon='changeFaq($event, index, "icon")'
+              :selected='faq.icon' title='سوالات متداول' />
           </div>
         </v-col>
       </v-row>
-      <div class="ma-4 add" @click="newQuestion">
-        <span class="label" style="color: #009d4c">اضافه کردن نکته</span>
+      <div class="ma-4 add" @click="addFaq">
+        <span class="label" style="color: #009d4c">اضافه کردن سوال</span>
         <v-icon class="mr-2" color="#009D4C">fas fa-plus-square</v-icon>
       </div>
     </v-card>
     <div class="d-flex justify-end mt-8">
-      <v-btn class="px-10 rounded-xl" color="primary">ذخیره محتویات</v-btn>
+      <v-btn @click='sendData' class="px-10 rounded-xl" color="primary">ذخیره محتویات</v-btn>
     </div>
+
+    <th-modal @input='updateModal' :value='modal.show'>
+      <template #title>
+        {{ modal.title }}
+      </template>
+      <template #body>
+        {{modal.body}}
+      </template>
+      <template #actions>
+        <v-btn @click='confirmModal' :color='modal.action'>
+          باشه
+        </v-btn>
+      </template>
+    </th-modal>
   </div>
 </template>
 
@@ -386,32 +362,111 @@ export default Vue.extend({
         { icon: '', text: '' },
       ],
       pointIcon: '',
-      faqIcon: ''
+      rules: {
+        required: (value: any) => !!value || 'این فیلد الزامی می باشد'
+      }
     }
   },
   head: {
     title: "تنظیمات صفحه اصلی"
   },
   methods: {
-    newTip() {
-      // this.tips.push({
-      //   icon: '',
-      //   text: '',
-      // })
+    changeTopImage(value: any){
+      (this as any).$store.commit('settings/mainPage/setTopImage', value)
     },
-    newQuestion() {
-      // this.questions.push({
-      //   icon: '',
-      //   text: '',
-      // })
+    changeTopLogoImage(value: any){
+      (this as any).$store.commit('settings/mainPage/setTopLogoImage', value)
     },
-    changePoints(value: any){
-      console.log(value)
+    changeTopPoemImage(value: any){
+      (this as any).$store.commit('settings/mainPage/setTopPoemImage', value)
+    },
+    changeBottomPoemImage(value: any){
+      (this as any).$store.commit('settings/mainPage/setBottomPoemImage', value)
+    },
+    changeLeftPointImage(value: any){
+      (this as any).$store.commit('settings/mainPage/setLeftPointImage', value)
+    },
+    changeRightPointImage(value: any){
+      (this as any).$store.commit('settings/mainPage/setRightPointImage', value)
+    },
+    changeLeftFaqImage(value: any){
+      (this as any).$store.commit('settings/mainPage/setFaqLeftImage', value)
+    },
+    changeSliders(value: any){
+      (this as any).$store.commit('settings/mainPage/setSliders', value)
+    },
+    addFaq() {
+      const $ = document;
+      (this as any).$store.commit('settings/mainPage/pushFaqs', {
+        question: '',
+        answer: '',
+        link: '',
+        icon: ''
+      })
+    },
+    changeFaq(value: any, index: number, type: string){
+      console.log('salam faq');
+        (this as any).$store.commit('settings/mainPage/changeFaqs', {
+          value,
+          index,
+          type
+        })
+    },
+    addPoint() {
+      const $ = document;
+      (this as any).$store.commit('settings/mainPage/pushPoints', {
+        title: '',
+        icon: ''
+      })
+    },
+    changePoint(value: any, index: number, type: string){
+      console.log('salam point');
+        (this as any).$store.commit('settings/mainPage/changePoints', {
+          value,
+          index,
+          type
+        })
+    },
+    sendData(){
+      (this as any).$store.dispatch('settings/mainPage/setSettingMainPage')
+        .then((res:any)=>{
+          if (res.success){
+            (this as any).$store.commit('utilities/modal/SET_MODAL', {
+              show: true,
+              title: 'آپدیت',
+              body: 'آپدیت با موفقیت انجام شد',
+              action: 'success'
+            })
+          }else{
+            (this as any).$store.commit('utilities/modal/SET_MODAL', {
+              show: true,
+              title: 'آپدیت',
+              body: 'آپدیت با موفقیت انجام نشد',
+              action: 'error'
+            })
+          }
+        })
+    },
+    confirmModal(){
+      (this as any).$store.commit('utilities/modal/SET_MODAL', {
+        show: false,
+        title: '',
+        body: '',
+        action: ''
+      })
+    },
+    updateModal(value: any){
+      (this as any).$store.commit('utilities/modal/SET_MODAL', {
+        show: false,
+        title: '',
+        body: '',
+        action: ''
+      })
     }
   },
   async created() {
     try{
-      await (this as any).$store.dispatch('settings/mainPage/getUserAccount')
+      await (this as any).$store.dispatch('settings/mainPage/getSettingMainPage')
     }catch(error){
       //
     }
@@ -537,7 +592,67 @@ export default Vue.extend({
         (this as any).$store.commit('settings/mainPage/setFaqLeftImage', value)
       }
     },
-  }
+    sliders: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/getSliders']
+      }
+    },
+    faqs: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/getFaqs']
+      }
+    },
+    points: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/getPoints']
+      }
+    },
+    topImage: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/topImage']
+      }
+    },
+    topLogoImage: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/topLogoImage']
+      }
+    },
+    topPoemImage: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/topPoemImage']
+      }
+    },
+    bottomPoemImage: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/bottomPoemImage']
+      }
+    },
+    leftPointImage: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/leftPointImage']
+      }
+    },
+    rightPointImage: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/rightPointImage']
+      }
+    },
+    faqLeftImage: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/faqLeftImage']
+      }
+    },
+    slidersFile: {
+      get(){
+        return (this as any).$store.getters['settings/mainPage/sliders']
+      }
+    },
+    modal: {
+      get(){
+        return (this as any).$store.getters['utilities/modal/getModal']
+      }
+    },
+  },
 })
 </script>
 
@@ -569,8 +684,7 @@ export default Vue.extend({
   border-radius: 80px;
 }
 .add {
-  &:hover {
-    cursor: pointer;
-  }
+  width: max-content;
+  cursor: pointer;
 }
 </style>

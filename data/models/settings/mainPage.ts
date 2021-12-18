@@ -15,6 +15,7 @@ export type MainPageSetting = {
   right_point_image: string,
   faq_title: string,
   faq_left_image: string,
-  sliders: [],
-  faqs: [],
+  sliders: string[],
+  faqs: any ,
+  points: any
 }
