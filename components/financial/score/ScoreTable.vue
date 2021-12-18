@@ -1,3 +1,4 @@
+<!--FIXME rate_number is not in the api-->
 <template>
   <v-container fluid>
     <v-data-table
@@ -32,6 +33,7 @@
           <template #body>
             {{ modal.body }}
           </template>
+
           <template #actions>
             <v-btn :color='modal.action' @click='confirmModal'>
               بله
@@ -43,31 +45,32 @@
         </th-modal>
 
       </template>
+      <!--      Deleted Actions column-->
       <!--      edit and delete buttons-->
-      <template v-slot:item.actions='{ item }'>
-        <v-btn
-          color='#FF5C5C'
-          depressed
-          rounded
-          small
-          @click='deleteItem(item)'
-        >
-          <v-icon color='white' small>
-            fas fa-trash
-          </v-icon>
-        </v-btn>
-        <v-btn
-          color='warning'
-          depressed
-          rounded
-          small
-          @click='editItem(item)'
-        >
-          <v-icon color='white' small>
-            fas fa-edit
-          </v-icon>
-        </v-btn>
-      </template>
+      <!--      <template v-slot:item.actions='{ item }'>-->
+      <!--        <v-btn-->
+      <!--          color='#FF5C5C'-->
+      <!--          depressed-->
+      <!--          rounded-->
+      <!--          small-->
+      <!--          @click='deleteItem(item)'-->
+      <!--        >-->
+      <!--          <v-icon color='white' small>-->
+      <!--            fas fa-trash-->
+      <!--          </v-icon>-->
+      <!--        </v-btn>-->
+      <!--        <v-btn-->
+      <!--          color='warning'-->
+      <!--          depressed-->
+      <!--          rounded-->
+      <!--          small-->
+      <!--          @click='editItem(item)'-->
+      <!--        >-->
+      <!--          <v-icon color='white' small>-->
+      <!--            fas fa-edit-->
+      <!--          </v-icon>-->
+      <!--        </v-btn>-->
+      <!--      </template>-->
 
 
       <template v-slot:no-data>
@@ -99,7 +102,8 @@ export default Vue.extend({
         { text: 'شناسه', value: 'id', align: 'start' },
         { text: 'امتیازدهی', value: 'title', align: 'start' },
         { text: 'مبلغ', value: 'price', align: 'start' },
-        { text: 'Actions', value: 'actions', sortable: false }
+        { text: 'درجه', value: 'rate_number', align: 'start' }
+        // { text: 'Actions', value: 'actions', sortable: false }
       ],
       editedIndex: -1,
       editedItem: {

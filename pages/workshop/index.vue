@@ -2,10 +2,6 @@
   <v-container class='pa-0' fluid>
     <tlf-container class='d-flex'>
       <div class='txt'>ایجاد کارگاه</div>
-      <v-btn class='mr-auto my-auto ' color='primary' depressed height='38px' rounded width='185px' @click=''
-      >
-        ذخیره محتویات
-      </v-btn>
     </tlf-container>
     <v-container id='add' class='pa-0' fluid>
       <work-shop></work-shop>

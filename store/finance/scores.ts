@@ -69,12 +69,12 @@ export const actions: ActionTree<ScoreState, any> = {
   async getScores({ commit }) {
     const scoreRes = await this.$repositories.scores().getScores()
     commit('SET_SCORES', scoreRes)
-  },
-
-  async archiveScores({ commit, dispatch }, id) {
-    const scoreRes = await this.$repositories.scores().archiveScores(id)
-    await dispatch('getScores')
-    commit('SET_MODAL_Res', scoreRes)
   }
+
+  // async archiveScores({ commit, dispatch }, id) {
+  //   const scoreRes = await this.$repositories.scores().archiveScores(id)
+  //   await dispatch('getScores')
+  //   commit('SET_MODAL_Res', scoreRes)
+  // }
 
 }

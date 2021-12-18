@@ -43,41 +43,41 @@
         </th-modal>
 
       </template>
-      <template #top>
-        <v-row class='pa-md-0 pa-4 px-md-5'>
-          <v-col class='pt-1' cols='12' lg='3' md='3'
-          >
-            <v-text-field
-              v-model='searchCode'
-              background-color='#FBFBFB'
-              height='40'
-              placeholder='جستجوی بر اساس کد کارگاه'
-              rounded
-            ></v-text-field
-            >
-          </v-col>
-          <v-col class='pt-1' cols='12' lg='3' md='3'
-          >
-            <v-text-field
-              v-model='searchName'
-              background-color='#FBFBFB'
-              height='40'
-              placeholder='جستجوی نام کارگاه'
-              rounded
-            ></v-text-field
-            >
-          </v-col>
-          <v-col cols='12' lg='1' md='1'
-          >
-            <v-btn class='white--text px-8 mt-2' color='#7A7A7A' rounded
-            >جستجو
-            </v-btn
-            >
-          </v-col
-          >
-        </v-row>
-        <v-divider />
-      </template>
+      <!--      <template #top>-->
+      <!--        <v-row class='pa-md-0 pa-4 px-md-5'>-->
+      <!--          <v-col class='pt-1' cols='12' lg='3' md='3'-->
+      <!--          >-->
+      <!--            <v-text-field-->
+      <!--              v-model='searchCode'-->
+      <!--              background-color='#FBFBFB'-->
+      <!--              height='40'-->
+      <!--              placeholder='جستجوی بر اساس کد کارگاه'-->
+      <!--              rounded-->
+      <!--            ></v-text-field-->
+      <!--            >-->
+      <!--          </v-col>-->
+      <!--          <v-col class='pt-1' cols='12' lg='3' md='3'-->
+      <!--          >-->
+      <!--            <v-text-field-->
+      <!--              v-model='searchName'-->
+      <!--              background-color='#FBFBFB'-->
+      <!--              height='40'-->
+      <!--              placeholder='جستجوی نام کارگاه'-->
+      <!--              rounded-->
+      <!--            ></v-text-field-->
+      <!--            >-->
+      <!--          </v-col>-->
+      <!--          <v-col cols='12' lg='1' md='1'-->
+      <!--          >-->
+      <!--            <v-btn class='white&#45;&#45;text px-8 mt-2' color='#7A7A7A' rounded-->
+      <!--            >جستجو-->
+      <!--            </v-btn-->
+      <!--            >-->
+      <!--          </v-col-->
+      <!--          >-->
+      <!--        </v-row>-->
+      <!--        <v-divider />-->
+      <!--      </template>-->
       <!--      edit and delete buttons-->
       <template v-slot:item.actions='{ item }'>
         <v-btn
@@ -134,18 +134,20 @@ export default Vue.extend({
       modalConfirm: false,
       lastId: 0,
       headers: [
-        { text: 'شناسه', value: 'city_id', align: 'start' },
+        { text: 'کدشهر', value: 'city_id', align: 'start' },
         { text: 'نام کارگاه', value: 'title', align: 'start' },
         { text: 'کد کارگاه', value: 'code', align: 'start' },
         { text: 'عملیات', value: 'actions', align: 'center', sortable: false }
       ],
       editedIndex: -1,
       editedItem: {
+        id: 0,
         code: 0,
         title: '',
         city_id: ''
       } as Workshop,
       defaultItem: {
+        id: 0,
         code: 0,
         title: '',
         city_id: ''
@@ -158,10 +160,10 @@ export default Vue.extend({
     }),
     modal: {
       get() {
-        return (this as any).$store.getters['finance/scores/getModal']
+        return (this as any).$store.getters['workshops/getModal']
       },
       set(value) {
-        (this as any).$store.commit('finance/scores/SET_MODAL', value)
+        (this as any).$store.commit('workshops/SET_MODAL', value)
       }
     },
     formTitle(): string {
@@ -172,13 +174,13 @@ export default Vue.extend({
   methods: {
     editItem(item: Workshop) {
 
-      console.log(item.code)
-      this.$data.lastId = item.code
+      console.log(item.id)
+      this.$data.lastId = item.id
       this.$data.dialog = true
       this.modal = {
         show: true,
-        title: 'تغییر کارگاه',
-        body: 'آیا مطمئن از تغییر این مورد هستید؟',
+        title: 'حذف صفحه',
+        body: 'آیا مطمئن از حذف این صفحه هستید؟',
         action: ''
       }
     },

@@ -1,6 +1,6 @@
 <template>
 
-  <v-container class='d-flex wrapper-card' fluid>
+  <v-container :class='{white:edit}' class='d-flex wrapper-card' fluid>
     <div class=' d-flex flex-column my-auto'>
       <div class='txt-label mb-2   mr-10'>کد کارگاه</div>
       <v-card class='  mr-10' elevation='4px' height='40px' rounded='lg'>

@@ -1,6 +1,7 @@
 export type Workshop = {
-  title: string
-  code: number
+  id?: number,
+  title?: string
+  code?: number
   province_id?: string
-  city_id: string
+  city_id?: string
 }

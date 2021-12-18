@@ -29,8 +29,12 @@ export const getters: GetterTree<WorkshopState, any> = {
 
 export const mutations: MutationTree<WorkshopState> = {
 
-  SET_WORKSHOPS(state, workshop) {
+  SET_WORKSHOP(state, workshop) {
     state.workshop = workshop.data
+    console.log(workshop)
+  },
+  SET_WORKSHOPS(state, workshop) {
+    state.workshops = workshop.data
     console.log(workshop)
   },
   SET_RES(state, res) {
@@ -62,7 +66,7 @@ export const mutations: MutationTree<WorkshopState> = {
 export const actions: ActionTree<WorkshopState, any> = {
   async setWorkshop({ commit, dispatch }, data) {
     const res = await this.$repositories.workshops().setWorkshop(data)
-    commit('SET_WORKSHOPS', res)
+    commit('SET_WORKSHOP', res)
     await dispatch('getWorkshops')
   },
 

@@ -4,7 +4,7 @@ import { Score } from '~/data/models/score'
 export default class Scores extends Repository {
   headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer 24|fLjLNE96BL0omAtyYW7BOfPlS2uz2gCQEcY9qco7'
+    'Authorization': 'Bearer 24|tX5ctipHRHwNpfCFAl0TYe1ZCIiKusaOWJYFAwyQ'
   }
 
   async setScore(data: Score): Promise<Score> {
@@ -21,11 +21,12 @@ export default class Scores extends Repository {
     return res.data
   }
 
-  async archiveScores(id: number): Promise<Score[]> {
-    const res = await this.axios.get(`/scores/archive/${id}`, {
-      headers: this.headers
-    })
-    return res.data
-  }
+  //Delete Request
+  // async archiveScores(id: number): Promise<Score[]> {
+  //   const res = await this.axios.get(`/scores/archive/${id}`, {
+  //     headers: this.headers
+  //   })
+  //   return res.data
+  // }
 
 }

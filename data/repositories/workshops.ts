@@ -6,7 +6,7 @@ export default class Workshops extends Repository {
 
   headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer 24|fLjLNE96BL0omAtyYW7BOfPlS2uz2gCQEcY9qco7'
+    'Authorization': 'Bearer 24|tX5ctipHRHwNpfCFAl0TYe1ZCIiKusaOWJYFAwyQ'
   }
 
   async getWorkshops(): Promise<Workshop[]> {
@@ -37,5 +37,11 @@ export default class Workshops extends Repository {
     return res.data
   }
 
+  async get(id: number): Promise<Workshop> {
+    const res = await this.axios.delete(`/workshop/delete/${id}`, {
+      headers: this.headers
+    })
+    return res.data
+  }
 
 }

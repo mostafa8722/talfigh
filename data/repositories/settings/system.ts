@@ -5,7 +5,7 @@ export default class system extends Repository {
 
   headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer 24|fLjLNE96BL0omAtyYW7BOfPlS2uz2gCQEcY9qco7'
+    'Authorization': 'Bearer 24|tX5ctipHRHwNpfCFAl0TYe1ZCIiKusaOWJYFAwyQ'
   }
 
   async setSettings(data: System): Promise<any> {
