@@ -1,13 +1,12 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import PostRepository from '~/data/repositories/postRepository'
 import Pages from '~/data/repositories/pages'
-import Account from '~/data/repositories/users/account'
 import Users from '~/data/repositories/users/users'
-import Contract from '~/data/repositories/contract'
 import Scores from '~/data/repositories/scores'
 import System from '~/data/repositories/settings/system'
 import Footer from '~/data/repositories/settings/footer'
 import MainPageSetting from '~/data/repositories/settings/mainPage'
+import SiteSetting from '~/data/repositories/settings/site'
 import Profile from '~/data/repositories/users/profile'
 import Cities from '~/data/repositories/cities/cities'
 
@@ -22,10 +21,6 @@ export default class Repositories {
 
   pages = () => new Pages(this.axios)
 
-  account = () => new Account(this.axios)
-
-  contract = () => new Contract(this.axios)
-
   users = () => new Users(this.axios)
 
   scores = () => new Scores(this.axios)
@@ -39,5 +34,7 @@ export default class Repositories {
   cities = () => new Cities(this.axios)
 
   mainPageSetting = () => new MainPageSetting(this.axios)
+
+  siteSetting = () => new SiteSetting(this.axios)
 
 }
