@@ -7,7 +7,20 @@ export default class MainPage extends Repository {
     const res = await this.axios.get('/setting/main',{
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
+        'Authorization': 'Bearer 9|G53z1CRM174XmlGlsNBvRqt5TR7T4fBV6wYRVze5'
+      }
+    })
+    return res.data
+  }
+
+  async saveMainPageSetting(data: any): Promise<MainPageSetting> {
+
+    console.log(data)
+
+    const res = await this.axios.patch('/setting/main/save', data, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer 9|G53z1CRM174XmlGlsNBvRqt5TR7T4fBV6wYRVze5'
       }
     })
     return res.data

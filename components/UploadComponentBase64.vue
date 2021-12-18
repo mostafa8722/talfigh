@@ -22,17 +22,7 @@
         </v-chip>
       </template>
     </v-file-input>
-    <v-btn
-      class="white--text"
-      color="blue"
-      block
-      elevation="2"
-      :disabled="isUploading || !files.length"
-      @click="submitFilesByOne()"
-    >
-      <v-icon>fas fa-upload</v-icon>&nbsp; بارگذاری
-    </v-btn>
-    <br />
+
     <v-card flat>
       <div v-for="file of fileInfo" :key="file.id">
         <v-chip
@@ -67,6 +57,9 @@
 import axios from 'axios'
 
 export default {
+    props:{
+        uploadBase64 :{type:String,default:"",}
+    },
   data() {
     return {
       files: [],
@@ -81,13 +74,30 @@ export default {
     updateFiles() {
       this.fileInfo = []
       for (const file of this.files) {
+
+          this.getBase64(file)
+
         const ITEM = { name: file.name, size: file.size, uploadPercentage: 0 }
         this.fileInfo.push(ITEM)
       }
     },
+      getBase64(file) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          let this_page = this;
+          reader.onload = function () {
+              this.uploadBase64 =reader.result ;
+              this_page.$emit('addImage',reader.result )
+          };
+          reader.onerror = function (error) {
+              console.log('Error: ', error);
+          };
+      },
     async submitFilesByOne() {
       let i = 0
       this.isUploading = true
+        console.log("upload",this.files)
+        return ;
       const formData = new FormData()
       for (let i = 0; i < this.files.length; i++) {
         const file = this.files[i]

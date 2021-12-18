@@ -1,0 +1,22 @@
+export type SiteSetting = {
+  id: number,
+    page_title: string,
+    instagram: string,
+    facebook: string,
+    whatsapp: string,
+    google_plus: string,
+    telegram: string,
+    aparat: string,
+    logo_menu: string,
+    latitude: string,
+    longitude: string,
+    address: string,
+    zipcode: string,
+    meta_description: string,
+    fax: string,
+    phone: string,
+    mobile: string,
+    email: string,
+    created_at: string,
+    updated_at: string
+}

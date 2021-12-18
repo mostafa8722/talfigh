@@ -26,7 +26,8 @@ const config: NuxtConfig = {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/scss/styles.scss',
-    '@fortawesome/fontawesome-free/css/all.css'
+    '@fortawesome/fontawesome-free/css/all.css',
+      '~assets/css/style_aws.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -38,8 +39,7 @@ const config: NuxtConfig = {
     "~/plugins/th-components.ts",
     {src: '~plugins/vuelayers.js', ssr: false},
      '~plugins/vuetify-draggable-treeview.js',
-    { src: '~/plugins/TiptapVuetify', mode: 'client' },
-    { src: '~/plugins/vue-persian-datepicker', mode: 'client' },
+    { src: '~/plugins/TiptapVuetify', mode: 'client' }
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

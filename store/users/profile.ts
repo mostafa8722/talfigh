@@ -142,8 +142,8 @@ export const mutations: MutationTree<ProfileState> = {
     state.confirm_plan = user.data.confirm_plan
     state.confirm_datetime = user.data.confirm_datetime
     state.address = user.data.address.address
-    state.latitude = user.data.address.latitude
-    state.longitude = user.data.address.longitude
+    state.latitude = user.data.address?.latitude || '51.337712'
+    state.longitude = user.data.address?.longitude || '35.699735'
     state.city_id = user.data.address.city_id
     state.province_id = user.data.address.province_id
     state.phone = state.account_type == '1'
