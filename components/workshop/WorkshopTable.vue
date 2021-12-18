@@ -2,7 +2,7 @@
   <v-container class='pa-0' fluid>
     <v-data-table
       :headers='headers'
-      :items='filteredItems'
+      :items='items'
       class='elevation-1 px-5'
       sort-by='calories'
     >
@@ -11,7 +11,7 @@
         <v-dialog
           v-model='dialog'
         >
-          <add-score :edit='true'></add-score>
+          <add-workshop :edit='true'></add-workshop>
         </v-dialog>
 
         <v-dialog v-model='dialogDelete' max-width='500px'>
@@ -43,41 +43,41 @@
         </th-modal>
 
       </template>
-      <template #top>
-        <v-row class='pa-md-0 pa-4 px-md-5'>
-          <v-col class='pt-1' cols='12' lg='3' md='3'
-          >
-            <v-text-field
-              v-model='searchCode'
-              background-color='#FBFBFB'
-              height='40'
-              placeholder='جستجوی بر اساس کد کارگاه'
-              rounded
-            ></v-text-field
-            >
-          </v-col>
-          <v-col class='pt-1' cols='12' lg='3' md='3'
-          >
-            <v-text-field
-              v-model='searchName'
-              background-color='#FBFBFB'
-              height='40'
-              placeholder='جستجوی نام کارگاه'
-              rounded
-            ></v-text-field
-            >
-          </v-col>
-          <v-col cols='12' lg='1' md='1'
-          >
-            <v-btn class='white--text px-8 mt-2' color='#7A7A7A' rounded
-            >جستجو
-            </v-btn
-            >
-          </v-col
-          >
-        </v-row>
-        <v-divider />
-      </template>
+      <!--      <template #top>-->
+      <!--        <v-row class='pa-md-0 pa-4 px-md-5'>-->
+      <!--          <v-col class='pt-1' cols='12' lg='3' md='3'-->
+      <!--          >-->
+      <!--            <v-text-field-->
+      <!--              v-model='searchCode'-->
+      <!--              background-color='#FBFBFB'-->
+      <!--              height='40'-->
+      <!--              placeholder='جستجوی بر اساس کد کارگاه'-->
+      <!--              rounded-->
+      <!--            ></v-text-field-->
+      <!--            >-->
+      <!--          </v-col>-->
+      <!--          <v-col class='pt-1' cols='12' lg='3' md='3'-->
+      <!--          >-->
+      <!--            <v-text-field-->
+      <!--              v-model='searchName'-->
+      <!--              background-color='#FBFBFB'-->
+      <!--              height='40'-->
+      <!--              placeholder='جستجوی نام کارگاه'-->
+      <!--              rounded-->
+      <!--            ></v-text-field-->
+      <!--            >-->
+      <!--          </v-col>-->
+      <!--          <v-col cols='12' lg='1' md='1'-->
+      <!--          >-->
+      <!--            <v-btn class='white&#45;&#45;text px-8 mt-2' color='#7A7A7A' rounded-->
+      <!--            >جستجو-->
+      <!--            </v-btn-->
+      <!--            >-->
+      <!--          </v-col-->
+      <!--          >-->
+      <!--        </v-row>-->
+      <!--        <v-divider />-->
+      <!--      </template>-->
       <!--      edit and delete buttons-->
       <template v-slot:item.actions='{ item }'>
         <v-btn
@@ -116,13 +116,14 @@
 
 <script lang='ts'>
 import Vue from 'vue'
-import AddScore from '~/components/financial/score/AddScore.vue'
-import { Score } from '~/data/models/score'
+
 import { mapGetters } from 'vuex'
+import AddWorkshop from '~/components/workshop/AddWorkshop.vue'
+import { Workshop } from '~/data/models/Workshop'
 
 export default Vue.extend({
   name: 'WorkShopTable',
-  components: { AddScore },
+  components: { AddWorkshop },
   data() {
     return {
       searchName: '',
@@ -133,49 +134,36 @@ export default Vue.extend({
       modalConfirm: false,
       lastId: 0,
       headers: [
-        { text: 'شناسه', value: 'id', align: 'start' },
+        { text: 'کدشهر', value: 'city_id', align: 'start' },
         { text: 'نام کارگاه', value: 'title', align: 'start' },
-        { text: 'کد کارگاه', value: 'price', align: 'start' },
+        { text: 'کد کارگاه', value: 'code', align: 'start' },
         { text: 'عملیات', value: 'actions', align: 'center', sortable: false }
       ],
       editedIndex: -1,
       editedItem: {
         id: 0,
+        code: 0,
         title: '',
-        price: 0,
-        is_archive: 0,
-        rate_number: 0,
-        created_at: '',
-        updated_at: ''
-      } as Score,
+        city_id: ''
+      } as Workshop,
       defaultItem: {
         id: 0,
+        code: 0,
         title: '',
-        price: '',
-        is_archive: 0,
-        created_at: '',
-        updated_at: ''
+        city_id: ''
       }
     }
   },
   computed: {
     ...mapGetters({
-      items: 'finance/scores/GET_SCORES'
+      items: 'workshops/GET_WORKSHOPS'
     }),
-    filteredItems() {
-      return this.items.filter((e: Score) => {
-
-        return e.is_archive != 1
-      })
-
-    }
-    ,
     modal: {
       get() {
-        return (this as any).$store.getters['finance/scores/getModal']
+        return (this as any).$store.getters['workshops/getModal']
       },
       set(value) {
-        (this as any).$store.commit('finance/scores/SET_MODAL', value)
+        (this as any).$store.commit('workshops/SET_MODAL', value)
       }
     },
     formTitle(): string {
@@ -184,7 +172,7 @@ export default Vue.extend({
 
   },
   methods: {
-    editItem(item: Score) {
+    editItem(item: Workshop) {
 
       console.log(item.id)
       this.$data.lastId = item.id
@@ -196,19 +184,19 @@ export default Vue.extend({
         action: ''
       }
     },
-    deleteItem(item: Score) {
-      console.log(item.id)
-      this.$data.lastId = item.id
+    deleteItem(item: Workshop) {
+      console.log(item.code)
+      this.$data.lastId = item.code
       this.$data.confirmDelete = true
       this.modal = {
         show: true,
-        title: 'حذف صفحه',
-        body: 'آیا مطمئن از حذف این صفحه هستید؟',
+        title: 'حذف کارگاه',
+        body: 'آیا مطمئن از حذف این مورد هستید؟',
         action: ''
       }
     },
     confirmModal() {
-      this.$store.dispatch('finance/scores/archiveScores', this.$data.lastId)
+      this.$store.dispatch('workshops/deleteWorkshop', this.$data.lastId)
       this.$data.confirmDelete = false
     }
   }

@@ -56,6 +56,7 @@ export const mutations: MutationTree<ScoreState> = {
 
 export const actions: ActionTree<ScoreState, any> = {
   async setScore({ commit, dispatch }, data) {
+    console.log(data)
     const scoreRes = await this.$repositories.scores().setScore(data)
     commit('SET_MODAL_Res', scoreRes)
     await dispatch('getScores')
@@ -68,12 +69,12 @@ export const actions: ActionTree<ScoreState, any> = {
   async getScores({ commit }) {
     const scoreRes = await this.$repositories.scores().getScores()
     commit('SET_SCORES', scoreRes)
-  },
-
-  async archiveScores({ commit, dispatch }, id) {
-    const scoreRes = await this.$repositories.scores().archiveScores(id)
-    await dispatch('getScores')
-    commit('SET_MODAL_Res', scoreRes)
   }
+
+  // async archiveScores({ commit, dispatch }, id) {
+  //   const scoreRes = await this.$repositories.scores().archiveScores(id)
+  //   await dispatch('getScores')
+  //   commit('SET_MODAL_Res', scoreRes)
+  // }
 
 }

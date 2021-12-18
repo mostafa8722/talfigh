@@ -2,10 +2,6 @@
   <v-container class='pa-0' fluid>
     <tlf-container class='d-flex'>
       <div class='txt'>ایجاد کارگاه</div>
-      <v-btn class='mr-auto my-auto ' color='primary' depressed height='38px' rounded width='185px'
-      >
-        ذخیره محتویات
-      </v-btn>
     </tlf-container>
     <v-container id='add' class='pa-0' fluid>
       <work-shop></work-shop>
@@ -23,11 +19,11 @@ export default Vue.extend({
   head: { title: 'کارگاه' },
   components: { WorkShop, TlfContainer },
   async fetch() {
-    await this.$store.dispatch('finance/scores/getScores')
+    await this.$store.dispatch('workshops/getWorkshops')
   },
   computed: {
     ...mapGetters({
-      items: 'finance/scores/GET_SCORES'
+      items: 'workshops/GET_WORKSHOPS'
     })
   }
 })

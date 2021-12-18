@@ -5,17 +5,17 @@ export default class system extends Repository {
 
   headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer 1|aRUzO00hlMpH1mbYuo7vAacVvrhofJ72gRd8HzYv'
+    'Authorization': 'Bearer 24|tX5ctipHRHwNpfCFAl0TYe1ZCIiKusaOWJYFAwyQ'
   }
 
-  async setSettings(data: System): Promise<System> {
+  async setSettings(data: System): Promise<any> {
     const res = await this.axios.patch('/setting/system/save', data, {
       headers: this.headers
     })
     return res.data
   }
 
-  async getSettings(): Promise<System> {
+  async getSettings(): Promise<any> {
     const res = await this.axios.get('/setting/system', {
       headers: this.headers
     })
