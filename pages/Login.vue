@@ -19,30 +19,31 @@
           <v-card-text style="margin-top: 10%">
             <div style="width: 351px">
               <v-text-field
+                v-model="username"
                 label="نام کاربری"
                 placeholder="نام کاربری"
                 color="#F5A06F"
-                v-model="username"
               >
               </v-text-field>
               <v-text-field
-                label="رمز کاربری"
-                placeholder="رمز کاربری"
-                class="pt-0"
-                color="#F5A06F"
                 v-model="password"
-              >
-              </v-text-field>
+                label="رمز کاربری"
+                color="warning"
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show1 ? 'text' : 'password'"
+                class="pt-2"
+                @click:append="show1 = !show1"
+              ></v-text-field>
               <v-checkbox
                 class="mb-2 pt-2"
                 label="من را به خاطر بسپار"
               ></v-checkbox>
               <v-btn
-                @click="login()"
                 color="primary"
                 class="white--text"
                 min-height="48px"
                 block
+                @click="login()"
                 >ورود به پنل</v-btn
               >
             </div>
@@ -59,36 +60,32 @@ export default {
   layout: 'empty',
   data() {
     return {
-      username:null,
-      password:null
+      show1: false,
+      username: null,
+      password: null,
     }
   },
-  mounted() {
-      // Before loading login page, obtain csrf cookie from the server.
-      this.$axios.$get('/sanctum/csrf-cookie',{baseURL:"http://localhost:8000"});
-  },
-  methods:{
-     async login()
-      {
-        try
-        {
-           await this.$auth.loginWith('laravelSanctum', {
-                data: {
-                  username: this.username,
-                  password: this.password,
-                },
-            });
-        }
-        catch(err)
-        {
-
-        }
-
-      }
-  },
   head: {
-    title: 'صفحه ورود'
-  }
+    title: 'صفحه ورود',
+  },
+  mounted() {
+    // Before loading login page, obtain csrf cookie from the server.
+    this.$axios.$get('/sanctum/csrf-cookie', {
+      baseURL: 'http://talfigh.ventosco.com/apiadmin/api',
+    })
+  },
+  methods: {
+    async login() {
+      try {
+        await this.$auth.loginWith('laravelSanctum', {
+          data: {
+            username: this.username,
+            password: this.password,
+          },
+        })
+      } catch (err) {}
+    },
+  },
 }
 </script>
 
