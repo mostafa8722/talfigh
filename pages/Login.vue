@@ -81,9 +81,9 @@ export default {
         }
         catch(err)
         {
-          
+
         }
-      
+
       }
   },
   head: {
