@@ -30,7 +30,7 @@ export default class Workshops extends Repository {
     return res.data
   }
 
-  async deleteWorkshop(id: number): Promise<Workshop> {
+  async deleteWorkshop(id: number): Promise<Workshop[]> {
     const res = await this.axios.delete(`/workshop/delete/${id}`, {
       headers: this.headers
     })

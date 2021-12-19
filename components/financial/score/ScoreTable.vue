@@ -15,17 +15,6 @@
           <add-score :edit='true'></add-score>
         </v-dialog>
 
-        <v-dialog v-model='dialogDelete' max-width='500px'>
-          <!--          <v-card class='wrapper-card'>-->
-          <!--            <v-card-title class='text-h5'>از حذف کردن این مورد اطمینان دارید؟</v-card-title>-->
-          <!--            <v-card-actions>-->
-          <!--              <v-spacer></v-spacer>-->
-          <!--              <v-btn color='blue darken-1' text @click=' '>خیر</v-btn>-->
-          <!--              <v-btn color='blue darken-1' text @click=' '>بله</v-btn>-->
-          <!--              <v-spacer></v-spacer>-->
-          <!--            </v-card-actions>-->
-          <!--           </v-card>-->
-        </v-dialog>
         <th-modal v-model='confirmDelete' el='thModal'>
           <template #title>
             {{ modal.title }}

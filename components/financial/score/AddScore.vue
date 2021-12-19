@@ -56,11 +56,10 @@ export default Vue.extend({
       this.$store.dispatch('finance/scores/setScore', this.$data.item)
 
 
-    },
-    updateItem() {
-      //TODO fix it after edit api was ready for scores
-      this.$store.dispatch('finance/scores/setScore', this.$data.item)
     }
+    // updateItem() {
+    //   this.$store.dispatch('finance/scores/setScore', this.$data.item)
+    // }
   }
 
 

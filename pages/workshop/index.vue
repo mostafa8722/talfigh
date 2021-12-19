@@ -1,5 +1,6 @@
 <template>
   <v-container class='pa-0' fluid>
+
     <tlf-container class='d-flex'>
       <div class='txt'>ایجاد کارگاه</div>
     </tlf-container>
@@ -20,6 +21,11 @@ export default Vue.extend({
   components: { WorkShop, TlfContainer },
   async fetch() {
     await this.$store.dispatch('workshops/getWorkshops')
+    await this.$store.dispatch('cities/provinces/getProvinces')
+    await this.$store.dispatch('cities/cities/getCities')
+  },
+  data() {
+    return {}
   },
   computed: {
     ...mapGetters({

@@ -13,18 +13,41 @@
         >
           <add-workshop :edit='true'></add-workshop>
         </v-dialog>
-
-        <v-dialog v-model='dialogDelete' max-width='500px'>
-          <!--          <v-card class='wrapper-card'>-->
-          <!--            <v-card-title class='text-h5'>از حذف کردن این مورد اطمینان دارید؟</v-card-title>-->
-          <!--            <v-card-actions>-->
-          <!--              <v-spacer></v-spacer>-->
-          <!--              <v-btn color='blue darken-1' text @click=' '>خیر</v-btn>-->
-          <!--              <v-btn color='blue darken-1' text @click=' '>بله</v-btn>-->
-          <!--              <v-spacer></v-spacer>-->
-          <!--            </v-card-actions>-->
-          <!--           </v-card>-->
-        </v-dialog>
+        <!--        Search Fields-->
+        <v-row class='pa-md-0 pa-4 px-md-5'>
+          <v-col class='pt-1' cols='12' lg='3' md='3'
+          >
+            <v-text-field
+              v-model='searchCode'
+              background-color='#FBFBFB'
+              height='40'
+              placeholder='جستجوی بر اساس کد کارگاه'
+              rounded
+            ></v-text-field
+            >
+          </v-col>
+          <v-col class='pt-1' cols='12' lg='3' md='3'
+          >
+            <v-text-field
+              v-model='searchName'
+              background-color='#FBFBFB'
+              height='40'
+              placeholder='جستجوی نام کارگاه'
+              rounded
+            ></v-text-field
+            >
+          </v-col>
+          <v-col cols='12' lg='1' md='1'
+          >
+            <v-btn class='white--text px-8 mt-2' color='#7A7A7A' rounded
+            >جستجو
+            </v-btn
+            >
+          </v-col
+          >
+        </v-row>
+        <v-divider />
+        <!--        Confirm Delete modal-->
         <th-modal v-model='confirmDelete' el='thModal'>
           <template #title>
             {{ modal.title }}
@@ -43,42 +66,7 @@
         </th-modal>
 
       </template>
-      <!--      <template #top>-->
-      <!--        <v-row class='pa-md-0 pa-4 px-md-5'>-->
-      <!--          <v-col class='pt-1' cols='12' lg='3' md='3'-->
-      <!--          >-->
-      <!--            <v-text-field-->
-      <!--              v-model='searchCode'-->
-      <!--              background-color='#FBFBFB'-->
-      <!--              height='40'-->
-      <!--              placeholder='جستجوی بر اساس کد کارگاه'-->
-      <!--              rounded-->
-      <!--            ></v-text-field-->
-      <!--            >-->
-      <!--          </v-col>-->
-      <!--          <v-col class='pt-1' cols='12' lg='3' md='3'-->
-      <!--          >-->
-      <!--            <v-text-field-->
-      <!--              v-model='searchName'-->
-      <!--              background-color='#FBFBFB'-->
-      <!--              height='40'-->
-      <!--              placeholder='جستجوی نام کارگاه'-->
-      <!--              rounded-->
-      <!--            ></v-text-field-->
-      <!--            >-->
-      <!--          </v-col>-->
-      <!--          <v-col cols='12' lg='1' md='1'-->
-      <!--          >-->
-      <!--            <v-btn class='white&#45;&#45;text px-8 mt-2' color='#7A7A7A' rounded-->
-      <!--            >جستجو-->
-      <!--            </v-btn-->
-      <!--            >-->
-      <!--          </v-col-->
-      <!--          >-->
-      <!--        </v-row>-->
-      <!--        <v-divider />-->
-      <!--      </template>-->
-      <!--      edit and delete buttons-->
+      <!--      Delete and Edit Buttons -->
       <template v-slot:item.actions='{ item }'>
         <v-btn
           color='#FF5C5C'
@@ -173,7 +161,6 @@ export default Vue.extend({
   },
   methods: {
     editItem(item: Workshop) {
-
       console.log(item.id)
       this.$data.lastId = item.id
       this.$data.dialog = true
@@ -185,8 +172,8 @@ export default Vue.extend({
       }
     },
     deleteItem(item: Workshop) {
-      console.log(item.code)
-      this.$data.lastId = item.code
+      console.log(item.id)
+      this.$data.lastId = item.id
       this.$data.confirmDelete = true
       this.modal = {
         show: true,
