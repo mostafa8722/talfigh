@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 import { NuxtConfig } from '@nuxt/types'
 import fa from 'vuetify/src/locale/fa'
-import {POSITION} from "vue-toastification";
+// import { POSITION } from 'vue-toastification'
 
 const config: NuxtConfig = {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -18,9 +18,15 @@ const config: NuxtConfig = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
+      },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css' }
+      {
+        rel: 'stylesheet',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css'
+      }
     ]
   },
 
@@ -28,7 +34,7 @@ const config: NuxtConfig = {
   css: [
     '~/assets/scss/styles.scss',
     '@fortawesome/fontawesome-free/css/all.css',
-      '~assets/css/style_aws.css',
+    '~assets/css/style_aws.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -37,9 +43,9 @@ const config: NuxtConfig = {
     '~/plugins/repositories.ts',
     '~/plugins/errors.ts',
     '~/plugins/vue-smooth-dnd.js',
-    "~/plugins/th-components.ts",
-    {src: '~plugins/vuelayers.js', ssr: false},
-     '~plugins/vuetify-draggable-treeview.js',
+    '~/plugins/th-components.ts',
+    { src: '~plugins/vuelayers.js', ssr: false },
+    '~plugins/vuetify-draggable-treeview.js',
     { src: '~/plugins/TiptapVuetify', mode: 'client' }
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -67,7 +73,7 @@ const config: NuxtConfig = {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'http://talfigh.ventosco.com/apiadmin/api',
     credentials: true,
     headers: {
       common: {
@@ -85,8 +91,8 @@ const config: NuxtConfig = {
         endpoints: {
           login: {
             url: '/api/login',
-            method: "post"
-          },
+            method: 'post'
+          }
         }
       }
     },
@@ -95,17 +101,17 @@ const config: NuxtConfig = {
       logout: '/',
       callback: '/login',
       home: '/dashboard'
-    },
+    }
   },
 
-  toast: {
-    timeout: 5000,
-    closeOnClick: false,
-    rtl: true,
-    position: POSITION.TOP_CENTER,
-    closeButton: false,
-    icon: false,
-  },
+  // toast: {
+  //   timeout: 5000,
+  //   closeOnClick: false,
+  //   rtl: true,
+  //   position: POSITION.TOP_CENTER,
+  //   closeButton: false,
+  //   icon: false
+  // },
 
   server: {
     port: 4000
@@ -124,7 +130,7 @@ const config: NuxtConfig = {
       dark: false,
       themes: {
         light: {
-          primary: "#2D9DCD",
+          primary: '#2D9DCD',
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
@@ -134,9 +140,9 @@ const config: NuxtConfig = {
         }
       }
     },
-        icons: {
-          iconfont: 'fa', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
-        },
+    icons: {
+      iconfont: 'fa' // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+    }
   },
 
   styleResources: {
@@ -156,7 +162,7 @@ const config: NuxtConfig = {
         }
       }
     },
-    transpile: ['vuetify/lib', "tiptap-vuetify"]
+    transpile: ['vuetify/lib', 'tiptap-vuetify']
   }
 }
 

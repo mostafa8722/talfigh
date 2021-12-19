@@ -18,6 +18,7 @@ import { mapGetters } from 'vuex'
 export default Vue.extend({
   components: { SumScore, TlfContainer },
   head: { title: 'امتیاز و مبلغ' },
+  auth: false,
   async fetch() {
     await this.$store.dispatch('finance/scores/getScores')
   },

@@ -18,6 +18,7 @@ import WorkShop from '~/components/workshop/WorkShop.vue'
 
 export default Vue.extend({
   head: { title: 'کارگاه' },
+  auth: false,
   components: { WorkShop, TlfContainer },
   async fetch() {
     await this.$store.dispatch('workshops/getWorkshops')

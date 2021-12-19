@@ -5,10 +5,6 @@
     >
       ذخیره محتویات
     </v-btn>
-    <v-btn v-if='edit' class='mr-auto my-auto ' color='primary' depressed height='41px' rounded width='138px'
-           @click='updateItem'>
-      ویرایش
-    </v-btn>
     <v-container :class='{white:edit}' class='d-flex wrapper-card mb-auto' fluid>
 
       <div class=' d-flex flex-column my-auto'>
@@ -32,7 +28,7 @@
           <!--        <v-text-field v-model='item.city_id' class='txt-input' dense filled outlined placeholder='شهر کارگاه' rounded>-->
           <!--        </v-text-field>-->
           <v-autocomplete
-            v-model='item.provinceId'
+            v-model='item.province_id'
             :items='provinces'
             class='txt-input'
             color='warning'
@@ -66,7 +62,10 @@
         </v-card>
 
       </div>
-
+      <v-btn v-if='edit' class='mr-auto my-auto ' color='primary' depressed height='41px' rounded width='138px'
+             @click='updateItem'>
+        ویرایش
+      </v-btn>
     </v-container>
   </v-container>
 
@@ -88,7 +87,7 @@ export default Vue.extend({
         code: null,
         title: '',
         city_id: '',
-        provinceId: 0
+        province_id: 0
       }
     }
   },
@@ -99,7 +98,7 @@ export default Vue.extend({
     }),
     filteredCities(): object {
       const filteredCities = this.cities.filter(
-        (x: any) => x.province_id === this.item.provinceId
+        (x: any) => x.province_id === this.item.province_id
       )
       return filteredCities
     }
