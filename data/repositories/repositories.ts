@@ -10,6 +10,7 @@ import SiteSetting from '~/data/repositories/settings/site'
 import Profile from '~/data/repositories/users/profile'
 import Cities from '~/data/repositories/cities/cities'
 import Workshops from '~/data/repositories/workshops'
+import AuthUser from '~/data/repositories/users/auth'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -39,5 +40,7 @@ export default class Repositories {
   siteSetting = () => new SiteSetting(this.axios)
 
   workshops = () => new Workshops(this.axios)
+
+  authUser = () => new AuthUser(this.axios)
 
 }

@@ -22,6 +22,7 @@
                 label="نام کاربری"
                 placeholder="نام کاربری"
                 color="#F5A06F"
+                v-model="username"
               >
               </v-text-field>
               <v-text-field
@@ -29,6 +30,7 @@
                 placeholder="رمز کاربری"
                 class="pt-0"
                 color="#F5A06F"
+                v-model="password"
               >
               </v-text-field>
               <v-checkbox
@@ -36,6 +38,7 @@
                 label="من را به خاطر بسپار"
               ></v-checkbox>
               <v-btn
+                @click="login()"
                 color="primary"
                 class="white--text"
                 min-height="48px"
@@ -55,7 +58,33 @@ export default {
   name: 'Login',
   layout: 'empty',
   data() {
-    return {}
+    return {
+      username:null,
+      password:null
+    }
+  },
+  mounted() {
+      // Before loading login page, obtain csrf cookie from the server.
+      this.$axios.$get('/sanctum/csrf-cookie',{baseURL:"http://localhost:8000"});
+  },
+  methods:{
+     async login()
+      {
+        try
+        {
+           await this.$auth.loginWith('laravelSanctum', {
+                data: {
+                  username: this.username,
+                  password: this.password,
+                },
+            });
+        }
+        catch(err)
+        {
+
+        }
+
+      }
   },
   head: {
     title: 'صفحه ورود'

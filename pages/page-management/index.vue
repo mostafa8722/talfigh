@@ -80,13 +80,7 @@
             >
             <v-col cols='12' lg='3' md='3'
             >
-              <v-btn
-                class='white--text px-8 mt-2 mr-md-4'
-                rounded
-                color='#7A7A7A'
-              >جستجو از تاریخ 12 تا 12
-              </v-btn
-              >
+
             </v-col
             >
             <v-col cols='12' lg='4' md='4'

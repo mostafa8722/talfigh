@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 import { NuxtConfig } from '@nuxt/types'
 import fa from 'vuetify/src/locale/fa'
+import {POSITION} from "vue-toastification";
 
 const config: NuxtConfig = {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -60,12 +61,13 @@ const config: NuxtConfig = {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://talfigh.ventosco.com/apiadmin/api',
+    baseURL: 'http://localhost:8000/api',
     credentials: true,
     headers: {
       common: {
@@ -75,8 +77,38 @@ const config: NuxtConfig = {
     }
   },
 
+  auth: {
+    strategies: {
+      'laravelSanctum': {
+        provider: 'laravel/sanctum',
+        url: 'http://localhost:8000',
+        endpoints: {
+          login: {
+            url: '/api/login',
+            method: "post"
+          },
+        }
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/dashboard'
+    },
+  },
+
+  toast: {
+    timeout: 5000,
+    closeOnClick: false,
+    rtl: true,
+    position: POSITION.TOP_CENTER,
+    closeButton: false,
+    icon: false,
+  },
+
   server: {
-    port: 8000
+    port: 4000
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
