@@ -15,8 +15,6 @@ export default class MainPage extends Repository {
 
   async saveMainPageSetting(data: any): Promise<MainPageSetting> {
 
-    console.log(data)
-
     const res = await this.axios.patch('/setting/main/save', data, {
       headers: {
         'Accept': 'application/json',
