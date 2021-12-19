@@ -360,12 +360,12 @@ export default Vue.extend({
     watch:{
         message(old_value,new_value){
 
-            this.$toast.open({
-                message: 'settings updated successfully',
-                type: 'success',
-                position:'bottom-left'
-                // all of other options may go here
-            });
+            // this.$toast.open({
+            //     message: 'settings updated successfully',
+            //     type: 'success',
+            //     position:'bottom-left'
+            //     // all of other options may go here
+            // });
 
         },
 

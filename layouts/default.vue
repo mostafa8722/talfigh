@@ -10,10 +10,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 import Menu from '~/components/menu/Menu.vue'
 import MenuMobile from '~/components/menu/Menu-Mobile.vue'
 
 export default Vue.extend({
+  middleware:'auth',
   components: { MenuMobile, Menu },
   data() {
     return {
@@ -137,6 +139,30 @@ export default Vue.extend({
   methods: {
     setMarginMain(number: any) {
       this.marginTopMenuMobile = number
+    }
+  },
+  computed: {
+    ...mapGetters({
+      showError: 'toast/showError',
+      showSuccess: 'toast/showSuccess',
+      errorText: 'toast/errorText',
+      successText: 'toast/successText'
+    })
+  },
+  watch: {
+    showError(newVal) {
+      if (newVal) {
+        if (this.errorText) {
+          this.$toast.error(this.errorText)
+        }
+      }
+    },
+    showSuccess(newVal) {
+      if (newVal) {
+        if (this.successText) {
+          this.$toast.success(this.successText)
+        }
+      }
     }
   }
 })
