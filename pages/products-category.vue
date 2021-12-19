@@ -41,7 +41,6 @@
           ></v-text-field>
           <v-virtual-scroll
             class="mt-4 tlf-v-scroll"
-            :items="categories"
             :item-height="60"
             height="200"
           >
@@ -87,9 +86,9 @@
             >چینش رسته محصولات</v-card-title
           >
           <v-card-text class="pa-2">
-            <v-draggable-treeview v-model="treeItems" class="card">
+            <v-draggable-treeview v-model="categories" class="card">
               <template #label="{ item }" class="card">
-                <div>{{ item.name }}</div>
+                <div>{{ item.title }}</div>
               </template>
               <template #append="{ item }">
                 <v-row>
@@ -101,7 +100,7 @@
                         elevation="0"
                         x-small
                         fab
-                        @click="showEditCategoryDialog(item.name)"
+                        @click="showEditCategoryDialog(item)"
                       >
                         <v-icon
                           :size="
@@ -117,6 +116,7 @@
                         elevation="0"
                         x-small
                         fab
+                        @click="deleteCategory(item)"
                       >
                         <v-icon
                           :size="
@@ -126,7 +126,13 @@
                           "
                           >fas fa-trash-alt</v-icon
                         > </v-btn
-                      ><v-btn color="primary" small class="ma-2 card-btn" icon>
+                      ><v-btn
+                        color="primary"
+                        small
+                        class="ma-2 card-btn"
+                        icon
+                        @click="showAddChildDialog(item)"
+                      >
                         <v-icon
                           :size="
                             $vuetify.breakpoint.lg || $vuetify.breakpoint.md
@@ -153,6 +159,31 @@
         </v-card></v-col
       >
     </v-row>
+    <th-modal v-model="addChildDialog">
+      <template #title>
+        <span>افزودن زیر رسته</span>
+      </template>
+      <template #body>
+        <div class="mr-1 mt-2 black--text">عنوان زیر رسته</div>
+        <v-row>
+          <v-col cols="8">
+            <v-text-field
+              v-model="child"
+              height="40"
+              background-color="#FBFBFB"
+              class="pt-0"
+              placeholder="عنوان رسته"
+              rounded
+            ></v-text-field
+          ></v-col>
+          <v-col cols="3"
+            ><v-btn class="rounded-xl mt-1" color="primary" @click="addChild"
+              >ذخیره</v-btn
+            ></v-col
+          >
+        </v-row>
+      </template>
+    </th-modal>
     <th-modal v-model="editCategoryDialog">
       <template #title>
         <span>ویرایش رسته</span>
@@ -162,7 +193,7 @@
         <v-row>
           <v-col cols="8">
             <v-text-field
-              v-model="selectedCategory"
+              v-model="selectedCategory.title"
               height="40"
               background-color="#FBFBFB"
               class="pt-0"
@@ -171,7 +202,12 @@
             ></v-text-field
           ></v-col>
           <v-col cols="3"
-            ><v-btn class="rounded-xl mt-1" color="primary">ذخیره</v-btn></v-col
+            ><v-btn
+              class="rounded-xl mt-1"
+              color="primary"
+              @click="updateCategory"
+              >ذخیره</v-btn
+            ></v-col
           >
         </v-row>
       </template>
@@ -179,24 +215,85 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+import { Category } from '~/data/models/category'
+
+export default Vue.extend({
   name: 'Cards',
   data() {
     return {
-      selectedCategory: {},
+      selectedCategory: {} as Category,
       editCategoryDialog: false,
-      categories: [],
-      treeItems: [],
+      addChildDialog: false,
+      child: '',
     }
   },
-  methods: {
-    showEditCategoryDialog(category) {
-      this.selectedCategory = category
-      this.editCategoryDialog = true
+  head: {
+    title: 'رسته محصولات',
+  },
+  computed: {
+    categories: {
+      get() {
+        return this.$store.getters['categories/categories']
+      },
+      set(value) {
+        this.$store.commit('categories/setCategories', value)
+      },
     },
   },
-}
+  created() {
+    this.getCategories()
+  },
+  methods: {
+    showEditCategoryDialog(category: Category) {
+      this.selectedCategory = { ...category }
+      this.editCategoryDialog = true
+    },
+    showAddChildDialog(category: Category) {
+      this.selectedCategory = { ...category }
+      console.log(this.selectedCategory)
+      this.addChildDialog = true
+    },
+    getCategories() {
+      this.$store.dispatch('categories/getCategories', 1)
+    },
+    updateCategory() {
+      this.editCategoryDialog = false
+      const data = {
+        id: this.selectedCategory.id,
+        title: this.selectedCategory.title,
+        type: this.selectedCategory.type,
+        description: this.selectedCategory.description,
+        tab: this.selectedCategory.tab,
+      }
+      this.$store.dispatch('categories/updateCategory', data).then(() => {
+        this.getCategories()
+      })
+    },
+    addChild() {
+      this.addChildDialog = false
+      const data = {
+        title: this.child,
+        type: this.selectedCategory.type,
+        parent_id: this.selectedCategory.parentId,
+        description: this.selectedCategory.description,
+      }
+      this.$store.dispatch('categories/addChild', data).then(() => {
+        this.getCategories()
+      })
+    },
+    deleteCategory(category: Category) {
+      this.selectedCategory = { ...category }
+
+      this.$store
+        .dispatch('categories/deleteCategory', this.selectedCategory.id)
+        .then(() => {
+          this.getCategories()
+        })
+    },
+  },
+})
 </script>
 
 <style lang="scss" scoped>
