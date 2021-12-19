@@ -66,6 +66,7 @@
         </th-modal>
 
       </template>
+
       <!--      Delete and Edit Buttons -->
       <template v-slot:item.actions='{ item }'>
         <v-btn
@@ -122,7 +123,7 @@ export default Vue.extend({
       modalConfirm: false,
       lastId: 0,
       headers: [
-        { text: 'کدشهر', value: 'city_id', align: 'start' },
+        { text: 'کدشهر', value: 'city.id', align: 'start' },
         { text: 'نام کارگاه', value: 'title', align: 'start' },
         { text: 'کد کارگاه', value: 'code', align: 'start' },
         { text: 'عملیات', value: 'actions', align: 'center', sortable: false }
