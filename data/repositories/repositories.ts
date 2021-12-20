@@ -11,6 +11,7 @@ import Profile from '~/data/repositories/users/profile'
 import Cities from '~/data/repositories/cities/cities'
 import Workshops from '~/data/repositories/workshops'
 import AuthUser from '~/data/repositories/users/auth'
+import Categories from '~/data/repositories/categories'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -43,4 +44,6 @@ export default class Repositories {
 
   authUser = () => new AuthUser(this.axios)
 
+  
+  categories = () => new Categories(this.axios)
 }

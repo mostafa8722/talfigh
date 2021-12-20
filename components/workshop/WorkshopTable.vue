@@ -18,7 +18,7 @@
           <v-col class='pt-1' cols='12' lg='3' md='3'
           >
             <v-text-field
-              v-model='searchCode'
+              v-model='code'
               background-color='#FBFBFB'
               height='40'
               placeholder='جستجوی بر اساس کد کارگاه'
@@ -29,7 +29,7 @@
           <v-col class='pt-1' cols='12' lg='3' md='3'
           >
             <v-text-field
-              v-model='searchName'
+              v-model='title'
               background-color='#FBFBFB'
               height='40'
               placeholder='جستجوی نام کارگاه'
@@ -122,12 +122,8 @@ export default Vue.extend({
       confirmDelete: false,
       modalConfirm: false,
       lastId: 0,
-      headers: [
-        { text: 'کدشهر', value: 'city.id', align: 'start' },
-        { text: 'نام کارگاه', value: 'title', align: 'start' },
-        { text: 'کد کارگاه', value: 'code', align: 'start' },
-        { text: 'عملیات', value: 'actions', align: 'center', sortable: false }
-      ],
+      title: '',
+      code: '',
       editedIndex: -1,
       editedItem: {
         id: 0,
@@ -157,6 +153,30 @@ export default Vue.extend({
     },
     formTitle(): string {
       return (this as any).editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
+    headers() {
+      return [
+
+        { text: 'کدشهر', value: 'city.id', align: 'start' },
+        { text: 'نام کارگاه', value: 'title', align: 'start' },
+        {
+          text: 'کد کارگاه',
+          value: 'code',
+          filter: (value: string) => {
+            if (!this.$data.code) return true
+            return value === this.$data.code
+          }
+        },
+        { text: 'عملیات', value: 'actions', align: 'center', sortable: false },
+        {
+          text: 'نام کارگاه',
+          value: 'title',
+          filter: (value: string) => {
+            if (!this.$data.title) return true
+            return value.includes(this.$data.title)
+          }
+        }
+      ]
     }
 
   },
