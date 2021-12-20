@@ -87,14 +87,14 @@ const config: NuxtConfig = {
     strategies: {
       'laravelSanctum': {
         provider: 'laravel/sanctum',
-        url: 'http://localhost:8000',
+        url: 'http://talfigh.ventosco.com/apiadmin',
         endpoints: {
           login: {
-            url: '/api/login',
+            url: '/login',
             method: 'post'
           }
         }
-      }
+      },
     },
     redirect: {
       login: '/login',
