@@ -71,7 +71,7 @@ export default {
   mounted() {
     // Before loading login page, obtain csrf cookie from the server.
     this.$axios.$get('/sanctum/csrf-cookie', {
-      baseURL: 'http://talfigh.ventosco.com/apiadmin/api',
+      baseURL: 'http://talfigh.ventosco.com/apiadmin',
     })
   },
   methods: {
