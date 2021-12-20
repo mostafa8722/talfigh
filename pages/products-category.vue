@@ -4,11 +4,11 @@
       <v-col cols="12" lg="3" md="3">
         <span class="white--text" style="font-size: 1.6rem">رسته محصولات</span>
       </v-col>
-      <v-col cols="12" lg="3" md="3"
+      <!-- <v-col cols="12" lg="3" md="3"
         ><v-btn class="button px-10 rounded-xl" color="primary"
           >ذخیره محتویات</v-btn
         ></v-col
-      >
+      > -->
     </v-row>
     <v-row>
       <v-col cols="12" xl="3">
@@ -18,6 +18,7 @@
           <v-row>
             <v-col cols="8">
               <v-text-field
+                v-model="category"
                 height="40"
                 background-color="#FBFBFB"
                 class="pt-0"
@@ -26,50 +27,54 @@
               ></v-text-field
             ></v-col>
             <v-col cols="3"
-              ><v-btn class="rounded-xl mt-1" color="primary"
+              ><v-btn
+                class="rounded-xl mt-1"
+                color="primary"
+                @click="storeCategory"
                 >اضافه کردن</v-btn
               ></v-col
             >
           </v-row>
           <v-text-field
+            v-model="search"
             background-color="#FBFBFB"
             height="40"
             rounded
             hide-details
             append-icon="fas fa-search"
             placeholder="جستجو"
+            @blur="searchCategory"
           ></v-text-field>
           <v-virtual-scroll
             class="mt-4 tlf-v-scroll"
+            :items="searchResult"
             :item-height="60"
             height="200"
           >
             <template #default="{ item }">
-              <div
-                class="px-4 py-4 tlf-role-item"
-                :class="{ selected: item.id == 3 }"
-              >
+              <div class="px-4 py-4 tlf-role-item">
                 <v-row>
                   <v-col cols="7"
-                    ><span>{{ item.title }}</span></v-col
+                    ><span>{{ item[0].title }}</span></v-col
                   >
                   <v-col class="d-flex flex-row" cols="4">
-                    <v-btn
+                    <!-- <v-btn
                       class="ma-1 card-btn"
                       color="error"
                       elevation="0"
                       x-small
                       fab
+                      @click="deleteCategory(item[0])"
                     >
                       <v-icon>fas fa-trash-alt</v-icon>
-                    </v-btn>
+                    </v-btn> -->
                     <v-btn
                       color="warning"
                       class="ma-1 card-btn"
                       elevation="0"
                       x-small
                       fab
-                      @click="showEditCategoryDialog(item.title)"
+                      @click="showEditCategoryDialog(item[0])"
                     >
                       <v-icon>fas fa-pencil-alt</v-icon>
                     </v-btn></v-col
@@ -148,14 +153,14 @@
               </template>
             </v-draggable-treeview>
           </v-card-text>
-          <v-card-actions>
+          <!-- <v-card-actions>
             <v-spacer></v-spacer>
             <div class="ml-4 mb-5">
               <v-btn color="primary" class="px-10" rounded>
                 ذخیره اطلاعات رسته
               </v-btn>
             </div>
-          </v-card-actions>
+          </v-card-actions> -->
         </v-card></v-col
       >
     </v-row>
@@ -227,6 +232,8 @@ export default Vue.extend({
       editCategoryDialog: false,
       addChildDialog: false,
       child: '',
+      category: '',
+      search: '',
     }
   },
   head: {
@@ -241,6 +248,11 @@ export default Vue.extend({
         this.$store.commit('categories/setCategories', value)
       },
     },
+    searchResult: {
+      get() {
+        return this.$store.getters['categories/searchResult']
+      },
+    },
   },
   created() {
     this.getCategories()
@@ -251,8 +263,8 @@ export default Vue.extend({
       this.editCategoryDialog = true
     },
     showAddChildDialog(category: Category) {
+      this.child = ""
       this.selectedCategory = { ...category }
-      console.log(this.selectedCategory)
       this.addChildDialog = true
     },
     getCategories() {
@@ -276,11 +288,32 @@ export default Vue.extend({
       const data = {
         title: this.child,
         type: this.selectedCategory.type,
-        parent_id: this.selectedCategory.parentId,
+        parent_id: this.selectedCategory.id,
         description: this.selectedCategory.description,
       }
       this.$store.dispatch('categories/addChild', data).then(() => {
         this.getCategories()
+      })
+    },
+    storeCategory() {
+      this.addChildDialog = false
+      const data = {
+        title: this.category,
+        type: 1,
+        description: '',
+      }
+      this.$store.dispatch('categories/storeCategory', data).then(() => {
+        this.category = ''
+        this.getCategories()
+      })
+    },
+    searchCategory() {
+      const data = {
+        id: 1,
+        search: this.search,
+      }
+      this.$store.dispatch('categories/searchCategory', data).then(() => {
+        this.search = ''
       })
     },
     deleteCategory(category: Category) {
