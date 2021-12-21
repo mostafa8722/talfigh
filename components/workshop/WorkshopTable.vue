@@ -95,7 +95,7 @@
 
 
       <template v-slot:no-data>
-        چیزی برای نمایش وجود ندازد
+        چیزی برای نمایش وجود ندارد
       </template>
     </v-data-table>
 
