@@ -15,7 +15,7 @@ import Menu from '~/components/menu/Menu.vue'
 import MenuMobile from '~/components/menu/Menu-Mobile.vue'
 
 export default Vue.extend({
- // middleware:'auth',
+  middleware:'auth',
   components: { MenuMobile, Menu },
   data() {
     return {
