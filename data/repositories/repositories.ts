@@ -3,7 +3,7 @@ import PostRepository from '~/data/repositories/postRepository'
 import Roles from '~/data/repositories/role'
 import Pages from '~/data/repositories/pages'
 import Permissions from '~/data/repositories/permissions/permission'
-import PermissionGroups from '~/data/repositories/permissions/PermissionGroup'
+import PermissionGroups from '~/data/repositories/permissions/permissionGroup'
 import Users from '~/data/repositories/users/users'
 import Scores from '~/data/repositories/scores'
 import System from '~/data/repositories/settings/system'
@@ -53,6 +53,6 @@ export default class Repositories {
 
   authUser = () => new AuthUser(this.axios)
 
-  
+
   categories = () => new Categories(this.axios)
 }

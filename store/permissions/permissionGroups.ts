@@ -20,7 +20,6 @@ export const getters: GetterTree<PermissionGroupsState, any> = {
 
 export const mutations: MutationTree<PermissionGroupsState> = {
     setPermissionGroups(state, permissions){
-        console.log("ttt2",permissions)
         state.permissionList = permissions
     },
     setMessage(state, data){
@@ -32,11 +31,9 @@ export const mutations: MutationTree<PermissionGroupsState> = {
 export const actions: ActionTree<PermissionGroupsState, any> = {
     async getPermissionGroups({ commit }) {
         const res = await this.$repositories.PermissionGroups().loadPermissions()
-        console.log("ttt",res)
         commit('setPermissionGroups', res)
     },
     async savePermissionGroup({ commit, dispatch }, data) {
-        console.log("tt1",data)
         const response = await this.$repositories.PermissionGroups().savePermission(data)
         if(response.success){
             commit('setMessage', response.message)

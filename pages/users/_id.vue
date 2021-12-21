@@ -679,7 +679,7 @@ export default Vue.extend({
       }
     },
     valueDateConvert(){
-      return (this as any).$store.getters['users/profile/getBirthDateFa']
+        return (this as any).$store.getters['users/profile/getBirthDateFa']
     }
   },
   created() {

@@ -62,8 +62,9 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import PermissionGroup from '~/data/models/permission-group'
-import Permission from '~/data/models/permission'
+import { PermissionGroup } from '~/data/models/permission-group'
+import { Permission } from '~/data/models/permission'
+
 export default Vue.extend({
   name: 'Roles',
   data() {
