@@ -98,7 +98,7 @@ export default Vue.extend({
           this.title = old_value.title;
           this.name = old_value.name;
 
-          old_value.permissions.map(permission =>
+          old_value.permissions.map((permission:any) =>
               this.selectedPermissions.push(permission.id)
           )
 
@@ -124,12 +124,6 @@ export default Vue.extend({
   methods: {
       save(){
 
-          return;
-          this.$store.dispatch('roles/updateRole', {
-              id:this.id,
-              title:this.title,
-              accessGroups:this.selectedPermissions
-          })
 
       },
     isPermissionGroupCompletelySelected(permissionGroup: any) {
