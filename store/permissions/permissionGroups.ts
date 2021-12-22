@@ -11,6 +11,7 @@ export type PermissionGroupsState = ReturnType<typeof state>
 
 export const getters: GetterTree<PermissionGroupsState, any> = {
     permissions(state){
+        console.log("bb",state.permissionList)
         return state.permissionList
     },
     message(state){

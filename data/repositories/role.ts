@@ -18,7 +18,6 @@ export default class Roles extends Repository {
     return res.data.data
   };
     async saveRole(data: Role): Promise<{data:Role,success:boolean,message:string}> {
-
         const res = await this.axios.post('/roles/store', data, {
             headers: {
                 'Accept': 'application/json',
@@ -37,6 +36,16 @@ export default class Roles extends Repository {
         })
         return res.data
     };
+
+    async selectRole(id:number ): Promise<{data:Role,success:boolean,message:string}> {
+        const res = await this.axios.get(`/roles/${id}`, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': bearer,
+            }
+        })
+        return res.data
+    }
     async deleteRole(data: Role): Promise<{data:Role,success:boolean,message:string}> {
         const res = await this.axios.delete(`/roles/delete/${data.id}`, {
             headers: {

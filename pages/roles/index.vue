@@ -49,9 +49,11 @@
             <v-btn @click="deleteItem(item)"  fab x-small color="error" elevation="0"
             ><v-icon>fas fa-trash-alt</v-icon></v-btn
             >
-            <v-btn  @click="addDialog(item)"  fab x-small color="warning" class="mr-4" elevation="0">
+            <nuxt-link v-bind:to="editItem(item)">
+            <v-btn   fab x-small color="warning" class="mr-4" elevation="0">
               <v-icon>fas fa-edit</v-icon>
             </v-btn>
+            </nuxt-link>
           </div>
         </template>
       </v-data-table>
@@ -85,7 +87,7 @@
             ></v-text-field>
           </v-col>
           <v-col cols="12">
-            <span class="mr-4">انتخاب دسترسی را جستجو کنید</span>
+            <span class="mr-4">انتخاب گروه دسترسی را جستجو کنید</span>
             <v-autocomplete
                     v-model="selectedPermissions"
                     class="pt-0"
@@ -212,6 +214,10 @@
 
                 this.addRoleDialog = true
 
+            },
+
+            editItem(item:any){
+                return `roles/${item.id}`
             },
             deleteItem(item:any){
                 this.id = item.id

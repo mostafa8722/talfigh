@@ -10,12 +10,23 @@
           <v-col class="pb-0" cols="12" lg="4" md="4">
             <span>عنوان نقش</span>
             <v-text-field
+              v-model="title"
               outlined
               class="rounded-lg mt-4"
               background-color="white"
               placeholder="عنوان نقش"
             ></v-text-field
           ></v-col>
+          <v-col class="pb-0" cols="12" lg="4" md="4">
+            <span>عنوان نقش به انگلیسی</span>
+            <v-text-field
+                    v-model="name"
+                    outlined
+                    class="rounded-lg mt-4"
+                    background-color="white"
+                    placeholder="عنوان نقش به انگلیسی"
+            ></v-text-field
+            ></v-col>
         </v-row>
       </v-card-title>
 
@@ -33,7 +44,7 @@
               <span class="font-weight-bold">{{ permissionGroup.title }}</span>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <div v-show="permissionGroup.permissions.length > 0">
+              <div v-show="permissionGroup.permission.length > 0">
                 <v-checkbox
                   label="انتخاب همه"
                   :value="isPermissionGroupCompletelySelected(permissionGroup)"
@@ -43,7 +54,7 @@
               </div>
 
               <v-checkbox
-                v-for="permission in permissionGroup.permissions"
+                v-for="permission in permissionGroup.permission"
                 :key="permission.id"
                 v-model="selectedPermissions"
                 :label="permission.title"
@@ -54,7 +65,7 @@
         </v-col>
       </v-expansion-panels>
       <div class="d-flex justify-md-end justify-center py-8 ml-md-8">
-        <v-btn class="px-10 rounded-xl" color="success" outlined>ثبت و ویرایش نقش</v-btn>
+        <v-btn @click="save" class="px-10 rounded-xl" color="success" outlined>ثبت و ویرایش نقش</v-btn>
       </div>
     </v-card>
   </div>
@@ -64,94 +75,46 @@
 import Vue from 'vue'
 import { PermissionGroup } from '~/data/models/permission-group'
 import { Permission } from '~/data/models/permission'
+import {mapGetters} from "vuex"
 
 export default Vue.extend({
   name: 'Roles',
+    computed: {
+        ...mapGetters({
+
+            permissionGroupsWithPermission2: 'permissions/permissionGroups/permissions',
+            role: 'roles/role',
+            message: 'roles/message'
+        })
+    },
+    async fetch() {
+        let id = this.$route.params.id
+        await this.$store.dispatch('roles/selectRole',id);
+        await this.$store.dispatch('permissions/permissionGroups/getPermissionGroups');
+
+    },
+    watch:{
+      role(old_value,new_value){
+          this.title = old_value.title;
+          this.name = old_value.name;
+
+          old_value.permissions.map(permission =>
+              this.selectedPermissions.push(permission.id)
+          )
+
+        },
+        permissionGroupsWithPermission2(old_value,new_value){
+
+            this.permissionGroupsWithPermission = old_value
+        }
+    },
   data() {
     return {
+        title :"",
+        name :"",
       selectedPermissions: [{}],
       permissionGroupsWithPermission: [
-        {
-          id: 1,
-          title: 'test',
-          permissions: [
-            { id: 2, title: 'test2' },
-            { id: 3, title: 'test3' },
-            { id: 4, title: 'test4' },
-          ],
-        },
-        {
-          id: 2,
-          title: 'test2',
-          permissions: [
-            { id: 2, title: 'test2' },
-            { id: 3, title: 'test3' },
-            { id: 4, title: 'test4' },
-          ],
-        },
-        {
-          id: 3,
-          title: 'test3',
-          permissions: [
-            { id: 2, title: 'test2' },
-            { id: 3, title: 'test3' },
-            { id: 4, title: 'test4' },
-          ],
-        },
-        {
-          id: 4,
-          title: 'test4',
-          permissions: [
-            { id: 2, title: 'test2' },
-            { id: 3, title: 'test3' },
-            { id: 4, title: 'test4' },
-          ],
-        },
-        {
-          id: 5,
-          title: 'test5',
-          permissions: [
-            { id: 2, title: 'test2' },
-            { id: 3, title: 'test3' },
-            { id: 4, title: 'test4' },
-          ],
-        },
-        {
-          id: 6,
-          title: 'test6',
-          permissions: [
-            { id: 2, title: 'test2' },
-            { id: 3, title: 'test3' },
-            { id: 4, title: 'test4' },
-          ],
-        },
-        {
-          id: 7,
-          title: 'test7',
-          permissions: [
-            { id: 2, title: 'test2' },
-            { id: 3, title: 'test3' },
-            { id: 4, title: 'test4' },
-          ],
-        },
-        {
-          id: 8,
-          title: 'test8',
-          permissions: [
-            { id: 2, title: 'test2' },
-            { id: 3, title: 'test3' },
-            { id: 4, title: 'test4' },
-          ],
-        },
-        {
-          id: 9,
-          title: 'test9',
-          permissions: [
-            { id: 2, title: 'test2' },
-            { id: 3, title: 'test3' },
-            { id: 4, title: 'test4' },
-          ],
-        },
+
       ],
     }
   },
@@ -159,14 +122,25 @@ export default Vue.extend({
     title: "ویرایش نقش"
   },
   methods: {
-    isPermissionGroupCompletelySelected(permissionGroup: PermissionGroup) {
-      return permissionGroup.permissions.every((permission: Permission) =>
+      save(){
+
+          return;
+          this.$store.dispatch('roles/updateRole', {
+              id:this.id,
+              title:this.title,
+              accessGroups:this.selectedPermissions
+          })
+
+      },
+    isPermissionGroupCompletelySelected(permissionGroup: any) {
+      return permissionGroup.permission.every((permission: Permission) =>
         this.selectedPermissions.includes(permission.id)
+
       )
     },
-    toggleSelectPermissionGroup(permissionGroup: PermissionGroup) {
+    toggleSelectPermissionGroup(permissionGroup: any) {
       if (this.isPermissionGroupCompletelySelected(permissionGroup)) {
-        const permissionIds = permissionGroup.permissions.map(
+        const permissionIds = permissionGroup.permission.map(
           (permission: Permission) => permission.id
         )
         this.selectedPermissions = this.selectedPermissions.filter(
@@ -175,12 +149,13 @@ export default Vue.extend({
           }
         )
       } else {
-        permissionGroup.permissions.forEach((permission: Permission) => {
+        permissionGroup.permission.forEach((permission: Permission) => {
           if (!this.selectedPermissions.includes(permission.id)) {
             this.selectedPermissions.push(permission.id)
           }
         })
       }
+
     },
   },
 })
