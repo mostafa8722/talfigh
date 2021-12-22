@@ -168,7 +168,7 @@ export default Vue.extend({
 
 
         addDialog(item:any){
-          console.log(item)
+
           if(item=="add"){
               this.id=0
               this.title=""

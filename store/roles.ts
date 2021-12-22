@@ -19,7 +19,7 @@ export const getters: GetterTree<RolesState, any> = {
 
 export const mutations: MutationTree<RolesState> = {
     setRoles(state, roles){
-        console.log("ttt2",roles)
+
         state.roleList = roles
     },
     setMessage(state, data){
@@ -31,11 +31,11 @@ export const mutations: MutationTree<RolesState> = {
 export const actions: ActionTree<RolesState, any> = {
     async getRoles({ commit }) {
         const res = await this.$repositories.Roles().loadRoles()
-        console.log("ttt",res)
+
         commit('setRoles', res)
     },
     async saveRole({ commit, dispatch }, data) {
-        console.log("tt1",data)
+
         const response = await this.$repositories.Roles().saveRole(data)
         if(response.success){
             commit('setMessage', response.message)

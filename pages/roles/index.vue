@@ -138,7 +138,7 @@
             ...mapGetters({
 
                 permissions: 'permissions/permissionGroups/permissions',
-                roles: 'roles/roles',
+                items: 'roles/roles',
                 message: 'roles/message'
             })
         },
@@ -149,6 +149,7 @@
             await this.$store.dispatch('permissions/permissionGroups/getPermissionGroups');
 
         },
+
         data() {
             return {
                 id:0,
@@ -196,7 +197,7 @@
                     })
             },
             addDialog(item:any){
-                console.log("tttt",item)
+
                 if(item=="add"){
                     this.id=0
                     this.title=""
@@ -206,7 +207,7 @@
                     this.id=item.id
                     this.title=item.title
                     this.name=item.name
-                    this.selectedPermissions=item.permission
+                    this.selectedPermissions=item.permissions
                 }
 
                 this.addRoleDialog = true

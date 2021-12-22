@@ -1,7 +1,7 @@
 import Repository from '~/data/repositories/repository'
 import { Role } from '~/data/models/role'
 import { API } from 'data/utils/Enums'
-let bearer = 'Bearer RrWLikHF7PAnP9JJS3PVikgdHiWDjFqZ9XkPXZaJ';
+let bearer = 'Bearer 16|3YzA368kiJH0RGuTccmXw4biirh75l1iVCXxnRrt';
 
 export default class Roles extends Repository {
 

@@ -1,7 +1,7 @@
 import Repository from '~/data/repositories/repository'
 import { Permission } from '~/data/models/permission'
 import { API } from 'data/utils/Enums'
-let bearer = 'Bearer RrWLikHF7PAnP9JJS3PVikgdHiWDjFqZ9XkPXZaJ';
+let bearer = 'Bearer 16|3YzA368kiJH0RGuTccmXw4biirh75l1iVCXxnRrt';
 
 export default class Permissions extends Repository {
 
@@ -9,6 +9,7 @@ export default class Permissions extends Repository {
   async loadPermissions(): Promise<Permission[]> {
 
     const res = await this.axios.get('/permissions',{
+
       headers: {
         'Accept': 'application/json',
         'Authorization': bearer
