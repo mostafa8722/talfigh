@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 import { NuxtConfig } from '@nuxt/types'
 import fa from 'vuetify/src/locale/fa'
-// import { POSITION } from 'vue-toastification'
+import { POSITION } from 'vue-toastification'
 
 const config: NuxtConfig = {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -52,7 +52,8 @@ const config: NuxtConfig = {
   components: true,
 
   router: {
-    middleware: 'maintenance'
+    //'maintenance',
+    // middleware: ['auth']
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -68,12 +69,14 @@ const config: NuxtConfig = {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    'vue-toastification/nuxt',
+
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://talfigh.ventosco.com/apiadmin/api',
+    baseURL: 'https://talfighehonar.com/api/api',
     credentials: true,
     headers: {
       common: {
@@ -85,33 +88,42 @@ const config: NuxtConfig = {
 
   auth: {
     strategies: {
-      'laravelSanctum': {
-        provider: 'laravel/sanctum',
-        url: 'http://talfigh.ventosco.com/apiadmin',
+      local: {
         endpoints: {
           login: {
-            url: '/login',
+            url: 'https://talfighehonar.com/api/api/login',
             method: 'post'
+          },
+          user: {
+            url: 'https://talfighehonar.com/api/api/user',
+            method: 'get'
           }
+        },
+        token: {
+          property: 'data.access_token'
+        },
+        user:{
+          property:'data'
         }
-      },
+      }
     },
+
     redirect: {
       login: '/login',
-      logout: '/',
+      logout: '/login',
       callback: '/login',
       home: '/dashboard'
     }
   },
 
-  // toast: {
-  //   timeout: 5000,
-  //   closeOnClick: false,
-  //   rtl: true,
-  //   position: POSITION.TOP_CENTER,
-  //   closeButton: false,
-  //   icon: false
-  // },
+  toast: {
+    timeout: 5000,
+    closeOnClick: false,
+    rtl: true,
+    position: POSITION.TOP_CENTER,
+    closeButton: false,
+    icon: false
+  },
 
   server: {
     port: 4000

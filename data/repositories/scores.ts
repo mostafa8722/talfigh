@@ -8,10 +8,10 @@ export default class Scores extends Repository {
   }
 
   async setScore(data: Score): Promise<Score> {
-    const res = await this.axios.post('/scores/store', data, {
-      headers: this.headers
-    })
-    return res.data
+      const res = await this.axios.post('/scores/store', data, {
+        headers: this.headers
+      })
+      return res.data
   }
 
   async getScores(): Promise<Score[]> {

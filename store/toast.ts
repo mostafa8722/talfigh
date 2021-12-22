@@ -27,9 +27,9 @@ export const mutations: MutationTree<ToastState> = {
   SHOW_ERROR(state, errorText) {
           state.showError = true
           state.errorText = errorText.message
-          setTimeout(() => {
-              state.showError = false
-            }, 100)
+          // setTimeout(() => {
+          //     state.showError = false
+          //   }, 100)
   },
   SHOW_SUCCESS(state, successText) {
       state.showSuccess = true

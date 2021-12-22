@@ -214,6 +214,7 @@ export default Vue.extend({
     title: "داشبورد"
   },
   mounted() {
+    console.log(this.$auth.loggedIn)
     this.fillData()
   },
   methods: {
