@@ -120,7 +120,7 @@
                 </span>
                   <span
                     style='color: #197095; font-size: 1rem; font-weight: 500;'>
-                     {{ item.personalParty[0].national_code }}
+               <!--      {{ // item.personalParty[0].national_code }}-->
                    </span>
                 </template>
 <!--        <template v-slot:item.date='{ item }'>-->

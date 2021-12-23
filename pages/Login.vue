@@ -68,23 +68,26 @@ export default {
   head: {
     title: 'صفحه ورود',
   },
-  mounted() {
-    // Before loading login page, obtain csrf cookie from the server.
-    this.$axios.$get('/sanctum/csrf-cookie', {
-      baseURL: 'http://localhost:8000',
-    })
-  },
+  // mounted() {
+  //   // Before loading login page, obtain csrf cookie from the server.
+  //   this.$axios.$get('/sanctum/csrf-cookie', {
+  //     baseURL: 'https://talfigh.ventosco.com/apiadmin',
+  //   })
+  // },
   methods: {
     async login() {
       try
       {
-        await this.$auth.loginWith('laravelSanctum', {
+        await this.$auth.loginWith('local', {
           data: {
             username: this.username,
             password: this.password,
           },
         })
-      } catch (err) {}
+        console.log(this.$auth.user)
+      } catch (err) {
+        console.error(err)
+      }
     },
   },
 }
