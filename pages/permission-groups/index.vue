@@ -21,6 +21,7 @@
         :headers="headers"
         hide-default-footer
         :page.sync="page"
+        :search="search"
         :items-per-page="itemsPerPage"
         @page-count="pageCount = $event"
       >
@@ -29,6 +30,7 @@
             <v-col class="pt-1" cols="12" lg="3" md="3"
               ><v-text-field
                 height="40"
+                v-model="search"
                 background-color="#FBFBFB"
                 placeholder="جستوجوی گروه دسترسی..."
                 rounded
@@ -42,12 +44,12 @@
           </v-row>
           <v-divider />
         </template>
-        <template #[`item.actions`]>
+        <template   v-slot:item.actions="{ item }" >
           <div class="d-flex flex-row py-6">
-            <v-btn fab x-small color="error" elevation="0"
+            <v-btn @click="deleteItem(item)"  fab x-small color="error" elevation="0"
               ><v-icon>fas fa-trash-alt</v-icon></v-btn
             >
-            <v-btn fab x-small color="warning" class="mr-4" elevation="0">
+            <v-btn  @click="addDialog(item)"  fab x-small color="warning" class="mr-4" elevation="0">
               <v-icon>fas fa-edit</v-icon>
             </v-btn>
           </div>
@@ -63,6 +65,7 @@
           <v-col cols="12">
             <span class="mr-4">عنوان گروه دسترسی</span>
             <v-text-field
+                    v-model="title"
               height="40"
               class="pt-0"
               background-color="#FBFBFB"
@@ -82,11 +85,11 @@
               deletable-chips
               :items="permissions"
               item-value="id"
-              item-text="text"
+              item-text="title"
             >
               <template #selection="data">
                 <v-chip close color="warning" @click:close="remove(data.item)">
-                  {{ data.item.text }}
+                  {{ data.item.title }}
                 </v-chip>
               </template>
             </v-autocomplete>
@@ -104,50 +107,48 @@
             @click="addPermissionGroupDialog = false"
             >لغو</v-btn
           >
-          <v-btn rounded color="primary" class="px-8">ثبت</v-btn>
+          <v-btn @click="save" rounded color="primary" class="px-8">ثبت</v-btn>
         </div>
       </template>
     </th-modal>
+    <ModalAsk @confirmFile="confirmFile" :dialog="dialog" title="آیا از حذف این مورد اطمینان دارید؟" />
+
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import TLFContainer from '~/components/utilities/TLF-Container.vue'
-
+import {mapGetters} from "vuex"
+import ModalAsk from '~/components/ModalAsk.vue'
 export default Vue.extend({
   name: 'PermissionGroups',
-  components: { TLFContainer },
+    computed: {
+        ...mapGetters({
+            permissions: 'permissions/permissions/permissions',
+            items: 'permissions/permissionGroups/permissions',
+            message: 'permissions/permissionGroups/message'
+        })
+    },
+  components: { TLFContainer,ModalAsk },
+
+    async fetch() {
+        await this.$store.dispatch('permissions/permissions/getPermissions');
+        await this.$store.dispatch('permissions/permissionGroups/getPermissionGroups');
+
+    },
   data() {
     return {
+        id:0,
+        title :"",
+        search:"",
       addPermissionGroupDialog: false,
+        dialog: false,
       page: 1,
       pageCount: 0,
       itemsPerPage: 10,
       selectedPermissions: [] as number[],
-      permissions: [
-        { id: 1, text: 'تستی' },
-        { id: 2, text: 'تستی2' },
-        { id: 3, text: 'تستی3' },
-        { id: 4, text: 'تستی4' },
-      ],
-      items: [
-        {
-          title: 'لیست درخواست‌ها',
-        },
-        {
-          title: 'لیست درخواست‌ها',
-        },
-        {
-          title: 'لیست درخواست‌ها',
-        },
-        {
-          title: 'لیست درخواست‌ها',
-        },
-        {
-          title: 'لیست درخواست‌ها',
-        },
-      ],
+
       headers: [
         {
           text: 'عنوان',
@@ -166,7 +167,58 @@ export default Vue.extend({
       const index = this.selectedPermissions.indexOf(item.id)
       if (index >= 0) this.selectedPermissions.splice(index, 1)
     },
+
+      save(){
+          if(this.id==0)
+              this.$store.dispatch('permissions/permissionGroups/savePermissionGroup', {
+                  title:this.title,
+                  permissions:this.selectedPermissions
+              })
+          else
+              this.$store.dispatch('permissions/permissionGroups/updatePermissionGroup', {
+                  id:this.id,
+                  title:this.title,
+                  permissions:this.selectedPermissions
+              })
+      },
+      addDialog(item:any){
+          if(item=="add"){
+              this.id=0
+              this.title=""
+              this.selectedPermissions=[]
+          } else{
+              this.id=item.id
+              this.title=item.title
+              this.selectedPermissions=item.permission
+          }
+
+          this.addPermissionGroupDialog = true
+
+      },
+      deleteItem(item:any){
+          this.id = item.id
+          this.dialog = true;
+      },
+      confirmFile(type:any){
+          if(type=="cancel")
+              this.dialog = false;
+          else{
+              this.$store.dispatch('permissions/permissionGroups/deletePermissionGroup', {
+                  id:this.id,
+              })
+          }
+      }
   },
+    watch:{
+        message(old_v,new_v){
+            alert(old_v)
+            if(this.id==0) {
+                this.title = ""
+                this.selectedPermissions = []
+            }
+            this.dialog = false;
+        }
+    }
 })
 </script>
 

@@ -13,7 +13,7 @@ export const state = () => ({
   mobile1: '',
   mobile2: '',
   display_name: '',
-  account_type: '',
+  account_type: '0',
   confirm_plan: '',
   confirm_datetime: '',
   phone: '',
@@ -28,8 +28,8 @@ export const state = () => ({
   address: '',
   city_id: '',
   province_id: '',
-  latitude: '',
-  longitude: '',
+  latitude: '51.337712',
+  longitude: '35.699735',
 })
 export type ProfileState = ReturnType<typeof state>
 
@@ -77,12 +77,12 @@ export const getters: GetterTree<ProfileState, any> = {
     return state.father_name
   },
   getBirthDate(state) {
-    return moment.from(state.birthdate, 'fa',  'YYYY-MM-DD')
+    return moment.from(state.birthdate || moment().format('jYYYY-jMM-jDD'), 'fa',  'YYYY-MM-DD')
       .locale('en')
       .format('YYYY-MM-DD')
   },
   getBirthDateFa(state){
-    return state.birthdate
+    return state.birthdate || moment().format('jYYYY-jMM-jDD')
   },
   getPhone(state) {
     return state.phone

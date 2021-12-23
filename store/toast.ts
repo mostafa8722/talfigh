@@ -24,7 +24,7 @@ export const getters: GetterTree<ToastState, any> = {
 }
 
 export const mutations: MutationTree<ToastState> = {
-  SHOW_ERROR(state, errorText) {          
+  SHOW_ERROR(state, errorText) {
           state.showError = true
           state.errorText = errorText.message
           setTimeout(() => {

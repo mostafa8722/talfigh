@@ -71,12 +71,13 @@ export default {
   mounted() {
     // Before loading login page, obtain csrf cookie from the server.
     this.$axios.$get('/sanctum/csrf-cookie', {
-      baseURL: 'http://talfigh.ventosco.com/apiadmin',
+      baseURL: 'http://localhost:8000',
     })
   },
   methods: {
     async login() {
-      try {
+      try
+      {
         await this.$auth.loginWith('laravelSanctum', {
           data: {
             username: this.username,

@@ -1,6 +1,9 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import PostRepository from '~/data/repositories/postRepository'
+import Roles from '~/data/repositories/role'
 import Pages from '~/data/repositories/pages'
+import Permissions from '~/data/repositories/permissions/permission'
+import PermissionGroups from '~/data/repositories/permissions/permissionGroup'
 import Users from '~/data/repositories/users/users'
 import Scores from '~/data/repositories/scores'
 import System from '~/data/repositories/settings/system'
@@ -24,6 +27,12 @@ export default class Repositories {
 
   pages = () => new Pages(this.axios)
 
+    Roles = () => new Roles(this.axios)
+
+  Permissions = () => new Permissions(this.axios)
+
+  PermissionGroups = () => new PermissionGroups(this.axios)
+
   users = () => new Users(this.axios)
 
   scores = () => new Scores(this.axios)
@@ -44,6 +53,6 @@ export default class Repositories {
 
   authUser = () => new AuthUser(this.axios)
 
-  
+
   categories = () => new Categories(this.axios)
 }
