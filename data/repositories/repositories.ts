@@ -15,6 +15,7 @@ import Cities from '~/data/repositories/cities/cities'
 import Workshops from '~/data/repositories/workshops'
 import AuthUser from '~/data/repositories/users/auth'
 import Categories from '~/data/repositories/categories'
+import Managers from '~/data/repositories/managers'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -27,7 +28,7 @@ export default class Repositories {
 
   pages = () => new Pages(this.axios)
 
-    Roles = () => new Roles(this.axios)
+  Roles = () => new Roles(this.axios)
 
   Permissions = () => new Permissions(this.axios)
 
@@ -53,6 +54,7 @@ export default class Repositories {
 
   authUser = () => new AuthUser(this.axios)
 
+  managers = () => new Managers(this.axios)
 
   categories = () => new Categories(this.axios)
 }
