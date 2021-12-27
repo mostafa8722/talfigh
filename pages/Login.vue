@@ -5,10 +5,10 @@
         <v-row>
           <v-col>
             <img class="ml-3" src="~/static/images/home.svg" alt="" />
-            <a class="black--text" style="text-decoration: none" href="#"
-              >ثبت نام</a
-            ></v-col
-          >
+            <a class="black--text" style="text-decoration: none" href="https://talfighehonar.com">
+              تلفیق هنر
+            </a>
+            </v-col>
         </v-row></span
       >
       <v-container class="d-flex justify-center align-center">
@@ -71,7 +71,7 @@ export default {
   // mounted() {
   //   // Before loading login page, obtain csrf cookie from the server.
   //   this.$axios.$get('/sanctum/csrf-cookie', {
-  //     baseURL: 'https://talfigh.ventosco.com/apiadmin',
+  //     baseURL: 'http://localhost:8000',
   //   })
   // },
   methods: {

@@ -24,6 +24,7 @@ import Vue from 'vue'
 import { mapGetters } from 'vuex'
 
 export default Vue.extend({
+  auth:false,
   async fetch() {
     await this.$store.dispatch('posts/getPosts')
   },

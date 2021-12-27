@@ -28,7 +28,10 @@
       "@nuxtjs/axios",
       "@types/node",
       "@nuxtjs/auth-next",
+      "vuelayers",
       "vuetify",
+      "@types/jest",
+      "@types/lodash"
     ]
   },
   "exclude": [
