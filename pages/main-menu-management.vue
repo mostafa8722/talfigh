@@ -5,8 +5,11 @@
         <div class="mt-4">
           <span class="white--text" style="font-size: 0.9rem"> صفحه‌ها </span>
           <v-autocomplete
+            v-model="pageId"
             :items="pages"
             item-text="title"
+            item-value="id"
+            return-object
             background-color="#D0D0D0"
             hide-details
             outlined
@@ -16,8 +19,11 @@
         <div class="mt-4">
           <span class="white--text" style="font-size: 0.9rem"> دسته‌ها </span>
           <v-autocomplete
-            :items="pages"
+            v-model="categoryId"
+            :items="categories"
             item-text="title"
+            item-value="id"
+            return-object
             background-color="#D0D0D0"
             hide-details
             outlined
@@ -27,8 +33,11 @@
         <div class="mt-4">
           <span class="white--text" style="font-size: 0.9rem"> بلاگ </span>
           <v-autocomplete
+            v-model="pageId"
             :items="pages"
             item-text="title"
+            item-value="id"
+            return-object
             background-color="#D0D0D0"
             hide-details
             outlined
@@ -38,8 +47,11 @@
         <div class="mt-4">
           <span class="white--text" style="font-size: 0.9rem"> محصولات </span>
           <v-autocomplete
-            :items="pages"
+            v-model="productId"
+            :items="products"
             item-text="title"
+            item-value="id"
+            return-object
             background-color="#D0D0D0"
             hide-details
             outlined
@@ -88,6 +100,7 @@
             <v-row>
               <v-col cols="10">
                 <v-text-field
+                  v-model="title"
                   placeholder="عنوان"
                   background-color="#fff"
                   class="my-4"
@@ -109,9 +122,11 @@
                   placeholder="نام منو"
                   :items="items"
                   item-text="name"
+                  item-value="key"
                   background-color="#fff"
                   class="my-4"
                   hide-details
+                  return-object
                   outlined
                 >
                 </v-autocomplete>
@@ -230,7 +245,7 @@
         <v-row>
           <v-col cols="8">
             <v-text-field
-              v-model="selectedMenu.name"
+              v-model="selectedMenu.title"
               height="40"
               background-color="#FBFBFB"
               class="pt-0"
@@ -239,7 +254,7 @@
             ></v-text-field
           ></v-col>
           <v-col cols="3"
-            ><v-btn class="rounded-xl mt-1" color="primary">ذخیره</v-btn></v-col
+            ><v-btn class="rounded-xl mt-1" color="primary" @click="updateMenu">ذخیره</v-btn></v-col
           >
         </v-row>
       </template>
@@ -259,8 +274,12 @@ export default Vue.extend({
       addChildDialog: false,
       child: '',
       title: '',
-      type: '',
+      type: {} as any,
       externalLink: '',
+      productId: {} as any,
+      pageId: {} as any,
+      postId: {} as any,
+      categoryId: {} as any,
       items: [
         { key: 1, name: 'صفحه اصلی' },
         { key: 2, name: 'فروشگاه' },
@@ -289,6 +308,11 @@ export default Vue.extend({
         return (this as any).$store.getters['pages/lists']
       },
     },
+    products: {
+      get() {
+        return (this as any).$store.getters['products/products']
+      },
+    },
     categories: {
       get() {
         return this.$store.getters['categories/categories']
@@ -299,6 +323,7 @@ export default Vue.extend({
     this.getMenus()
     this.getPages()
     this.getCategories()
+    this.getProducts()
   },
   methods: {
     getPages() {
@@ -306,6 +331,9 @@ export default Vue.extend({
     },
     getCategories() {
       this.$store.dispatch('categories/getCategories', 1)
+    },
+    getProducts() {
+      this.$store.dispatch('products/getProducts')
     },
     showEditMenuDialog(menu: any) {
       this.selectedMenu = { ...menu }
@@ -324,9 +352,13 @@ export default Vue.extend({
       const data = {
         id: this.selectedMenu.id,
         title: this.selectedMenu.title,
-        type: this.type,
-        description: this.selectedMenu.description,
-        tab: this.selectedMenu.tab,
+        type: this.type.key,
+        parent_id: this.selectedMenu.id,
+        external_link: this.externalLink,
+        product_id: this.productId.id,
+        page_id: this.pageId.id,
+        post_id: this.postId.id,
+        category_id: this.categoryId.id,
       }
       this.$store.dispatch('main-menu-management/updateMenu', data).then(() => {
         this.getMenus()
@@ -336,8 +368,13 @@ export default Vue.extend({
       this.addChildDialog = false
       const data = {
         title: this.child,
-        type: this.type,
+        type: this.type.key,
         parent_id: this.selectedMenu.id,
+        external_link: this.externalLink,
+        product_id: this.productId.id,
+        page_id: this.pageId.id,
+        post_id: this.postId.id,
+        category_id: this.categoryId.id,
       }
       this.$store.dispatch('main-menu-management/addChild', data).then(() => {
         this.getMenus()
@@ -349,10 +386,10 @@ export default Vue.extend({
         title: this.title,
         type: this.type,
         external_link: this.externalLink,
-        product_id: '',
-        page_id: 1,
-        post_id: '',
-        category_id: '',
+        product_id: this.productId.id,
+        page_id: this.pageId.id,
+        post_id: this.postId.id,
+        category_id: this.categoryId.id,
       }
       this.$store.dispatch('main-menu-management/storeMenu', data).then(() => {
         this.title = ''

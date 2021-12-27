@@ -18,6 +18,7 @@ import Categories from '~/data/repositories/categories'
 import ContactUs from '~/data/repositories/contactus'
 import Managers from '~/data/repositories/managers'
 import Menus from '~/data/repositories/main-menu-management'
+import Products from '~/data/repositories/products'
 
 export default class Repositories {
   axios: NuxtAxiosInstance
@@ -63,4 +64,6 @@ export default class Repositories {
   contact = () => new ContactUs(this.axios)
 
   menus = () => new Menus(this.axios)
+
+  products = () => new Products(this.axios)
 }
