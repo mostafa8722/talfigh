@@ -65,6 +65,7 @@
                 <v-col class="my-4 py-0" cols="12">
                   <span style="color: #747474">لینک خارجی</span>
                   <v-text-field
+                    v-model="externalLink"
                     background-color="white"
                     outlined
                     dense
@@ -72,7 +73,7 @@
                 </v-col>
               </v-row>
               <div class="float-left">
-                <v-btn color="primary" class="px-10" rounded>
+                <v-btn color="primary" class="px-10" rounded @click="storeMenu">
                   اضافه کردن به منو
                 </v-btn>
               </div>
@@ -104,6 +105,7 @@
             <v-row>
               <v-col cols="10">
                 <v-autocomplete
+                  v-model="type"
                   placeholder="نام منو"
                   :items="items"
                   item-text="name"
@@ -185,7 +187,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <div class="ml-4 mb-5">
-              <v-btn color="primary" class="px-10" rounded>
+              <v-btn color="primary" class="px-10" rounded @click="storeMenu">
                 ذخیره اطلاعات رسته
               </v-btn>
             </div>
@@ -212,7 +214,9 @@
             ></v-text-field
           ></v-col>
           <v-col cols="3"
-            ><v-btn class="rounded-xl mt-1" color="primary">ذخیره</v-btn></v-col
+            ><v-btn class="rounded-xl mt-1" color="primary" @click="addChild"
+              >ذخیره</v-btn
+            ></v-col
           >
         </v-row>
       </template>
@@ -254,6 +258,9 @@ export default Vue.extend({
       editMenuDialog: false,
       addChildDialog: false,
       child: '',
+      title: '',
+      type: '',
+      externalLink: '',
       items: [
         { key: 1, name: 'صفحه اصلی' },
         { key: 2, name: 'فروشگاه' },
@@ -317,7 +324,7 @@ export default Vue.extend({
       const data = {
         id: this.selectedMenu.id,
         title: this.selectedMenu.title,
-        type: this.selectedMenu.type,
+        type: this.type,
         description: this.selectedMenu.description,
         tab: this.selectedMenu.tab,
       }
@@ -329,9 +336,8 @@ export default Vue.extend({
       this.addChildDialog = false
       const data = {
         title: this.child,
-        type: this.selectedMenu.type,
+        type: this.type,
         parent_id: this.selectedMenu.id,
-        description: this.selectedMenu.description,
       }
       this.$store.dispatch('main-menu-management/addChild', data).then(() => {
         this.getMenus()
@@ -340,12 +346,16 @@ export default Vue.extend({
     storeMenu() {
       this.addChildDialog = false
       const data = {
-        title: this.menu,
-        type: 1,
-        description: '',
+        title: this.title,
+        type: this.type,
+        external_link: this.externalLink,
+        product_id: '',
+        page_id: 1,
+        post_id: '',
+        category_id: '',
       }
       this.$store.dispatch('main-menu-management/storeMenu', data).then(() => {
-        this.menu = ''
+        this.title = ''
         this.getMenus()
       })
     },
