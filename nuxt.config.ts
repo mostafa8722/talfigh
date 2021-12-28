@@ -106,7 +106,7 @@ const config: NuxtConfig = {
           type: 'Bearer'
         },
         user:{
-          property:'data'
+          property:'user'
         }
       }
     },
