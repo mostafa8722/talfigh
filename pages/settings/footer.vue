@@ -12,14 +12,10 @@
         ></v-col
       >
       <v-col cols="12" lg="6" md="6"></v-col>
-      <v-col cols="12" lg="3" md="3"
-        ><span class="label">بخش اول آدرس و اطلاعات شبکه اجتماعی</span></v-col
-      >
+     
       <v-col cols="12" lg="9" md="9"></v-col>
       <v-col cols="12"
-        ><div class="box">
-          به صورت خودکار از بخش تنظیمات سیستم پر می‌شود
-        </div></v-col
+        ></v-col
       >
       <v-col cols="12" lg="3" md="3"
         ><span class="label">بخش دوم انتخاب عنوان</span></v-col
@@ -192,15 +188,6 @@
         ></v-col
       >
     </v-row>
-    <v-snackbar v-model="snackbar">
-      {{ serverMessage }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn color="yellow" text v-bind="attrs" @click="snackbar = false">
-          بستن
-        </v-btn>
-      </template>
-    </v-snackbar>
   </div>
 </template>
 
@@ -273,7 +260,6 @@ export default Vue.extend({
       fileHandler: null as null | File,
       fileUrl: '' as string,
       serverMessage: '',
-      snackbar: false,
       footerSettings: {
         title1: '',
         title2: '',
@@ -297,9 +283,9 @@ export default Vue.extend({
 
     this.fileUrl = this.footerSettings.footer_logo || ''
 
-    if (fs.message) {
-      this.serverMessage = fs.message
-      this.snackbar = true
+    if (fs.message) 
+    {
+      this.$toast.success(fs.message)
     }
   },
   watch: {
@@ -352,9 +338,9 @@ export default Vue.extend({
 
       const res = this.$store.getters['settings/footer/GET_RES'] as Footer
 
-      if (res.message) {
-        this.serverMessage = res.message
-        this.snackbar = true
+      if (res.message) 
+      {
+        this.$toast.success(res.message)
       }
 
       this.clearImage()

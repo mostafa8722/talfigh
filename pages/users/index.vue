@@ -111,7 +111,7 @@
              {{ item.firstname }} {{ item.lastname }}
            </span>
         </template>
-                <template v-slot:item.nationalCode='{ item }'>
+                <template v-slot:item.national_code='{ item }'>
                                     <span
                                       style='color: #848484;
                        font-size: 1rem;
@@ -120,7 +120,7 @@
                 </span>
                   <span
                     style='color: #197095; font-size: 1rem; font-weight: 500;'>
-               <!--      {{ // item.personalParty[0].national_code }}-->
+                    {{  item.national_code }}
                    </span>
                 </template>
 <!--        <template v-slot:item.date='{ item }'>-->

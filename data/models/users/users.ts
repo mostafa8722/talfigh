@@ -6,6 +6,7 @@ export type User = {
   lastname: string,
   mobile1: string,
   mobile2: string,
+  national_code:string,
   display_name: string,
   account_type: string,
   confirm_plan: number,
@@ -14,7 +15,6 @@ export type User = {
   updated_at: string,
   personalParty: [
     {
-      national_code: string,
       birthdate: string
     }
   ]

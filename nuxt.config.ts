@@ -76,7 +76,7 @@ const config: NuxtConfig = {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://talfigh.ventosco.com/apiadmin/api',
+    baseURL: 'http://localhost:8000/api',
     credentials: true,
     headers: {
       common: {
@@ -91,11 +91,11 @@ const config: NuxtConfig = {
       local: {
         endpoints: {
           login: {
-            url: 'http://talfigh.ventosco.com/apiadmin/api/login',
+            url: 'http://localhost:8000/api/login',
             method: 'post'
           },
           user: {
-            url: 'http://talfigh.ventosco.com/apiadmin/api/user',
+            url: 'http://localhost:8000/api/user',
             method: 'get'
           }
         },
