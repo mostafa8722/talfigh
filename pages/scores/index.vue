@@ -18,13 +18,12 @@ import { mapGetters } from 'vuex'
 export default Vue.extend({
   components: { SumScore, TlfContainer },
   head: { title: 'امتیاز و مبلغ' },
-  auth: false,
   async fetch() {
-    await this.$store.dispatch('finance/scores/getScores')
+    await this.$store.dispatch('scores/scores/getScores')
   },
   computed: {
     ...mapGetters({
-      items: 'finance/scores/GET_SCORES'
+      items: 'scores/scores/GET_SCORES'
     })
   }
 })

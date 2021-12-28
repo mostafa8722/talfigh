@@ -5,7 +5,7 @@
     <add-score></add-score>
 
     <!--Score Chart-->
-    <score-table></score-table>
+    <!-- <score-table></score-table> -->
   </v-container>
 </template>
 
