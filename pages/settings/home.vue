@@ -328,19 +328,6 @@
       <v-btn @click='sendData' class="px-10 rounded-xl" color="primary">ذخیره محتویات</v-btn>
     </div>
 
-    <th-modal @input='updateModal' :value='modal.show'>
-      <template #title>
-        {{ modal.title }}
-      </template>
-      <template #body>
-        {{modal.body}}
-      </template>
-      <template #actions>
-        <v-btn @click='confirmModal' :color='modal.action'>
-          باشه
-        </v-btn>
-      </template>
-    </th-modal>
   </div>
 </template>
 
@@ -447,22 +434,6 @@ export default Vue.extend({
           }
         })
     },
-    confirmModal(){
-      (this as any).$store.commit('utilities/modal/SET_MODAL', {
-        show: false,
-        title: '',
-        body: '',
-        action: ''
-      })
-    },
-    updateModal(value: any){
-      (this as any).$store.commit('utilities/modal/SET_MODAL', {
-        show: false,
-        title: '',
-        body: '',
-        action: ''
-      })
-    }
   },
   async created() {
     try{

@@ -16,6 +16,7 @@ export const getters: GetterTree<SiteSettingState, any> = {
 export const mutations: MutationTree<SiteSettingState> = {
   setSiteSetting(state, data){
     state.siteSetting = data.data
+    state.siteSetting.logo_menu=""
   }
 }
 
@@ -33,7 +34,7 @@ export const actions: ActionTree<SiteSettingState, any> = {
     }
     catch(error:any)
     {
-      this.$toast.success(error.message);
+      this.$toast.error(error.message);
     }
   },
 }
