@@ -2,7 +2,7 @@
   <div class="py-10 px-10">
     <div class="d-flex justify-space-between">
       <h1 class="tlf-title ml-16">تنظیمات سایت</h1>
-      <v-btn class="rounded-xl" color="primary">ذخیره محتویات</v-btn>
+      <v-btn class="rounded-xl" @click="save" color="primary">ذخیره محتویات</v-btn>
     </div>
 
     <div class="mt-10">
@@ -12,7 +12,7 @@
           <v-text-field class="rounded-lg"
                         background-color="white"
                         v-model='site.page_title'
-                        placeholder="تلفیق هنر"
+                        placeholder="عنوان وب سایت"
                         solo
                         filled
                         dense
@@ -28,7 +28,7 @@
           <v-icon size="36" color="white">fab fa-instagram</v-icon>
           <v-text-field class="rounded-lg mr-6"
                         background-color="white"
-                        placeholder="تلفیق هنر"
+                        placeholder="instagram"
                         v-model='site.instagram'
                         solo
                         filled
@@ -42,7 +42,7 @@
           <v-text-field class="rounded-lg mr-12"
                         background-color="white"
                         v-model='site.facebook'
-                        placeholder="تلفیق هنر"
+                        placeholder="facebook"
                         solo
                         filled
                         hide-details
@@ -56,7 +56,7 @@
           <v-icon size="36" color="white">fab fa-whatsapp</v-icon>
           <v-text-field class="rounded-lg mr-6"
                         background-color="white"
-                        placeholder="تلفیق هنر"
+                        placeholder="whatsapp"
                         v-model='site.whatsapp'
                         solo
                         filled
@@ -69,7 +69,7 @@
           <v-icon size="36" color="white">fab fa-google-plus-g</v-icon>
           <v-text-field class="rounded-lg mr-6"
                         background-color="white"
-                        placeholder="تلفیق هنر"
+                        placeholder="google plus"
                         v-model='site.google_plus'
                         solo
                         filled
@@ -84,7 +84,7 @@
           <v-icon size="36" color="white">fab fa-telegram-plane</v-icon>
           <v-text-field class="rounded-lg mr-6"
                         background-color="white"
-                        placeholder="تلفیق هنر"
+                        placeholder="telegram"
                         v-model='site.telegram'
                         solo
                         filled
@@ -97,7 +97,7 @@
           <v-img src="~/static/images/aparat.png" max-width="48px" contain/>
           <v-text-field class="rounded-lg mr-6"
                         background-color="white"
-                        placeholder="تلفیق هنر"
+                        placeholder="aparat"
                         v-model='site.aparat'
                         solo
                         filled
@@ -110,7 +110,14 @@
       <div class="mt-10">
 
         <p class="tlf-subtitle">عکس نوار - page icon</p>
-        <UploadComponent @addImage="addImage" />
+        <v-row>
+          <v-col cols="6">
+            <UploadComponent @addImage="addImage" />  
+             <img max-height="150"
+              max-width="250"
+              :src="cdnUrl+site.logo_menu">
+          </v-col>
+        </v-row>
       </div>
 
       <div class="map-container mt-10">
@@ -168,7 +175,7 @@
         <p class="tlf-subtitle">آدرس به صورت متنی</p>
         <v-text-field class="rounded-lg"
                       background-color="white"
-                      placeholder="تلفیق هنر"
+                      placeholder=""
                       v-model='site.address'
                       solo
                       filled
@@ -180,7 +187,7 @@
         <p class="tlf-subtitle">کد پستی</p>
         <v-text-field class="rounded-lg"
                       background-color="white"
-                      placeholder="تلفیق هنر"
+                      placeholder=""
                       v-model='site.zipcode'
                       solo
                       filled
@@ -192,7 +199,7 @@
         <p class="tlf-subtitle">توضیحات متا</p>
         <v-text-field class="rounded-lg"
                       background-color="white"
-                      placeholder="تلفیق هنر"
+                      placeholder=""
                       v-model='site.meta_description'
                       solo
                       filled
@@ -208,7 +215,7 @@
             <p class="tlf-subtitle">شماره فکس</p>
             <v-text-field class="rounded-lg"
                           background-color="white"
-                          placeholder="تلفیق هنر"
+                          placeholder=""
                           v-model='site.fax'
                           solo
                           filled
@@ -220,7 +227,7 @@
             <p class="tlf-subtitle">شماره تلفن</p>
             <v-text-field class="rounded-lg"
                           background-color="white"
-                          placeholder="تلفیق هنر"
+                          placeholder=""
                           v-model='site.phone'
                           solo
                           filled
@@ -232,7 +239,7 @@
             <p class="tlf-subtitle">شماره موبایل</p>
             <v-text-field class="rounded-lg"
                           background-color="white"
-                          placeholder="تلفیق هنر"
+                          placeholder=""
                           v-model='site.mobile'
                           solo
                           filled
@@ -248,7 +255,7 @@
             <p class="tlf-subtitle">ایمیل</p>
             <v-text-field class="rounded-lg"
                           background-color="white"
-                          placeholder="تلفیق هنر"
+                          placeholder=""
                           v-model='site.email'
                           solo
                           filled
@@ -274,15 +281,14 @@ import VueToast from 'vue-toast-notification';
 import UploadComponent from '~/components/UploadComponentBase64.vue';
 Vue.use(VueToast);
 export default Vue.extend({
-  name: "Site",
+    name: "Site",
+    inject: ['cdnUrl'],
     components:{
         UploadComponent
     },
     computed: {
         ...mapGetters({
             message: 'settings/site/message',
-
-
         })
     },
   data() {
@@ -357,31 +363,14 @@ export default Vue.extend({
             this.mapOptions.center = [this.site.latitude, this.site.longitude];
         }
     },
-    watch:{
-        message(old_value,new_value){
-
-            // this.$toast.open({
-            //     message: 'settings updated successfully',
-            //     type: 'success',
-            //     position:'bottom-left'
-            //     // all of other options may go here
-            // });
-
-        },
-
-    },
   methods: {
     setSelectedPosition(event: any) {
       this.mapOptions.selectedLocation = event.coordinate
         this.site.latitude = this.mapOptions.selectedLocation[0]
         this.site.longitude = this.mapOptions.selectedLocation[1]
-
-
-    },
-
-       save(){
+      },
+      save(){
           this.$store.dispatch('settings/site/setSettings', this.site)
-
       },
       addImage(base64: string){
         this.site.logo_menu = base64

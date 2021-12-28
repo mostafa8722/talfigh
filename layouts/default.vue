@@ -17,6 +17,9 @@ import MenuMobile from '~/components/menu/Menu-Mobile.vue'
 export default Vue.extend({
   middleware:'auth',
   components: { MenuMobile, Menu },
+  provide: {
+    cdnUrl: 'http:/localhost:8000/'
+  },
   data() {
     return {
       items: [

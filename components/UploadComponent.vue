@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <v-snackbar v-model="oops" timeout="2000" color="error" top outlined>
-      بارگذاری ناموفق بود!
-    </v-snackbar>
-
+  <div class="white--text">
     <v-file-input
       ref="files"
       v-model="files"
@@ -102,7 +98,7 @@ export default {
         }
 
        const up = await axios.post(
-          'https://p.forghoon.co/api/v1/images/upload/multiple',
+          '/upload/multiple',
           formData,
           { onUploadProgress }
         )
