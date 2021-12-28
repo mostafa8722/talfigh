@@ -38,7 +38,7 @@ export const actions: ActionTree<SettingState, any> = {
     }
     catch(error:any)
     {
-      this.$toast.success(error.message)
+      this.$toast.error(error.message)
     }
 
   },

@@ -7,7 +7,7 @@
         </span>
       </v-col>
       <v-col cols='12' lg='3' md='3'>
-        <v-btn class='button px-10 rounded-xl' color='primary'
+        <v-btn class='button px-10 rounded-xl' color='primary' @click='save'
         >ذخیره محتویات
         </v-btn>
       </v-col>
