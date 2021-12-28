@@ -24,15 +24,23 @@ export const mutations: MutationTree<SettingState> = {
   SET_RES(state, res) {
     state.res = res
     state.settings = res.data
-    console.log(res)
   }
 }
 
 export const actions: ActionTree<SettingState, any> = {
   async setSettings({ state, commit, dispatch }) {
-    const response = await this.$repositories.systemSettings().setSettings(state.res)
-    commit('SET_RES', response)
-    await dispatch('getSettings')
+    try
+    {
+      const response = await this.$repositories.systemSettings().setSettings(state.res)
+      commit('SET_RES', response)
+      await dispatch('getSettings')
+      this.$toast.success(response.message)
+    }
+    catch(error:any)
+    {
+      this.$toast.success(error.message)
+    }
+
   },
 
 

@@ -1,8 +1,6 @@
 <template>
   <v-container fluid>
     <v-row>
-
-      <v-container class='purple'>{{ items }}</v-container>
       <v-col cols='12' lg='3' md='3'>
         <span class='white--text' style='font-size: 1.6rem'>
           اضافه کردن سیستمی
@@ -14,7 +12,7 @@
         </v-btn>
       </v-col>
       <v-col class='mt-4' cols='12'
-      ><span class='label'>code api پست</span></v-col>
+      ><span class='label white--text'>code api پست</span></v-col>
       <v-col class='pt-0 pb-0' cols='12'>
         <v-text-field
           :value='items.post_apikey'
@@ -26,7 +24,7 @@
 
         </v-text-field>
       </v-col>
-      <v-col cols='12'><span class='label'>code api درگاه</span></v-col>
+      <v-col cols='12'><span class='label white--text'>code api درگاه</span></v-col>
       <v-col class='pt-0 pb-0' cols='12'>
         <v-text-field
           :value='items.payment_apikey'
@@ -38,7 +36,7 @@
         ></v-text-field>
       </v-col>
       <v-col cols='12'>
-        <span class='label'>code api شاهکار</span></v-col>
+        <span class='label white--text'>code api شاهکار</span></v-col>
       <v-col class='pt-0 pb-0' cols='12'>
         <v-text-field
           :value='items.shahkar_apikey'
@@ -52,7 +50,7 @@
       </v-col>
       <v-col cols='12'
       >
-        <span class='label'>code api رسمیو</span></v-col>
+        <span class='label white--text'>code api رسمیو</span></v-col>
       <v-col class='pt-0 pb-0' cols='12'>
         <v-text-field
           :value='items.rasmio_apikey'
@@ -90,8 +88,8 @@ export default Vue.extend({
     }
   },
   methods: {
-    save() {
-      console.log(this.sett)
+    save() 
+    {
       this.$store.commit('settings/system/SET_RES', this.sett)
       this.$store.dispatch('settings/system/setSettings')
     }
